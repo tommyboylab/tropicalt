@@ -1,0 +1,17 @@
+.github/*
+node_modules/*
+scripts/*
+.expo/*
+.expo-shared/*
+.vscode/*
+bin/
+build/*
+env.json
+
+# Environment
+.env
+*gc-*.json
+codegen/generated/*
+
+ios/*
+android/*

@@ -1,0 +1,43 @@
+.recentArticles {
+    position:relative;
+    width: 100%;
+    height: 20em;
+    grid-area: RecentArticles;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1em;
+    margin-top: auto;
+  }
+  
+  .recentArticles h2 {
+    color: greenyellow;
+    position:absolute;
+    width:100%;
+    text-align:center;
+    margin-top: -2.5em;
+  }
+  
+  .recentArticles > article {
+    margin: auto 0.25em;
+    height: 100%;
+    flex: 1 2 30%;
+  }
+  
+  .recentArticles article:hover {
+    flex-basis: 40%;
+  }
+  
+  @media (max-width: 750px) {
+    .recentArticles {
+      height: 45em;
+      flex-direction: column;
+    }
+    .recentArticles > article {
+      height: 30%;
+      margin-bottom:.5em;
+    }
+    .recentArticles article:hover {
+      flex-basis: 40%;
+    }
+  }
+  

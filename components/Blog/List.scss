@@ -1,0 +1,65 @@
+.postList {
+    width: 100%;
+    height: 100%;
+    grid-area: PostList;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .postList > article {
+    flex: 1 3 30%;
+  }
+  
+  .postList article:nth-child(1) {
+    flex: 1 3 100%;
+  }
+.postList article:nth-child(2n) {
+  flex: 1 3 25%;
+}
+
+.postList article:hover {
+  flex-basis: 30%;
+}
+  .postList article:nth-child(1):hover {
+    flex-basis: 100%;
+  }
+
+
+  
+  @media (max-width: 1000px) {
+    .postList {
+      height: 90vh;
+    }
+    .postList > article {
+      flex: 1 3 30%;
+    }
+  
+    .postList article:nth-child(3n) {
+      flex: 1 3 45%;
+    }
+  
+    .postList article:hover {
+      flex-basis: 45%;
+    }
+  
+    .postList article:nth-child(3n):hover {
+      flex-basis: 50%;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .postList {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      height: 100%;
+    }
+    .postList > article:nth-child(n) {
+      flex-basis: 7.5em;
+    }
+  
+    .postList > article:nth-child(n):hover {
+      flex-basis: 10em;
+    }
+  }
+  

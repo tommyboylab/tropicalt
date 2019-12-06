@@ -1,0 +1,29 @@
+.postAbout {
+    padding-top: 0.5em;
+    margin:0 auto;
+    width: 96%;
+    height: auto;
+    border-radius: 0.5em;
+    box-shadow: 0em 0em 10em black;
+    background-color: rgb(51, 131, 247);
+  }
+.postAbout img{
+  padding-right:.25em;
+}
+  .postAbout > div {
+    margin: auto;
+  }
+  
+  .postAbout p {
+    color: rgb(0, 255, 170);
+    padding-left: 0.4em;
+    padding-right: 0.4em;
+  }
+  
+  .postAbout a {
+    float: right;
+    color: rgb(190, 55, 250);
+    padding-bottom: 0.25em;
+    padding-right: 0.4em;
+  }
+  

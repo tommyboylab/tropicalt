@@ -1,12 +1,8 @@
 const s = require('./Tags.scss');
 
-export default () => (
+export default tags => (
     <ul className={s.postTags}>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Life</li>
-        <li>Love</li>
-        <li>Happiness</li>
-        <br />
+            <li>Tag:</li>
+        <li><a href="/">{tags.tag}</a></li>
     </ul>
 );

@@ -51,10 +51,10 @@ const Post = () => {
     }
 
     return data.articles.map(article => (
-        <main className={s.post}>
+        <main className={s.post} key={article.id}>
             <Nav />
             <CoverImg title={article.title} url={article.coverImg.url} />
-            <Tags />
+                <Tags tag={article.tags}/>
             <Body content={article.content} />
             <Sidebar />
             <Footer />

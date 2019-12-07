@@ -1,5 +1,5 @@
 import Post from '../../../Home/Recents/Recents';
-import AboutMe from '../Aboutme/AboutMe';
+import AboutMe from '../About/AboutMe';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 const s = require('./Sidebar.scss');

@@ -24,7 +24,7 @@ const ImageB = ({ heroes }: { heroes: any[] }) => {
     return (
         <div className={s.imageBanner} key={imgB.id}>
             <h1>{imgB.header}</h1>
-            <img src={`http://127.0.0.1:1337${imgB.img.url}`} alt={`Image for ${imgB.header}`} />
+            <img src={`https://api.tropicalt.ca${imgB.img.url}`} alt={`Image for ${imgB.header}`} />
         </div>
     );
 };

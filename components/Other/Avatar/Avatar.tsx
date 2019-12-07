@@ -34,7 +34,7 @@ const Avatar = () => {
 
     return (
         <div key={data.avatar.id} className={s.avatar}>
-            <img src={`http://127.0.0.1:1337${data.avatar.img.url}`} alt={data.avatar.alt} />
+            <img src={`https://api.tropicalt.ca${data.avatar.img.url}`} alt={data.avatar.alt} />
         </div>
     );
 };

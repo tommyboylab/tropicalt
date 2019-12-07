@@ -1,19 +1,16 @@
-const s = require('../Resume.scss');
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import s from '../Resume.module.scss';
 
-export default () => (
-    <div className={s.skills}>
-        <h2>Skills</h2>
-        <h3>Hard Skills</h3>
-        <ul>
-            <li>Test Case Creation, Documentation, Reporting</li>
-            <li>iOS, Android, Automated E2E Testing</li>
-            <li>React, Apollo, Expo, GraphQL</li>
-        </ul>
-        <h3>Soft Skills</h3>
-        <ul>
-            <li>Communication</li>
-            <li>Critical Thinking</li>
-            <li>Attention to Detail</li>
-        </ul>
-    </div>
+type Skills = {
+	content: string;
+};
+
+const Skills = (skills: Skills): JSX.Element => (
+	<div className={s.skills}>
+		<h2>Skills</h2>
+		<ReactMarkdown source={skills.content} />
+	</div>
 );
+
+export default Skills;

@@ -1,17 +1,8 @@
 .github/*
-node_modules/*
-scripts/*
-.expo/*
-.expo-shared/*
 .vscode/*
-bin/
-build/*
-env.json
+.next/*
+
+node_modules/*
 
 # Environment
 .env
-*gc-*.json
-codegen/generated/*
-
-ios/*
-android/*

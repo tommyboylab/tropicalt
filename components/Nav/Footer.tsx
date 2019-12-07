@@ -1,49 +1,55 @@
-import * as React from 'react';
-import Link from 'next/link';
+import React from 'react';
+import Link from './ActiveLink/ActiveLink';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-const s = require('./Footer.scss');
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
+import s from './Footer.module.scss';
+
+type Footer = {
+	id: string;
+	title: string;
+	url: string;
+};
 
 const getFooterItems = gql`
-    {
-        navs {
-            id
-            title
-            url
-        }
-    }
+	query getFooter {
+		nav(id: 1) {
+			nav {
+				id
+				title
+				url
+			}
+		}
+	}
 `;
 
-const Footer = () => {
-    const { data, error, loading } = useQuery(getFooterItems);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
-    }
+const Footer = (): JSX.Element => {
+	const { data, error, loading } = useQuery(getFooterItems);
 
-    return (
-        <footer className={s.footer}>
-            <a href="/">T^T</a>
-            <h3>Made by Thomas Fiala with a little help from Education</h3>
-            <ul>
-                {data.navs.map(nav => {
-                    return (
-                        <Link href={nav.url} key={nav.id}>
-                            <li id="home">{nav.title}</li>
-                        </Link>
-                    );
-                })}
-            </ul>
-        </footer>
-    );
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const nav = data?.nav?.nav as Footer[];
+
+	return (
+		<footer className={s.footer}>
+			<Link href='/'>
+				<li>T^T</li>
+			</Link>
+			<h3>Made by Thomas Fiala with a little help from Education</h3>
+			<ul>
+				{nav.map((nav) => {
+					return (
+						<Link href={nav.url} key={nav.id}>
+							<li>{nav.title}</li>
+						</Link>
+					);
+				})}
+			</ul>
+		</footer>
+	);
 };
-export default () => <Footer />;
+
+Footer.displayName = 'Footer';
+export default Footer;

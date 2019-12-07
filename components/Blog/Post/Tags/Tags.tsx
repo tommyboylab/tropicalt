@@ -1,12 +1,14 @@
-const s = require('./Tags.scss');
+import React from 'react';
+import s from './Tags.module.scss';
 
-export default () => (
-    <ul className={s.postTags}>
-        <li>HTML</li>
-        <li>CSS</li>
-        <li>Life</li>
-        <li>Love</li>
-        <li>Happiness</li>
-        <br />
-    </ul>
+type Tag = {
+	tag: { id: string; tag: string };
+};
+
+const TagList = (tag: Tag): JSX.Element => (
+	<li className={s.postTags}>
+		<a href={`/blog/tag/${tag.tag}`}>{tag.tag}</a>
+	</li>
 );
+
+export default TagList;

@@ -1,8 +1,16 @@
-const s = require('../AboutCards.scss');
+import React from 'react';
+import s from '../AboutCards.module.scss';
 
-export default text => (
-    <div className={s.aboutCardText}>
-        <h2>{text.title}</h2>
-        <p>{text.excerpt}</p>
-    </div>
+type Txt = {
+	title: string;
+	excerpt: string;
+};
+
+const Text = (Txt: Txt): JSX.Element => (
+	<div className={s.aboutCardText}>
+		<h2>{Txt.title}</h2>
+		<p>{Txt.excerpt}</p>
+	</div>
 );
+
+export default Text;

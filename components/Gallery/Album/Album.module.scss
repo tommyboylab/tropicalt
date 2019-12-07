@@ -1,0 +1,256 @@
+@use '../../Other/Styles/Styles';
+
+.mainPane {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainPane img {
+  display: block;
+  width: auto;
+  height: 100%;
+  margin-left: 50%;
+  box-shadow: Styles.$BOXSHADOW_COLOR 0 0 70px 10px;
+  transform: translateX(-50%);
+}
+
+.sidebar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  text-align: right;
+  color: Styles.$PRIMARY_COLOR;
+  background-color: Styles.$SIDEBAR_COLOR;
+  width: 20em;
+  overflow-y: auto;
+  padding-top: .5em;
+  padding-right: .25em;
+  transform: translateX(20.5em);
+  transition: transform 1000ms cubic-bezier(.165, .84, .44, 1);
+}
+
+.sidebar > a {
+  text-decoration: none;
+  margin-right: 1em;
+}
+
+.sidebar > a:hover {
+  color: Styles.$SECONDARY_COLOR;
+  transition: color 500ms ease-in-out;
+}
+
+.sidebarHeader h2 {
+  font-size: Styles.$X_LARGE_FONT;
+  line-height: 2.75rem;
+  margin: .25em .25em 0 .25em;
+}
+
+.sidebarHeader p {
+  font-size: Styles.$MEDIUM_FONT;
+  color: Styles.$PRIMARY_COLOR;
+  margin: .5em;
+}
+
+.sidebarHeader ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 45%;
+  margin: 0 auto;
+  padding-left: .25em;
+  list-style: none;
+}
+
+.sidebarFooter p {
+  margin: .25em .5em;
+}
+
+.sidebarFooter p:nth-child( 2 ) {
+  text-align: center;
+  border-top: solid 1px Styles.$SECONDARY_COLOR;
+}
+
+.sidebar svg {
+  width: 50px;
+  height: 50px;
+  fill: Styles.$SVG_COLOR;
+}
+
+.sidebar svg:hover {
+  fill: Styles.$PRIMARY_COLOR;
+  transition: fill .5s ease, border-bottom-color .25s ease;
+}
+
+.sidebar img {
+  display: block;
+  width: 100%;
+  height: 10em;
+  object-fit: cover;
+  object-position: center;
+  border: 2px solid Styles.$PRIMARY_COLOR_MUTED;
+  border-radius: .25rem;
+}
+
+.sidebar button {
+  opacity: .7;
+  cursor: pointer;
+  background: none;
+  width: 47%;
+  margin: .25em;
+  border: none;
+  border-radius: .25em;
+}
+
+.sidebar button:focus {
+  opacity: 1;
+}
+
+.toggle {
+  z-index: 1;
+  position: fixed;
+  top: .5em;
+  right: .5em;
+  background-color: transparent;
+  width: 3em;
+  height: 3em;
+  border: 1px solid Styles.$PRIMARY_COLOR;
+  border-radius: .25em;
+  transition: transform 1000ms cubic-bezier(.165, .84, .44, 1);
+
+  > span {
+    position: absolute;
+    background: Styles.$SECONDARY_COLOR;
+    width: 28px;
+    height: 4px;
+    border-radius: .2em;
+    transform: translate3d(-50%, -50%, 0);
+    transition: background 2000ms cubic-bezier(.165, .84, .44, 1);
+
+    &:before,
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      background: Styles.$PRIMARY_COLOR;
+      width: 28px;
+      height: 4px;
+      transition: transform 2000ms cubic-bezier(.165, .84, .44, 1);
+    }
+
+    &:before {
+      top: -12px;
+    }
+
+    &:after {
+      bottom: -12px;
+    }
+  }
+}
+
+section.open {
+
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .toggle {
+    transform: translateX(-25rem);
+  }
+
+  span {
+    background: transparent;
+  }
+
+  span:before {
+    transform: translate(4px, 4px) rotate(40deg);
+  }
+
+  span:after {
+    transform: translate(4px, -4px) rotate(-40deg);
+  }
+}
+
+@media ( max-width: 800px ) {
+
+  .sidebar ul {
+    width: 60%;
+    padding-left: .25em;
+  }
+
+  .sidebar h2 {
+    font-size: Styles.$LARGE_FONT;
+  }
+
+  .sidebar a {
+    font-size: Styles.$SMALL_FONT;
+  }
+
+  .sidebar p {
+    font-size: Styles.$MEDIUM_FONT;
+  }
+
+  .sidebar button {
+    width: 46%;
+  }
+
+  .toggle {
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  section .sidebar {
+    width: 15em;
+    transform: translateX(15.5em);
+  }
+
+  section.open {
+
+    .toggle {
+      transform: translateX(-19rem);
+    }
+  }
+}
+
+@media ( max-width: 600px ) {
+
+  .sidebar ul {
+    width: 75%;
+    padding-left: .5em;
+  }
+
+  .sidebar h2 {
+    font-size: Styles.$LARGE_FONT;
+  }
+
+  .sidebar a {
+    font-size: Styles.$X_SMALL_FONT;
+  }
+
+  .sidebar p {
+    font-size: Styles.$SMALL_FONT;
+  }
+
+  .sidebar button {
+    width: 90%;
+  }
+
+  .toggle {
+    width: 2em;
+    height: 2em;
+  }
+
+  section .sidebar {
+    width: 10em;
+    transform: translateX(10.5em);
+  }
+
+  section.open {
+
+    .toggle {
+      transform: translateX(-12.5rem);
+    }
+  }
+}

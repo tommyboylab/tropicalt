@@ -1,0 +1,21 @@
+.layout {
+  display: grid;
+  grid-template-areas: 'PostHeader PostSidebar'
+    'PostList PostSidebar'
+    'PostControls PostSidebar'
+    'Footer Footer';
+  grid-template-columns: 3.5fr 1fr;
+  grid-template-rows: auto 2fr auto;
+}
+
+@media ( max-width: 1000px ) {
+
+  .layout {
+    grid-template-areas: 'PostHeader'
+      'PostList'
+      'PostControls'
+      'PostSidebar'
+      'Footer';
+    grid-template-columns: 1fr;
+  }
+}

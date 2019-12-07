@@ -87,7 +87,7 @@ nav .sidebar {
 }
 .sidebarHeader ul {
   width:40%;
-  padding-left:.5em;
+  padding-left:.25em;
   margin:0 auto;
     list-style:none;
     display: flex;
@@ -116,14 +116,15 @@ svg:hover {
     fill: #10b068;
 }
 .sidebar img {
+    display:block;
     width: 100%;
-	height: auto;
+    height:10em;
     object-fit: cover;
     object-position: center;
 }
 
  .sidebar button {
-    width: 46%;
+    width: 47%;
     margin:.25em;
     cursor: pointer;
     background: none;
@@ -197,7 +198,7 @@ svg:hover {
 
   .sidebar ul {
     width:60%;
-    padding-left:.75em;
+    padding-left:.25em;
   }
   .sidebar h2 {
     font-size:1.75em;
@@ -212,7 +213,7 @@ svg:hover {
   }
 
   .sidebar button {
-    width:45%;
+    width:46%;
   }
 
   .toggle {

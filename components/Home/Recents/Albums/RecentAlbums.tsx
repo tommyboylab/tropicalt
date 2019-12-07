@@ -20,13 +20,6 @@ const getAlbums = gql`
             date
             excerpt
             location
-            photos {
-                title
-                excerpt
-                img {
-                    url
-                }
-            }
             user {
                 name
             }
@@ -54,6 +47,7 @@ const Albums = () => {
             {data.albums.map(album => (
                 <Album
                     type="album"
+                    key={album.id}
                     slug={album.slug}
                     coverImg={album.coverImg.url}
                     title={album.title}

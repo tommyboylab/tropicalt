@@ -1,0 +1,114 @@
+@use '../../../Other/Styles/Styles';
+
+.postText {
+  grid-area: PostText;
+  font-family: Styles.$PRIMARY_FONT;
+  background-color: rgb(20, 20, 25);
+  box-shadow: black 0 .25em 1em;
+  color: Styles.$FONT_COLOR;
+  margin: 0 .5em;
+  margin-bottom: 1em;
+  border-bottom-right-radius: .5em;
+  border-bottom-left-radius: .5em;
+  padding: 1em 2vw .5vw 1.5vw;
+}
+
+.postText h1 {
+  font-size: Styles.$LARGE_FONT;
+}
+
+.postText h2 {
+  font-size: Styles.$MEDIUM_FONT;
+}
+
+.postText h3 {
+  font-size: Styles.$SMALL_FONT;
+}
+
+.postText h4 {
+  font-size: Styles.$SMALL_FONT;
+}
+
+.postText h5 {
+  font-size: Styles.$SMALL_FONT;
+}
+
+.postText h6 {
+  font-size: Styles.$SMALL_FONT;
+}
+
+.postText ul {
+  margin: 1em 0 1em 1.5em;
+}
+
+.postText ol {
+  margin: 1em 0 1em 1.5em;
+}
+
+.postText dl {
+  margin: 1em 0 1em .25em;
+}
+
+.postText dd {
+  margin: .25em 0 .5em .5em;
+}
+
+.postText pre {
+  text-align: center;
+  white-space: normal;
+  margin: 1em;
+}
+
+.postText code {
+  display: block;
+  font-size: Styles.$CALC_FONT_SMALL;
+  word-wrap: break-word;
+  color: Styles.$SECONDARY_COLOR;
+  background: rgba(0, 0, 0, .5);
+  margin: 0 auto;
+  padding: 2em;
+  border-radius: .5em;
+}
+
+//.postText blockquote {
+//}
+//
+
+.postText p {
+  font-size: Styles.$SMALL_FONT;
+  text-indent: .5em;
+  margin-bottom: 1em;
+}
+
+.postText a {
+  font-size: Styles.$SMALL_FONT;
+  text-decoration: none;
+  color: Styles.$SECONDARY_COLOR;
+}
+
+//.postText i {
+//}
+//
+
+.postText b {
+  font-weight: bold;
+}
+
+.postText strong {
+  font-weight: bold;
+}
+
+.postText em {
+  font-style: italic;
+}
+
+.postText mark {
+  background-color: Styles.$PRIMARY_COLOR;
+}
+
+@media ( max-width: 600px ) {
+
+  .postText {
+    font-size: Styles.$X_SMALL_FONT;
+  }
+}

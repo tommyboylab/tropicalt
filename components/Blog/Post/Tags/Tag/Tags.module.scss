@@ -1,0 +1,11 @@
+@use '../../../../Other/Styles/Styles';
+
+.postTags a {
+  text-decoration: none;
+  color: Styles.$QUATERNARY_COLOR_MUTED;
+  transition: color 300ms ease-in-out;
+}
+
+.postTags a:hover {
+  color: Styles.$QUATERNARY_COLOR;
+}

@@ -1,10 +1,33 @@
-const s = require('../Resume.scss');
+import React from 'react';
+import s from '../Resume.module.scss';
+import gql from 'graphql-tag';
 
-export default props => (
+type Contact = {
+  phoneNum: string;
+  address: string;
+};
+
+const ContactFragment = gql`
+  fragment ContactFragment on Resume {
+    address
+    phoneNum
+  }
+`;
+
+const Contact = (contact: any): JSX.Element => {
+  contact = contact.data?.resume as Contact;
+  return (
     <div className={s.contactInfo}>
-        <p className={s.address}>{props.address}</p>
-        <p className={s.cellphone}>
-            Cell:&#53;&#49;&#57;&#45;&#53;&#52;&#54;&#45;&#54;&#55;&#54;&#53;
-        </p>
+      <p className={s.cellphone}>{contact.phoneNum}</p>
+      <p className={s.address}>{contact.address}</p>
     </div>
-);
+  );
+};
+
+Contact.displayName = 'Contact Info';
+
+Contact.fragments = {
+  ContactFragment: ContactFragment,
+};
+
+export default Contact;

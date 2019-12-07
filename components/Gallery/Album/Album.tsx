@@ -1,71 +1,89 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
+import axios from 'redaxios';
 import MainWindow from './MainWindow/MainWindow';
 import Sidebar from './Sidebar/Sidebar';
-import gql from 'graphql-tag';
-import { useApolloClient, useLazyQuery, useQuery } from '@apollo/react-hooks';
+import Meta from '../../Other/Meta/Meta';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-// import {items} from "./TestGallery";
-import { useRouter } from 'next/router';
-import fetch from 'isomorphic-unfetch';
-import getGoogleAlbum from '../GoogleAPI/API';
 
 const getAlbum = gql`
-    query($slug:[String!]) {
-        albums(where: { slug: $slug }) {
-            albumId
-            title
-            excerpt
+  query getAlbums($slug: [String!]) {
+    albums(where: { slug: $slug }) {
+      id
+      title
+      slug
+      cover {
+        img {
+          id
+          url
         }
+      }
+      excerpt
+      albumID
     }
+  }
 `;
 
+type Albums = {
+  title: string;
+  excerpt: string;
+  cover: { img: { id: string; url: string; hash: string } };
+  albumID: number;
+};
+
 type Photo = {
-    original: string;
-    thumbnail: string;
+  original: string;
+  thumbnail: string;
 };
 
-const fetchData = async (albumId: number, setPhotos: (photos: Photo[]) => void) => {
-    if (!albumId) return;
-    const photosArray = await getGoogleAlbum(albumId);
-    if (photosArray && photosArray.length > 0) {
+const Album = (): JSX.Element => {
+  const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
+  const [activePhoto, setActivePhoto] = useState<Photo>();
+  const [photos, setPhotos] = useState<Photo[]>([]);
+
+  const { data, error, loading } = useQuery(getAlbum, {
+    variables: { slug: router.query.slug },
+    onCompleted: async (d) => {
+      const albumId = d?.albums[0].albumID;
+      if (albumId) {
+        const photosArray = await axios.get(`https://tropicalt-google-photos.glitch.me/${albumId}`);
         setPhotos(
-            photosArray.map((url: string) => ({
-                original: `${url}=w2048?lqip?webp`,
-                thumbnail: `${url}=w400?lqip?webp`,
-            }))
+          photosArray?.data?.map((url: string) => ({
+            original: `${url}=w2048`,
+            thumbnail: `${url}=w400`,
+          }))
         );
-    }
-};
+      }
+      setIsLoading(false);
+    },
+  });
 
-const Album = () => {
-    const router = useRouter();
-    const slug = router.query.slug;
-    const [activePhoto, setActivePhoto] = useState<Photo>();
-    const [photos, setPhotos] = useState<Photo[]>([]);
-    const client = useApolloClient();
+  if (isLoading || loading) return <Load />;
+  if (error || (!isLoading && !photos.length)) return <Err />;
 
-    useEffect(() => {
-        if (!slug) return;
-        async function fetchAlbums() {
-            const { data } = await client.query({ query: getAlbum, variables: { slug, } });
-            await fetchData(data?.albums[0].albumId, setPhotos);
-        }
-        fetchAlbums();
-    }, [slug,]);
+  const albums = data?.albums as Albums[];
 
-    const {data, error, loading} = useQuery(getAlbum, { variables: { slug, } });
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error! {error.message}</div>;
-    }
-    return (
-        <>
-            <Sidebar title={data.albums[0].title} excerpt={data.albums[0].excerpt} items={photos} activeItemId={activePhoto} setActiveItem={setActivePhoto} />
-            <MainWindow item={activePhoto} />
-        </>
-    );
+  return (
+    <>
+      <Meta
+        title={albums[0].title}
+        excerpt={albums[0].excerpt}
+        imgUrl={albums[0].cover.img.url}
+        url={`/albums/${router.query.slug}`}
+      />
+      <Sidebar
+        title={albums[0].title}
+        excerpt={albums[0].excerpt}
+        photos={photos}
+        activeItemID={activePhoto}
+        setActiveItem={setActivePhoto}
+      />
+      <MainWindow src={activePhoto} />
+    </>
+  );
 };
 export default Album;

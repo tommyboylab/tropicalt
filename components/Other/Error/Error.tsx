@@ -1,7 +1,11 @@
+import React from 'react';
+import s from './Error.module.scss';
 
-export default error => (
-    <div>
-        <img src="/static/err.png" />
-        <h2>Well, I guess I F**ked Up</h2>
-    </div>
+const Err = (): JSX.Element => (
+  <div className={s.error}>
+    <img src='/static/err.png' alt={`You've found an error my friend!'`} />
+    <h2>Who you gonna call?</h2>
+  </div>
 );
+
+export default Err;

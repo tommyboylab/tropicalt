@@ -1,0 +1,46 @@
+@use '../../../Other/Styles/Styles';
+
+.blogSidebar {
+  grid-area: PostSidebar;
+  display: flex;
+  flex-direction: column;
+  min-height: 60em;
+  margin-top: 3.25em;
+  margin-right: .5em;
+  padding-bottom: 1em;
+}
+
+.blogSidebar h2 {
+  font-size: Styles.$X_LARGE_FONT;
+  text-align: right;
+  letter-spacing: .25em;
+  color: Styles.$TERTIARY_COLOR;
+  padding-right: .5em;
+}
+
+.blogSidebar article {
+  flex: 1 2 auto;
+  height: 15%;
+  margin: .25em;
+  transition: all 350ms ease-in-out;
+  transition-property: height;
+}
+
+.blogSidebar article:hover {
+  flex-basis: auto;
+  height: 25%;
+}
+
+@media ( max-width: 1000px ) {
+
+  .blogSidebar {
+    width: 100%;
+    margin-top: 0;
+    padding: .5em;
+  }
+
+  .blogSidebar article:hover {
+    flex-basis: auto;
+    height: 25%;
+  }
+}

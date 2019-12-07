@@ -1,50 +1,61 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import Text from './AboutCard/AboutCardText';
-import Img from './AboutCard/AboutCardImage';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
+import Img from '../Other/Img/Img';
+import s from './AboutCards.module.scss';
 
-const getAboutCards = gql`
-    {
-        aboutcards {
-            id
-            title
-            excerpt
-            img {
-                id
-                url
-            }
+type AboutCard = [
+  {
+    img: { img: { id: string; url: string; hash: string } };
+    id: string;
+    title: string;
+    excerpt: string;
+  }
+];
+
+const AboutCardFragment = gql`
+  fragment AboutCardFragment on Query {
+    aboutCards {
+      id
+      title
+      excerpt
+      img {
+        img {
+          id
+          url
+          hash
         }
+      }
     }
+  }
 `;
 
-const AboutCards = () => {
-    const { data, error, loading } = useQuery(getAboutCards);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return;
-        <div>
-            {' '}
-            <Err />
-            Error! {error.message}
-        </div>;
-    }
+const AboutCards = (aboutCards: any): JSX.Element => {
+  aboutCards = aboutCards.data?.aboutCards as AboutCard;
 
-    return (
-        <>
-            {data.aboutcards.map(about => {
-                return (
-                    <React.Fragment key={about.id}>
-                        <Img url={about.img.url} />
-                        <Text title={about.title} excerpt={about.excerpt} />
-                    </React.Fragment>
-                );
-            })}
-        </>
-    );
+  return (
+    <>
+      {aboutCards.map((aboutCard: any) => {
+        return (
+          <Fragment key={aboutCard.id}>
+            <Img
+              class={s.aboutCardImg}
+              url={aboutCard.img.img.url}
+              placeholder={`/uploads/${aboutCard.img.img.hash}-thumb.svg`}
+              alt={`Image for ${aboutCard.title}`}
+            />
+            <Text title={aboutCard.title} excerpt={aboutCard.excerpt} />
+          </Fragment>
+        );
+      })}
+    </>
+  );
 };
-export default () => <AboutCards />;
+
+AboutCards.displayName = 'AboutCards';
+
+AboutCards.fragments = {
+  AboutCardFragment: AboutCardFragment,
+};
+
+export default AboutCards;

@@ -1,7 +1,14 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-const s = require('./Body.scss');
-export default content => (
-    <div className={s.postText}>
-        <ReactMarkdown source={content.content} />
-    </div>
+import s from './Body.module.scss';
+
+type Content = {
+  content: string;
+};
+const Body = (Content: Content): JSX.Element => (
+  <div className={s.postText}>
+    <ReactMarkdown source={Content.content} />
+  </div>
 );
+
+export default Body;

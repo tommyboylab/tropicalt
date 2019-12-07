@@ -1,31 +1,32 @@
-const s = require('../Resume.scss');
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import s from '../Resume.module.scss';
+import gql from 'graphql-tag';
 
-export default () => (
+type Work = {
+  workExp: string;
+};
+
+const WorkExpFragment = gql`
+  fragment WorkExpFragment on Resume {
+    workExp
+  }
+`;
+
+const WorkExp = (workExp: any): JSX.Element => {
+  workExp = workExp.data?.resume as Work;
+  return (
     <div className={s.workHistory}>
-        <h2>Work History</h2>
-
-        <h3>OAK'S LAB: 2018-2019</h3>
-
-        <ul>
-            <li>Worked independently to fill a daily personal quota.</li>
-            <li>Worked as a team to fullfill an overall quota.</li>
-            <li>Manual Work, Tough Conditions; what else can you say.</li>
-        </ul>
-
-        <h3>Little Smokey Forestry Services: 2017-2018</h3>
-
-        <ul>
-            <li>Worked independently to fill a daily personal quota.</li>
-            <li>Worked as a team to fullfill an overall quota.</li>
-            <li>Manual Work, Tough Conditions; what else can you say.</li>
-        </ul>
-
-        <h3>Cineplex Entertainment: 2012-2016</h3>
-
-        <ul>
-            <li>Worked as a Cast member.</li>
-            <li>Greeted customers, sold tickets, sold food at concession and cleaned theaters.</li>
-            <li>A genuinely enjoyable job.</li>
-        </ul>
+      <h2>Work History</h2>
+      <ReactMarkdown source={workExp.workExp} />
     </div>
-);
+  );
+};
+
+WorkExp.displayName = 'Work Experience';
+
+WorkExp.fragments = {
+  WorkExpFragment: WorkExpFragment,
+};
+
+export default WorkExp;

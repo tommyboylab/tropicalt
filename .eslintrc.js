@@ -1,23 +1,42 @@
 module.exports = {
-  plugins: ['react-perf', '@typescript-eslint'],
-  parser: '@typescript-eslint/parser',
   root: true,
+  env: {
+    browser: true,
+    node: true,
+    es6: true,
+  },
+  parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 2017,
+    ecmaFeatures: {
+      jsx: true,
+    },
+  },
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'react-perf'],
   extends: [
-    'plugin:react-perf/recommended',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-perf/recommended',
     'prettier',
     'prettier/@typescript-eslint',
-    'stylelint',
+    'prettier',
+    'prettier/react',
   ],
-  rules: {
-    '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/ban-ts-ignore': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/no-non-null-assertion': 0,
-    // turn on in case of performance issues
-    'react-perf/jsx-no-new-function-as-prop': 0,
-    'react-perf/jsx-no-new-object-as-prop': 0,
-    'react-perf/jsx-no-new-array-as-prop': 0,
-    'react-native/no-inline-styles': 0,
-  },
+  overrides: [
+    {
+      files: 'tests/**',
+      rules: {
+        'no-template-curly-in-string': 1,
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+        'react/jsx-uses-react': 'error',
+        'react/jsx-uses-vars': 'error',
+        // 'react-perf/jsx-no-new-function-as-prop': 0,
+        // 'react-perf/jsx-no-new-object-as-prop': 0,
+        // '@typescript-eslint/explicit-function-return-type': 0,
+      },
+    },
+  ],
 };

@@ -1,8 +1,9 @@
 module.exports = {
-  "presets": [
-    "next/babel"
-  ],
+  presets: ['next/babel'],
   plugins: [
-    ['@babel/plugin-proposal-optional-chaining'],
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-transform-typescript',
+    '@babel/plugin-transform-react-jsx',
+    'import-graphql',
   ],
 };

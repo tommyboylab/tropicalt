@@ -1,0 +1,15 @@
+@use '../Styles/Styles';
+
+.error {
+  position: absolute;
+  top: 45%;
+  left: 45%;
+  color: Red;
+  margin-top: -5em;
+  margin-left: -5em;
+}
+
+.error img {
+  max-width: 15em;
+  max-height: 15em;
+}

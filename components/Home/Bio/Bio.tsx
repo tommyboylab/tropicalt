@@ -1,41 +1,36 @@
-const s = require('./Bio.scss');
-import Avatar from '../../Other/Avatar/Avatar';
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import * as React from 'react';
-import Load from '../../Other/Load/Load';
-import Err from '../../Other/Error/Error';
+import Avatar from '../../Other/Avatar/Avatar';
+import s from './Bio.module.scss';
 
-const getBio = gql`
-    {
-        bio(id: "1") {
-            id
-            title
-            content
-        }
+type Bio = {
+  id: number;
+  bio: string;
+};
+
+const BioFragment = gql`
+  fragment BiographyFragment on Query {
+    avatar(id: "1") {
+      bio
+      ...AvatarFragment
     }
+  }
+  ${Avatar.fragments.AvatarFragment}
 `;
 
-const Bio = () => {
-    const { data, error, loading } = useQuery(getBio);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
-    }
+const Bio = (bio: any): JSX.Element => {
+  bio = bio?.data?.avatar as Bio;
 
-    return (
-        <div key={data.bio.id} className={s.bio}>
-            <Avatar />
-            <h3>{data.bio.title}</h3>
-            <p>{data.bio.content}</p>
-        </div>
-    );
+  return (
+    <div key={bio.id} className={s.bio}>
+      <Avatar data={bio} />
+      <ReactMarkdown source={bio.bio} />
+    </div>
+  );
+};
+
+Bio.fragments = {
+  BiographyFragment: BioFragment,
 };
 export default Bio;

@@ -1,48 +1,59 @@
-import * as React from 'react';
-import Link from 'next/link';
+import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-const s = require('./Nav.scss');
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
+import Link from './ActiveLink/ActiveLink';
+import s from './Nav.module.scss';
 
-const getNavItems = gql`
-    {
-        navs {
-            id
-            title
-            url
-        }
+type Nav = [
+  {
+    id: string;
+    title: string;
+    url: string;
+  }
+];
+
+const NavFragment = gql`
+  fragment NavigationFragment on Query {
+    nav(id: 1) {
+      nav {
+        id
+        title
+        url
+      }
     }
+  }
 `;
 
-const Nav = () => {
-    const { data, error, loading } = useQuery(getNavItems);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
-    }
+const Nav = (nav: any): JSX.Element => {
+  nav = nav.data?.nav?.nav as Nav;
 
-    return (
-        <nav>
-            <li className={s.menu}>T^T</li>
-            <ul>
-                {data.navs.map(nav => {
-                    return (
-                        <Link href={nav.url} key={nav.id}>
-                            <li>{nav.title}</li>
-                        </Link>
-                    );
-                })}
-            </ul>
-        </nav>
-    );
+  return (
+    <nav className={s.nav}>
+      <li className={s.menu}>T^T</li>
+      <ul>
+        <style jsx>{`
+          .link.active:after {
+            height: -0.2em;
+            text-align: center;
+            content: ' -------';
+          }
+        `}</style>
+        {nav &&
+          nav.map((nav: { url: string; id: string | number | undefined; title: React.ReactNode }) => {
+            return (
+              <Link href={nav.url} key={nav.id}>
+                <li className='link'>{nav.title}</li>
+              </Link>
+            );
+          })}
+      </ul>
+    </nav>
+  );
 };
-export default () => <Nav />;
+
+Nav.displayName = 'Nav';
+
+Nav.fragments = {
+  NavigationFragment: NavFragment,
+};
+
+export default Nav;

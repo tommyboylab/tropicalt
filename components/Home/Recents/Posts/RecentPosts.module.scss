@@ -1,0 +1,58 @@
+@use '../../../Other/Styles/Styles';
+
+.recentArticles {
+  grid-area: RecentArticles;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 20em;
+  margin-top: auto;
+  margin-bottom: 1em;
+  padding: 0 .5em;
+}
+
+.recentArticles h2 {
+  position: absolute;
+  right: 0;
+  left: 0;
+  color: Styles.$PRIMARY_COLOR;
+  width: max-content;
+  margin: -2.5em auto 0 auto;
+  border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+}
+
+.recentArticles > article {
+  flex: 1 2 auto;
+  width: 30%;
+  height: 100%;
+  margin: auto .25em;
+  transition: all 350ms ease-in-out;
+  transition-property: height, width;
+}
+
+.recentArticles article:hover {
+  flex-basis: auto;
+  width: 40%;
+}
+
+@media ( max-width: 750px ) {
+
+  .recentArticles {
+    flex-direction: column;
+    height: 45em;
+    padding: .75em;
+  }
+
+  .recentArticles > article {
+    width: 100%;
+    height: 30%;
+    margin: .25em auto;
+  }
+
+  .recentArticles article:hover {
+    flex-basis: auto;
+    width: 100%;
+    height: 40%;
+  }
+}

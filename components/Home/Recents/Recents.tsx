@@ -7,7 +7,7 @@ export default Recent => (
     <Link href={`/${Recent.type}/${Recent.slug}`} as={`/${Recent.type}/${Recent.slug}`}>
         <article
             className={s.recent}
-            style={{ backgroundImage: `url(https://api.tropicalt.ca${Recent.coverImg})` }}
+            style={{ backgroundImage: `url(https://api.tropicalt.ca${Recent.coverImg}?lqip?webp)` }}
         >
             <h3 className={s.title}>{Recent.title}</h3>
             <ul className={s.detailsList}>

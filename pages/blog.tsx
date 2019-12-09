@@ -1,4 +1,4 @@
-import '../components/Other/Layout/Blog.scss';
+const s = require('../components/Other/Layout/Blog.scss');
 import Nav from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
 import Header from '../components/Blog/Post/Header/Header';
@@ -7,7 +7,7 @@ import List from '../components/Blog/List';
 
 export default function Blog() {
     return (
-        <main>
+        <main className={s.layout}>
             <Nav />
             <Header />
             <List />

@@ -1,5 +1,5 @@
 import React from 'react';
-import '../components/Other/Layout/Home.scss';
+const s = require('../components/Other/Layout/Home.scss');
 import Nav from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
 import RecentPosts from '../components/Home/Recents/Posts/RecentPosts';
@@ -9,7 +9,7 @@ import Bio from '../components/Home/Bio/Bio';
 
 export default function Home() {
     return (
-        <main>
+        <main className={s.layout}>
             <Nav />
             <ImgB />
             <Bio />

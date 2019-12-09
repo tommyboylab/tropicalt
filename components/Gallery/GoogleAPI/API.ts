@@ -1,6 +1,10 @@
 import axios from 'axios';
 
+
 const regex = /\["(https:\/\/lh3\.googleusercontent\.com\/[a-zA-Z0-9\-_]*)"/g;
+
+
+
 
 function extractPhotos(content) {
     const links = new Set();
@@ -12,13 +16,15 @@ function extractPhotos(content) {
 }
 
 const getAlbum = async (id: number) => {
+
+
     try {
-        const link = `https://photos.app.goo.gl/${id}`
-        const response = await axios.get(link)
+        const request = `https://proxy.tropicalt.ca/https:///photos.app.goo.gl/${id}`
+        const response = await axios.get(request )
         return extractPhotos(response.data)
     } catch (e) {
         return null;
     }
 };
 
-export default getAlbum;
+export default getAlbum

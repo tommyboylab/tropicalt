@@ -1,4 +1,4 @@
-main {
+.layout {
     display: grid;
     grid-template-areas:
       "name name name name"
@@ -10,7 +10,7 @@ main {
   }
 
   @media only screen and (max-width: 1200px) {
-    main {
+    .layout {
       grid-template-areas:
         "name name"
         "contactInfo contactInfo"
@@ -23,7 +23,7 @@ main {
 
 
     @media only screen and (max-width: 720px) {
-        main {
+        .layout {
           grid-template-columns: 1fr;
           grid-template-areas:
             "name"

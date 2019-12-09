@@ -1,4 +1,4 @@
-import '../components/Other/Layout/Resume.scss';
+const s = require('../components/Other/Layout/Resume.scss');
 import Header from '../components/Resume/Nav/Header';
 import Contact from '../components/Resume/Contact/Contact';
 import Footer from '../components/Resume/Nav/Footer';
@@ -9,7 +9,7 @@ import Hobbies from '../components/Resume/Hobbies/Hobbies';
 
 export default function Blog() {
     return (
-        <main>
+        <main className={s.layout}>
             <Header />
             <Contact />
             <WorkExp />

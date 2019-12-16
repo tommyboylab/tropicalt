@@ -6,8 +6,12 @@
       "workHistory education imageHighlight imageHighlight"
       "hobbies hobbies hobbies hobbies"
       "contact contact contact contact";
-    padding: 0 8vw;
+      padding: 0 8vw;
+      font-family: 'Times New Roman',  serif;
+      background: #fff;
+      color: #222;
   }
+
 
   @media only screen and (max-width: 1200px) {
     .layout {
@@ -18,7 +22,6 @@
         "imageHighlight imageHighlight"
         "hobbies hobbies"
         "contact contact";
-      padding: 0 8vw;
     }}
 
 

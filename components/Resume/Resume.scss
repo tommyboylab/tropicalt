@@ -1,60 +1,31 @@
-/* Clear all formatting */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Times New Roman',  serif;
-  }
-  html {
-    background: #fff;
-    color: #222;
-  }
-  
-  a {
-    color: #222;
-    text-decoration: none;
-  }
-  h2 {
-    text-indent: -0.5em;
-  }
-  h2,
-  ul {
-    padding-top: 0.5em;
-    padding-bottom: 0.25em;
-  }
-  
-  li {
-    padding-bottom: 0.25em;
-  }
-  
   .name {
     width: 100%;
     margin-bottom: 2.5vw;
     text-align: center;
     grid-area: name;
   }
-  
+
   .name h1 {
     text-transform: uppercase;
   }
-  
+
   .name a {
-    padding-top: 0.75em;
+    padding-top: 0.5em;
     float: left;
-    font-size: 1.75vh;
+    font-size: calc( 2vmin + .75vmax);
     text-decoration: none;
     color: #222;
   }
-  
+
   .T {
     margin: auto;
     font-size: 4.5em;
     height: 0.7em;
-    line-height: 0.5em;
+    line-height: 0.35em;
     text-indent: -3em;
     letter-spacing: -0.03em;
   }
-  
+
   .A {
     margin: auto;
     font-size: 2.5em;
@@ -62,16 +33,16 @@
     line-height: 0.5em;
     font-style: italic;
   }
-  
+
   .F {
     margin: auto;
     font-size: 4.5em;
     text-indent: 4em;
     letter-spacing: -0.03em;
     height: 0.7em;
-    line-height: 0.9em;
+    line-height: 1em;
   }
-  
+
   .contactInfo {
     grid-area: contactInfo;
     text-align: center;
@@ -79,37 +50,54 @@
     letter-spacing: 0.3em;
     font-size: 1em;
   }
-  
+
   .address {
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid;
+  }
+
+  .cellphone {
     padding-top: 0.2em;
     border-top: 2px solid;
   }
-  
-  .cellphone {
-    padding-top: 0.2em;
-    border-bottom: 2px solid;
-    padding-bottom: 0.2em;
-  }
-  
+
   .workHistory {
     grid-area: workHistory;
     margin-left: 1vw;
     margin-right: 1vw;
     padding-bottom: 1vw;
   }
-  
-  .workHistory ul {
-    padding-bottom: 1vw;
+
+  .workHistory h2 {
+    text-indent: -0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
+    text-decoration: underline;
   }
-  
+
+  .workHistory ul {
+    padding-bottom: 3vw;
+    padding-top: 0.5em;
+  }
+
+  .workHistory li {
+    padding-bottom: 0.25em;
+  }
+
   .education {
     grid-area: education;
-    margin-left: 1vw;
-    margin-right: 1vw;
+    margin:0 1vw;
     padding-bottom: 1vw;
   }
+  .education h2 {
+    text-decoration: underline;
+    text-indent: -0.5em;
+    padding-top: 0.5em;
+    padding-bottom: 0.25em;
+    margin-bottom: 2em;
+  }
   .education h3:nth-of-type(2) {
-    margin-top:2.5em;
+    margin-top:.5em;
   }
   .education img {
     width: 100%;
@@ -122,7 +110,8 @@
 .education img:nth-of-type(1) {
     width: 100%;
     margin-top: 1em;
-    margin-bottom: 1em;
+    margin-bottom:3.25em;
+
   }
   // .skills {
   //   grid-area: skills;
@@ -144,7 +133,7 @@
     margin-right: .5vw;
     padding-bottom: 1vw;
   }
-  
+
 
   .hobbies {
     grid-area: hobbies;
@@ -152,10 +141,10 @@
     font-size: 1.5em;
     border-bottom: 2px solid;
   }
-  
+
   .hobbies h2 {
     padding: 0;
-    font-size: 1.35em;
+    font-size: 1.25em;
   }
   .hobbies ul {
     list-style: none;
@@ -166,7 +155,7 @@
     display: inline-block;
     margin-left: 3vw;
   }
-  
+
   .contact {
     grid-area: contact;
     text-align: center;
@@ -175,7 +164,7 @@
     margin-top: 0.25em;
     margin-bottom: 0.5em;
   }
-  
+
   @media only screen and (max-width: 1200px) {
     .highlightImg img {
       width: 100%;
@@ -192,7 +181,7 @@
   }
 
 }
-  
+
   @media only screen and (max-width: 720px) {
     .name h1 {
       font-size: calc(4vmin + 3vmax);
@@ -213,7 +202,7 @@
     .highlightImg img {
       margin: 0.5em 0;
     }
-  
+
     .hobbies li {
       padding-top: 0em;
       font-size: 0.8em;

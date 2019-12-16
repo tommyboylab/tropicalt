@@ -1,5 +1,13 @@
 .postImg {
+    position:relative;
+    // Removes spacing of image in div -> border
+    line-height:0;
     grid-area: PostImg;
+    margin: .5em .5em 0 .5em;
+    border:2px solid rgb(190, 55, 250);
+    border-top-right-radius: 1em;
+    border-top-left-radius: 1em;
+
   }
   .postImg img {
     width: 100%;
@@ -7,28 +15,16 @@
     border-top-right-radius: 1em;
     border-top-left-radius: 1em;
   }
-  
+
   .postImg h3 {
-    right: 30.5vmax;
+    right:0;
+    top: 15%;
     font-size: 3vmax;
     position: absolute;
-    margin-top: 5rem;
-    padding: 0.5em 0.5em 0.5em 3vw;
+    padding: 0.5em;
     background-color: skyblue;
     color: lightgreen;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
   }
-  
-  @media all and (orientation: landscape) {
-    .postImg h3 {
-      margin-top: 5rem;
-    }
-  }
-  
-  @media (max-width: 1100px) {
-    .postImg h3 {
-      right: 0;
-    }
-  }
-  
+

@@ -6,19 +6,18 @@
     grid-area: ImageBanner;
   }
   .imageBanner h1 {
-    font-size: 8em;
+    font-size: 6em;
     text-align: center;
     color: Steelblue;
-    margin-top: 15vh;
+    padding-top: .75em;
     position: absolute;
     width: 100%;
-    z-index: 2;
+    z-index: 1;
     opacity: 0;
     animation: iBFadeInOut 8s linear infinite 0s;
   }
-  
+
   .imageBanner img {
-    position: absolute;
     object-position: center;
     object-fit: cover;
     width: 100%;
@@ -26,34 +25,34 @@
     opacity: 0;
     animation: iBFadeInOut 8s linear infinite 0s;
   }
-  
+
   @keyframes iBFadeInOut {
     0% {
       animation-timing-function: ease-in;
       opacity: 0;
     }
-  
+
     8% {
       animation-timing-function: ease-out;
       opacity: 1;
     }
-  
-    17% {
+
+    15% {
       opacity: 1;
     }
-  
+
     35% {
       opacity: 0;
     }
-  
+
     100% {
       opacity: 0;
     }
   }
-  
+
   @media (max-width: 550px) {
     .imageBanner h1 {
-      font-size: 5em;
+      padding-top: 1.5em;
+      font-size: 4em;
     }
   }
-  

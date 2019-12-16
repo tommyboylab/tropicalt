@@ -7,6 +7,7 @@ const getArticles = gql`
     {
         articles {
             id
+            slug
             coverImg {
                 id
                 url

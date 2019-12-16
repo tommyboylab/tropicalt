@@ -4,22 +4,25 @@
     grid-area: RecentAlbums;
     display: flex;
     flex-direction: column;
-    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding: 0 .25em;
   }
-  
+
   .recentAlbums h2 {
-    margin: 0.5em auto;
-    color: greenyellow;
+    width:max-content;
+    border-bottom: 1px solid #be37fa;
+    margin: 0.5em auto 0.75em auto;
+    color:#00ffaa;
   }
-  
+
   .recentAlbums > article {
     flex: 1 2 30%;
   }
-  
+
   .recentAlbums article:hover {
     flex-basis: 40%;
   }
-  
+
   @media (max-width: 750px) {
     .recentAlbums > article {
       height: 30%;
@@ -28,4 +31,3 @@
       flex-basis: 40%;
     }
   }
-  

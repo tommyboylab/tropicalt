@@ -4,12 +4,12 @@ export default () => (
     <div className={s.workHistory}>
         <h2>Work History</h2>
 
-        <h3>OAK'S LAB: 2018-2019</h3>
+        <h3>OAK'S LAB: 2018 -> Present</h3>
 
         <ul>
-            <li>Worked independently to fill a daily personal quota.</li>
-            <li>Worked as a team to fullfill an overall quota.</li>
-            <li>Manual Work, Tough Conditions; what else can you say.</li>
+            <li>Working as the Head of the QA & QC Department</li>
+            <li>Building the department from the ground up</li>
+            <li>Everyday I'm Hustlin'.</li>
         </ul>
 
         <h3>Little Smokey Forestry Services: 2017-2018</h3>

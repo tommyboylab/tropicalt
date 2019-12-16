@@ -5,28 +5,31 @@
     grid-area: RecentArticles;
     display: flex;
     flex-direction: row;
-    padding-bottom: 1em;
+    margin-bottom: 1em;
     margin-top: auto;
   }
-  
+
   .recentArticles h2 {
-    color: greenyellow;
+    color: #00ffaa;
+    width:max-content;
     position:absolute;
-    width:100%;
-    text-align:center;
-    margin-top: -2.5em;
+    border-bottom: 1px solid #be37fa;
+    left:0;
+    right:0;
+    margin: -2.5em auto 0 auto;
+
   }
-  
+
   .recentArticles > article {
-    margin: auto 0.25em;
+    margin: auto 0.35em;
     height: 100%;
     flex: 1 2 30%;
   }
-  
+
   .recentArticles article:hover {
     flex-basis: 40%;
   }
-  
+
   @media (max-width: 750px) {
     .recentArticles {
       height: 45em;
@@ -34,10 +37,9 @@
     }
     .recentArticles > article {
       height: 30%;
-      margin-bottom:.5em;
+      margin-bottom:.75em;
     }
     .recentArticles article:hover {
       flex-basis: 40%;
     }
   }
-  

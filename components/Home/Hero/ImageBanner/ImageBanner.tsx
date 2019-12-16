@@ -9,7 +9,7 @@ const ImageB = ({ heroes }: { heroes: any[] }) => {
         });
     };
     useEffect(() => {
-        const clear = setTimeout(nextHero, 3000);
+        const clear = setTimeout(nextHero, 2750);
         return () => {
             clearTimeout(clear);
         };

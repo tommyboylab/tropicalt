@@ -19,6 +19,7 @@ const getAlbum = async (id: number) => {
 
 
     try {
+        axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
         const request = `https://proxy.tropicalt.ca/https://photos.app.goo.gl/${id}`
         const response = await axios.get(request )
         return extractPhotos(response.data)

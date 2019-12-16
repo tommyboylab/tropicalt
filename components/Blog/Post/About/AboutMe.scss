@@ -1,10 +1,9 @@
 .postAbout {
     padding-top: 0.5em;
-    margin:0 auto;
-    width: 96%;
+    margin:0 0.5em 0.5em .25em;
     height: auto;
-    border-radius: 0.5em;
-    box-shadow: 0em 0em 10em black;
+    border-radius: 0.25em;
+    box-shadow: 0em 0em 5em black;
     background-color: rgb(51, 131, 247);
   }
 .postAbout img{
@@ -13,17 +12,21 @@
   .postAbout > div {
     margin: auto;
   }
-  
+
   .postAbout p {
+    font-size:.8em;
     color: rgb(0, 255, 170);
-    padding-left: 0.4em;
-    padding-right: 0.4em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
   }
-  
+
   .postAbout a {
-    float: right;
     color: rgb(190, 55, 250);
-    padding-bottom: 0.25em;
-    padding-right: 0.4em;
+    margin-top:1em;
+    padding:.5em;
   }
-  
+
+  .postAbout a:hover {
+    color: #af0a6e;
+    transition: 0.5s ease-in-out;
+  }

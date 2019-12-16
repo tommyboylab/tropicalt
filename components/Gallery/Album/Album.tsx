@@ -31,8 +31,8 @@ const fetchData = async (albumId: number, setPhotos: (photos: Photo[]) => void) 
     if (photosArray && photosArray.length > 0) {
         setPhotos(
             photosArray.map((url: string) => ({
-                original: `${url}=w2048?lqip?webp`,
-                thumbnail: `${url}=w400?lqip?webp`,
+                original: `${url}=w2048`,
+                thumbnail: `${url}=w400`,
             }))
         );
     }

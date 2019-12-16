@@ -51,7 +51,7 @@ const Sidebar = ({ items, activeItemId, setActiveItem, title, excerpt }) => {
 
     return (
         <>
-            <nav className={open ? s.open : s.closed} ref={navRef}>
+            <section className={open ? s.open : s.closed} ref={navRef}>
                 <button className={s.toggle} onClick={toggleOpen}>
                     <span />
                 </button>
@@ -109,7 +109,7 @@ const Sidebar = ({ items, activeItemId, setActiveItem, title, excerpt }) => {
                         <p>Made by Thomas Fiala with a little help from Education.</p>
                     </div>
                 </div>
-            </nav>
+            </section>
         </>
     );
 };

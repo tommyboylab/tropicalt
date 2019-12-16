@@ -51,7 +51,7 @@ button{
 }
 
 
-nav .sidebar {
+section .sidebar {
     z-index: 1;
     position: fixed;
     right: 0;
@@ -96,7 +96,7 @@ nav .sidebar {
 }
 
 
-.sidebarFooter p{ 
+.sidebarFooter p{
     margin:.25em .5em;
 }
 
@@ -133,7 +133,7 @@ svg:hover {
  .sidebar button:focus{
     opacity:1;
 }
-  
+
 .toggle{
     z-index: 1;
     position: absolute;
@@ -143,7 +143,7 @@ svg:hover {
     width: 3em;
     background-color: transparent;
     transition: transform 1000ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
-  
+
     > span {
       position: absolute;
       width: 28px;
@@ -152,7 +152,7 @@ svg:hover {
       border-radius: .2em;
       transition: background 2000ms cubic-bezier(0.165, 0.840, 0.440, 1.000);
       background: #1cde78;
-  
+
       &:before,
       &:after {
         content: '';
@@ -171,16 +171,16 @@ svg:hover {
       }
     }
   }
-  
-  nav.open {
+
+  section.open {
     .sidebar {
       transform: translateX(0);
     }
-  
+
    .toggle {
       transform: translateX(-25rem);
     }
-    
+
     span {
       background: transparent;
     }
@@ -221,11 +221,11 @@ svg:hover {
     width: 2.5em;
   }
 
-  nav .sidebar {
+  section .sidebar {
     transform: translateX(15.5em);
     width:15em;
   }
-  nav.open {
+  section.open {
     .toggle {
       transform: translateX(-19rem);
     }
@@ -259,11 +259,11 @@ svg:hover {
     width: 2em;
   }
 
-  nav .sidebar {
+  section .sidebar {
     transform: translateX(10.5em);
     width:10em;
   }
-nav.open {
+section.open {
   .toggle {
     transform: translateX(-12.5rem);
   }

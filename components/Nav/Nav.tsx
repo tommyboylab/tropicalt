@@ -1,13 +1,12 @@
 import * as React from 'react';
-import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-const s = require('./Nav.scss');
+import Link from 'next/link';
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
+const s = require('./Nav.scss');
 
-const getNavItems = gql`
-    {
+const getNavItems = gql`{
         navs {
             id
             title
@@ -36,9 +35,11 @@ const Nav = () => {
             <ul>
                 {data.navs.map(nav => {
                     return (
-                        <Link href={nav.url} key={nav.id}>
+                        <React.Fragment key={nav.id}>
+                        <Link href={nav.url}>
                             <li>{nav.title}</li>
                         </Link>
+                        </React.Fragment>
                     );
                 })}
             </ul>

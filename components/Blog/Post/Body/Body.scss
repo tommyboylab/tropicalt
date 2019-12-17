@@ -2,8 +2,8 @@
     grid-area: PostText;
     font-family: Didact Gothic, serif;
     color: Gainsboro;
-    margin-left: 1vw;
-    margin-right: 1.5vw;
+    padding-left: 1vw;
+    padding-right: 1.5vw;
     padding-top: 1em;
   }
 
@@ -42,11 +42,11 @@
   }
 
  p code {
-   min-width:60%;
+   max-width:90%;
    width:min-content;
    margin:0 auto;
    word-wrap:break-word;
-   font-size:.75em;
+   font-size:calc(2vmin + .75vmax);
    display:block;
    border-radius:.5em;
    background:rgba(0, 0, 0, 0.5);
@@ -86,4 +86,10 @@
   }
   .postText mark {
     background-color: PaleGreen;
+  }
+
+@media (max-width: 600px) {
+    .postText {
+      font-size:.75em;
+    }
   }

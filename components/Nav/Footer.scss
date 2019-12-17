@@ -4,10 +4,11 @@
     display: flex;
     justify-content: space-around;
     border-top: 1px solid rgb(190, 55, 250);
+   padding-bottom: .5em;
   }
 
  .footer h3, a  {
-   margin: auto 0;
+   margin: auto 1em;
    color: rgb(190, 55, 250);
    text-decoration: none;
  }

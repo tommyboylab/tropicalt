@@ -1,4 +1,3 @@
-
 export default error => (
     <div>
         <img src="/static/err.png" />

@@ -6,7 +6,7 @@
     margin-right: 1.5vw;
     padding-top: 1em;
   }
-  
+
   //.postText h1 {
   //}
   //
@@ -24,48 +24,53 @@
   //
   //.postText h6 {
   //}
-  
+
   .postText ul {
     margin: 1em 0 1em 1.5em;
   }
-  
+
   .postText ol {
     margin: 1em 0 1em 1.5em;
   }
-  
+
   .postText dl {
     margin: 1em 0 1em 0.25em;
   }
-  
+
   .postText dd {
     margin: 0.25em 0 0.5em 0.5em;
   }
 
  p code {
+   min-width:60%;
+   width:min-content;
+   margin:0 auto;
+   word-wrap:break-word;
+   font-size:.75em;
    display:block;
    border-radius:.5em;
    background:rgba(0, 0, 0, 0.5);
-   margin: 0 2em;
    padding: 1em 2em;
    color: #be37fa;
   }
-  
+
   //.postText blockquote {
   //}
   //
   .postText pre {
     white-space: normal;
   }
-  
+
   .postText p {
+    font-size:.95em;
     margin-left:.5em;
     margin-bottom:1em;
   }
-  
+
   .postText a {
     color: magenta;
   }
-  
+
   //.postText i {
   //}
   //

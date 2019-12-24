@@ -1,3 +1,5 @@
+import Resume from '../components/Resume/Resume';
+
 const s = require('../components/Other/Layout/Resume.scss');
 import Header from '../components/Resume/Nav/Header';
 import Contact from '../components/Resume/Contact/Contact';
@@ -10,13 +12,7 @@ import Hobbies from '../components/Resume/Hobbies/Hobbies';
 export default function Blog() {
     return (
         <main className={s.layout}>
-            <Header />
-            <Contact />
-            <WorkExp />
-            <Edu />
-            <HighlightImg />
-            <Hobbies />
-            <Footer />
+            <Resume />
         </main>
     );
 }

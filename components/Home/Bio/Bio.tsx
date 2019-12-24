@@ -1,3 +1,5 @@
+import ReactMarkdown from 'react-markdown';
+
 const s = require('./Bio.scss');
 import Avatar from '../../Other/Avatar/Avatar';
 import gql from 'graphql-tag';
@@ -34,7 +36,7 @@ const Bio = () => {
         <div key={data.bio.id} className={s.bio}>
             <Avatar />
             <h3>{data.bio.title}</h3>
-            <p>{data.bio.content}</p>
+            <ReactMarkdown source={data.bio.content} />
         </div>
     );
 };

@@ -28,7 +28,6 @@ const AboutCards = () => {
     if (error) {
         return;
         <div>
-            {' '}
             <Err />
             Error! {error.message}
         </div>;

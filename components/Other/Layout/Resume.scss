@@ -4,10 +4,10 @@
       "name name name name"
       "contactInfo contactInfo contactInfo contactInfo"
       "workHistory education imageHighlight imageHighlight"
+      "workHistory skills imageHighlight imageHighlight"
       "hobbies hobbies hobbies hobbies"
       "contact contact contact contact";
       padding: 0 8vw;
-      font-family: 'Times New Roman',  serif;
       background: #fff;
       color: #222;
   }
@@ -19,6 +19,7 @@
         "name name"
         "contactInfo contactInfo"
         "workHistory education"
+        "workHistory skills"
         "imageHighlight imageHighlight"
         "hobbies hobbies"
         "contact contact";
@@ -33,6 +34,7 @@
             "contactInfo"
             "workHistory"
             "education"
+            "skills"
             "imageHighlight"
             "hobbies"
             "contact";

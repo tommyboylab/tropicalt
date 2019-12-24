@@ -1,12 +1,10 @@
 const s = require('../Resume.scss');
 
-export default () => (
+export default footer => (
     <div className={s.contact}>
         <p>
-            Contact Information:{' '}
-            <a href="mailto:&#116;&#104;&#111;&#109;&#97;&#115;&#97;&#108;&#101;&#120;&#97;&#110;&#100;&#101;&#114;&#102;&#105;&#97;&#108;&#97;&#64;&#103;&#109;&#97;&#105;&#108;&#46;&#99;&#111;&#109;">
-                &#69;&#109;&#97;&#105;&#108;
-            </a>
+            Contact Information:
+            <a href={`mailto:${footer.emailAdd}`}>Email</a>
         </p>
     </div>
 );

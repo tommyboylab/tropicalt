@@ -1,16 +1,14 @@
 // import Layout from '../components/Layout/Layout'
 // import Link from 'next/link'
-// import "./about.scss";
+const s = require('../components/Other/Layout/About.scss');
 import Nav from '../components/Nav/Nav';
-// import Footer from '../components/Nav/Footer';
 import AboutCards from '../components/About/AboutCards';
 
 export default function Home() {
     return (
-        <main>
+        <main className={s.layout}>
             <Nav />
             <AboutCards />
-            {/*<Footer />*/}
         </main>
     );
 }

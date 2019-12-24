@@ -56,7 +56,7 @@ const Sidebar = ({ items, activeItemId, setActiveItem, title, excerpt }) => {
                     <span />
                 </button>
                 <div className={s.sidebar}>
-                    <Link href="/">
+                    <Link href="/albums">
                         <a>{'Back to TropicalT >>>'}</a>
                     </Link>
                     <div className={s.sidebarHeader}>

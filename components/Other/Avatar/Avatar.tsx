@@ -34,7 +34,7 @@ const Avatar = () => {
 
     return (
         <div key={data.avatar.id} className={s.avatar}>
-            <img src={`https://api.tropicalt.ca${data.avatar.img.url}?lqip?webp`} alt={data.avatar.alt} />
+            <img src={`https://api.tropicalt.ca${data.avatar.img.url}`} alt={data.avatar.alt} />
         </div>
     );
 };

@@ -1,5 +1,4 @@
   .name {
-    width: 100%;
     margin-bottom: 2.5vw;
     text-align: center;
     grid-area: name;
@@ -12,7 +11,7 @@
   .name a {
     padding-top: 0.5em;
     float: left;
-    font-size: calc( 2vmin + .75vmax);
+    font-size: calc( 1.5vmin + .75vmax);
     text-decoration: none;
     color: #222;
   }
@@ -38,7 +37,7 @@
     margin: auto;
     font-size: 4.5em;
     text-indent: 4em;
-    letter-spacing: -0.03em;
+    letter-spacing: .03em;
     height: 0.7em;
     line-height: 1em;
   }
@@ -63,22 +62,22 @@
 
   .workHistory {
     grid-area: workHistory;
-    margin-left: 1vw;
-    margin-right: 1vw;
-    padding-bottom: 1vw;
+    margin:1vw;
   }
 
   .workHistory h2 {
     text-indent: -0.5em;
-    padding-top: 0.5em;
-    padding-bottom: 0.25em;
+    padding-top: 0.25em;
     text-decoration: underline;
+    text-shadow: 0 2px 3px rgba(245, 70, 170, .5);
   }
 
-  .workHistory ul {
-    padding-bottom: 3vw;
-    padding-top: 0.5em;
+  .workHistory h3 {
+    text-shadow: 0 2px 3px rgba(90,225,125, .5);
+    padding-top: 1em;
   }
+
+
 
   .workHistory li {
     padding-bottom: 0.25em;
@@ -86,45 +85,52 @@
 
   .education {
     grid-area: education;
-    margin:0 1vw;
-    padding-bottom: 1vw;
+    margin:1vw .5vw 0 3vw;
   }
   .education h2 {
+    text-shadow: 0 2px 3px rgba(245, 70, 170, .5);
     text-decoration: underline;
     text-indent: -0.5em;
-    padding-top: 0.5em;
-    padding-bottom: 0.25em;
-    margin-bottom: 2em;
+    padding-top: 0.25em;
   }
-  .education h3:nth-of-type(2) {
-    margin-top:.5em;
+
+  .education h3 {
+    text-shadow: 0 2px 3px rgba(90,225,125, .5);
+    padding-top:.25em;
   }
+
   .education img {
-    width: 100%;
-    margin-bottom: 0.5em;
+    width: 85%;
+    margin-top: .25em;
+
   }
+
 .highlightImg img {
   width: 100%;
 }
 
-.education img:nth-of-type(1) {
-    width: 100%;
-    margin-top: 1em;
-    margin-bottom:3.25em;
 
+   .skills {
+     grid-area: skills;
+     margin:0 .5vw 1vw 3vw;
+   }
+  .skills h2 {
+    text-shadow: 0 2px 3px rgba(245, 70, 170, .5);
+    text-decoration: underline;
+    text-indent: -0.5em;
   }
-  // .skills {
-  //   grid-area: skills;
-  //   margin-left: 1vw;
-  //   margin-right: 1vw;
-  //   padding-bottom: 1vw;
-  // }
-  // .skills h3 {
-  //   margin-top: 0.5em;
-  // }
-  // .skills ul {
-  //   // list-style: none;
-  // }
+   .skills h3 {
+     text-shadow: 0 2px 3px rgba(90,225,125, .5);
+     padding-top:1em;
+   }
+   .skills ul {
+     column-gap:.8em;
+     column-count: 2;
+   }
+   .skills li {
+     padding-bottom: 0.25em;
+    margin-right:.5em;
+   }
   .highlightImg {
     grid-area: imageHighlight;
     padding-top: 1vw;
@@ -138,20 +144,21 @@
   .hobbies {
     grid-area: hobbies;
     border-top: 2px solid;
-    font-size: 1.5em;
+
     border-bottom: 2px solid;
   }
 
   .hobbies h2 {
+    text-shadow: 0 2px 3px rgba(245, 70, 170, .5);
+    text-align:center;
     padding: 0;
-    font-size: 1.25em;
+    font-size: 1em;
   }
   .hobbies ul {
     list-style: none;
     text-align: center;
   }
   .hobbies li {
-    margin-top: -0.5em;
     display: inline-block;
     margin-left: 3vw;
   }
@@ -165,10 +172,24 @@
     margin-bottom: 0.5em;
   }
 
+  .workHistory h3:first-of-type {
+    padding-top:.25em;
+  }
+  .skills h3:first-of-type{
+    padding-top:.25em;
+  }
+
   @media only screen and (max-width: 1200px) {
     .highlightImg img {
       width: 100%;
       margin: 0.5em 0;
+    }
+    .workHistory li {
+      font-size:.9em;
+    }
+
+    .skills li {
+      font-size:.8em;
     }
   }
 
@@ -204,6 +225,29 @@
     }
 
     .hobbies li {
+      padding-top: 0em;
+      font-size: 0.8em;
+    }
+
+    .workHistory li {
+      padding-top: 0em;
+      font-size: 0.8em;
+    }
+
+    .education {
+      margin:1vw;
+    }
+
+    .education p {
+      padding-top: 0em;
+      font-size: 0.8em;
+    }
+
+    .skills{
+      margin:1vw;
+    }
+
+    .skills li {
       padding-top: 0em;
       font-size: 0.8em;
     }

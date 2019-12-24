@@ -9,7 +9,7 @@ const ImageB = ({ heroes }: { heroes: any[] }) => {
         });
     };
     useEffect(() => {
-        const clear = setTimeout(nextHero, 2750);
+        const clear = setTimeout(nextHero, 3000);
         return () => {
             clearTimeout(clear);
         };
@@ -24,7 +24,7 @@ const ImageB = ({ heroes }: { heroes: any[] }) => {
     return (
         <div className={s.imageBanner} key={imgB.id}>
             <h1>{imgB.header}</h1>
-            <img src={`https://api.tropicalt.ca${imgB.img.url}?lqip?webp`} alt={`Image for ${imgB.header}`} />
+            <img src={`https://api.tropicalt.ca${imgB.img.url}`} alt={`Image for ${imgB.header}`} />
         </div>
     );
 };

@@ -1,7 +1,7 @@
 const s = require('../Resume.scss');
 
-export default () => (
+export default highlightImg => (
     <div className={s.highlightImg}>
-        <img src="/static/images/titanium_urea.jpg" />
+        <img src={`https://api.tropicalt.ca${highlightImg.url}`} />
     </div>
 );

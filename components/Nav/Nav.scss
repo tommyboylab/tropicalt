@@ -5,7 +5,7 @@
     right: 0;
     margin: 0.25em auto;
     position: fixed;
-    z-index: 5;
+    z-index: 10;
     background: rgba(45, 105, 165, 0.7);
     border-radius: .75em;
     box-shadow: 0 0 0.5em rgb(190, 55, 250);
@@ -70,7 +70,7 @@
       opacity: 0;
       transition: visibility 0s, opacity 0.5s
     }
-    nav:hover ul {
+    nav:hover ul, nav:active:hover ul {
       opacity:1;
       visibility: visible;
     }

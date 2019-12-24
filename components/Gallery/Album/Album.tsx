@@ -5,13 +5,11 @@ import gql from 'graphql-tag';
 import { useApolloClient, useLazyQuery, useQuery } from '@apollo/react-hooks';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-// import {items} from "./TestGallery";
 import { useRouter } from 'next/router';
-import fetch from 'isomorphic-unfetch';
-import getGoogleAlbum from '../GoogleAPI/API';
+import axios from 'axios';
 
 const getAlbum = gql`
-    query($slug:[String!]) {
+    query($slug: [String!]) {
         albums(where: { slug: $slug }) {
             albumId
             title
@@ -27,10 +25,11 @@ type Photo = {
 
 const fetchData = async (albumId: number, setPhotos: (photos: Photo[]) => void) => {
     if (!albumId) return;
-    const photosArray = await getGoogleAlbum(albumId);
-    if (photosArray && photosArray.length > 0) {
+    // const photosArray = await getGoogleAlbum(albumId);
+    const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumId}`);
+    if (photosArray && photosArray.data.length > 0) {
         setPhotos(
-            photosArray.map((url: string) => ({
+            photosArray.data.map((url: string) => ({
                 original: `${url}=w2048`,
                 thumbnail: `${url}=w400`,
             }))
@@ -48,13 +47,13 @@ const Album = () => {
     useEffect(() => {
         if (!slug) return;
         async function fetchAlbums() {
-            const { data } = await client.query({ query: getAlbum, variables: { slug, } });
+            const { data } = await client.query({ query: getAlbum, variables: { slug } });
             await fetchData(data?.albums[0].albumId, setPhotos);
         }
         fetchAlbums();
-    }, [slug,]);
+    }, [slug]);
 
-    const {data, error, loading} = useQuery(getAlbum, { variables: { slug, } });
+    const { data, error, loading } = useQuery(getAlbum, { variables: { slug } });
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -63,7 +62,13 @@ const Album = () => {
     }
     return (
         <>
-            <Sidebar title={data.albums[0].title} excerpt={data.albums[0].excerpt} items={photos} activeItemId={activePhoto} setActiveItem={setActivePhoto} />
+            <Sidebar
+                title={data.albums[0].title}
+                excerpt={data.albums[0].excerpt}
+                items={photos}
+                activeItemId={activePhoto}
+                setActiveItem={setActivePhoto}
+            />
             <MainWindow item={activePhoto} />
         </>
     );

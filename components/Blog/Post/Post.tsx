@@ -54,7 +54,7 @@ const Post = () => {
         <main className={s.layout} key={article.id}>
             <Nav />
             <CoverImg title={article.title} url={article.coverImg.url} />
-                <Tags tag={article.tags}/>
+            <Tags tag={article.tags} />
             <Body content={article.content} />
             <Sidebar />
             <Footer />

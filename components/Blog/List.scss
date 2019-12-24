@@ -55,6 +55,7 @@
       flex-direction: column;
       flex-wrap: nowrap;
      height:100%;
+      padding:.25em;
     }
     .postList > article:nth-child(n) {
       flex-basis: 8em;

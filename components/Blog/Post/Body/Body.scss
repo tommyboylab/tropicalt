@@ -46,11 +46,11 @@
    width:min-content;
    margin:0 auto;
    word-wrap:break-word;
-   font-size:calc(2vmin + .75vmax);
+   font-size:calc(2vmin + .5vmax);
    display:block;
    border-radius:.5em;
    background:rgba(0, 0, 0, 0.5);
-   padding: 1em 2em;
+   padding: 2em;
    color: #be37fa;
   }
 
@@ -62,7 +62,7 @@
   }
 
   .postText p {
-    font-size:.95em;
+    font-size:1em;
     margin-left:.5em;
     margin-bottom:1em;
   }

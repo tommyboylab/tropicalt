@@ -6,7 +6,8 @@ import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
 const s = require('./Nav.scss');
 
-const getNavItems = gql`{
+const getNavItems = gql`
+    {
         navs {
             id
             title
@@ -35,11 +36,9 @@ const Nav = () => {
             <ul>
                 {data.navs.map(nav => {
                     return (
-                        <React.Fragment key={nav.id}>
-                        <Link href={nav.url}>
+                        <Link href={nav.url} key={nav.id}>
                             <li>{nav.title}</li>
                         </Link>
-                        </React.Fragment>
                     );
                 })}
             </ul>

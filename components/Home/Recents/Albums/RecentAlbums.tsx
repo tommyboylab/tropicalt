@@ -9,19 +9,20 @@ import React from 'react';
 
 const getAlbums = gql`
     {
-        albums(limit: 3) {
+        albums(limit: 4, sort: "date:desc", where: {
+            published: true
+        }) {
             slug
             id
-            coverImg {
+            cover {
                 id
                 url
             }
             title
             date
-            excerpt
             location
             user {
-                name
+                username
             }
         }
     }
@@ -33,12 +34,10 @@ const Albums = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
@@ -49,10 +48,10 @@ const Albums = () => {
                     type="album"
                     key={album.id}
                     slug={album.slug}
-                    coverImg={album.coverImg.url}
+                    cover={album.cover.url}
                     title={album.title}
                     date={album.date}
-                    name={album.user.name}
+                    name={album.user.username}
                     excerpt={`Location: ${album.location}`}
                 />
             ))}

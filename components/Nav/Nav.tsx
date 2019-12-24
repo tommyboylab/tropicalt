@@ -7,13 +7,11 @@ import Err from '../Other/Error/Error';
 const s = require('./Nav.scss');
 
 const getNavItems = gql`
-    {
-        navs {
-            id
-            title
-            url
-        }
-    }
+    {nav(id:1)
+    {nav {
+        title
+        url
+    }}}
 `;
 
 const Nav = () => {
@@ -22,19 +20,17 @@ const Nav = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
         <nav>
             <li className={s.menu}>T^T</li>
             <ul>
-                {data.navs.map(nav => {
+                {data.nav.nav.map(nav => {
                     return (
                         <Link href={nav.url} key={nav.id}>
                             <li>{nav.title}</li>

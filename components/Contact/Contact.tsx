@@ -96,7 +96,7 @@ export default function Form() {
                             <button
                                 type="submit"
                                 className={s.submit}
-                                onClick={handleSubmit(onSubmit) && show}
+                                onClick={!mutationError || handleSubmit(onSubmit) &&  show}
                                 disabled={!formState.isValid || (errors && mutationLoading)}
                             >
                                 Submit

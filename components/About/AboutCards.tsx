@@ -8,7 +8,7 @@ import Err from '../Other/Error/Error';
 
 const getAboutCards = gql`
     {
-        aboutcards {
+        aboutCards {
             id
             title
             excerpt
@@ -29,7 +29,7 @@ const AboutCards = () => {
         return;
         <div>
             <Err />
-            Error! {error.message}
+            {console.log (error.message)}
         </div>;
     }
 

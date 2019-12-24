@@ -22,17 +22,15 @@ const Post = () => {
             articles (where: {slug: "${slug}"}) {
                 id
                 slug
-                coverImg {
+                cover {
                     id
                     url
                 }
                 title
-                updated_at
                 content
-                user{
-                    name
+                tag {
+                tag
                 }
-                tags
             }
         }
     `;
@@ -45,7 +43,7 @@ const Post = () => {
         return (
             <div>
                 <Err />
-                Error! {error.message}
+                {console.log (error.message)}
             </div>
         );
     }
@@ -53,8 +51,10 @@ const Post = () => {
     return data.articles.map(article => (
         <main className={s.layout} key={article.id}>
             <Nav />
-            <CoverImg title={article.title} url={article.coverImg.url} />
-            <Tags tag={article.tags} />
+            <CoverImg title={article.title} url={article.cover.url} />
+            {article.tag.tag.map(article => (
+                    <Tags tag={article.tag.tag} />
+                ))}
             <Body content={article.content} />
             <Sidebar />
             <Footer />

@@ -10,10 +10,9 @@ import Err from '../../Other/Error/Error';
 
 const getBio = gql`
     {
-        bio(id: "1") {
+        avatar(id: "1") {
             id
-            title
-            content
+            bio
         }
     }
 `;
@@ -24,19 +23,16 @@ const Bio = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
-        <div key={data.bio.id} className={s.bio}>
+        <div key={data.avatar.id} className={s.bio}>
             <Avatar />
-            <h3>{data.bio.title}</h3>
-            <ReactMarkdown source={data.bio.content} />
+            <ReactMarkdown source={data.avatar.bio} />
         </div>
     );
 };

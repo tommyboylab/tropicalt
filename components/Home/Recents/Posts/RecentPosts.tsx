@@ -5,22 +5,25 @@ import { useQuery } from '@apollo/react-hooks';
 const s = require('./RecentPosts.scss');
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
+import React from "react";
 
 const getArticles = gql`
     {
-        articles(limit: 3) {
+        articles(limit: 3, sort: "date:desc", where: {
+            published: true
+        }) {
             id
             slug
-            coverImg {
+            title
+            excerpt
+            date
+            cover {
                 id
                 url
             }
-            title
-            date
-            excerpt
-            content
+           
             user {
-                name
+                username
             }
         }
     }
@@ -32,12 +35,10 @@ const Articles = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
@@ -48,10 +49,10 @@ const Articles = () => {
                     type="post"
                     key={article.id}
                     slug={article.slug}
-                    coverImg={article.coverImg.url}
+                    cover={article.cover.url}
                     title={article.title}
                     date={article.date}
-                    name={article.user.name}
+                    name={article.user.username}
                     excerpt={article.excerpt}
                 />
             ))}

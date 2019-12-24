@@ -7,12 +7,13 @@ import Err from '../../Other/Error/Error';
 
 const getImgB = gql`
     {
-        heroes {
+        hero (id:1) {
             id
-            header
-            img {
+            hero {
+                title
+                cover{
                 id
-                url
+                url}
             }
         }
     }
@@ -24,14 +25,12 @@ const ImgB = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
-    return <ImageBanner heroes={data.heroes} />;
+    return <ImageBanner heroes={data.hero.hero} />;
 };
 export default ImgB;

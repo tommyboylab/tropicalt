@@ -7,13 +7,11 @@ import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
 
 const getFooterItems = gql`
-    {
-        navs {
-            id
-            title
-            url
-        }
-    }
+    {nav(id:1)
+    {nav {
+        title
+        url
+    }}}
 `;
 
 const Footer = () => {
@@ -22,12 +20,10 @@ const Footer = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
@@ -35,10 +31,10 @@ const Footer = () => {
             <a href="/">T^T</a>
             <h3>Made by Thomas Fiala with a little help from Education</h3>
             <ul>
-                {data.navs.map(nav => {
+                {data.nav.nav.map(nav => {
                     return (
                         <Link href={nav.url} key={nav.id}>
-                            <li id="home">{nav.title}</li>
+                            <li>{nav.title}</li>
                         </Link>
                     );
                 })}

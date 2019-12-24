@@ -11,7 +11,7 @@ import axios from 'axios';
 const getAlbum = gql`
     query($slug: [String!]) {
         albums(where: { slug: $slug }) {
-            albumId
+            albumID
             title
             excerpt
         }
@@ -23,10 +23,10 @@ type Photo = {
     thumbnail: string;
 };
 
-const fetchData = async (albumId: number, setPhotos: (photos: Photo[]) => void) => {
-    if (!albumId) return;
+const fetchData = async (albumID: number, setPhotos: (photos: Photo[]) => void) => {
+    if (!albumID) return;
     // const photosArray = await getGoogleAlbum(albumId);
-    const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumId}`);
+    const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumID}`);
     if (photosArray && photosArray.data.length > 0) {
         setPhotos(
             photosArray.data.map((url: string) => ({
@@ -55,10 +55,13 @@ const Album = () => {
 
     const { data, error, loading } = useQuery(getAlbum, { variables: { slug } });
     if (loading) {
-        return <div>Loading...</div>;
+        return  <Load />;
     }
     if (error) {
-        return <div>Error! {error.message}</div>;
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
     return (
         <>

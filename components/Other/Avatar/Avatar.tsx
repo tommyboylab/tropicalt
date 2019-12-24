@@ -9,7 +9,7 @@ const getAvatar = gql`
     {
         avatar(id: "1") {
             id
-            img {
+            avatar {
                 id
                 url
             }
@@ -24,17 +24,15 @@ const Avatar = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
         <div key={data.avatar.id} className={s.avatar}>
-            <img src={`https://api.tropicalt.ca${data.avatar.img.url}`} alt={data.avatar.alt} />
+            <img src={`https://api.tropicalt.ca${data.avatar.avatar.url}`} alt={data.avatar.alt} />
         </div>
     );
 };

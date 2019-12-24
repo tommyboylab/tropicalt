@@ -5,13 +5,16 @@ import { useQuery } from '@apollo/react-hooks';
 const s = require('./Sidebar.scss');
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
+import React from "react";
 
 const getArticles = gql`
     {
-        articles(limit: 4) {
+        articles(limit: 4, sort: "date:desc", where: {
+            published: true
+        }) {
             id
             slug
-            coverImg {
+            cover {
                 id
                 url
             }
@@ -19,7 +22,7 @@ const getArticles = gql`
             date
             excerpt
             user {
-                name
+                username
             }
         }
     }
@@ -31,12 +34,10 @@ const PostSidebar = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
 
     return (
@@ -48,10 +49,10 @@ const PostSidebar = () => {
                     type="post"
                     key={article.id}
                     slug={article.slug}
-                    coverImg={article.coverImg.url}
+                    cover={article.cover.url}
                     title={article.title}
                     date={article.date}
-                    name={article.user.name}
+                    name={article.user.username}
                     excerpt={article.excerpt}
                 />
             ))}

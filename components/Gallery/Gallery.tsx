@@ -10,19 +10,20 @@ import { useRouter } from 'next/router';
 
 const getAlbum = gql`
     {
-        albums {
+        albums (sort: "date:desc", where: {
+            published: true
+        }) {
             id
             slug
-            coverImg {
+            cover {
                 id
                 url
             }
             title
             date
-            excerpt
             location
             user {
-                name
+                username
             }
         }
     }
@@ -48,10 +49,10 @@ const Albums = () => {
                     type="album"
                     id={album.id}
                     slug={album.slug}
-                    coverImg={album.coverImg.url}
+                    cover={album.cover.url}
                     title={album.title}
                     date={album.date}
-                    name={album.user.name}
+                    name={album.user.username}
                     excerpt={`Location: ${album.location}`}
                 />
             ))}

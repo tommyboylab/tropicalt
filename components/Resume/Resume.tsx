@@ -21,7 +21,7 @@ const getResume = gql`
             workExp
             edu
             skills
-            highlightImg {
+            highlight {
                 id
                 url
             }
@@ -37,12 +37,10 @@ const Resume = () => {
         return <Load />;
     }
     if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
+        return   <div>
+            <Err />
+            {console.log (error.message)}
+        </div>;
     }
     return (
         <React.Fragment>
@@ -51,7 +49,7 @@ const Resume = () => {
             <WorkExp content={data.resume.workExp} />
             <Edu content={data.resume.edu} />
             <Skills content={data.resume.skills} />
-            <HighlightImg url={data.resume.highlightImg.url} />
+            <HighlightImg url={data.resume.highlight.url} />
             <Hobbies content={data.resume.hobbies} />
             <Footer emailAdd={data.resume.email} />
         </React.Fragment>

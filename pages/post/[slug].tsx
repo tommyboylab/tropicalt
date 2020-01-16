@@ -9,5 +9,5 @@ import Post from '../../components/Blog/Post/Post';
 import '../../components/Other/Layout/Post.scss';
 
 export default function Posts() {
-    return <Post />;
+	return <Post />;
 }

@@ -10,21 +10,34 @@ import Err from '../../Other/Error/Error';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
-import Album from '../../Home/Recents/Recents';
 const s = require('../../Other/Layout/Post.scss');
 
-const Post = () => {
-    const router = useRouter();
-    const slug = router.query.slug;
+interface Article {
+	id: string;
+	title: string;
+	cover: { img: { url: string }; placeholder: { url: string } };
+	tag: any[];
+	content: string;
+}
 
-    const getArticle = gql`
+const Post = () => {
+	const router = useRouter();
+	const slug = router.query.slug;
+
+	const getArticle = gql`
         {
             articles (where: {slug: "${slug}"}) {
                 id
                 slug
                 cover {
-                    id
-                    url
+                    img{
+                        id
+                        url
+                    }
+                    placeholder{
+                        id
+                        url 
+                    }
                 }
                 title
                 content
@@ -35,30 +48,35 @@ const Post = () => {
         }
     `;
 
-    const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return (
-            <div>
-                <Err />
-                {console.log (error.message)}
-            </div>
-        );
-    }
+	const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
+	if (loading) {
+		return <Load />;
+	}
+	if (error) {
+		return (
+			<div>
+				<Err />
+				{console.log(error.message)}
+			</div>
+		);
+	}
 
-    return data.articles.map(article => (
-        <main className={s.layout} key={article.id}>
-            <Nav />
-            <CoverImg title={article.title} url={article.cover.url} />
-            {article.tag.tag.map(article => (
-                    <Tags tag={article.tag.tag} />
-                ))}
-            <Body content={article.content} />
-            <Sidebar />
-            <Footer />
-        </main>
-    ));
+	return data.articles.map((Article: Article) => (
+		<main className={s.layout} key={Article.id}>
+			<Nav />
+			<CoverImg
+				title={Article.title}
+				url={Article.cover.img.url}
+				placeholder={Article.cover.placeholder.url}
+				alt={Article.title}
+			/>
+			{Article.tag.map((tag) => (
+				<Tags tag={tag.tag} />
+			))}
+			<Body content={Article.content} />
+			<Sidebar />
+			<Footer />
+		</main>
+	));
 };
 export default () => <Post />;

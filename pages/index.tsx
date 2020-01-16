@@ -8,14 +8,14 @@ import ImgB from '../components/Home/Hero/Hero';
 import Bio from '../components/Home/Bio/Bio';
 
 export default function Home() {
-    return (
-        <main className={s.layout}>
-            <Nav />
-            <ImgB />
-            <Bio />
-            <RecentPosts />
-            <RecentAlbums />
-            <Footer />
-        </main>
-    );
+	return (
+		<main className={s.layout}>
+			<Nav />
+			<ImgB />
+			<Bio />
+			<RecentPosts />
+			<RecentAlbums />
+			<Footer />
+		</main>
+	);
 }

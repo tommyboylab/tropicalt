@@ -1,35 +1,33 @@
 .bio {
-    grid-area: Bio;
-    position:relative;
-
-  }
-
-  .bio h3 {
-    color: #be37fa;
-    width: 80%;
-    margin: 1em .5em;
-
-  }
-
-  .bio p{
-    color: #00ffaa;
-    margin: 1em;
-  }
-
-.bio p:last-of-type {
-  padding-bottom: 2.5em;
+	grid-area: Bio;
+	position: relative;
 }
 
-  .bio .avatar img {
-    position:absolute;
-  }
+.bio h3 {
+	color: #be37fa;
+	width: 80%;
+	margin: 1em 0.5em;
+}
 
-  @media (max-width: 550px) {
-    .bio h3 {
-      margin: .75em 0 0 0.75em;
-    }
-    .bio p {
-      font-size:.8em;
-     margin: 0.5em 0.75em 0.75em 0.75em;
-    }
-  }
+.bio p {
+	color: #00ffaa;
+	margin: 1em;
+}
+
+.bio p:last-of-type {
+	padding-bottom: 2.5em;
+}
+
+.bio .avatar img {
+	position: absolute;
+}
+
+@media (max-width: 550px) {
+	.bio h3 {
+		margin: 0.75em 0 0 0.75em;
+	}
+	.bio p {
+		font-size: 0.8em;
+		margin: 0.5em 0.75em 0.75em 0.75em;
+	}
+}

@@ -1,37 +1,37 @@
 .blogSidebar {
-    height:75%;
-    grid-area: PostSidebar;
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.5em;
-    padding-bottom: 1em;
-  }
-
-.blogSidebar h2 {
-  text-align:right;
-  font-size:2em;
-  letter-spacing:.25em;
-  padding:.5em .5em;
-  color:blue;
+	height: 75%;
+	grid-area: PostSidebar;
+	display: flex;
+	flex-direction: column;
+	margin-top: 0.5em;
+	padding-bottom: 1em;
 }
 
-  .blogSidebar article {
-    flex: 1 2 15%;
-    margin: .25em .5em .25em .25em;
-  }
+.blogSidebar h2 {
+	text-align: right;
+	font-size: 2em;
+	letter-spacing: 0.25em;
+	padding: 0.5em 0.5em;
+	color: blue;
+}
 
-  .blogSidebar article:hover {
-    flex-basis: 20%;
-  }
+.blogSidebar article {
+	flex: 1 2 15%;
+	margin: 0.25em 0.5em 0.25em 0.25em;
+}
 
-  @media (max-width: 1000px) {
-    .blogSidebar {
-      width: 100%;
-      height: 100%;
-      min-height:55em;
-    }
+.blogSidebar article:hover {
+	flex-basis: 20%;
+}
 
-    .blogSidebar article:hover {
-      flex-basis: 25%;
-    }
-  }
+@media (max-width: 1000px) {
+	.blogSidebar {
+		width: 100%;
+		height: 100%;
+		min-height: 55em;
+	}
+
+	.blogSidebar article:hover {
+		flex-basis: 25%;
+	}
+}

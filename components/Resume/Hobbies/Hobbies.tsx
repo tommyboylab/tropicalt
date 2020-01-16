@@ -2,9 +2,13 @@ import ReactMarkdown from 'react-markdown';
 
 const s = require('../Resume.scss');
 
-export default hobbies => (
-    <div className={s.hobbies}>
-        <h2>Hobbies</h2>
-        <ReactMarkdown source={hobbies.content} />
-    </div>
+interface Hobbies {
+	content: string;
+}
+
+export default (Hobbies: Hobbies) => (
+	<div className={s.hobbies}>
+		<h2>Hobbies</h2>
+		<ReactMarkdown source={Hobbies.content} />
+	</div>
 );

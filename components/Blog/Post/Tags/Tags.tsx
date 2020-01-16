@@ -1,10 +1,12 @@
 const s = require('./Tags.scss');
-
-export default tags => (
-    <ul className={s.postTags}>
-        <li>Tag:</li>
-        <li>
-            <a href="/">{tags.tag}</a>
-        </li>
-    </ul>
+interface Tags {
+	tag:string[];
+}
+export default (Tags:Tags) => (
+	<ul className={s.postTags}>
+		<li>Tags:</li>
+		<li>
+			<a href='/'>{Tags.tag}</a>
+		</li>
+	</ul>
 );

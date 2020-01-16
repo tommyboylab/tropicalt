@@ -1,45 +1,44 @@
 .recentArticles {
-    position:relative;
-    width: 100%;
-    height: 20em;
-    grid-area: RecentArticles;
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 1em;
-    margin-top: auto;
-  }
+	position: relative;
+	width: 100%;
+	height: 20em;
+	grid-area: RecentArticles;
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 1em;
+	margin-top: auto;
+}
 
-  .recentArticles h2 {
-    color: #00ffaa;
-    width:max-content;
-    position:absolute;
-    border-bottom: 1px solid #be37fa;
-    left:0;
-    right:0;
-    margin: -2.5em auto 0 auto;
+.recentArticles h2 {
+	color: #00ffaa;
+	width: max-content;
+	position: absolute;
+	border-bottom: 1px solid #be37fa;
+	left: 0;
+	right: 0;
+	margin: -2.5em auto 0 auto;
+}
 
-  }
+.recentArticles > article {
+	margin: auto 0.5em;
+	height: 100%;
+	flex: 1 2 30%;
+}
 
-  .recentArticles > article {
-    margin: auto 0.5em;
-    height: 100%;
-    flex: 1 2 30%;
-  }
+.recentArticles article:hover {
+	flex-basis: 40%;
+}
 
-  .recentArticles article:hover {
-    flex-basis: 40%;
-  }
-
-  @media (max-width: 750px) {
-    .recentArticles {
-      height: 45em;
-      flex-direction: column;
-    }
-    .recentArticles > article {
-      height: 30%;
-      margin-bottom:.75em;
-    }
-    .recentArticles article:hover {
-      flex-basis: 40%;
-    }
-  }
+@media (max-width: 750px) {
+	.recentArticles {
+		height: 45em;
+		flex-direction: column;
+	}
+	.recentArticles > article {
+		height: 30%;
+		margin-bottom: 0.75em;
+	}
+	.recentArticles article:hover {
+		flex-basis: 40%;
+	}
+}

@@ -9,31 +9,33 @@ import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 
 const getBio = gql`
-    {
-        avatar(id: "1") {
-            id
-            bio
-        }
-    }
+	{
+		avatar(id: "1") {
+			id
+			bio
+		}
+	}
 `;
 
 const Bio = () => {
-    const { data, error, loading } = useQuery(getBio);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return   <div>
-            <Err />
-            {console.log (error.message)}
-        </div>;
-    }
+	const { data, error, loading } = useQuery(getBio);
+	if (loading) {
+		return <Load />;
+	}
+	if (error) {
+		return (
+			<div>
+				<Err />
+				{console.log(error.message)}
+			</div>
+		);
+	}
 
-    return (
-        <div key={data.avatar.id} className={s.bio}>
-            <Avatar />
-            <ReactMarkdown source={data.avatar.bio} />
-        </div>
-    );
+	return (
+		<div key={data.avatar.id} className={s.bio}>
+			<Avatar />
+			<ReactMarkdown source={data.avatar.bio} />
+		</div>
+	);
 };
 export default Bio;

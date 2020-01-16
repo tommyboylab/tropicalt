@@ -2,7 +2,7 @@ import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
 
 const globalStyle = {
-    __html: `
+	__html: `
   *,
   *::before,
   *::after {
@@ -65,21 +65,18 @@ select:-webkit-autofill:focus {
 };
 
 export default class TropicalTStyle extends Document {
-    render() {
-        return (
-            <html>
-                <Head>
-                    <meta name="viewport" content="width=device-width, initial-scale=1" />
-                    <meta charSet="utf-8" />
-                    <style dangerouslySetInnerHTML={globalStyle} />
-                    <link
-                        rel="stylesheet"
-                        href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-                    />
-                </Head>
-                <Main />
-                <NextScript />
-            </html>
-        );
-    }
+	render() {
+		return (
+			<html>
+				<Head>
+					<meta name='viewport' content='width=device-width, initial-scale=1' />
+					<meta charSet='utf-8' />
+					<style dangerouslySetInnerHTML={globalStyle} />
+					<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css' />
+				</Head>
+				<Main />
+				<NextScript />
+			</html>
+		);
+	}
 }

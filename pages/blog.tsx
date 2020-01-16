@@ -6,13 +6,13 @@ import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
 import List from '../components/Blog/List';
 
 export default function Blog() {
-    return (
-        <main className={s.layout}>
-            <Nav />
-            <Header />
-            <List />
-            <Sidebar />
-            <Footer />
-        </main>
-    );
+	return (
+		<main className={s.layout}>
+			<Nav />
+			<Header />
+			<List />
+			<Sidebar />
+			<Footer />
+		</main>
+	);
 }

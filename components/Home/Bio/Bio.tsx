@@ -19,6 +19,7 @@ const getBio = gql`
 
 const Bio = () => {
 	const { data, error, loading } = useQuery(getBio);
+
 	if (loading) {
 		return <Load />;
 	}

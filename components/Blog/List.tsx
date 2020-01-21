@@ -49,7 +49,8 @@ const Articles = () => {
 		},
 		fetchPolicy: 'cache-and-network',
 	});
-	if (loading && !data) {
+
+	if (loading) {
 		return <Load />;
 	}
 	if (error) {
@@ -60,6 +61,7 @@ const Articles = () => {
 			</div>
 		);
 	}
+
 	return (
 		<div className={s.postList}>
 			{data.articles.map((Article: Article) => (
@@ -76,16 +78,10 @@ const Articles = () => {
 				/>
 			))}{' '}
 			<div className={s.postControls}>
-				<button
-					// reduce the offset by 10 to fetch the previous page
-					onClick={() => setNextPosts(nextPosts - 7)}
-					disabled={nextPosts === 0}>
+				<button onClick={() => setNextPosts(nextPosts - 7)} disabled={nextPosts === 0}>
 					Prev
 				</button>
-				<button
-					// increase the offset by 10 to fetch the next page
-					onClick={() => setNextPosts(nextPosts + 7)}
-					disabled={data.articles.length < 7}>
+				<button onClick={() => setNextPosts(nextPosts + 7)} disabled={data.articles.length < 7}>
 					Next
 				</button>
 			</div>

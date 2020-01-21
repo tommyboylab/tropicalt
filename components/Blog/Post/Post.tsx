@@ -49,6 +49,7 @@ const Post = () => {
     `;
 
 	const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
+
 	if (loading) {
 		return <Load />;
 	}
@@ -61,22 +62,22 @@ const Post = () => {
 		);
 	}
 
-	return data.articles.map((Article: Article) => (
-		<main className={s.layout} key={Article.id}>
-			<Nav />
-			<CoverImg
-				title={Article.title}
-				url={Article.cover.img.url}
-				placeholder={Article.cover.placeholder.url}
-				alt={Article.title}
-			/>
-			{Article.tag.map((tag) => (
-				<Tags tag={tag.tag} />
+	const articles = data?.articles as Article[];
+	return (
+		<>
+			{articles.map(({ id, title, cover: { img, placeholder }, tag, content }) => (
+				<main className={s.layout} key={id}>
+					<Nav />
+					<CoverImg title={title} url={img.url} placeholder={placeholder.url} alt={title} />
+					{tag.map(({ tag }) => (
+						<Tags tag={tag} />
+					))}
+					<Body content={content} />
+					<Sidebar />
+					<Footer />
+				</main>
 			))}
-			<Body content={Article.content} />
-			<Sidebar />
-			<Footer />
-		</main>
-	));
+		</>
+	);
 };
-export default () => <Post />;
+export default Post;

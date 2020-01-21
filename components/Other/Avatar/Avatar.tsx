@@ -28,6 +28,7 @@ const getAvatar = gql`
 
 const Avatar = () => {
 	const { data, error, loading } = useQuery(getAvatar);
+
 	if (loading) {
 		return <Load />;
 	}

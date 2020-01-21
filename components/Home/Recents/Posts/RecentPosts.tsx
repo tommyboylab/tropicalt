@@ -45,6 +45,7 @@ const getArticles = gql`
 
 const Articles = () => {
 	const { data, error, loading } = useQuery(getArticles);
+
 	if (loading) {
 		return <Load />;
 	}

@@ -39,6 +39,7 @@ const getResume = gql`
 
 const Resume = () => {
 	const { data, error, loading } = useQuery(getResume);
+
 	if (loading) {
 		return <Load />;
 	}
@@ -50,6 +51,7 @@ const Resume = () => {
 			</div>
 		);
 	}
+
 	return (
 		<React.Fragment>
 			<Header />

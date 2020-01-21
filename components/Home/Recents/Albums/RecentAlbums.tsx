@@ -44,6 +44,7 @@ const getAlbums = gql`
 
 const Albums = () => {
 	const { data, error, loading } = useQuery(getAlbums);
+
 	if (loading) {
 		return <Load />;
 	}

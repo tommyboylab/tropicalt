@@ -9,7 +9,7 @@ import Err from '../Other/Error/Error';
 interface Footer {
 	id: string;
 	title: string;
-	url:string;
+	url: string;
 }
 const getFooterItems = gql`
 	{
@@ -25,6 +25,7 @@ const getFooterItems = gql`
 
 const Footer = () => {
 	const { data, error, loading } = useQuery(getFooterItems);
+
 	if (loading) {
 		return <Load />;
 	}
@@ -42,7 +43,7 @@ const Footer = () => {
 			<a href='/'>T^T</a>
 			<h3>Made by Thomas Fiala with a little help from Education</h3>
 			<ul>
-				{data.nav.nav.map((Nav:Footer) => {
+				{data.nav.nav.map((Nav: Footer) => {
 					return (
 						<Link href={Nav.url} key={Nav.id}>
 							<li>{Nav.title}</li>

@@ -44,6 +44,7 @@ const getArticles = gql`
 
 const PostSidebar = () => {
 	const { data, error, loading } = useQuery(getArticles);
+
 	if (loading) {
 		return <Load />;
 	}

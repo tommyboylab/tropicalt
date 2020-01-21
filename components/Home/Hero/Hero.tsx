@@ -28,6 +28,7 @@ const getImgB = gql`
 
 const ImgB = () => {
 	const { data, error, loading } = useQuery(getImgB);
+
 	if (loading) {
 		return <Load />;
 	}

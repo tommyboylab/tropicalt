@@ -13,30 +13,24 @@
 		"types": "tsc --noEmit",
 		"prettier": "prettier \"**/*.+(ts|tsx|json|graphq|scss)\" --write",
 		"lint": "eslint './**/*.scss' './**/*.js' './**/*.ts' './**/*.tsx' --fix",
-		"fixall": "npm run prettier && npm run lint"
+		"fixall": "npm run prettier && npm run lint",
+		"codegen": "graphql-codegen --config codegen.yml"
 	},
 	"dependencies": {
 		"@apollo/react-hooks": "^3.1.3",
 		"@apollo/react-ssr": "^3.1.3",
-		"@zeit/next-sass": "^0.2.1-canary.4",
 		"apollo-boost": "^0.4.7",
 		"axios": "^0.19.0",
 		"graphql": "^14.5.8",
 		"isomorphic-unfetch": "^3.0.0",
 		"moment": "^2.24.0",
-		"next": "^9.1.6",
-		"next-compose-plugins": "^2.2.0",
-		"node-sass": "^4.13.0",
+		"next": "^9.2.0",
+		"node-sass": "^4.13.1",
 		"react": "^16.12.0",
 		"react-dom": "^16.12.0",
-		"react-hook-form": "^4.2.1",
+		"react-hook-form": "^4.5.6",
 		"react-markdown": "^4.2.2",
 		"react-moment": "^0.9.7",
-		"sqip": "^1.0.0-alpha.30",
-		"sqip-plugin-blur": "^1.0.0-alpha.22",
-		"sqip-plugin-data-uri": "^1.0.0-alpha.31",
-		"sqip-plugin-primitive": "^1.0.0-alpha.32",
-		"sqip-plugin-svgo": "^1.0.0-alpha.31",
 		"yup": "^0.28.0"
 	},
 	"devDependencies": {
@@ -45,8 +39,8 @@
 		"@babel/plugin-transform-react-jsx": "^7.8.3",
 		"@babel/plugin-transform-typescript": "^7.8.3",
 		"@babel/preset-typescript": "^7.8.3",
-		"@storybook/addon-info": "^5.3.3",
-		"@storybook/react": "^5.3.3",
+		"@storybook/addon-info": "^5.3.7",
+		"@storybook/react": "^5.3.7",
 		"@types/jest": "^24.9.0",
 		"@types/react": "^16.9.17",
 		"@types/react-dom": "^16.9.4",
@@ -54,17 +48,22 @@
 		"@typescript-eslint/eslint-plugin": "^2.16.0",
 		"@typescript-eslint/parser": "^2.16.0",
 		"@typescript-eslint/typescript-estree": "^2.16.0",
+		"@webdeb/next-styles": "^1.0.3",
+		"@zeit/next-sass": "^1.0.1",
 		"babel-loader": "^8.0.6",
 		"eslint": "^6.8.0",
 		"eslint-config-prettier": "^6.8.0",
-		"eslint-plugin-react": "^7.17.0",
+		"eslint-plugin-react": "^7.18.0",
 		"eslint-plugin-react-hooks": "^2.3.0",
 		"eslint-plugin-react-perf": "^3.2.3",
+		"install": "^0.13.0",
 		"jest": "^24.9.0",
+		"next-compose-plugins": "^2.2.0",
+		"npm": "^6.13.6",
 		"postcss-scss": "^2.0.0",
 		"prettier": "^1.19.1",
-		"storybook": "^5.3.3",
-		"typescript": "^3.7.4"
+		"storybook": "^5.3.7",
+		"typescript": "^3.7.5"
 	},
 	"jest": {
 		"transform": {
@@ -73,7 +72,8 @@
 		"mapCoverage": true,
 		"testPathIgnorePatterns": [
 			"/node_modules/",
-			"/lib/"
+			"/lib/",
+			"/.next/"
 		],
 		"testRegex": "(/test/.*|\\.(test|spec))\\.(ts|tsx|js)$",
 		"moduleFileExtensions": [

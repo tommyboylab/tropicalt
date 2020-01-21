@@ -9,7 +9,7 @@ const s = require('./Nav.scss');
 interface Nav {
 	id: string;
 	title: string;
-	url:string;
+	url: string;
 }
 
 const getNavItems = gql`
@@ -26,6 +26,7 @@ const getNavItems = gql`
 
 const Nav = () => {
 	const { data, error, loading } = useQuery(getNavItems);
+
 	if (loading) {
 		return <Load />;
 	}
@@ -42,7 +43,7 @@ const Nav = () => {
 		<nav>
 			<li className={s.menu}>T^T</li>
 			<ul>
-				{data.nav.nav.map((Nav:Nav) => {
+				{data.nav.nav.map((Nav: Nav) => {
 					return (
 						<Link href={Nav.url} key={Nav.id}>
 							<li>{Nav.title}</li>

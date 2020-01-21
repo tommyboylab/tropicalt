@@ -61,6 +61,11 @@ select:-webkit-autofill:focus {
     width:100%;
     height:100%;
   }
+  
+  button:focus {
+  outline:0;
+  box-shadow: 0 0 .5em rgba(90, 225, 125, 1);
+  }
 `,
 };
 

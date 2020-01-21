@@ -39,6 +39,7 @@ const getAlbum = gql`
 
 const Albums = () => {
 	const { data, error, loading } = useQuery(getAlbum);
+
 	if (loading) {
 		return <Load />;
 	}
@@ -46,10 +47,11 @@ const Albums = () => {
 		return (
 			<div>
 				<Err />
-				Error! {error.message}
+				{console.log(error.message)}
 			</div>
 		);
 	}
+
 	return (
 		<div className={s.albumList}>
 			{data.albums.map((Album: Album) => (

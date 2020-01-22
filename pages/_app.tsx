@@ -13,9 +13,9 @@ const apollo = new ApolloClient({
 		onError(({ graphQLErrors, networkError }) => {
 			if (graphQLErrors)
 				graphQLErrors.map(({ message, locations, path }) =>
-					console.log(`[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
+					console.log(`Whoa there! [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
 				);
-			if (networkError) console.log(`[Network error]: ${networkError}`, networkError);
+			if (networkError) console.log(`Oh No! [Network error]: ${networkError}`, networkError);
 		}),
 		createHttpLink({
 			uri: 'https://api.tropicalt.ca/graphql',

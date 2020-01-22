@@ -1,13 +1,12 @@
-import Recents from '../Recents';
-import './RecentAlbums.scss';
+import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-const s = require('./RecentAlbums.scss');
+import Recents from '../Recents';
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
-import React from 'react';
+const s = require('./RecentAlbums.scss');
 
-interface Album {
+type Album = {
 	id: string;
 	slug: string;
 	cover: { placeholder: { url: string } };
@@ -15,10 +14,10 @@ interface Album {
 	date: string;
 	user: { username: string };
 	location: string;
-}
+};
 
 const getAlbums = gql`
-	{
+	query getAlbums {
 		albums(limit: 4, sort: "date:desc", where: { published: true }) {
 			slug
 			id
@@ -45,32 +44,25 @@ const getAlbums = gql`
 const Albums = () => {
 	const { data, error, loading } = useQuery(getAlbums);
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const albums = data?.albums as Album[];
 
 	return (
 		<div className={s.recentAlbums}>
 			<h2>Recent Albums</h2>
-			{data.albums.map((Album: Album) => (
+			{albums.map((album) => (
 				<Recents
-					id={Album.id}
+					id={album.id}
 					type='Album'
-					key={Album.id}
-					slug={Album.slug}
-					cover={Album.cover.placeholder.url}
-					title={Album.title}
-					date={Album.date}
-					name={Album.user.username}
-					excerpt={`Location: ${Album.location}`}
+					key={album.id}
+					slug={album.slug}
+					cover={album.cover.placeholder.url}
+					title={album.title}
+					date={album.date}
+					name={album.user.username}
+					excerpt={`Location: ${album.location}`}
 				/>
 			))}
 		</div>

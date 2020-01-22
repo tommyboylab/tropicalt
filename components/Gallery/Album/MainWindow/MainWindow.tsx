@@ -1,10 +1,14 @@
 import React from 'react';
 const s = require('../Album.scss');
 
-const MainPane = ({ item }) => (
+type MainWindow = {
+	src: any;
+};
+
+const MainWindow = ({ src }: MainWindow) => (
 	<div className={s.mainPane}>
-		<img src={item} />
+		<img src={src} />
 	</div>
 );
 
-export default MainPane;
+export default MainWindow;

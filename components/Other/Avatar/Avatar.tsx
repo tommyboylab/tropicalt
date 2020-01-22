@@ -1,14 +1,13 @@
-import Img from '../Img/Img';
-
-const s = require('./Avatar.scss');
+import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import * as React from 'react';
+import Img from '../Img/Img';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
+const s = require('./Avatar.scss');
 
 const getAvatar = gql`
-	{
+	query getAvatar {
 		avatar(id: "1") {
 			id
 			avatar {
@@ -29,17 +28,8 @@ const getAvatar = gql`
 const Avatar = () => {
 	const { data, error, loading } = useQuery(getAvatar);
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
 
 	return (
 		<div key={data.avatar.id} className={s.avatar}>
@@ -52,4 +42,5 @@ const Avatar = () => {
 		</div>
 	);
 };
+
 export default Avatar;

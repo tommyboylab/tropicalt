@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import MainWindow from './MainWindow/MainWindow';
-import Sidebar from './Sidebar/Sidebar';
+import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import axios from 'axios';
+import MainWindow from './MainWindow/MainWindow';
+import Sidebar from './Sidebar/Sidebar';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-import { useRouter } from 'next/router';
-import axios from 'axios';
-// import getGoogleAlbum from '../GoogleAPI/API';
 
 const getAlbum = gql`
-	query($slug: [String!]) {
+	query getAlbums($slug: [String!]) {
 		albums(where: { slug: $slug }) {
 			title
 			excerpt
@@ -19,12 +18,19 @@ const getAlbum = gql`
 	}
 `;
 
+type Albums = {
+	title: string;
+	excerpt: string;
+	albumID: number;
+};
+
 type Photo = {
 	original: string;
 	thumbnail: string;
 };
+
 //@ts-ignore
-const fetchData = async (albumID: number, setPhotos: (photos: Photo[]) => void) => {
+const fetchData = async (albumID: Albums, setPhotos: (photos: Photo[]) => void) => {
 	if (!albumID) return <Load />;
 	const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumID}`);
 	// const photosArray = await getGoogleAlbum(albumID);
@@ -55,27 +61,21 @@ const Album = () => {
 	}, [slug]);
 
 	const { data, error, loading } = useQuery(getAlbum, { variables: { slug } });
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const albums = data?.albums as Albums[];
+
 	return (
 		<>
 			<Sidebar
-				title={data.albums[0].title}
-				excerpt={data.albums[0].excerpt}
-				items={photos}
-				activeItemId={activePhoto}
+				title={albums[0].title}
+				excerpt={albums[0].excerpt}
+				photos={photos}
+				activeItemID={activePhoto}
 				setActiveItem={setActivePhoto}
 			/>
-			<MainWindow item={activePhoto} />
+			<MainWindow src={activePhoto} />
 		</>
 	);
 };

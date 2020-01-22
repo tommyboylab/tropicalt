@@ -138,6 +138,7 @@ svg:hover {
 	height: 3em;
 	width: 3em;
 	background-color: transparent;
+	border-radius: 0.25em;
 	transition: transform 1000ms cubic-bezier(0.165, 0.84, 0.44, 1);
 
 	> span {

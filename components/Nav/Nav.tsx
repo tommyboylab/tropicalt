@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
@@ -6,14 +6,14 @@ import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
 const s = require('./Nav.scss');
 
-interface Nav {
+type Nav = {
 	id: string;
 	title: string;
 	url: string;
-}
+};
 
 const getNavItems = gql`
-	{
+	query getNav {
 		nav(id: 1) {
 			nav {
 				id
@@ -27,26 +27,19 @@ const getNavItems = gql`
 const Nav = () => {
 	const { data, error, loading } = useQuery(getNavItems);
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const nav = data?.nav?.nav as Nav[];
 
 	return (
 		<nav>
 			<li className={s.menu}>T^T</li>
 			<ul>
-				{data.nav.nav.map((Nav: Nav) => {
+				{nav.map((nav) => {
 					return (
-						<Link href={Nav.url} key={Nav.id}>
-							<li>{Nav.title}</li>
+						<Link href={nav.url} key={nav.id}>
+							<li>{nav.title}</li>
 						</Link>
 					);
 				})}

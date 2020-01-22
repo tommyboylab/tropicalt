@@ -1,15 +1,14 @@
-import Img from '../../Other/Img/Img';
 import React from 'react';
-
+import Img from '../../Other/Img/Img';
 const s = require('../Resume.scss');
 
-interface Img {
+type Img = {
 	url: string;
 	placeholder: string;
 	alt: string;
-}
+};
 
-export default (highlightImg: Img) => (
+const Highlight = (highlightImg: Img) => (
 	<div className={s.highlightImg}>
 		<Img
 			class={s.highlightImg.img}
@@ -19,3 +18,5 @@ export default (highlightImg: Img) => (
 		/>
 	</div>
 );
+
+export default Highlight;

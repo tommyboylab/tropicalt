@@ -1,10 +1,13 @@
+import React from 'react';
 import Avatar from '../../../Other/Avatar/Avatar';
-import React from "react";
 const s = require('./AboutMe.scss');
-export default () => (
+
+const About = () => (
 	<div className={s.postAbout}>
 		<Avatar />
 		<p>I'm just a simple man with a dream of building a personal website.</p>
 		<a>Read More...</a>
 	</div>
 );
+
+export default About;

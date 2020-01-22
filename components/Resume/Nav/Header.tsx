@@ -1,6 +1,8 @@
+import React from 'react';
 import Link from 'next/link';
 const s = require('../Resume.scss');
-export default () => (
+
+const Header = () => (
 	<div className={s.name}>
 		<h5 className={s.return}>
 			<Link href='/'>
@@ -14,3 +16,5 @@ export default () => (
 		<h1 className={s.F}>Fiala</h1>
 	</div>
 );
+
+export default Header;

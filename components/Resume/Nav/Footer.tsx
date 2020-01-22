@@ -1,13 +1,17 @@
+import React from 'react';
 const s = require('../Resume.scss');
 
-interface Footer {
+type Footer = {
 	email: string;
-}
-export default (Footer: Footer) => (
+};
+
+const Footer = (footer: Footer) => (
 	<div className={s.contact}>
 		<p>
 			Contact Information:
-			<a href={`mailto:${Footer.email}`}>Email</a>
+			<a href={`mailto:${footer.email}`}>Email</a>
 		</p>
 	</div>
 );
+
+export default Footer;

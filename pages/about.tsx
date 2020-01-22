@@ -1,8 +1,7 @@
-// import Layout from '../components/Layout/Layout'
-// import Link from 'next/link'
-const s = require('../components/Other/Layout/About.scss');
+import React from 'react';
 import Nav from '../components/Nav/Nav';
 import AboutCards from '../components/About/AboutCards';
+const s = require('../components/Other/Layout/About.scss');
 
 export default function Home() {
 	return (

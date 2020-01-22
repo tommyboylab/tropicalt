@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 const s = require('./Modal.scss');
 
-export const ToggleContent = ({ toggle, content }: { toggle: any; content: any }) => {
-	const [isShown, setIsShown] = React.useState<boolean>(false);
+type Toggle = {
+	toggle: Function;
+	content: Function;
+};
+
+export const ToggleContent = ({ toggle, content }: Toggle) => {
+	const [isShown, setIsShown] = useState(false);
 	const hide = () => setIsShown(false);
 	const show = () => setIsShown(true);
 
@@ -15,8 +20,11 @@ export const ToggleContent = ({ toggle, content }: { toggle: any; content: any }
 	);
 };
 
-// @ts-ignore
-export const Modal = ({ children }) =>
+type Modal = {
+	children: JSX.Element[];
+};
+
+export const Modal = ({ children }: Modal) =>
 	ReactDOM.createPortal(
 		<div className={s.modalOverlay}>
 			<div className={s.modal}>{children}</div>

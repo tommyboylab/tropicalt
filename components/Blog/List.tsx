@@ -1,12 +1,12 @@
-import Post from '../Home/Recents/Recents';
-const s = require('./List.scss');
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import Post from '../Home/Recents/Recents';
 import Err from '../Other/Error/Error';
-import React, { useState } from 'react';
 import Load from '../Other/Load/Load';
+const s = require('./List.scss');
 
-interface Article {
+type ArticleList = {
 	id: string;
 	slug: string;
 	cover: { placeholder: { url: string } };
@@ -14,7 +14,7 @@ interface Article {
 	date: string;
 	user: { username: string };
 	excerpt: string;
-}
+};
 
 const getArticlesQuery = gql`
 	query getArticles($start: Int!) {
@@ -50,38 +50,31 @@ const Articles = () => {
 		fetchPolicy: 'cache-and-network',
 	});
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const articles = data?.articles as ArticleList[];
 
 	return (
 		<div className={s.postList}>
-			{data.articles.map((Article: Article) => (
+			{articles.map((article) => (
 				<Post
-					id={Article.id}
+					id={article.id}
 					type='post'
-					slug={Article.slug}
-					key={Article.id}
-					cover={Article.cover.placeholder.url}
-					title={Article.title}
-					date={Article.date}
-					name={Article.user.username}
-					excerpt={Article.excerpt}
+					slug={article.slug}
+					key={article.id}
+					cover={article.cover.placeholder.url}
+					title={article.title}
+					date={article.date}
+					name={article.user.username}
+					excerpt={article.excerpt}
 				/>
-			))}{' '}
+			))}
 			<div className={s.postControls}>
 				<button onClick={() => setNextPosts(nextPosts - 7)} disabled={nextPosts === 0}>
 					Prev
 				</button>
-				<button onClick={() => setNextPosts(nextPosts + 7)} disabled={data.articles.length < 7}>
+				<button onClick={() => setNextPosts(nextPosts + 7)} disabled={articles.length < 7}>
 					Next
 				</button>
 			</div>

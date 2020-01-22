@@ -1,15 +1,14 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-
-const s = require('./Bio.scss');
-import Avatar from '../../Other/Avatar/Avatar';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import * as React from 'react';
+import Avatar from '../../Other/Avatar/Avatar';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
+const s = require('./Bio.scss');
 
 const getBio = gql`
-	{
+	query getAvatar {
 		avatar(id: "1") {
 			id
 			bio
@@ -20,17 +19,8 @@ const getBio = gql`
 const Bio = () => {
 	const { data, error, loading } = useQuery(getBio);
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
 
 	return (
 		<div key={data.avatar.id} className={s.bio}>
@@ -39,4 +29,5 @@ const Bio = () => {
 		</div>
 	);
 };
+
 export default Bio;

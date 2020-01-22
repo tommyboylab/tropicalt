@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Moment from 'react-moment';
 const s = require('./Recents.scss');
 
-interface Recent {
+type Recent = {
 	id: string;
 	type: string;
 	slug: string;
@@ -12,9 +12,9 @@ interface Recent {
 	date: string;
 	name: string;
 	excerpt: string;
-}
+};
 
-export default (Recent: Recent) => (
+const Recent = (Recent: Recent) => (
 	<Link href={`/${Recent.type}/${Recent.slug}`} as={`/${Recent.type}/${Recent.slug}`}>
 		<article
 			id={Recent.id}
@@ -31,3 +31,5 @@ export default (Recent: Recent) => (
 		</article>
 	</Link>
 );
+
+export default Recent;

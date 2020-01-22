@@ -1,3 +1,6 @@
+import React from 'react';
 const s = require('./Load.scss');
 
-export default (load:any) => <img className={s.load} src='/static/load.gif' />;
+const Loading = () => <img className={s.load} src='/static/load.gif' />;
+
+export default Loading;

@@ -1,14 +1,15 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-
 const s = require('../Resume.scss');
 
-interface Hobbies {
+type Hobbies = {
 	content: string;
-}
+};
 
-export default (Hobbies: Hobbies) => (
+const Hobbies = (hobbies: Hobbies) => (
 	<div className={s.hobbies}>
 		<h2>Hobbies</h2>
-		<ReactMarkdown source={Hobbies.content} />
+		<ReactMarkdown source={hobbies.content} />
 	</div>
 );
+export default Hobbies;

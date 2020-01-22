@@ -1,8 +1,11 @@
+import React from 'react';
 const s = require('./Tags.scss');
-interface Tags {
-	tag:string[];
-}
-export default (Tags:Tags) => (
+
+type Tags = {
+	tag: string[];
+};
+
+const TagList = (Tags: Tags) => (
 	<ul className={s.postTags}>
 		<li>Tags:</li>
 		<li>
@@ -10,3 +13,5 @@ export default (Tags:Tags) => (
 		</li>
 	</ul>
 );
+
+export default TagList;

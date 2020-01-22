@@ -1,14 +1,16 @@
+import React from 'react';
 import ReactMarkdown from 'react-markdown';
-
-interface Education {
-	content: string;
-}
-
 const s = require('../Resume.scss');
 
-export default (Education: Education) => (
+type Education = {
+	content: string;
+};
+
+const Education = (education: Education) => (
 	<div className={s.education}>
 		<h2>Education</h2>
-		<ReactMarkdown source={Education.content} />
+		<ReactMarkdown source={education.content} />
 	</div>
 );
+
+export default Education;

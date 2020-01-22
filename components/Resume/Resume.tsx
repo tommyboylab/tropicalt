@@ -1,8 +1,6 @@
+import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
-import React from 'react';
 import Header from './Nav/Header';
 import Contact from './Contact/Contact';
 import WorkExp from './WorkExp/WorkExp';
@@ -11,9 +9,11 @@ import HighlightImg from './Image/Image';
 import Hobbies from './Hobbies/Hobbies';
 import Footer from './Nav/Footer';
 import Skills from './Skills/Skills';
+import Load from '../Other/Load/Load';
+import Err from '../Other/Error/Error';
 
 const getResume = gql`
-	{
+	query getResume {
 		resume(id: 1) {
 			id
 			address
@@ -40,20 +40,11 @@ const getResume = gql`
 const Resume = () => {
 	const { data, error, loading } = useQuery(getResume);
 
-	if (loading) {
-		return <Load />;
-	}
-	if (error) {
-		return (
-			<div>
-				<Err />
-				{console.log(error.message)}
-			</div>
-		);
-	}
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
 
 	return (
-		<React.Fragment>
+		<>
 			<Header />
 			<Contact phone={data.resume.phoneNum} address={data.resume.address} />
 			<WorkExp content={data.resume.workExp} />
@@ -66,7 +57,7 @@ const Resume = () => {
 			/>
 			<Hobbies content={data.resume.hobbies} />
 			<Footer email={data.resume.email} />
-		</React.Fragment>
+		</>
 	);
 };
 export default () => <Resume />;

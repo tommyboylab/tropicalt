@@ -1,10 +1,12 @@
-interface Img {
-	class:string;
-	url:string;
-	alt:string;
-	placeholder:string;
-}
-export default (Img:Img) => (
+import React from 'react';
+
+type Img = {
+	class: string;
+	url: string;
+	alt: string;
+	placeholder: string;
+};
+const Image = (Img: Img) => (
 	<img
 		className={Img.class}
 		src={`https://api.tropicalt.ca${Img.url}`}
@@ -17,3 +19,4 @@ export default (Img:Img) => (
 		}}
 	/>
 );
+export default Image;

@@ -1,12 +1,15 @@
 import React from 'react';
 
-// const mybutton = (props: {isActive: boolean}) =>  <button ></button>
+type Props = {
+	src?: any;
+	isActive?: any;
+	setActive?: any;
+	id?: string;
+};
 
-const ThumbButton = ({ active, src, setActiveItem, id }) => (
-	//@ts-ignore
-	<button active={active} onFocus={setActiveItem} onClick={setActiveItem}>
+const ThumbButton = ({ isActive, setActive, id, src }: Props) => (
+	<button onFocus={setActive} onClick={setActive}>
 		<img id={id} src={src} />
 	</button>
 );
-
 export default ThumbButton;

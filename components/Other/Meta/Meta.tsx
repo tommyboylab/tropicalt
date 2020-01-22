@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import Head from 'next/head';
 
-type Props = {
+type Meta = {
 	type: string;
 	title: string;
 	excerpt: string;
@@ -9,7 +9,7 @@ type Props = {
 	slug: string;
 };
 
-export default ({ title, excerpt, url, type, slug }: Props) => (
+export default ({ title, excerpt, url, type, slug }: Meta) => (
 	<Head>
 		!-- Primary Meta Tags -->
 		<title>{title}</title>

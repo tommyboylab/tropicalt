@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Moment from 'react-moment';
-const s = require('./Recents.scss');
+import s from './Recents.module.scss';
 
 type Recent = {
 	id: string;

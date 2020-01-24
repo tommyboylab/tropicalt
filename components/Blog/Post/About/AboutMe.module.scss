@@ -1,0 +1,34 @@
+.postAbout {
+  background-color: rgb(51, 131, 247);
+  height: auto;
+  margin: 0 .5em .5em .25em;
+  padding-top: .5em;
+  border-radius: .25em;
+  box-shadow: 0em 0em 5em black;
+}
+
+.postAbout img {
+  padding-right: .25em;
+}
+
+.postAbout > div {
+  margin: auto;
+}
+
+.postAbout p {
+  font-size: .8em;
+  color: rgb(0, 255, 170);
+  padding-right: .5em;
+  padding-left: .5em;
+}
+
+.postAbout a {
+  color: rgb(190, 55, 250);
+  margin-top: 1em;
+  padding: .5em;
+}
+
+.postAbout a:hover {
+  color: rgb(175, 10, 110);
+  transition: .5s ease-in-out;
+}

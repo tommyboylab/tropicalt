@@ -4,7 +4,7 @@ import Footer from '../components/Nav/Footer';
 import Header from '../components/Blog/Post/Header/Header';
 import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
 import List from '../components/Blog/List';
-const s = require('../components/Other/Layout/Blog.scss');
+const s = require('../components/Other/Layout/Blog.module.scss');
 
 export default function Blog() {
 	return (

@@ -5,7 +5,7 @@ import Post from '../../../Home/Recents/Recents';
 import AboutMe from '../About/AboutMe';
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
-const s = require('./Sidebar.scss');
+import s from './Sidebar.module.scss';
 
 type Article = {
 	id: string;

@@ -1,7 +1,7 @@
 import React from 'react';
 import Contact from '../components/Contact/Contact';
 import Nav from '../components/Nav/Nav';
-const s = require('../components/Other/Layout/Contact.scss');
+const s = require('../components/Other/Layout/Contact.module.scss');
 
 export default function ContactPage() {
 	return (

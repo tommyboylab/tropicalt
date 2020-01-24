@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-const s = require('./Body.scss');
+import s from './Body.module.scss';
 
 type Content = {
 	content: string;

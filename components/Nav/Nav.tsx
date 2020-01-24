@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Link from 'next/link';
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
-const s = require('./Nav.scss');
+import s from './Nav.module.scss';
 
 type Nav = {
 	id: string;
@@ -33,7 +33,7 @@ const Nav = () => {
 	const nav = data?.nav?.nav as Nav[];
 
 	return (
-		<nav>
+		<nav className={s.nav}>
 			<li className={s.menu}>T^T</li>
 			<ul>
 				{nav.map((nav) => {

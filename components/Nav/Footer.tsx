@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-const s = require('./Footer.scss');
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
+import s from './Footer.module.scss';
 
 type Footer = {
 	id: string;

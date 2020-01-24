@@ -4,7 +4,7 @@ import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
 import { useForm } from 'react-hook-form';
 import { ToggleContent, Modal } from './Modal/Modal';
-const s = require('./Contact.scss');
+import s from './Contact.module.scss';
 
 type FormFields = {
 	name: string;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-const s = require('../Resume.scss');
+import s from '../Resume.module.scss';
 
 const Header = () => (
 	<div className={s.name}>

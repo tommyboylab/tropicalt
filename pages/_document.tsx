@@ -15,7 +15,7 @@ const globalStyle = {
   }
   
   h1 {
-  font-family: Flamenco;
+  font-family: Raleway;
   }
 
   /* didact-gothic-regular - latin */

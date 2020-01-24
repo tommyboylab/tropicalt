@@ -18,7 +18,7 @@ const apollo = new ApolloClient({
 			if (networkError) console.log(`Oh No! [Network error]: ${networkError}`, networkError);
 		}),
 		createHttpLink({
-			uri: 'https://api.tropicalt.ca/graphql',
+			uri: process.env.API,
 			fetch: fetch,
 		}),
 	]),

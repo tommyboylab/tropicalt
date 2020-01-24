@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('../AboutCards.scss');
+import s from '../AboutCards.module.scss';
 
 type Txt = {
 	title: string;

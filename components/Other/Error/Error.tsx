@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('./Error.scss');
+import s from './Error.module.scss';
 
 const Err = () => (
 	<div className={s.error}>

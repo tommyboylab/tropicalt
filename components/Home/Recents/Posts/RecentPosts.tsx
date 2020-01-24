@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Post from '../Recents';
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
-const s = require('./RecentPosts.scss');
+import s from './RecentPosts.module.scss';
 
 type Article = {
 	id: string;

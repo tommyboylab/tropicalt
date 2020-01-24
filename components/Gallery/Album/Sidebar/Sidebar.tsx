@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Link from 'next/link';
 import ThumbButton from './ThumbButton';
-const s = require('../Album.scss');
+import s from '../Album.module.scss';
 
 function useOnClickOutside(onClickOutside: EventListener) {
 	const insideRef = useRef(null);

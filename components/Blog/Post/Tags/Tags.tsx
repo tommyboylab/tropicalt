@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('./Tags.scss');
+import s from './Tags.module.scss';
 
 type Tags = {
 	tag: string[];

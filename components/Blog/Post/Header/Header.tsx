@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('./Header.scss');
+import s from './Header.module.scss';
 
 const Header = () => (
 	<div className={s.postHeader}>

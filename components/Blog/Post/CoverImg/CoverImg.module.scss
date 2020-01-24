@@ -1,0 +1,29 @@
+.postImg {
+  grid-area: PostImg;
+  position: relative;
+  // Removes spacing of image in div -> border
+  line-height: 0;
+  margin: .5em .5em 0 .5em;
+  border: 2px solid rgb(190, 55, 250);
+  border-top-right-radius: .75rem;
+  border-top-left-radius: .75rem;
+}
+
+.postImg img {
+  width: 100%;
+  height: 100%;
+  border-top-right-radius: .5em;
+  border-top-left-radius: .5em;
+}
+
+.postImg h3 {
+  position: absolute;
+  top: 15%;
+  right: 0;
+  font-size: 3vmax;
+  color: lightgreen;
+  background-color: skyblue;
+  padding: .5em;
+  border-top-left-radius: .5em;
+  border-bottom-left-radius: .5em;
+}

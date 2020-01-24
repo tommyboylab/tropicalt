@@ -1,6 +1,6 @@
 import React from 'react';
 import Img from '../../../Other/Img/Img';
-const s = require('./CoverImg.scss');
+import s from './CoverImg.module.scss';
 
 type PostImg = {
 	title: string;
@@ -11,7 +11,7 @@ type PostImg = {
 const Image = (PostImg: PostImg) => (
 	<div className={s.postImg}>
 		<h3>{PostImg.title}</h3>
-		<Img class={s.postImg.img} url={PostImg.url} placeholder={PostImg.placeholder} alt={`Image for ${PostImg.alt}`} />
+		<Img class={s.postImg} url={PostImg.url} placeholder={PostImg.placeholder} alt={`Image for ${PostImg.alt}`} />
 	</div>
 );
 

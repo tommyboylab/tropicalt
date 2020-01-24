@@ -1,0 +1,38 @@
+.blogSidebar {
+  grid-area: PostSidebar;
+  display: flex;
+  flex-direction: column;
+  height: 75%;
+  margin-top: .5em;
+  padding-bottom: 1em;
+}
+
+.blogSidebar h2 {
+  font-size: 2em;
+  text-align: right;
+  letter-spacing: .25em;
+  color: blue;
+  padding: .5em .5em;
+}
+
+.blogSidebar article {
+  flex: 1 2 15%;
+  margin: .25em .5em .25em .25em;
+}
+
+.blogSidebar article:hover {
+  flex-basis: 20%;
+}
+
+@media ( max-width: 1000px ) {
+
+  .blogSidebar {
+    width: 100%;
+    min-height: 55em;
+    height: 100%;
+  }
+
+  .blogSidebar article:hover {
+    flex-basis: 25%;
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-const s = require('../components/Other/Layout/Error.scss');
+const s = require('../components/Other/Layout/Error.module.scss');
 
 type Err = {
 	statusCode: any;

@@ -1,0 +1,35 @@
+.recentAlbums {
+  grid-area: RecentAlbums;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 20em;
+  height: 100%;
+  padding: .5em .5em 1em .5em;
+}
+
+.recentAlbums h2 {
+  color: rgb(0, 255, 170);
+  width: max-content;
+  margin: .5em auto .75em auto;
+  border-bottom: 1px solid rgb(190, 55, 250);
+}
+
+.recentAlbums > article {
+  flex: 1 2 30%;
+}
+
+.recentAlbums article:hover {
+  flex-basis: 40%;
+}
+
+@media ( max-width: 750px ) {
+
+  .recentAlbums > article {
+    height: 30%;
+  }
+
+  .recentAlbums article:hover {
+    flex-basis: 40%;
+  }
+}

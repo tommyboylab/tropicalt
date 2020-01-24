@@ -1,0 +1,100 @@
+.postText {
+  grid-area: PostText;
+  font-family: 'Didact Gothic', serif;
+  color: Gainsboro;
+  padding-top: 1em;
+  padding-right: 1.5vw;
+  padding-left: 1vw;
+}
+
+//.postText h1 {
+//}
+//
+//.postText h2 {
+//}
+//
+//.postText h3 {
+//}
+//
+//.postText h4 {
+//}
+//
+//.postText h5 {
+//}
+//
+//.postText h6 {
+//}
+
+.postText ul {
+  margin: 1em 0 1em 1.5em;
+}
+
+.postText ol {
+  margin: 1em 0 1em 1.5em;
+}
+
+.postText dl {
+  margin: 1em 0 1em .25em;
+}
+
+.postText dd {
+  margin: .25em 0 .5em .5em;
+}
+
+p code {
+  display: block;
+  font-size: calc(2vmin + .5vmax);
+  word-wrap: break-word;
+  color: rgb(190, 55, 250);
+  background: rgba(0, 0, 0, .5);
+  max-width: 90%;
+  width: min-content;
+  margin: 0 auto;
+  padding: 2em;
+  border-radius: .5em;
+}
+
+//.postText blockquote {
+//}
+//
+
+.postText pre {
+  white-space: normal;
+}
+
+.postText p {
+  font-size: 1em;
+  margin-bottom: 1em;
+  margin-left: .5em;
+}
+
+.postText a {
+  color: magenta;
+}
+
+//.postText i {
+//}
+//
+
+.postText b {
+  font-weight: bold;
+}
+
+.postText strong {
+  font-weight: bold;
+}
+
+.postText em {
+  font-style: italic;
+}
+
+.postText mark {
+  background-color: PaleGreen;
+}
+
+@media ( max-width: 600px ) {
+
+  .postText {
+    font-size: .75em;
+  }
+}

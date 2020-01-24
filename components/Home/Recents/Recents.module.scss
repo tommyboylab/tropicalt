@@ -1,0 +1,38 @@
+.recent {
+  cursor: pointer;
+  color: rgb(115, 5, 45);
+  background-position: center;
+  border-radius: .25em;
+  box-shadow: 0em 0em .75em black;
+  transition: flex-basis 350ms ease-in-out;
+  background-size: cover;
+}
+
+.title {
+  font-size: 1.5em;
+  width: 100%;
+  padding: .25em 1em 0 .5em;
+}
+
+.detailsList {
+  opacity: 0;
+  font-size: 1em;
+  line-height: 1.5em;
+  width: 100%;
+  padding-right: .5em;
+  padding-left: .5em;
+  list-style: none;
+}
+
+.recent:hover .detailsList {
+  opacity: 1;
+  transition: opacity 400ms ease-in-out;
+}
+
+.detailsList li {
+  padding-left: .5em;
+}
+
+.detailsList li:nth-child( 1 ) {
+  padding-left: .25em;
+}

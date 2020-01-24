@@ -5,7 +5,7 @@ import Text from './AboutCard/AboutCardText';
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
 import Img from '../Other/Img/Img';
-const s = require('./AboutCards.scss');
+import s from './AboutCards.module.scss';
 
 type AboutCard = {
 	img: { img: { url: string }; placeholder: { url: string } };

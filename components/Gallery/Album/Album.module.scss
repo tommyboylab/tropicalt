@@ -1,0 +1,286 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  border: none;
+  outline-color: rgb(15, 175, 105);
+}
+
+.mainPane {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.mainPane h1 {
+  position: absolute;
+  top: .5em;
+  left: 1em;
+  color: white;
+}
+
+.mainPane p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 1.5em;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, .2), rgba(0, 0, 0, .1));
+  padding: .5em 25% .5em 1em;
+}
+
+.mainPane img {
+  display: block;
+  width: auto;
+  height: 100%;
+  margin-left: 50%;
+  box-shadow: rgb(20, 20, 30) 0 0 70px 10px;
+  transform: translateX(-50%);
+}
+
+section .sidebar {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  text-align: right;
+  color: rgb(15, 175, 105);
+  background-color: rgb(20, 20, 30);
+  width: 20em;
+  overflow-y: auto;
+  padding-top: .5em;
+  padding-right: .25em;
+  transform: translateX(20.5em);
+  transition: transform 1000ms cubic-bezier(.165, .84, .44, 1);
+}
+
+.sidebar > a {
+  font-size: 1.25em;
+  text-decoration: none;
+  margin-right: 1em;
+}
+
+.sidebarHeader h2 {
+  font-size: 2.5em;
+  line-height: 2.75rem;
+  margin: .25em .25em 0 .25em;
+}
+
+.sidebarHeader p {
+  font-size: 1.25em;
+  color: rgb(15, 175, 105);
+  margin: .5em;
+}
+
+.sidebarHeader ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  margin: 0 auto;
+  padding-left: .25em;
+  list-style: none;
+}
+
+.sidebarFooter p {
+  margin: .25em .5em;
+}
+
+.sidebarFooter p:nth-child( 2 ) {
+  text-align: center;
+  border-top: solid rgb(175, 10, 110) 1px;
+}
+
+svg {
+  width: 50px;
+  height: 50px;
+  fill: rgb(170, 170, 170);
+}
+
+svg:hover {
+  fill: rgb(15, 175, 105);
+  transition: fill .5s ease, border-bottom-color .25s ease;
+}
+
+.sidebar img {
+  display: block;
+  width: 100%;
+  height: 10em;
+  object-fit: cover;
+  object-position: center;
+}
+
+.sidebar button {
+  opacity: .7;
+  cursor: pointer;
+  background: none;
+  width: 47%;
+  margin: .25em;
+}
+
+.sidebar button:focus {
+  opacity: 1;
+}
+
+.toggle {
+  z-index: 1;
+  position: fixed;
+  top: .5em;
+  right: .5em;
+  background-color: transparent;
+  width: 3em;
+  height: 3em;
+  border-radius: .25em;
+  transition: transform 1000ms cubic-bezier(.165, .84, .44, 1);
+
+  > span {
+    position: absolute;
+    background: rgb(30, 220, 120);
+    width: 28px;
+    height: 4px;
+    border-radius: .2em;
+    transform: translate3d(-50%, -50%, 0);
+    transition: background 2000ms cubic-bezier(.165, .84, .44, 1);
+
+    &:before,
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      background: rgb(30, 220, 120);
+      width: 28px;
+      height: 4px;
+      transition: transform 2000ms cubic-bezier(.165, .84, .44, 1);
+    }
+
+    &:before {
+      top: -12px;
+    }
+
+    &:after {
+      bottom: -12px;
+    }
+  }
+}
+
+section.open {
+
+  .sidebar {
+    transform: translateX(0);
+  }
+
+  .toggle {
+    transform: translateX(-25rem);
+  }
+
+  span {
+    background: transparent;
+  }
+
+  span:before {
+    transform: translate(4px, 4px) rotate(40deg);
+  }
+
+  span:after {
+    transform: translate(4px, -4px) rotate(-40deg);
+  }
+}
+
+@media ( max-width: 800px ) {
+
+  .sidebar ul {
+    width: 60%;
+    padding-left: .25em;
+  }
+
+  .sidebar h2 {
+    font-size: 1.75em;
+  }
+
+  .sidebar a {
+    font-size: 1em;
+  }
+
+  .sidebar p {
+    font-size: 1.25em;
+  }
+
+  .sidebar button {
+    width: 46%;
+  }
+
+  .toggle {
+    width: 2.5em;
+    height: 2.5em;
+  }
+
+  section .sidebar {
+    width: 15em;
+    transform: translateX(15.5em);
+  }
+
+  section.open {
+
+    .toggle {
+      transform: translateX(-19rem);
+    }
+  }
+}
+
+@media ( max-width: 600px ) {
+
+  .sidebar ul {
+    width: 75%;
+    padding-left: .5em;
+  }
+
+  .sidebar h2 {
+    font-size: 1.5em;
+  }
+
+  .sidebar a {
+    font-size: .75em;
+  }
+
+  .sidebar p {
+    font-size: 1em;
+  }
+
+  .sidebar button {
+    width: 90%;
+  }
+
+  .toggle {
+    width: 2em;
+    height: 2em;
+  }
+
+  section .sidebar {
+    width: 10em;
+    transform: translateX(10.5em);
+  }
+
+  section.open {
+
+    .toggle {
+      transform: translateX(-12.5rem);
+    }
+  }
+}

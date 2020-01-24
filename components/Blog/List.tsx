@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Post from '../Home/Recents/Recents';
 import Err from '../Other/Error/Error';
 import Load from '../Other/Load/Load';
-const s = require('./List.scss');
+import s from './List.module.scss';
 
 type ArticleList = {
 	id: string;

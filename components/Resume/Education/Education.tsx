@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-const s = require('../Resume.scss');
+import s from '../Resume.module.scss';
 
 type Education = {
 	content: string;

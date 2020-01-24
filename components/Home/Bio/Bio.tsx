@@ -5,7 +5,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Avatar from '../../Other/Avatar/Avatar';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-const s = require('./Bio.scss');
+import s from './Bio.module.scss';
 
 const getBio = gql`
 	query getAvatar {

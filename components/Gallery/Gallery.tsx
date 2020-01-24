@@ -1,6 +1,6 @@
 import React from 'react';
 import Recents from '../Home/Recents/Recents';
-const s = require('./Gallery.scss');
+import s from './Gallery.module.scss';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Load from '../Other/Load/Load';

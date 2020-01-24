@@ -1,6 +1,6 @@
 import React from 'react';
 import Img from '../../Other/Img/Img';
-const s = require('../Resume.scss');
+import s from '../Resume.module.scss';
 
 type Img = {
 	url: string;
@@ -11,7 +11,7 @@ type Img = {
 const Highlight = (highlightImg: Img) => (
 	<div className={s.highlightImg}>
 		<Img
-			class={s.highlightImg.img}
+			class={s.highlightImg}
 			url={highlightImg.url}
 			placeholder={highlightImg.placeholder}
 			alt={`Image for ${highlightImg.alt}`}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
-const s = require('./Modal.scss');
+import s from './Modal.module.scss';
 
 type Toggle = {
 	toggle: Function;

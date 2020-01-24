@@ -10,7 +10,7 @@ import Sidebar from './Sidebar/Sidebar';
 import Footer from '../../Nav/Footer';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-const s = require('../../Other/Layout/Post.scss');
+import s from '../../Other/Layout/Post.module.scss';
 
 type Article = {
 	id: string;

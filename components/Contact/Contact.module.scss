@@ -1,0 +1,82 @@
+.error {
+  color: rgb(190, 55, 250);
+}
+
+.form > form {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(175, 10, 110, .8);
+  width: max-content;
+  margin: 0 auto;
+  padding: 0 6vw 5vw 6vw;
+  border-bottom-right-radius: 1em;
+  border-bottom-left-radius: 1em;
+}
+
+.form form h1 {
+  font-size: 1.5rem;
+  color: rgb(190, 55, 250);
+  margin-top: 2.75em;
+}
+
+.form input,
+form textarea {
+  opacity: .5;
+  color: rgb(190, 55, 250);
+  background-color: rgb(35, 40, 45);
+  width: 100%;
+  padding: .5em;
+  border: none;
+  border-radius: .25em;
+  border-bottom: 2px solid rgb(190, 55, 250);
+  outline: none;
+  transition: opacity 500ms ease-in-out;
+}
+
+.name,
+.email {
+  height: 3em;
+  margin-bottom: 1em;
+}
+
+.message {
+  max-height: 10em;
+  height: 25vh;
+  margin-bottom: 2.25em;
+}
+
+.message textarea {
+  resize: none;
+  height: 100%;
+}
+
+.form input:valid,
+.form textarea:valid {
+  opacity: 1;
+}
+
+.name input:focus,
+.email input:focus,
+.message textarea:focus {
+  opacity: 1;
+}
+
+.submit {
+  color: rgb(190, 55, 250);
+  background-color: rgb(35, 40, 45);
+  width: min-content;
+  margin: 0 auto;
+  padding: .5em 3em;
+  border: none;
+  border-radius: .75em;
+  transition: opacity 500ms ease-in-out;
+}
+
+.submit:disabled {
+  opacity: .5;
+}
+
+.submitError {
+  width: max-content;
+  margin: 0 auto;
+}

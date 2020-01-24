@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '../../../Other/Avatar/Avatar';
-const s = require('./AboutMe.scss');
+import s from './AboutMe.module.scss';
 
 const About = () => (
 	<div className={s.postAbout}>

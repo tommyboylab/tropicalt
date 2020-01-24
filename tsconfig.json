@@ -10,11 +10,11 @@
 		"skipLibCheck": true,
 		"resolveJsonModule": true,
 		"isolatedModules": true,
-		"strict": false,
+		"strict": true,
 		"jsx": "preserve",
 		"noEmit": true,
-		"rootDirs": ["src", "stories"],
-		"baseUrl": "src",
+		"rootDirs": ["components", "pages", "public", "stories"],
+		"baseUrl": ".",
 		"forceConsistentCasingInFileNames": true,
 		"noImplicitReturns": true,
 		"noImplicitThis": true,
@@ -31,3 +31,4 @@
 	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
 	"exclude": ["node_modules"]
 }
+

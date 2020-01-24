@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('../Album.scss');
+import s from '../Album.module.scss';
 
 type MainWindow = {
 	src: any;

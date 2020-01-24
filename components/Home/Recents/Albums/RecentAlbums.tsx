@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Recents from '../Recents';
 import Load from '../../../Other/Load/Load';
 import Err from '../../../Other/Error/Error';
-const s = require('./RecentAlbums.scss');
+import s from './RecentAlbums.module.scss';
 
 type Album = {
 	id: string;

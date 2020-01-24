@@ -1,5 +1,5 @@
 import React from 'react';
-const s = require('../Resume.scss');
+import s from '../Resume.module.scss';
 
 type Footer = {
 	email: string;

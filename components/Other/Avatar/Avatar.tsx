@@ -4,7 +4,7 @@ import { useQuery } from '@apollo/react-hooks';
 import Img from '../Img/Img';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
-const s = require('./Avatar.scss');
+import s from './Avatar.module.scss';
 
 const getAvatar = gql`
 	query getAvatar {
@@ -34,7 +34,7 @@ const Avatar = () => {
 	return (
 		<div key={data.avatar.id} className={s.avatar}>
 			<Img
-				class={s.avatar.img}
+				class={s.avatar}
 				url={data.avatar.avatar.img.url}
 				placeholder={data.avatar.avatar.placeholder.url}
 				alt={`Image for ${data.avatar.alt}`}

@@ -6,7 +6,7 @@ type Education = {
 	content: string;
 };
 
-const Education = (education: Education) => (
+const Education = (education: Education): JSX.Element => (
 	<div className={s.education}>
 		<h2>Education</h2>
 		<ReactMarkdown source={education.content} />

@@ -1,43 +1,50 @@
+@use '../Other/Styles/Styles';
+
 .footer {
-  grid-area: Footer;
-  display: flex;
-  justify-content: space-around;
-  width: 100%;
-  padding-top: .5em;
-  padding-bottom: .5em;
-  border-top: 1px solid rgb(190, 55, 250);
+	grid-area: Footer;
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+	border-top: 1px solid Styles.$SECONDARY_COLOR;
 }
 
-.footer h3 a {
-  text-decoration: none;
-  color: rgb(190, 55, 250);
-  margin: auto 0;
+.footer h3 {
+	color: Styles.$SECONDARY_COLOR;
+	margin: auto 0;
+	padding: 0 1em;
+}
+
+.footer a {
+	color: Styles.$PRIMARY_COLOR;
+	background: none;
+	margin: auto 0;
 }
 
 .footer h3:hover {
-  color: rgb(175, 10, 110);
-  transition: .5s ease-in-out;
+	color: Styles.$QUATERNARY_COLOR;
+	transition: 0.5s ease-in-out;
 }
 
 .footer ul {
-  margin: auto 0;
-  list-style: none;
-  column-count: 2;
+	margin: auto 0;
+	column-count: 2;
 }
 
 .footer li {
-  cursor: pointer;
-  color: rgb(0, 255, 170);
+	cursor: pointer;
+	color: Styles.$PRIMARY_COLOR;
+	list-style: none;
 }
 
-@media ( max-width: 920px ) {
+@media (max-width: 920px) {
+	.footer {
+		flex-direction: column;
+		text-align: center;
+	}
 
-  .footer {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .footer ul {
-    margin: 0 auto;
-  }
+	.footer ul {
+		margin: 0 auto;
+	}
 }

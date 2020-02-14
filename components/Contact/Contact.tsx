@@ -2,7 +2,7 @@ import React from 'react';
 import { object, string } from 'yup';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { useForm } from 'react-hook-form';
+import { EventFunction, useForm } from 'react-hook-form';
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';
 
@@ -39,13 +39,22 @@ const contactSchema = object().shape({
 		.required(),
 });
 
-export default function Form() {
+const HideModal = (hide: EventFunction): JSX.Element => (
+	<Modal>
+		<h2>Thanks for reaching out</h2>
+		<p>{`I'll get back to you shortly.`}</p>
+		<button onClick={hide}>Close</button>
+	</Modal>
+);
+
+const Form = (): JSX.Element => {
 	const [addEmail, { loading: mutationLoading, error: mutationError }] = useMutation(sendEmail);
 	const { register, errors, handleSubmit, formState, reset } = useForm<FormFields>({
 		mode: 'onChange',
 		validationSchema: contactSchema,
 	});
-	const onSubmit = async (data: FormFields) => {
+
+	const onSubmit = async (data: FormFields): Promise<void> => {
 		await addEmail({
 			variables: { name: data.name, email: data.email, message: data.message },
 		});
@@ -55,6 +64,7 @@ export default function Form() {
 			message: '',
 		});
 	};
+
 	return (
 		<section className={s.form}>
 			<form onSubmit={handleSubmit(onSubmit)}>
@@ -91,25 +101,26 @@ export default function Form() {
 				</div>
 
 				<ToggleContent
-					toggle={(show: any) => (
+					toggle={(show: EventFunction): JSX.Element => (
 						<button
 							type='submit'
 							className={s.submit}
-							onClick={mutationError || (handleSubmit(onSubmit) && show)}
-							disabled={!formState.isValid || (errors && mutationLoading)}>
+							onClick={(event) => {
+								handleSubmit(onSubmit);
+								show(event);
+							}}
+							disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
 							Submit
 						</button>
 					)}
-					content={(hide: any) => (
-						<Modal>
-							<h2>Thanks for reaching out</h2>
-							<p>I'll get back to you shortly.</p>
-							<button onClick={hide}>Close</button>
-						</Modal>
-					)}
+					content={HideModal}
 				/>
 				{mutationError && <p className={s.submitError}>Error :( Please try again</p>}
 			</form>
 		</section>
 	);
-}
+};
+
+Form.displayName = 'Contact Form';
+
+export default Form;

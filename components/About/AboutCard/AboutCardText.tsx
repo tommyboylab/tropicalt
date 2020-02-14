@@ -6,7 +6,7 @@ type Txt = {
 	excerpt: string;
 };
 
-const Text = (Txt: Txt) => (
+const Text = (Txt: Txt): JSX.Element => (
 	<div className={s.aboutCardText}>
 		<h2>{Txt.title}</h2>
 		<p>{Txt.excerpt}</p>

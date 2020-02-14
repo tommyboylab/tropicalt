@@ -5,7 +5,7 @@ type MainWindow = {
 	src: any;
 };
 
-const MainWindow = ({ src }: MainWindow) => (
+const MainWindow = ({ src }: MainWindow): JSX.Element => (
 	<div className={s.mainPane}>
 		<img src={src} />
 	</div>

@@ -92,6 +92,7 @@
       "break-before",
       "break-inside",
       "cursor",
+      "user-select",
       "font",
       "font-family",
       "font-size",

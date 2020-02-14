@@ -1,13 +1,12 @@
 import React from 'react';
 
 type Props = {
-	src?: any;
-	isActive?: any;
-	setActive?: any;
-	id?: string;
+	src: string;
+	setActive: any;
+	id: string;
 };
 
-const ThumbButton = ({ isActive, setActive, id, src }: Props) => (
+const ThumbButton = ({ setActive, id, src }: Props): JSX.Element => (
 	<button onFocus={setActive} onClick={setActive}>
 		<img id={id} src={src} />
 	</button>

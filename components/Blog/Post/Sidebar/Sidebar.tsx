@@ -42,7 +42,7 @@ const getArticles = gql`
 	}
 `;
 
-const PostSidebar = () => {
+const PostSidebar = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getArticles);
 
 	if (loading && !data) return <Load />;
@@ -57,7 +57,7 @@ const PostSidebar = () => {
 			{articles.map((article) => (
 				<Post
 					id={article.id}
-					type='post'
+					type='blog'
 					key={article.id}
 					slug={article.slug}
 					cover={article.cover.placeholder.url}
@@ -70,4 +70,7 @@ const PostSidebar = () => {
 		</div>
 	);
 };
-export default () => <PostSidebar />;
+
+PostSidebar.displayName = 'Sidebar';
+
+export default PostSidebar;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
+import Link from './ActiveLink/ActiveLink';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Load from '../Other/Load/Load';
@@ -24,7 +24,7 @@ const getFooterItems = gql`
 	}
 `;
 
-const Footer = () => {
+const Footer = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getFooterItems);
 
 	if (loading && !data) return <Load />;
@@ -34,7 +34,9 @@ const Footer = () => {
 
 	return (
 		<footer className={s.footer}>
-			<a href='/'>T^T</a>
+			<Link href='/'>
+				<li>T^T</li>
+			</Link>
 			<h3>Made by Thomas Fiala with a little help from Education</h3>
 			<ul>
 				{nav.map((nav) => {
@@ -48,4 +50,6 @@ const Footer = () => {
 		</footer>
 	);
 };
-export default () => <Footer />;
+
+Footer.displayName = 'Footer';
+export default Footer;

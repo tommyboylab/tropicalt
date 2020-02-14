@@ -1,75 +1,84 @@
+@use '../../../Other/Styles/Styles';
+
 .postText {
-  grid-area: PostText;
-  font-family: 'Didact Gothic', serif;
-  color: Gainsboro;
-  padding-top: 1em;
-  padding-right: 1.5vw;
-  padding-left: 1vw;
+	grid-area: PostText;
+	font-family: Styles.$PRIMARY_FONT;
+	color: Styles.$FONT_COLOR;
+	margin: 0 0.5em;
+	padding: 1em 2vw 1vw 1.5vw;
 }
 
-//.postText h1 {
-//}
-//
-//.postText h2 {
-//}
-//
-//.postText h3 {
-//}
-//
-//.postText h4 {
-//}
-//
-//.postText h5 {
-//}
-//
-//.postText h6 {
-//}
+.postText h1 {
+	font-size: Styles.$LARGE_FONT;
+}
+
+.postText h2 {
+	font-size: Styles.$MEDIUM_FONT;
+}
+
+.postText h3 {
+	font-size: Styles.$SMALL_FONT;
+}
+
+.postText h4 {
+	font-size: Styles.$SMALL_FONT;
+}
+
+.postText h5 {
+	font-size: Styles.$SMALL_FONT;
+}
+
+.postText h6 {
+	font-size: Styles.$SMALL_FONT;
+}
 
 .postText ul {
-  margin: 1em 0 1em 1.5em;
+	margin: 1em 0 1em 1.5em;
 }
 
 .postText ol {
-  margin: 1em 0 1em 1.5em;
+	margin: 1em 0 1em 1.5em;
 }
 
 .postText dl {
-  margin: 1em 0 1em .25em;
+	margin: 1em 0 1em 0.25em;
 }
 
 .postText dd {
-  margin: .25em 0 .5em .5em;
+	margin: 0.25em 0 0.5em 0.5em;
 }
 
-p code {
-  display: block;
-  font-size: calc(2vmin + .5vmax);
-  word-wrap: break-word;
-  color: rgb(190, 55, 250);
-  background: rgba(0, 0, 0, .5);
-  max-width: 90%;
-  width: min-content;
-  margin: 0 auto;
-  padding: 2em;
-  border-radius: .5em;
+.postText pre {
+	text-align: center;
+	white-space: normal;
+	margin: 1em;
+}
+
+.postText code {
+	display: block;
+	font-size: Styles.$CALC_FONT_SMALL;
+	word-wrap: break-word;
+	color: Styles.$SECONDARY_COLOR;
+	background: rgba(0, 0, 0, 0.5);
+	margin: 0 auto;
+	padding: 2em;
+	border-radius: 0.5em;
 }
 
 //.postText blockquote {
 //}
 //
 
-.postText pre {
-  white-space: normal;
-}
-
 .postText p {
-  font-size: 1em;
-  margin-bottom: 1em;
-  margin-left: .5em;
+	font-size: Styles.$SMALL_FONT;
+	text-indent: 0.5em;
+	margin-bottom: 1em;
 }
 
 .postText a {
-  color: magenta;
+	font-size: Styles.$SMALL_FONT;
+	text-decoration: none;
+	color: Styles.$SECONDARY_COLOR;
 }
 
 //.postText i {
@@ -77,24 +86,23 @@ p code {
 //
 
 .postText b {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .postText strong {
-  font-weight: bold;
+	font-weight: bold;
 }
 
 .postText em {
-  font-style: italic;
+	font-style: italic;
 }
 
 .postText mark {
-  background-color: PaleGreen;
+	background-color: Styles.$PRIMARY_COLOR;
 }
 
-@media ( max-width: 600px ) {
-
-  .postText {
-    font-size: .75em;
-  }
+@media (max-width: 600px) {
+	.postText {
+		font-size: Styles.$X_SMALL_FONT;
+	}
 }

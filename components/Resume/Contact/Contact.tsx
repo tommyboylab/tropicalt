@@ -6,7 +6,7 @@ type Contact = {
 	address: string;
 };
 
-const Contact = (contact: Contact) => (
+const Contact = (contact: Contact): JSX.Element => (
 	<div className={s.contactInfo}>
 		<p className={s.cellphone}>{contact.phone}</p>
 		<p className={s.address}>{contact.address}</p>

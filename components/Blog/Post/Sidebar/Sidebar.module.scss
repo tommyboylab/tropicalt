@@ -1,38 +1,40 @@
+@use '../../../Other/Styles/Styles';
+
 .blogSidebar {
-  grid-area: PostSidebar;
-  display: flex;
-  flex-direction: column;
-  height: 75%;
-  margin-top: .5em;
-  padding-bottom: 1em;
+	grid-area: PostSidebar;
+	display: flex;
+	flex-direction: column;
+	min-height: 60em;
+	height: 90%;
+	margin-top: 3.25em;
+	margin-right: 0.5em;
+	padding-bottom: 1em;
 }
 
 .blogSidebar h2 {
-  font-size: 2em;
-  text-align: right;
-  letter-spacing: .25em;
-  color: blue;
-  padding: .5em .5em;
+	font-size: Styles.$X_LARGE_FONT;
+	text-align: right;
+	letter-spacing: 0.25em;
+	color: Styles.$TERTIARY_COLOR;
+	padding-right: 0.5em;
 }
 
 .blogSidebar article {
-  flex: 1 2 15%;
-  margin: .25em .5em .25em .25em;
+	flex: 1 2 15%;
+	margin: 0.25em;
 }
 
 .blogSidebar article:hover {
-  flex-basis: 20%;
+	flex-basis: 25%;
 }
 
-@media ( max-width: 1000px ) {
+@media (max-width: 1000px) {
+	.blogSidebar {
+		width: 100%;
+		margin-top: 0;
+	}
 
-  .blogSidebar {
-    width: 100%;
-    min-height: 55em;
-    height: 100%;
-  }
-
-  .blogSidebar article:hover {
-    flex-basis: 25%;
-  }
+	.blogSidebar article:hover {
+		flex-basis: 25%;
+	}
 }

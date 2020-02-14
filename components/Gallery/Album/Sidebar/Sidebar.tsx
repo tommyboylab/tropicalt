@@ -1,14 +1,13 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, MutableRefObject, SetStateAction } from 'react';
 import Link from 'next/link';
 import ThumbButton from './ThumbButton';
 import s from '../Album.module.scss';
 
-function useOnClickOutside(onClickOutside: EventListener) {
-	const insideRef = useRef(null);
+function useOnClickOutside(onClickOutside: EventListener): MutableRefObject<HTMLElement | null> {
+	const insideRef = useRef<HTMLElement | null>(null);
 
-	function handleBodyClick(event: MouseEventInit) {
-		//@ts-ignore
-		if (!insideRef.current.contains(event.target)) {
+	function handleBodyClick(event: MouseEvent) {
+		if (!insideRef?.current?.contains(event.target as Node)) {
 			onClickOutside(event as Event);
 		}
 	}
@@ -31,7 +30,7 @@ function useSidebar(defaultOpen: boolean) {
 		}
 	});
 
-	function toggleOpen() {
+	function toggleOpen(): SetStateAction<void> {
 		setOpen(!open);
 	}
 
@@ -55,7 +54,7 @@ type Sidebar = {
 	excerpt: string;
 };
 
-const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar) => {
+const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar): JSX.Element => {
 	const { sidebarRef, open, toggleOpen } = useSidebar(true);
 
 	return (
@@ -107,7 +106,7 @@ const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar) => {
 					<ThumbButton
 						key={photo.original}
 						src={photo.thumbnail}
-						setActive={() => {
+						setActive={(): SetStateAction<void> => {
 							setActiveItem(photo.original);
 						}}
 						id={photo.original}

@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { useRouter } from 'next/router';
+import Meta from '../../Other/Meta/Meta';
 import Nav from '../../Nav/Nav';
 import CoverImg from './CoverImg/CoverImg';
 import Tags from './Tags/Tags';
@@ -11,42 +12,45 @@ import Footer from '../../Nav/Footer';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 import s from '../../Other/Layout/Post.module.scss';
+import MobileHeader from './MobileHeader/MobileHeader';
 
 type Article = {
 	id: string;
 	title: string;
 	cover: { img: { url: string }; placeholder: { url: string } };
-	tag: any[];
+	tag: [{ tag: { id: string; tag: string } }];
 	content: string;
+	excerpt: string;
 };
 
-const Post = () => {
+const getArticle = gql`
+	query Article($slug: String) {
+		articles(where: { slug: $slug }) {
+			id
+			slug
+			cover {
+				img {
+					id
+					url
+				}
+				placeholder {
+					id
+					url
+				}
+			}
+			title
+			excerpt
+			content
+			tag {
+				tag
+			}
+		}
+	}
+`;
+
+const Post = (): JSX.Element => {
 	const router = useRouter();
 	const slug = router.query.slug;
-
-	const getArticle = gql`
-        query Article {
-            articles (where: {slug: "${slug}"}) {
-                id
-                slug
-                cover {
-                    img{
-                        id
-                        url
-                    }
-                    placeholder{
-                        id
-                        url 
-                    }
-                }
-                title
-                content
-                tag {
-                tag
-                }
-            }
-        }
-    `;
 
 	const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
 
@@ -58,24 +62,36 @@ const Post = () => {
 	return (
 		<>
 			{articles.map((article) => (
-				<main className={s.layout} key={article.id}>
-					<Nav />
-					<CoverImg
+				<>
+					<Meta
+						type={'post'}
 						title={article.title}
-						url={article.cover.img.url}
-						placeholder={article.cover.placeholder.url}
-						alt={article.title}
+						excerpt={article.excerpt}
+						imgUrl={article.cover.img.url}
+						slug={`${slug}`}
 					/>
-					{article.tag.map(({ tag }) => (
-						<Tags tag={tag} />
-					))}
-					<Body content={article.content} />
-					<Sidebar />
-					<Footer />
-				</main>
+					<main className={s.layout} key={article.id}>
+						<Nav />
+						<MobileHeader />
+						<CoverImg
+							title={article.title}
+							url={article.cover.img.url}
+							placeholder={article.cover.placeholder.url}
+							alt={article.title}
+						/>
+						{article.tag.map(({ tag: tag }) => (
+							<Tags key={tag.id} tag={tag} />
+						))}
+						<Body content={article.content} />
+						<Sidebar />
+						<Footer />
+					</main>
+				</>
 			))}
 		</>
 	);
 };
+
+Post.displayName = 'Post';
 
 export default Post;

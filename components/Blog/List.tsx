@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import Post from '../Home/Recents/Recents';
@@ -41,7 +41,7 @@ const getArticlesQuery = gql`
 	}
 `;
 
-const Articles = () => {
+const Articles = (): JSX.Element => {
 	const [nextPosts, setNextPosts] = useState(0);
 	const { data, error, loading } = useQuery(getArticlesQuery, {
 		variables: {
@@ -49,6 +49,9 @@ const Articles = () => {
 		},
 		fetchPolicy: 'cache-and-network',
 	});
+
+	const prev = useCallback((): void => setNextPosts(nextPosts - 7), [nextPosts]);
+	const next = useCallback((): void => setNextPosts(nextPosts + 7), [nextPosts]);
 
 	if (loading && !data) return <Load />;
 	if (error) return <Err />;
@@ -60,7 +63,7 @@ const Articles = () => {
 			{articles.map((article) => (
 				<Post
 					id={article.id}
-					type='post'
+					type='blog'
 					slug={article.slug}
 					key={article.id}
 					cover={article.cover.placeholder.url}
@@ -71,14 +74,17 @@ const Articles = () => {
 				/>
 			))}
 			<div className={s.postControls}>
-				<button onClick={() => setNextPosts(nextPosts - 7)} disabled={nextPosts === 0}>
+				<button onClick={prev} disabled={nextPosts === 0}>
 					Prev
 				</button>
-				<button onClick={() => setNextPosts(nextPosts + 7)} disabled={articles.length < 7}>
+				<button onClick={next} disabled={articles.length < 7}>
 					Next
 				</button>
 			</div>
 		</div>
 	);
 };
-export default () => <Articles />;
+
+Articles.displayName = 'ArticleList';
+
+export default Articles;

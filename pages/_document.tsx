@@ -13,9 +13,9 @@ const globalStyle = {
     line-height:1.5em;
     box-sizing: border-box;
   }
-  
+
   h1 {
-  font-family: Raleway;
+   font-family: Raleway;
   }
 
   /* didact-gothic-regular - latin */
@@ -109,7 +109,7 @@ const globalStyle = {
 };
 
 export default class TropicalTStyle extends Document {
-	render() {
+	render(): JSX.Element {
 		return (
 			<html>
 				<Head>

@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import s from '../Resume.module.scss';
 
-const Header = () => (
+const Header = (): JSX.Element => (
 	<div className={s.name}>
 		<h5 className={s.return}>
 			<Link href='/'>

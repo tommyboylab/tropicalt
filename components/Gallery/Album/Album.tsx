@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
-import { useApolloClient, useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/react-hooks';
 import axios from 'axios';
 import MainWindow from './MainWindow/MainWindow';
 import Sidebar from './Sidebar/Sidebar';
+import Meta from '../../Other/Meta/Meta';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 
 const getAlbum = gql`
 	query getAlbums($slug: [String!]) {
 		albums(where: { slug: $slug }) {
+			id
 			title
+			slug
+			cover {
+				img {
+					id
+					url
+				}
+			}
 			excerpt
 			albumID
 		}
@@ -21,6 +30,7 @@ const getAlbum = gql`
 type Albums = {
 	title: string;
 	excerpt: string;
+	cover: { img: { id: string; url: string } };
 	albumID: number;
 };
 
@@ -29,45 +39,43 @@ type Photo = {
 	thumbnail: string;
 };
 
-//@ts-ignore
-const fetchData = async (albumID: Albums, setPhotos: (photos: Photo[]) => void) => {
-	if (!albumID) return <Load />;
-	const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumID}`);
-	// const photosArray = await getGoogleAlbum(albumID);
-	if (photosArray && photosArray.data.length > 0) {
-		setPhotos(
-			photosArray.data.map((url: string) => ({
-				original: `${url}=w2048`,
-				thumbnail: `${url}=w400`,
-			}))
-		);
-	}
-};
-
-const Album = () => {
+const Album = (): JSX.Element => {
 	const router = useRouter();
-	const slug = router.query.slug;
+	const [isLoading, setIsLoading] = useState(true);
 	const [activePhoto, setActivePhoto] = useState<Photo>();
 	const [photos, setPhotos] = useState<Photo[]>([]);
-	const client = useApolloClient();
 
-	useEffect(() => {
-		if (!slug) return;
-		async function fetchAlbums() {
-			const { data } = await client.query({ query: getAlbum, variables: { slug } });
-			await fetchData(data?.albums[0].albumID, setPhotos);
-		}
-		fetchAlbums();
-	}, [slug]);
+	const { data, error, loading } = useQuery(getAlbum, {
+		variables: { slug: router.query.slug },
+		onCompleted: async (d) => {
+			const albumId = d?.albums[0].albumID;
+			if (albumId) {
+				const photosArray = await axios.get(`https://google-photos-album-demo.glitch.me/${albumId}`);
+				setPhotos(
+					photosArray?.data?.map((url: string) => ({
+						original: `${url}=w2048`,
+						thumbnail: `${url}=w400`,
+					}))
+				);
+			}
+			setIsLoading(false);
+		},
+	});
 
-	const { data, error, loading } = useQuery(getAlbum, { variables: { slug } });
-	if (loading && !data) return <Load />;
-	if (error) return <Err />;
+	if (isLoading || loading) return <Load />;
+	if (error || (!isLoading && !photos.length)) return <Err />;
 
 	const albums = data?.albums as Albums[];
 
 	return (
 		<>
+			<Meta
+				type={'albums'}
+				title={albums[0].title}
+				excerpt={albums[0].excerpt}
+				imgUrl={albums[0].cover.img.url}
+				slug={`${router.query.slug}`}
+			/>
 			<Sidebar
 				title={albums[0].title}
 				excerpt={albums[0].excerpt}

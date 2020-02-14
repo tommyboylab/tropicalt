@@ -5,7 +5,7 @@ type Footer = {
 	email: string;
 };
 
-const Footer = (footer: Footer) => (
+const Footer = (footer: Footer): JSX.Element => (
 	<div className={s.contact}>
 		<p>
 			Contact Information:

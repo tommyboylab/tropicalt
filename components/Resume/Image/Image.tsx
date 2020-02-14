@@ -8,7 +8,7 @@ type Img = {
 	alt: string;
 };
 
-const Highlight = (highlightImg: Img) => (
+const Highlight = (highlightImg: Img): JSX.Element => (
 	<div className={s.highlightImg}>
 		<Img
 			class={s.highlightImg}

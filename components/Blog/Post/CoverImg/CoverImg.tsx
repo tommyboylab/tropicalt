@@ -8,9 +8,9 @@ type PostImg = {
 	url: string;
 	alt: string;
 };
-const Image = (PostImg: PostImg) => (
+const Image = (PostImg: PostImg): JSX.Element => (
 	<div className={s.postImg}>
-		<h3>{PostImg.title}</h3>
+		<h1>{PostImg.title}</h1>
 		<Img class={s.postImg} url={PostImg.url} placeholder={PostImg.placeholder} alt={`Image for ${PostImg.alt}`} />
 	</div>
 );

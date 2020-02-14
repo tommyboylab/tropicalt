@@ -26,7 +26,7 @@ const apollo = new ApolloClient({
 });
 
 class TropicalT extends App {
-	render() {
+	render(): JSX.Element {
 		const { Component, pageProps, router } = this.props;
 
 		return (

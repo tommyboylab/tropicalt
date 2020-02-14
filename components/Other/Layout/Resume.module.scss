@@ -1,40 +1,41 @@
 .layout {
-  display: grid;
-  grid-template-areas: 'name name name name'
-    'contactInfo contactInfo contactInfo contactInfo'
-    'workHistory education imageHighlight imageHighlight'
-    'workHistory skills imageHighlight imageHighlight'
-    'hobbies hobbies hobbies hobbies'
-    'contact contact contact contact';
-  color: rgb(35, 35, 35);
-  background: white;
-  padding: 0 8vw;
+	display: grid;
+	grid-template-areas:
+		'name name name name'
+		'contactInfo contactInfo contactInfo contactInfo'
+		'workHistory education imageHighlight imageHighlight'
+		'workHistory skills imageHighlight imageHighlight'
+		'hobbies hobbies hobbies hobbies'
+		'contact contact contact contact';
+	color: rgb(35, 35, 35);
+	background: rgb(253, 252, 247);
+	padding: 0 8vw;
 }
 
-@media only screen and ( max-width: 1200px ) {
-
-  .layout {
-    grid-template-areas: 'name name'
-      'contactInfo contactInfo'
-      'workHistory education'
-      'workHistory skills'
-      'imageHighlight imageHighlight'
-      'hobbies hobbies'
-      'contact contact';
-  }
+@media only screen and (max-width: 1400px) {
+	.layout {
+		grid-template-areas:
+			'name name'
+			'contactInfo contactInfo'
+			'workHistory education'
+			'workHistory skills'
+			'imageHighlight imageHighlight'
+			'hobbies hobbies'
+			'contact contact';
+	}
 }
 
-@media only screen and ( max-width: 720px ) {
-
-  .layout {
-    grid-template-areas: 'name'
-      'contactInfo'
-      'workHistory'
-      'education'
-      'skills'
-      'imageHighlight'
-      'hobbies'
-      'contact';
-    grid-template-columns: 1fr;
-  }
+@media only screen and (max-width: 1000px) {
+	.layout {
+		grid-template-areas:
+			'name'
+			'contactInfo'
+			'workHistory'
+			'education'
+			'skills'
+			'imageHighlight'
+			'hobbies'
+			'contact';
+		grid-template-columns: 1fr;
+	}
 }

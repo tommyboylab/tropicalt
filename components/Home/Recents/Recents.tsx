@@ -14,7 +14,7 @@ type Recent = {
 	excerpt: string;
 };
 
-const Recent = (Recent: Recent) => (
+const Recent = (Recent: Recent): JSX.Element => (
 	<Link href={`/${Recent.type}/${Recent.slug}`} as={`/${Recent.type}/${Recent.slug}`}>
 		<article
 			id={Recent.id}

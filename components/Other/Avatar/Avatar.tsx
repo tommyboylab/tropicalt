@@ -25,7 +25,7 @@ const getAvatar = gql`
 	}
 `;
 
-const Avatar = () => {
+const Avatar = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getAvatar);
 
 	if (loading && !data) return <Load />;
@@ -42,5 +42,7 @@ const Avatar = () => {
 		</div>
 	);
 };
+
+Avatar.displayName = 'Avatar';
 
 export default Avatar;

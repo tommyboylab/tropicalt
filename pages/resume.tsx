@@ -1,8 +1,8 @@
 import React from 'react';
 import Resume from '../components/Resume/Resume';
-const s = require('../components/Other/Layout/Resume.module.scss');
+import s from '../components/Other/Layout/Resume.module.scss';
 
-export default function Blog() {
+export default function ResumePage(): JSX.Element {
 	return (
 		<main className={s.layout}>
 			<Resume />

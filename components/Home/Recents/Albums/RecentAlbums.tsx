@@ -41,7 +41,7 @@ const getAlbums = gql`
 	}
 `;
 
-const Albums = () => {
+const Albums = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getAlbums);
 
 	if (loading && !data) return <Load />;
@@ -55,7 +55,7 @@ const Albums = () => {
 			{albums.map((album) => (
 				<Recents
 					id={album.id}
-					type='Album'
+					type='albums'
 					key={album.id}
 					slug={album.slug}
 					cover={album.cover.placeholder.url}
@@ -68,4 +68,7 @@ const Albums = () => {
 		</div>
 	);
 };
-export default () => <Albums />;
+
+Albums.displayName = 'Recent Albums';
+
+export default Albums;

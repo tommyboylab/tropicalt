@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import Link from 'next/link';
+import Link from './ActiveLink/ActiveLink';
 import Load from '../Other/Load/Load';
 import Err from '../Other/Error/Error';
 import s from './Nav.module.scss';
@@ -24,7 +24,7 @@ const getNavItems = gql`
 	}
 `;
 
-const Nav = () => {
+const Nav = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getNavItems);
 
 	if (loading && !data) return <Load />;
@@ -36,10 +36,18 @@ const Nav = () => {
 		<nav className={s.nav}>
 			<li className={s.menu}>T^T</li>
 			<ul>
+				<style jsx>{`
+					.link.active:after {
+						height: -0.2em;
+						text-align: center;
+						content: ' -------';
+						color: red;
+					}
+				`}</style>
 				{nav.map((nav) => {
 					return (
 						<Link href={nav.url} key={nav.id}>
-							<li>{nav.title}</li>
+							<li className='link'>{nav.title}</li>
 						</Link>
 					);
 				})}
@@ -47,4 +55,7 @@ const Nav = () => {
 		</nav>
 	);
 };
-export default () => <Nav />;
+
+Nav.displayName = 'Nav';
+
+export default Nav;

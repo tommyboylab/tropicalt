@@ -34,7 +34,7 @@ const getAboutCards = gql`
 	}
 `;
 
-const AboutCards = () => {
+const AboutCards = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getAboutCards);
 
 	if (loading && !data) return <Load />;
@@ -60,4 +60,7 @@ const AboutCards = () => {
 		</>
 	);
 };
-export default () => <AboutCards />;
+
+AboutCards.displayName = 'AboutCards';
+
+export default AboutCards;

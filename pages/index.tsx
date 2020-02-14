@@ -5,9 +5,9 @@ import RecentPosts from '../components/Home/Recents/Posts/RecentPosts';
 import RecentAlbums from '../components/Home/Recents/Albums/RecentAlbums';
 import ImgB from '../components/Home/Hero/Hero';
 import Bio from '../components/Home/Bio/Bio';
-const s = require('../components/Other/Layout/Home.module.scss');
+import s from '../components/Other/Layout/Home.module.scss';
 
-export default function Home() {
+export default function Home(): JSX.Element {
 	return (
 		<main className={s.layout}>
 			<Nav />

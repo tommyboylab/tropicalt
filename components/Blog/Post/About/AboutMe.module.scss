@@ -1,34 +1,30 @@
-.postAbout {
-  background-color: rgb(51, 131, 247);
-  height: auto;
-  margin: 0 .5em .5em .25em;
-  padding-top: .5em;
-  border-radius: .25em;
-  box-shadow: 0em 0em 5em black;
-}
+@use '../../../Other/Styles/Styles';
 
-.postAbout img {
-  padding-right: .25em;
+.postAbout {
+	text-align: center;
+	background-color: Styles.$TERTIARY_COLOR;
+	margin: 0.5em 1em;
+	padding: 0.5em;
+	border-radius: 0.25em;
+	box-shadow: 0em 0em 5em Styles.$BOXSHADOW_COLOR;
 }
 
 .postAbout > div {
-  margin: auto;
+	float: none;
+	margin: 0 auto;
 }
 
 .postAbout p {
-  font-size: .8em;
-  color: rgb(0, 255, 170);
-  padding-right: .5em;
-  padding-left: .5em;
+	font-size: Styles.$X_SMALL_FONT;
+	color: Styles.$PRIMARY_COLOR;
 }
 
 .postAbout a {
-  color: rgb(190, 55, 250);
-  margin-top: 1em;
-  padding: .5em;
+	text-decoration: none;
+	color: Styles.$SECONDARY_COLOR;
 }
 
 .postAbout a:hover {
-  color: rgb(175, 10, 110);
-  transition: .5s ease-in-out;
+	color: Styles.$SECONDARY_COLOR_MUTED;
+	transition: 0.25s ease-in-out;
 }

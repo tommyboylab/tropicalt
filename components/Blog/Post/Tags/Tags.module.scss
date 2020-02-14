@@ -1,18 +1,24 @@
+@use '../../../Other/Styles/Styles';
+
 .postTags {
-  grid-area: PostTags;
-  background-color: magenta;
-  list-style: none;
-  margin-block-end: 0;
-  margin-block-start: 0;
-  padding-inline-start: 2vw;
+	grid-area: PostTags;
+	background-color: Styles.$SECONDARY_COLOR;
+	// weird margin to line up with Image :/
+	margin-right: 0.53rem;
+	margin-left: 0.5em;
+	border-right: 2px solid Styles.$PRIMARY_COLOR;
+	border-bottom: 2px solid Styles.$PRIMARY_COLOR;
+	border-bottom-right-radius: 0.5em;
+	list-style: none;
+	padding-inline-start: 2vw;
 }
 
 .postTags li {
-  float: left;
-  margin-right: .6em;
+	float: left;
+	margin-right: 0.5em;
 }
 
-.postTags li a {
-  text-decoration: none;
-  color: springgreen;
+.postTags a {
+	text-decoration: none;
+	color: Styles.$PRIMARY_COLOR;
 }

@@ -16,7 +16,7 @@ const getBio = gql`
 	}
 `;
 
-const Bio = () => {
+const Bio = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getBio);
 
 	if (loading && !data) return <Load />;

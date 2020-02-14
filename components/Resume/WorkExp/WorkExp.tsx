@@ -6,7 +6,7 @@ type Work = {
 	content: string;
 };
 
-const WorkExp = (workExp: Work) => (
+const WorkExp = (workExp: Work): JSX.Element => (
 	<div className={s.workHistory}>
 		<h2>Work History</h2>
 		<ReactMarkdown source={workExp.content} />

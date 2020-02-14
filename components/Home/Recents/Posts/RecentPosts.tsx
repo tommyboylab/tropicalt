@@ -42,7 +42,7 @@ const getArticles = gql`
 	}
 `;
 
-const Articles = () => {
+const Articles = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getArticles);
 
 	if (loading && !data) return <Load />;
@@ -56,7 +56,7 @@ const Articles = () => {
 			{articles.map((article) => (
 				<Post
 					id={article.id}
-					type='post'
+					type='blog'
 					key={article.id}
 					slug={article.slug}
 					cover={article.cover.placeholder.url}
@@ -69,4 +69,7 @@ const Articles = () => {
 		</div>
 	);
 };
-export default () => <Articles />;
+
+Articles.displayName = 'Recent Articles';
+
+export default Articles;

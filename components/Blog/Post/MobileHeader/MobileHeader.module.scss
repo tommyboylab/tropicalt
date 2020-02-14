@@ -1,0 +1,29 @@
+@use '../../../Other/Styles/Styles';
+
+.mobileHeader {
+	opacity: 0;
+	position: absolute;
+	top: 3.5%;
+	left: 50%;
+	font-size: Styles.$MEDIUM_FONT;
+	transform: translateX(-50%);
+}
+
+.mobileHeader h2 {
+	color: Styles.$PRIMARY_COLOR;
+}
+
+.mobileHeader a {
+	color: Styles.$SECONDARY_COLOR;
+}
+
+.mobileHeader h2:hover {
+	color: Styles.$PRIMARY_COLOR_MUTED;
+	transition: color 0.5s;
+}
+
+@media (max-width: 770px) {
+	.mobileHeader {
+		opacity: 1;
+	}
+}

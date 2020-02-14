@@ -1,35 +1,34 @@
+@use '../../Other/Styles/Styles';
+
 .bio {
-  grid-area: Bio;
-  position: relative;
+	grid-area: Bio;
 }
 
 .bio h3 {
-  color: rgb(190, 55, 250);
-  width: 80%;
-  margin: 1em .5em;
+	color: Styles.$SECONDARY_COLOR;
+	margin: 1em 0.5em;
 }
 
 .bio p {
-  color: rgb(0, 255, 170);
-  margin: 1em;
+	color: Styles.$PRIMARY_COLOR;
+	margin: 1em;
 }
 
 .bio p:last-of-type {
-  padding-bottom: 2.5em;
+	padding-bottom: 4em;
 }
 
-.bio .avatar img {
-  position: absolute;
+.bio > div {
+	margin: 2.5% 3% 0.5% 1.5%;
 }
 
-@media ( max-width: 550px ) {
+@media (max-width: 550px) {
+	.bio h3 {
+		margin: 0.75em 0 0 0.75em;
+	}
 
-  .bio h3 {
-    margin: .75em 0 0 .75em;
-  }
-
-  .bio p {
-    font-size: .8em;
-    margin: .5em .75em .75em .75em;
-  }
+	.bio p {
+		font-size: Styles.$X_SMALL_FONT;
+		margin: 0.5em 0.75em 0.75em 0.75em;
+	}
 }

@@ -5,7 +5,7 @@ import s from './Body.module.scss';
 type Content = {
 	content: string;
 };
-const Body = (Content: Content) => (
+const Body = (Content: Content): JSX.Element => (
 	<div className={s.postText}>
 		<ReactMarkdown source={Content.content} />
 	</div>

@@ -6,7 +6,7 @@ type Hobbies = {
 	content: string;
 };
 
-const Hobbies = (hobbies: Hobbies) => (
+const Hobbies = (hobbies: Hobbies): JSX.Element => (
 	<div className={s.hobbies}>
 		<h2>Hobbies</h2>
 		<ReactMarkdown source={hobbies.content} />

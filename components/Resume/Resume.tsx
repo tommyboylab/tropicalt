@@ -37,7 +37,7 @@ const getResume = gql`
 	}
 `;
 
-const Resume = () => {
+const Resume = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getResume);
 
 	if (loading && !data) return <Load />;
@@ -60,4 +60,7 @@ const Resume = () => {
 		</>
 	);
 };
-export default () => <Resume />;
+
+Resume.displayName = 'Resume';
+
+export default Resume;

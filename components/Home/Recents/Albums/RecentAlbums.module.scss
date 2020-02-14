@@ -1,35 +1,36 @@
+@use '../../../Other/Styles/Styles';
+
 .recentAlbums {
-  grid-area: RecentAlbums;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  min-height: 20em;
-  height: 100%;
-  padding: .5em .5em 1em .5em;
+	grid-area: RecentAlbums;
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-height: 20em;
+	height: 100%;
+	padding: 0.5em 0.5em 1em 0.5em;
 }
 
 .recentAlbums h2 {
-  color: rgb(0, 255, 170);
-  width: max-content;
-  margin: .5em auto .75em auto;
-  border-bottom: 1px solid rgb(190, 55, 250);
+	color: Styles.$PRIMARY_COLOR;
+	width: max-content;
+	margin: 0.5em auto 0.75em auto;
+	border-bottom: 1px solid Styles.$SECONDARY_COLOR;
 }
 
 .recentAlbums > article {
-  flex: 1 2 30%;
+	flex: 1 2 30%;
 }
 
 .recentAlbums article:hover {
-  flex-basis: 40%;
+	flex-basis: 40%;
 }
 
-@media ( max-width: 750px ) {
+@media (max-width: 750px) {
+	.recentAlbums > article {
+		height: 30%;
+	}
 
-  .recentAlbums > article {
-    height: 30%;
-  }
-
-  .recentAlbums article:hover {
-    flex-basis: 40%;
-  }
+	.recentAlbums article:hover {
+		flex-basis: 40%;
+	}
 }

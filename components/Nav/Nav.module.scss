@@ -1,103 +1,104 @@
 @use '../Other/Styles/Styles';
 
 .nav {
-	z-index: 10;
-	position: fixed;
-	right: 0;
-	left: 0;
-	text-decoration: none;
-	background: Styles.$NAV_COLOR;
-	width: min-content;
-	height: min-content;
-	margin: 0.25em auto;
-	border-radius: 0.75em;
-	box-shadow: 0 0 0.5em Styles.$SECONDARY_COLOR;
+  z-index: 10;
+  position: fixed;
+  right: 0;
+  left: 0;
+  text-decoration: none;
+  background: Styles.$NAV_COLOR;
+  width: min-content;
+  height: min-content;
+  margin: .25em auto;
+  border-radius: .75em;
+  box-shadow: 0 0 .5em Styles.$SECONDARY_COLOR;
 }
 
 .nav ul {
-	display: flex;
-	justify-content: space-around;
-	list-style: none;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
 }
 
 .nav li {
-	cursor: pointer;
-	user-select: none;
-	font-size: Styles.$MEDIUM_FONT;
-	color: Styles.$PRIMARY_COLOR;
-	padding: 0.25em;
+  cursor: pointer;
+  user-select: none;
+  font-size: Styles.$MEDIUM_FONT;
+  color: Styles.$PRIMARY_COLOR;
+  padding: .25em;
 }
 
 .nav ul a {
-	border-right: 1px solid Styles.$SECONDARY_COLOR;
+  border-right: 1px solid Styles.$SECONDARY_COLOR;
 }
 
 .nav a:hover {
-	background: Styles.$PRIMARY_COLOR_MUTED;
-	transition: background 0.5s ease-in-out;
+  background: Styles.$PRIMARY_COLOR_MUTED;
+  transition: background .5s ease-in-out;
 }
 
 .nav ul a:first-child {
-	border-radius: 0.75em 0 0 0.75em;
+  border-radius: .75em 0 0 .75em;
 }
 
 .nav ul a:last-child {
-	border-radius: 0 0.75em 0.75em 0;
-	border-right: none;
+  border-radius: 0 .75em .75em 0;
+  border-right: none;
 }
 /* Set properties for mobile menu in desktop mode */
 
 .menu {
-	display: none;
+  display: none;
 }
 
-@media (max-width: 770px) {
-	.nav {
-		width: min-content;
-		margin: 0.5em 0.5em;
-	}
-	/* Set mobile menu visible */
+@media ( max-width: 770px ) {
 
-	.menu {
-		display: inline-block;
-		font-size: Styles.$X_SMALL_FONT;
-		background: Styles.$NAV_COLOR;
-		padding: 0.25em;
-		border-radius: 0.5em;
-	}
-	/* Set navigation bar menu properties */
+  .nav {
+    width: min-content;
+    margin: .5em .5em;
+  }
+  /* Set mobile menu visible */
 
-	.nav ul,
-	.nav:active ul {
-		visibility: hidden;
-		opacity: 0;
-		flex-direction: column;
-		position: absolute;
-		top: 2.5em;
-		left: 0.5em;
-		background: Styles.$NAV_COLOR;
-		border-radius: 0 0.5em 0.5em 0.5em;
-		transition: visibility 0s, opacity 0.5s;
-	}
+  .menu {
+    display: inline-block;
+    font-size: Styles.$X_SMALL_FONT;
+    background: Styles.$NAV_COLOR;
+    padding: .25em;
+    border-radius: .5em;
+  }
+  /* Set navigation bar menu properties */
 
-	.nav:hover ul,
-	.nav:active:hover ul {
-		visibility: visible;
-		opacity: 1;
-	}
+  .nav ul,
+  .nav:active ul {
+    visibility: hidden;
+    opacity: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 2.5em;
+    left: .5em;
+    background: Styles.$NAV_COLOR;
+    border-radius: 0 .5em .5em .5em;
+    transition: visibility 0s, opacity .5s;
+  }
 
-	.nav ul a {
-		font-size: Styles.$X_SMALL_FONT;
-		border-right: none;
-		border-bottom: 1px solid Styles.$SECONDARY_COLOR;
-	}
+  .nav:hover ul,
+  .nav:active:hover ul {
+    visibility: visible;
+    opacity: 1;
+  }
 
-	.nav ul a:first-child {
-		border-radius: 0 0.5em 0 0;
-	}
+  .nav ul a {
+    font-size: Styles.$X_SMALL_FONT;
+    border-right: none;
+    border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+  }
 
-	.nav ul a:last-child {
-		border-radius: 0 0 0.5em 0.5em;
-		border-bottom: none;
-	}
+  .nav ul a:first-child {
+    border-radius: 0 .5em 0 0;
+  }
+
+  .nav ul a:last-child {
+    border-radius: 0 0 .5em .5em;
+    border-bottom: none;
+  }
 }

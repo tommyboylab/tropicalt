@@ -1,70 +1,71 @@
 @use '../Other/Styles/Styles';
 
 .aboutCardImg {
-	position: sticky;
-	top: 0;
-	width: calc(50% + 1px);
-	height: 100vh;
-	object-fit: cover;
-	object-position: center;
-	overflow-x: hidden;
-	margin: 0 auto 0 0;
-	box-shadow: -5px 0 10px Styles.$BOXSHADOW_COLOR;
+  position: sticky;
+  top: 0;
+  width: calc(50% + 1px);
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  overflow-x: hidden;
+  margin: 0 auto 0 0;
+  box-shadow: -5px 0 10px Styles.$BOXSHADOW_COLOR;
 }
 
 .aboutCardText {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	position: sticky;
-	top: 0;
-	color: Styles.$PRIMARY_COLOR;
-	background: Styles.$BACKGROUND_COLOR;
-	width: calc(50% + 1px);
-	height: 100vh;
-	overflow-x: hidden;
-	margin: 0 0 1px auto;
-	box-shadow: -5px -5px 10px Styles.$BOXSHADOW_COLOR;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  color: Styles.$PRIMARY_COLOR;
+  background: Styles.$BACKGROUND_COLOR;
+  width: calc(50% + 1px);
+  height: 100vh;
+  overflow-x: hidden;
+  margin: 0 0 1px auto;
+  box-shadow: -5px -5px 10px Styles.$BOXSHADOW_COLOR;
 }
 
-.aboutCardImg:nth-of-type(1),
-.aboutCardText:nth-of-type(1) {
-	width: 50%;
+.aboutCardImg:nth-of-type( 1 ),
+.aboutCardText:nth-of-type( 1 ) {
+  width: 50%;
 }
 
 .aboutCardText h2 {
-	font-family: Styles.$SECONDARY_FONT;
-	font-size: Styles.$CALC_FONT_LARGE;
-	text-align: center;
-	line-height: 1em;
-	margin: 15vh 0.25em auto 0.25em;
-	padding-bottom: 2.5em;
+  font-family: Styles.$SECONDARY_FONT;
+  font-size: Styles.$CALC_FONT_LARGE;
+  text-align: center;
+  line-height: 1em;
+  margin: 15vh .25em auto .25em;
+  padding-bottom: 2.5em;
 }
 
 .aboutCardText p {
-	font-family: Styles.$SECONDARY_FONT;
-	font-size: Styles.$CALC_FONT_MEDIUM;
-	font-style: italic;
-	text-align: right;
-	margin: 0 0.5em 2vw 0.25em;
+  font-family: Styles.$SECONDARY_FONT;
+  font-size: Styles.$CALC_FONT_MEDIUM;
+  font-style: italic;
+  text-align: right;
+  margin: 0 .5em 2vw .25em;
 }
 /* Mobile site formatting begins here */
-@media only screen and (max-width: 660px) {
-	.aboutCardImg {
-		position: relative;
-		min-width: 100%;
-	}
+@media only screen and ( max-width: 660px ) {
 
-	.aboutCardText {
-		position: relative;
-		min-width: 100%;
-	}
+  .aboutCardImg {
+    position: relative;
+    min-width: 100%;
+  }
 
-	.aboutCardText h2 {
-		margin: 10vw 0.5em auto 0.25em;
-	}
+  .aboutCardText {
+    position: relative;
+    min-width: 100%;
+  }
 
-	.aboutCardText p {
-		margin: 0 0.5em 10vw 0.25em;
-	}
+  .aboutCardText h2 {
+    margin: 10vw .5em auto .25em;
+  }
+
+  .aboutCardText p {
+    margin: 0 .5em 10vw .25em;
+  }
 }

@@ -1,50 +1,51 @@
 @use '../Other/Styles/Styles';
 
 .footer {
-	grid-area: Footer;
-	display: flex;
-	justify-content: space-around;
-	width: 100%;
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
-	border-top: 1px solid Styles.$SECONDARY_COLOR;
+  grid-area: Footer;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  border-top: 1px solid Styles.$SECONDARY_COLOR;
 }
 
 .footer h3 {
-	color: Styles.$SECONDARY_COLOR;
-	margin: auto 0;
-	padding: 0 1em;
+  color: Styles.$SECONDARY_COLOR;
+  margin: auto 0;
+  padding: 0 1em;
 }
 
 .footer a {
-	color: Styles.$PRIMARY_COLOR;
-	background: none;
-	margin: auto 0;
+  color: Styles.$PRIMARY_COLOR;
+  background: none;
+  margin: auto 0;
 }
 
 .footer h3:hover {
-	color: Styles.$QUATERNARY_COLOR;
-	transition: 0.5s ease-in-out;
+  color: Styles.$QUATERNARY_COLOR;
+  transition: .5s ease-in-out;
 }
 
 .footer ul {
-	margin: auto 0;
-	column-count: 2;
+  margin: auto 0;
+  column-count: 2;
 }
 
 .footer li {
-	cursor: pointer;
-	color: Styles.$PRIMARY_COLOR;
-	list-style: none;
+  cursor: pointer;
+  color: Styles.$PRIMARY_COLOR;
+  list-style: none;
 }
 
-@media (max-width: 920px) {
-	.footer {
-		flex-direction: column;
-		text-align: center;
-	}
+@media ( max-width: 920px ) {
 
-	.footer ul {
-		margin: 0 auto;
-	}
+  .footer {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer ul {
+    margin: 0 auto;
+  }
 }

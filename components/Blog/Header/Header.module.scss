@@ -1,47 +1,50 @@
 @use '../../Other/Styles/Styles';
 
 .postHeader {
-	grid-area: PostHeader;
-	padding-bottom: 1em;
+  grid-area: PostHeader;
+  padding-bottom: 1em;
 }
 
 .postHeader h1 {
-	font-size: Styles.$X_LARGE_FONT;
-	line-height: 0.5em;
-	color: Styles.$PRIMARY_COLOR;
-	margin-right: 0.5em;
-	margin-left: 0.5em;
+  font-size: Styles.$X_LARGE_FONT;
+  line-height: .5em;
+  color: Styles.$PRIMARY_COLOR;
+  margin-right: .5em;
+  margin-left: .5em;
 }
 
 .postHeader h2 {
-	color: Styles.$PRIMARY_COLOR;
-	margin-right: 0.5em;
-	margin-left: 2em;
+  color: Styles.$PRIMARY_COLOR;
+  margin-right: .5em;
+  margin-left: 2em;
 }
 
-@media (max-width: 1000px) {
-	.postHeader {
-		padding-top: 3em;
-	}
+@media ( max-width: 1000px ) {
 
-	.postHeader h1 {
-		margin-left: 0.25em;
-	}
+  .postHeader {
+    padding-top: 3em;
+  }
+
+  .postHeader h1 {
+    margin-left: .25em;
+  }
 }
 
-@media (max-width: 770px) {
-	.postHeader {
-		padding-top: 0;
-	}
+@media ( max-width: 770px ) {
 
-	.postHeader h1 {
-		text-align: center;
-		margin-left: 0.8em;
-	}
+  .postHeader {
+    padding-top: 0;
+  }
+
+  .postHeader h1 {
+    text-align: center;
+    margin-left: .8em;
+  }
 }
 
-@media (max-width: 550px) {
-	.postHeader h2 {
-		font-size: Styles.$X_SMALL_FONT;
-	}
+@media ( max-width: 550px ) {
+
+  .postHeader h2 {
+    font-size: Styles.$X_SMALL_FONT;
+  }
 }

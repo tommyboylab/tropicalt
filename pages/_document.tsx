@@ -12,6 +12,7 @@ const globalStyle = {
     font-size:1.15rem;
     line-height:1.5em;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1 {
@@ -59,12 +60,7 @@ const globalStyle = {
        url('/static/fonts/Flamenco/flamenco-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('/static/fonts/Flamenco/flamenco-v10-latin-regular.svg#Flamenco') format('svg'); /* Legacy iOS */
   }
-
-  ::-webkit-tap-highlight-color: {
-    color:Jade;
-    background: Violet;
-  }
-
+  
   ::selection {
     color:Jade;
     background: Violet; /* WebKit/Blink Browsers */

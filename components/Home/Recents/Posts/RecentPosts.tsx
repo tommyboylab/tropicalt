@@ -9,7 +9,7 @@ import s from './RecentPosts.module.scss';
 type Article = {
 	id: string;
 	slug: string;
-	cover: { placeholder: { url: string } };
+	cover: { img: { url: string }; placeholder: { url: string } };
 	title: string;
 	date: string;
 	user: { username: string };
@@ -60,6 +60,7 @@ const Articles = (): JSX.Element => {
 					key={article.id}
 					slug={article.slug}
 					cover={article.cover.placeholder.url}
+					img={article.cover.img.url}
 					title={article.title}
 					date={article.date}
 					name={article.user.username}

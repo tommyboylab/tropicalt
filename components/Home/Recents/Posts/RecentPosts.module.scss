@@ -1,48 +1,49 @@
 @use '../../../Other/Styles/Styles';
 
 .recentArticles {
-	grid-area: RecentArticles;
-	display: flex;
-	flex-direction: row;
-	position: relative;
-	width: 100%;
-	height: 20em;
-	margin-top: auto;
-	margin-bottom: 1em;
+  grid-area: RecentArticles;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  width: 100%;
+  height: 20em;
+  margin-top: auto;
+  margin-bottom: 1em;
 }
 
 .recentArticles h2 {
-	position: absolute;
-	right: 0;
-	left: 0;
-	color: Styles.$PRIMARY_COLOR;
-	width: max-content;
-	margin: -2.5em auto 0 auto;
-	border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+  position: absolute;
+  right: 0;
+  left: 0;
+  color: Styles.$PRIMARY_COLOR;
+  width: max-content;
+  margin: -2.5em auto 0 auto;
+  border-bottom: 1px solid Styles.$SECONDARY_COLOR;
 }
 
 .recentArticles > article {
-	flex: 1 2 30%;
-	height: 100%;
-	margin: auto 0.5em;
+  flex: 1 2 30%;
+  height: 100%;
+  margin: auto .5em;
 }
 
 .recentArticles article:hover {
-	flex-basis: 40%;
+  flex-basis: 40%;
 }
 
-@media (max-width: 750px) {
-	.recentArticles {
-		flex-direction: column;
-		height: 45em;
-	}
+@media ( max-width: 750px ) {
 
-	.recentArticles > article {
-		height: 30%;
-		margin-bottom: 0.75em;
-	}
+  .recentArticles {
+    flex-direction: column;
+    height: 45em;
+  }
 
-	.recentArticles article:hover {
-		flex-basis: 40%;
-	}
+  .recentArticles > article {
+    height: 30%;
+    margin-bottom: .75em;
+  }
+
+  .recentArticles article:hover {
+    flex-basis: 40%;
+  }
 }

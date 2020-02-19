@@ -1,68 +1,68 @@
 @use '../../../Other/Styles/Styles';
 
 .postText {
-	grid-area: PostText;
-	font-family: Styles.$PRIMARY_FONT;
-	color: Styles.$FONT_COLOR;
-	margin: 0 0.5em;
-	padding: 1em 2vw 1vw 1.5vw;
+  grid-area: PostText;
+  font-family: Styles.$PRIMARY_FONT;
+  color: Styles.$FONT_COLOR;
+  margin: 0 .5em;
+  padding: 1em 2vw 1vw 1.5vw;
 }
 
 .postText h1 {
-	font-size: Styles.$LARGE_FONT;
+  font-size: Styles.$LARGE_FONT;
 }
 
 .postText h2 {
-	font-size: Styles.$MEDIUM_FONT;
+  font-size: Styles.$MEDIUM_FONT;
 }
 
 .postText h3 {
-	font-size: Styles.$SMALL_FONT;
+  font-size: Styles.$SMALL_FONT;
 }
 
 .postText h4 {
-	font-size: Styles.$SMALL_FONT;
+  font-size: Styles.$SMALL_FONT;
 }
 
 .postText h5 {
-	font-size: Styles.$SMALL_FONT;
+  font-size: Styles.$SMALL_FONT;
 }
 
 .postText h6 {
-	font-size: Styles.$SMALL_FONT;
+  font-size: Styles.$SMALL_FONT;
 }
 
 .postText ul {
-	margin: 1em 0 1em 1.5em;
+  margin: 1em 0 1em 1.5em;
 }
 
 .postText ol {
-	margin: 1em 0 1em 1.5em;
+  margin: 1em 0 1em 1.5em;
 }
 
 .postText dl {
-	margin: 1em 0 1em 0.25em;
+  margin: 1em 0 1em .25em;
 }
 
 .postText dd {
-	margin: 0.25em 0 0.5em 0.5em;
+  margin: .25em 0 .5em .5em;
 }
 
 .postText pre {
-	text-align: center;
-	white-space: normal;
-	margin: 1em;
+  text-align: center;
+  white-space: normal;
+  margin: 1em;
 }
 
 .postText code {
-	display: block;
-	font-size: Styles.$CALC_FONT_SMALL;
-	word-wrap: break-word;
-	color: Styles.$SECONDARY_COLOR;
-	background: rgba(0, 0, 0, 0.5);
-	margin: 0 auto;
-	padding: 2em;
-	border-radius: 0.5em;
+  display: block;
+  font-size: Styles.$CALC_FONT_SMALL;
+  word-wrap: break-word;
+  color: Styles.$SECONDARY_COLOR;
+  background: rgba(0, 0, 0, .5);
+  margin: 0 auto;
+  padding: 2em;
+  border-radius: .5em;
 }
 
 //.postText blockquote {
@@ -70,15 +70,15 @@
 //
 
 .postText p {
-	font-size: Styles.$SMALL_FONT;
-	text-indent: 0.5em;
-	margin-bottom: 1em;
+  font-size: Styles.$SMALL_FONT;
+  text-indent: .5em;
+  margin-bottom: 1em;
 }
 
 .postText a {
-	font-size: Styles.$SMALL_FONT;
-	text-decoration: none;
-	color: Styles.$SECONDARY_COLOR;
+  font-size: Styles.$SMALL_FONT;
+  text-decoration: none;
+  color: Styles.$SECONDARY_COLOR;
 }
 
 //.postText i {
@@ -86,23 +86,24 @@
 //
 
 .postText b {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .postText strong {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .postText em {
-	font-style: italic;
+  font-style: italic;
 }
 
 .postText mark {
-	background-color: Styles.$PRIMARY_COLOR;
+  background-color: Styles.$PRIMARY_COLOR;
 }
 
-@media (max-width: 600px) {
-	.postText {
-		font-size: Styles.$X_SMALL_FONT;
-	}
+@media ( max-width: 600px ) {
+
+  .postText {
+    font-size: Styles.$X_SMALL_FONT;
+  }
 }

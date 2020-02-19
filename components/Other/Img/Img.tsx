@@ -8,17 +8,18 @@ type Img = {
 	style?: React.CSSProperties;
 };
 
-// const style = (style, placeholder) => {style && {
-// 		backgroundImage: `url(https://api.tropicalt.ca/${Img.placeholder})`,
-// 		backgroundPosition: 'center',
-// 		backgroundSize: 'cover',
-// 		backgroundRepeat: 'no-repeat',
-// 	}}
+// Add the lazy tag to HTML attributes
+declare module 'react' {
+	interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+		loading?: 'auto' | 'eager' | 'lazy';
+	}
+}
 
 const Image = (Img: Img): JSX.Element => (
 	<img
 		className={Img.class}
 		src={`https://api.tropicalt.ca${Img.url}`}
+		loading='lazy'
 		alt={Img.alt}
 		style={{
 			backgroundImage: `url(https://api.tropicalt.ca/${Img.placeholder})`,

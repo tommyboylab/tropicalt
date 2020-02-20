@@ -27,15 +27,16 @@ const sendEmail = gql`
 
 const contactSchema = object().shape({
 	name: string()
-		.min(2, 'Too Short!')
-		.max(22, 'Too Long!')
+		.min(2, `That's not a name!`)
+		.max(22)
 		.required(),
 	email: string()
-		.email('Invalid email')
+		.email(`That's not a real email!`)
+		.min(6, `That's not a real email!`)
 		.required(),
 	message: string()
-		.min(2, 'Too Short!')
-		.max(500, 'Too Long!')
+		.min(2, 'What kind of message is that?')
+		.max(500)
 		.required(),
 });
 
@@ -68,7 +69,7 @@ const Form = (): JSX.Element => {
 	return (
 		<section className={s.form}>
 			<form onSubmit={handleSubmit(onSubmit)}>
-				<h1>Looking to get in touch?</h1>
+				<h1>Want to get in touch?</h1>
 
 				<div className={s.name}>
 					<input

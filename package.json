@@ -45,7 +45,7 @@
         "@storybook/addons": "^5.2.6",
         "@storybook/react": "^5.2.6",
         "@typescript-eslint/eslint-plugin": "^2.10.0",
-        "@typescript-eslint/parser": "^2.10.0",
+        "@typescript-eslint/parser": "^2.21.0",
         "babel-loader": "^8.0.6",
         "eslint": "^6.7.2",
         "eslint-config-prettier": "^6.7.0",

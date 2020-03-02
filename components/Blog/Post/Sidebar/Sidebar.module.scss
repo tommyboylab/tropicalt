@@ -20,12 +20,16 @@
 }
 
 .blogSidebar article {
-  flex: 1 2 15%;
+  flex: 1 2 auto;
+  height: 15%;
   margin: .25em;
+  transition: all 350ms ease-in-out;
+  transition-property: height;
 }
 
 .blogSidebar article:hover {
-  flex-basis: 25%;
+  flex-basis: auto;
+  height:25%;
 }
 
 @media ( max-width: 1000px ) {
@@ -36,6 +40,7 @@
   }
 
   .blogSidebar article:hover {
-    flex-basis: 25%;
+    flex-basis: auto;
+    height:25%;
   }
 }

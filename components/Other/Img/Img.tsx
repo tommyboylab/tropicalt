@@ -11,7 +11,7 @@ type Img = {
 // Add the lazy tag to HTML attributes
 declare module 'react' {
 	interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
-		loading?: 'auto' | 'eager' | 'lazy';
+		loading?: 'eager' | 'lazy';
 	}
 }
 

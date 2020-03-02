@@ -11,25 +11,32 @@
 }
 
 .postList > article {
-  flex: 1 3 30%;
+  flex: 1 3 auto;
+  width:30%;
   height: 20em;
   margin: .25em;
+  transition: all 350ms ease-in-out;
+  transition-property: height, width;
 }
 
 .postList article:nth-child( 1 ) {
-  flex: 1 3 100%;
+  flex: 1 3 auto;
+  width:100%;
 }
 
 .postList article:nth-child( 2n ) {
-  flex: 1 3 25%;
+  flex: 1 3 auto;
+  width:25%;
 }
 
 .postList article:hover {
-  flex-basis: 35%;
+  flex-basis: auto;
+  width:35%;
 }
 
 .postList article:nth-child( 1 ):hover {
-  flex-basis: 100%;
+  flex-basis: auto;
+  width:100%;
 }
 
 .postControls {
@@ -59,19 +66,23 @@
 @media ( max-width: 1000px ) {
 
   .postList > article {
-    flex: 1 3 30%;
+    flex: 1 3 auto;
+    width:30%;
   }
 
   .postList article:nth-child( 3n ) {
-    flex: 1 3 50%;
+    flex: 1 3 auto;
+    width:50%;
   }
 
   .postList article:hover {
-    flex-basis: 45%;
+    flex-basis: auto;
+    width:45%;
   }
 
   .postList article:nth-child( 3n ):hover {
-    flex-basis: 55%;
+    flex-basis: auto;
+    width:55%;
   }
 }
 
@@ -81,14 +92,19 @@
     flex-direction: column;
     flex-wrap: nowrap;
     height: 100%;
+    width:100%;
     padding: .25em;
   }
 
   .postList > article:nth-child( n ) {
-    flex-basis: 10em;
+    flex-basis: auto;
+    width:100%;
+    height:10em;
   }
 
   .postList > article:nth-child( n ):hover {
-    flex-basis: 15em;
+    flex-basis: auto;
+    width:100%;
+    height:15em;
   }
 }

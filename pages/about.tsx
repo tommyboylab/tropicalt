@@ -1,16 +1,13 @@
-// import Layout from '../components/Layout/Layout'
-// import Link from 'next/link'
-// import "./about.scss";
+import React from 'react';
 import Nav from '../components/Nav/Nav';
-// import Footer from '../components/Nav/Footer';
 import AboutCards from '../components/About/AboutCards';
+import s from '../components/Other/Layout/About.module.scss';
 
-export default function Home() {
-    return (
-        <main>
-            <Nav />
-            <AboutCards />
-            {/*<Footer />*/}
-        </main>
-    );
+export default function Home(): JSX.Element {
+	return (
+		<main className={s.layout}>
+			<Nav />
+			<AboutCards />
+		</main>
+	);
 }

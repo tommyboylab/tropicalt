@@ -1,41 +1,48 @@
-const s = require('./Avatar.scss');
+import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import * as React from 'react';
+import Img from '../Img/Img';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
+import s from './Avatar.module.scss';
 
 const getAvatar = gql`
-    {
-        avatar(id: "1") {
-            id
-            img {
-                id
-                url
-            }
-            alt
-        }
-    }
+	query getAvatar {
+		avatar(id: "1") {
+			id
+			avatar {
+				img {
+					id
+					url
+				}
+				placeholder {
+					id
+					url
+				}
+			}
+			alt
+		}
+	}
 `;
 
-const Avatar = () => {
-    const { data, error, loading } = useQuery(getAvatar);
-    if (loading) {
-        return <Load />;
-    }
-    if (error) {
-        return (
-            <div>
-                <Err />
-                Error! {error.message}
-            </div>
-        );
-    }
+const Avatar = (): JSX.Element => {
+	const { data, error, loading } = useQuery(getAvatar);
 
-    return (
-        <div key={data.avatar.id} className={s.avatar}>
-            <img src={`http://127.0.0.1:1337${data.avatar.img.url}`} alt={data.avatar.alt} />
-        </div>
-    );
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	return (
+		<div key={data.avatar.id} className={s.avatar}>
+			<Img
+				class={s.avatar}
+				url={data.avatar.avatar.img.url}
+				placeholder={data.avatar.avatar.placeholder.url}
+				alt={`Image for ${data.avatar.alt}`}
+			/>
+		</div>
+	);
 };
+
+Avatar.displayName = 'Avatar';
+
 export default Avatar;

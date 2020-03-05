@@ -1,50 +1,91 @@
-import Post from '../Home/Recents/Recents';
-const s = require('./List.scss');
+import React, { useState, useCallback } from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import Post from '../Home/Recents/Recents';
+import Err from '../Other/Error/Error';
+import Load from '../Other/Load/Load';
+import s from './List.module.scss';
 
-const getArticles = gql`
-    {
-        articles {
-            id
-            coverImg {
-                id
-                url
-            }
-            title
-            date
-            excerpt
-            user {
-                name
-            }
-        }
-    }
+type ArticleList = {
+	id: string;
+	slug: string;
+	cover: { img: { url: string }; placeholder: { url: string } };
+	title: string;
+	date: string;
+	user: { username: string };
+	excerpt: string;
+};
+
+const getArticlesQuery = gql`
+	query getArticles($start: Int!) {
+		articles(limit: 7, start: $start, sort: "date:desc", where: { published: true }) {
+			id
+			slug
+			cover {
+				img {
+					id
+					url
+				}
+				placeholder {
+					id
+					url
+				}
+			}
+			title
+			date
+			excerpt
+			user {
+				username
+			}
+		}
+	}
 `;
 
-const Articles = () => {
-    const { data, error, loading } = useQuery(getArticles);
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-    if (error) {
-        return <div>Error! {error.message}</div>;
-    }
+const Articles = (): JSX.Element => {
+	const [nextPosts, setNextPosts] = useState(0);
+	const { data, error, loading } = useQuery(getArticlesQuery, {
+		variables: {
+			start: nextPosts,
+		},
+		fetchPolicy: 'cache-and-network',
+	});
 
-    return (
-        <div className={s.postList}>
-            {data.articles.map(article => (
-                <Post
-                    type="post"
-                    slug={article.slug}
-                    key={article.id}
-                    coverImg={article.coverImg.url}
-                    title={article.title}
-                    date={article.date}
-                    name={article.user.name}
-                    excerpt={article.excerpt}
-                />
-            ))}
-        </div>
-    );
+	const prev = useCallback((): void => setNextPosts(nextPosts - 7), [nextPosts]);
+	const next = useCallback((): void => setNextPosts(nextPosts + 7), [nextPosts]);
+
+	if (loading && !data) return <Load />;
+	if (error) return <Err />;
+
+	const articles = data?.articles as ArticleList[];
+
+	return (
+		<div className={s.postList}>
+			{articles.map((article) => (
+				<Post
+					id={article.id}
+					type='blog'
+					slug={article.slug}
+					key={article.id}
+					cover={article.cover.placeholder.url}
+					img={article.cover.img.url}
+					title={article.title}
+					date={article.date}
+					name={article.user.username}
+					excerpt={article.excerpt}
+				/>
+			))}
+			<div className={s.postControls}>
+				<button onClick={prev} disabled={nextPosts === 0}>
+					Prev
+				</button>
+				<button onClick={next} disabled={articles.length < 7}>
+					Next
+				</button>
+			</div>
+		</div>
+	);
 };
-export default () => <Articles />;
+
+Articles.displayName = 'ArticleList';
+
+export default Articles;

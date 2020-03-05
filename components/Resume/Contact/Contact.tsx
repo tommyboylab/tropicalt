@@ -1,10 +1,16 @@
-const s = require('../Resume.scss');
+import React from 'react';
+import s from '../Resume.module.scss';
 
-export default props => (
-    <div className={s.contactInfo}>
-        <p className={s.address}>{props.address}</p>
-        <p className={s.cellphone}>
-            Cell:&#53;&#49;&#57;&#45;&#53;&#52;&#54;&#45;&#54;&#55;&#54;&#53;
-        </p>
-    </div>
+type Contact = {
+	phone: string;
+	address: string;
+};
+
+const Contact = (contact: Contact): JSX.Element => (
+	<div className={s.contactInfo}>
+		<p className={s.cellphone}>{contact.phone}</p>
+		<p className={s.address}>{contact.address}</p>
+	</div>
 );
+
+export default Contact;

@@ -1,15 +1,15 @@
-const s = require('../Resume.scss');
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+import s from '../Resume.module.scss';
 
-export default () => (
-    <div className={s.hobbies}>
-        <ul>
-            <li>
-                <h2>Hobbies:</h2>
-            </li>
-            <li>Photography</li>
-            <li>HTML / CSS / JS</li>
-            <li>Fencing</li>
-            <li>Forensic Science</li>
-        </ul>
-    </div>
+type Hobbies = {
+	content: string;
+};
+
+const Hobbies = (hobbies: Hobbies): JSX.Element => (
+	<div className={s.hobbies}>
+		<h2>Hobbies</h2>
+		<ReactMarkdown source={hobbies.content} />
+	</div>
 );
+export default Hobbies;

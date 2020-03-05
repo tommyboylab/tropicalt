@@ -1,8 +1,18 @@
-const s = require('./CoverImg.scss');
+import React from 'react';
+import Img from '../../../Other/Img/Img';
+import s from './CoverImg.module.scss';
 
-export default postImg => (
-    <div className={s.postImg}>
-        <h3>{postImg.title}</h3>
-        <img src={`http://127.0.0.1:1337${postImg.url}`} />
-    </div>
+type PostImg = {
+	title: string;
+	placeholder: string;
+	url: string;
+	alt: string;
+};
+const Image = (PostImg: PostImg): JSX.Element => (
+	<div className={s.postImg}>
+		<h1>{PostImg.title}</h1>
+		<Img class={s.postImg} url={PostImg.url} placeholder={PostImg.placeholder} alt={`Image for ${PostImg.alt}`} />
+	</div>
 );
+
+export default Image;

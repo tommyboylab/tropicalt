@@ -3,6 +3,6 @@ module.exports = {
     'next/babel'
   ],
   plugins: [
-    '@babel/plugin-proposal-optional-chaining', '@babel/plugin-transform-typescript', '@babel/plugin-transform-react-jsx'
+    '@babel/plugin-proposal-optional-chaining', '@babel/plugin-transform-typescript', '@babel/plugin-transform-react-jsx', "import-graphql"
   ],
 };

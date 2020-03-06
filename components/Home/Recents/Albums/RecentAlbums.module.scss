@@ -19,14 +19,14 @@
 
 .recentAlbums > article {
   flex: 1 2 auto;
-  height:30%;
+  height: 30%;
   transition: all 350ms ease-in-out;
   transition-property: height;
 }
 
 .recentAlbums article:hover {
   flex-basis: auto;
-  height:40%;
+  height: 40%;
 }
 
 @media ( max-width: 750px ) {
@@ -37,6 +37,6 @@
 
   .recentAlbums article:hover {
     flex-basis: auto;
-    height:40%;
+    height: 40%;
   }
 }

@@ -24,6 +24,8 @@ const getNavItems = gql`
 	}
 `;
 
+
+
 const Nav = (): JSX.Element => {
 	const { data, error, loading } = useQuery(getNavItems);
 
@@ -41,7 +43,6 @@ const Nav = (): JSX.Element => {
 						height: -0.2em;
 						text-align: center;
 						content: ' -------';
-						color: red;
 					}
 				`}</style>
 				{nav.map((nav) => {

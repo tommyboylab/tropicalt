@@ -9,51 +9,51 @@
 
 .albumList > article {
   flex: 1 3 auto;
-  width:30%;
+  width: 30%;
   transition: all 350ms ease-in-out;
   transition-property: height, width;
 }
 
 .albumList article:nth-child( 1 ) {
   flex: 1 3 auto;
-  width:100%;
+  width: 100%;
 }
 
 .albumList article:nth-child( 2n ) {
   flex: 1 3 auto;
-  width:25%;
+  width: 25%;
 }
 
 .albumList article:hover {
   flex-basis: auto;
-  width:30%;
+  width: 30%;
 }
 
 .albumList article:nth-child( 1 ):hover {
   flex-basis: auto;
-  width:100%;
+  width: 100%;
 }
 
 @media ( max-width: 1000px ) {
 
   .albumList > article {
     flex: 1 3 auto;
-    width:30%;
+    width: 30%;
   }
 
   .albumList article:nth-child( 3n ) {
     flex: 1 3 auto;
-    width:45%;
+    width: 45%;
   }
 
   .albumList article:hover {
     flex-basis: auto;
-    width:45%;
+    width: 45%;
   }
 
   .albumList article:nth-child( 3n ):hover {
     flex-basis: auto;
-    width:50%;
+    width: 50%;
   }
 }
 
@@ -66,13 +66,13 @@
 
   .albumList > article:nth-child( n ) {
     flex-basis: auto;
-    height:9.5em;
-    width:100%;
+    height: 9.5em;
+    width: 100%;
   }
 
   .albumList > article:nth-child( n ):hover {
     flex-basis: auto;
-    height:12em;
-    width:100%;
+    height: 12em;
+    width: 100%;
   }
 }

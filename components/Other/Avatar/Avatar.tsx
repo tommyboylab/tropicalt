@@ -7,40 +7,40 @@ import Err from '../../Other/Error/Error';
 import s from './Avatar.module.scss';
 
 const getAvatar = gql`
-	query getAvatar {
-		avatar(id: "1") {
-			id
-			avatar {
-				img {
-					id
-					url
-				}
-				placeholder {
-					id
-					url
-				}
-			}
-			alt
-		}
-	}
+  query getAvatar {
+    avatar(id: "1") {
+      id
+      avatar {
+        img {
+          id
+          url
+        }
+        placeholder {
+          id
+          url
+        }
+      }
+      alt
+    }
+  }
 `;
 
 const Avatar = (): JSX.Element => {
-	const { data, error, loading } = useQuery(getAvatar);
+  const { data, error, loading } = useQuery(getAvatar);
 
-	if (loading && !data) return <Load />;
-	if (error) return <Err />;
+  if (loading && !data) return <Load />;
+  if (error) return <Err />;
 
-	return (
-		<div key={data.avatar.id} className={s.avatar}>
-			<Img
-				class={s.avatar}
-				url={data.avatar.avatar.img.url}
-				placeholder={data.avatar.avatar.placeholder.url}
-				alt={`Image for ${data.avatar.alt}`}
-			/>
-		</div>
-	);
+  return (
+    <div key={data.avatar.id} className={s.avatar}>
+      <Img
+        class={s.avatar}
+        url={data.avatar.avatar.img.url}
+        placeholder={data.avatar.avatar.placeholder.url}
+        alt={`Image for ${data.avatar.alt}`}
+      />
+    </div>
+  );
 };
 
 Avatar.displayName = 'Avatar';

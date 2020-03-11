@@ -1,0 +1,57 @@
+@use '../../Other/Styles/Styles';
+
+.layout {
+  width: 100vw;
+  height: 100vh;
+}
+
+.videoHeader {
+  text-align: center;
+  line-height: 1.25;
+  color: Styles.$PRIMARY_COLOR;
+  max-width: 100%;
+  width: max-content;
+  margin: 0 auto .5em auto;
+  padding-top: 3.5rem;
+  border-bottom: 3px solid Styles.$SECONDARY_COLOR;
+}
+
+.videoDescription {
+  text-align: center;
+  line-height: 1;
+  color: Styles.$SECONDARY_COLOR;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: .5em;
+}
+
+.videoTag {
+  color: Styles.$PRIMARY_COLOR;
+  padding-left: 1em;
+  list-style: none;
+}
+
+.videoTag li {
+  float: left;
+  padding-right: .5em;
+  padding-bottom: 1em;
+}
+
+.videoContainer {
+  text-align: center;
+  background-color: black;
+  width: max-content;
+  height: min-content;
+  margin: 0 auto;
+  padding: 1em;
+  border: 1px Styles.$PRIMARY_COLOR solid;
+  border-radius: .25em;
+}
+
+.videoPlayer {
+  background-color: black;
+  width: auto;
+  max-height: 75vh;
+  border: 1px solid Styles.$SECONDARY_COLOR;
+  border-radius: .25em;
+}

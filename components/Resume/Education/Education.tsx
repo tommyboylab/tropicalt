@@ -3,14 +3,14 @@ import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
 
 type Education = {
-	content: string;
+  content: string;
 };
 
 const Education = (education: Education): JSX.Element => (
-	<div className={s.education}>
-		<h2>Education</h2>
-		<ReactMarkdown source={education.content} />
-	</div>
+  <div className={s.education}>
+    <h2>Education</h2>
+    <ReactMarkdown source={education.content} />
+  </div>
 );
 
 export default Education;

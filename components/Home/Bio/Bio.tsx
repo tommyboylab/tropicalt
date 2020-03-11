@@ -8,26 +8,26 @@ import Err from '../../Other/Error/Error';
 import s from './Bio.module.scss';
 
 const getBio = gql`
-	query getAvatar {
-		avatar(id: "1") {
-			id
-			bio
-		}
-	}
+  query getAvatar {
+    avatar(id: "1") {
+      id
+      bio
+    }
+  }
 `;
 
 const Bio = (): JSX.Element => {
-	const { data, error, loading } = useQuery(getBio);
+  const { data, error, loading } = useQuery(getBio);
 
-	if (loading && !data) return <Load />;
-	if (error) return <Err />;
+  if (loading && !data) return <Load />;
+  if (error) return <Err />;
 
-	return (
-		<div key={data.avatar.id} className={s.bio}>
-			<Avatar />
-			<ReactMarkdown source={data.avatar.bio} />
-		</div>
-	);
+  return (
+    <div key={data.avatar.id} className={s.bio}>
+      <Avatar />
+      <ReactMarkdown source={data.avatar.bio} />
+    </div>
+  );
 };
 
 export default Bio;

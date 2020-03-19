@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import { object, string } from 'yup';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/react-hooks';
-import { EventFunction, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';
 
@@ -40,7 +40,7 @@ const contactSchema = object().shape({
     .required(),
 });
 
-const HideModal = (hide: EventFunction): JSX.Element => (
+const HideModal = (hide: MouseEventHandler): JSX.Element => (
   <Modal>
     <h2>Thanks for reaching out</h2>
     <p>{`I'll get back to you shortly.`}</p>
@@ -102,7 +102,7 @@ const Form = (): JSX.Element => {
         </div>
 
         <ToggleContent
-          toggle={(show: EventFunction): JSX.Element => (
+          toggle={(show: MouseEventHandler): JSX.Element => (
             <button
               type='submit'
               className={s.submit}

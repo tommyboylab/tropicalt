@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import axios from 'axios';
+import { ReactVideoPlay, VideoSourceType } from 'react-video-play';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 import s from './VideoPlayer.module.scss';
@@ -65,12 +66,32 @@ const VideoPlayer = (): JSX.Element => {
   if (isLoading || loading) return <Load />;
   if (error || (!isLoading && !video.length)) return <Err />;
 
+  const src = [
+    {
+      name: 'HD',
+      default: true,
+      source: [
+        {
+          source: `${video[0].url}`,
+          type: VideoSourceType.video_mp4,
+        },
+      ],
+    },
+  ];
+
   const videoData = data?.videos as Video[];
   return (
     <>
       <Nav />
       <h1 className={s.videoHeader}>{videoData[0].title}</h1>
       <div className={s.videoContainer}>
+        <ReactVideoPlay
+          sources={src}
+          poster='http://lorempixel.com/900/450/people/'
+          autoplay={true}
+          muted={true}
+          ambiLight={true}
+        />
         <video className={s.videoPlayer} controls={true}>
           <source src={video[0].url} type='video/mp4' />
         </video>

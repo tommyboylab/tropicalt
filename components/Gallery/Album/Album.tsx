@@ -30,7 +30,7 @@ const getAlbum = gql`
 type Albums = {
   title: string;
   excerpt: string;
-  cover: { img: { id: string; url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   albumID: number;
 };
 

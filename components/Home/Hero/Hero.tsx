@@ -10,7 +10,7 @@ export type Heroes = [
   {
     id: number;
     title: string;
-    cover: { img: { id: string; url: string }; placeholder: { id: string; url: string } };
+    cover: { img: { id: string; url: string; hash: string } };
   }
 ];
 const getImgB = gql`
@@ -24,10 +24,7 @@ const getImgB = gql`
           img {
             id
             url
-          }
-          placeholder {
-            id
-            url
+            hash
           }
         }
       }
@@ -68,7 +65,7 @@ const ImgB = (): JSX.Element => {
           <Img
             class={s.imageBanner}
             url={hero.cover.img.url}
-            placeholder={hero.cover.placeholder.url}
+            placeholder={`/uploads/${hero.cover.img.hash}-thumb.svg`}
             alt={`Image for ${hero.title}`}
           />
           <style global jsx>{`

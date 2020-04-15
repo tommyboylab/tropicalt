@@ -14,10 +14,7 @@ const getAvatar = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       alt
@@ -36,7 +33,7 @@ const Avatar = (): JSX.Element => {
       <Img
         class={s.avatar}
         url={data.avatar.avatar.img.url}
-        placeholder={data.avatar.avatar.placeholder.url}
+        placeholder={`/uploads/${data.avatar.avatar.img.hash}-thumb.svg`}
         alt={`Image for ${data.avatar.alt}`}
       />
     </div>

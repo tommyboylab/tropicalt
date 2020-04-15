@@ -9,7 +9,7 @@ import s from './RecentAlbums.module.scss';
 type Album = {
   id: string;
   slug: string;
-  cover: { img: { url: string }; placeholder: { url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   title: string;
   date: string;
   user: { username: string };
@@ -25,10 +25,7 @@ const getAlbums = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       title
@@ -58,7 +55,7 @@ const Albums = (): JSX.Element => {
           type='albums'
           key={album.id}
           slug={album.slug}
-          cover={album.cover.placeholder.url}
+          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
           img={album.cover.img.url}
           title={album.title}
           date={album.date}

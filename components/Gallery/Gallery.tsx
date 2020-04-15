@@ -9,7 +9,7 @@ import Err from '../Other/Error/Error';
 type Albums = {
   id: string;
   slug: string;
-  cover: { img: { url: string }; placeholder: { url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   title: string;
   date: string;
   user: { username: string };
@@ -26,10 +26,7 @@ const getAlbum = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       date
@@ -57,7 +54,7 @@ const Albums = (): JSX.Element => {
           type='albums'
           id={album.id}
           slug={album.slug}
-          cover={album.cover.placeholder.url}
+          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
           img={album.cover.img.url}
           title={album.title}
           date={album.date}

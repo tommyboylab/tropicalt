@@ -9,7 +9,7 @@ import s from './List.module.scss';
 type ArticleList = {
   id: string;
   slug: string;
-  cover: { img: { url: string }; placeholder: { url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   title: string;
   date: string;
   user: { username: string };
@@ -25,10 +25,7 @@ const getArticlesQuery = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       title
@@ -66,7 +63,7 @@ const Articles = (): JSX.Element => {
           type='blog'
           slug={article.slug}
           key={article.id}
-          cover={article.cover.placeholder.url}
+          cover={`/uploads/${article.cover.img.hash}-thumb.svg`}
           img={article.cover.img.url}
           title={article.title}
           date={article.date}

@@ -8,7 +8,7 @@ import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
 
 type AboutCard = {
-  img: { img: { url: string }; placeholder: { url: string } };
+  img: { img: { id: string; url: string; hash: string } };
   id: string;
   title: string;
   excerpt: string;
@@ -24,10 +24,7 @@ const getAboutCards = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
     }
@@ -50,7 +47,7 @@ const AboutCards = (): JSX.Element => {
             <Img
               class={s.aboutCardImg}
               url={aboutCard.img.img.url}
-              placeholder={aboutCard.img.placeholder.url}
+              placeholder={`/uploads/${aboutCard.img.img.hash}-thumb.svg`}
               alt={`Image for ${aboutCard.title}`}
             />
             <Text title={aboutCard.title} excerpt={aboutCard.excerpt} />

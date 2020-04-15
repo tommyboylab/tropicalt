@@ -9,11 +9,11 @@ import Err from '../Other/Error/Error';
 type Videos = {
   id: string;
   slug: string;
-  cover: { img: { url: string }; placeholder: { url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   title: string;
   date: string;
   user: { username: string };
-  tag: { id: string; tag: string };
+  tag: [{ tag: { id: string; tag: string } }];
 };
 
 const getVideo = gql`
@@ -26,10 +26,7 @@ const getVideo = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       date
@@ -59,12 +56,12 @@ const Videos = (): JSX.Element => {
           type='vlog'
           id={video.id}
           slug={video.slug}
-          cover={video.cover.placeholder.url}
+          cover={`/uploads/${video.cover.img.hash}-thumb.svg`}
           img={video.cover.img.url}
           title={video.title}
           date={video.date}
           name={video.user.username}
-          excerpt={`Location: ${video.tag.tag}`}
+          excerpt={`Location: ${video.tag.map(({ tag }) => tag)}`}
         />
       ))}
     </div>

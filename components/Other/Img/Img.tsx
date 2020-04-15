@@ -22,7 +22,7 @@ const Image = (Img: Img): JSX.Element => (
     loading='lazy'
     alt={Img.alt}
     style={{
-      backgroundImage: `url(https://api.tropicalt.ca/${Img.placeholder})`,
+      backgroundImage: `url(https://api.tropicalt.ca${Img.placeholder})`,
       backgroundPosition: 'center',
       backgroundSize: 'cover',
       backgroundRepeat: 'no-repeat',

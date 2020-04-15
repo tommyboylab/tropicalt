@@ -9,7 +9,7 @@ import s from './RecentPosts.module.scss';
 type Article = {
   id: string;
   slug: string;
-  cover: { img: { url: string }; placeholder: { url: string } };
+  cover: { img: { id: string; url: string; hash: string } };
   title: string;
   date: string;
   user: { username: string };
@@ -28,10 +28,7 @@ const getArticles = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
 
@@ -59,7 +56,7 @@ const Articles = (): JSX.Element => {
           type='blog'
           key={article.id}
           slug={article.slug}
-          cover={article.cover.placeholder.url}
+          cover={`/uploads/${article.cover.img.hash}-thumb.svg`}
           img={article.cover.img.url}
           title={article.title}
           date={article.date}

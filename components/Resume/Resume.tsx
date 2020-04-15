@@ -25,10 +25,7 @@ const getResume = gql`
         img {
           id
           url
-        }
-        placeholder {
-          id
-          url
+          hash
         }
       }
       hobbies
@@ -52,7 +49,7 @@ const Resume = (): JSX.Element => {
       <Skills content={data.resume.skills} />
       <HighlightImg
         url={data.resume.highlight.img.url}
-        placeholder={data.resume.highlight.placeholder.url}
+        placeholder={`/uploads/${data.resume.highlight.img.hash}-thumb.svg`}
         alt='Resume'
       />
       <Hobbies content={data.resume.hobbies} />

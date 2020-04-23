@@ -1,21 +1,20 @@
 import React, { Fragment } from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import Text from './AboutCard/AboutCardText';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
 
-type AboutCard = {
-  img: { img: { id: string; url: string; hash: string } };
-  id: string;
-  title: string;
-  excerpt: string;
-};
+type AboutCard = [
+  {
+    img: { img: { id: string; url: string; hash: string } };
+    id: string;
+    title: string;
+    excerpt: string;
+  }
+];
 
-const getAboutCards = gql`
-  query aboutCards {
+const AboutCardFragment = gql`
+  fragment AboutCardFragment on Query {
     aboutCards {
       id
       title
@@ -31,17 +30,12 @@ const getAboutCards = gql`
   }
 `;
 
-const AboutCards = (): JSX.Element => {
-  const { data, error, loading } = useQuery(getAboutCards);
-
-  if (loading && !data) return <Load />;
-  if (error) return <Err />;
-
-  const aboutCards = data?.aboutCards as AboutCard[];
+const AboutCards = (aboutCards: any): JSX.Element => {
+  aboutCards = aboutCards.data?.aboutCards as AboutCard;
 
   return (
     <>
-      {aboutCards.map((aboutCard) => {
+      {aboutCards.map((aboutCard: any) => {
         return (
           <Fragment key={aboutCard.id}>
             <Img
@@ -59,5 +53,9 @@ const AboutCards = (): JSX.Element => {
 };
 
 AboutCards.displayName = 'AboutCards';
+
+AboutCards.fragments = {
+  AboutCardFragment: AboutCardFragment,
+};
 
 export default AboutCards;

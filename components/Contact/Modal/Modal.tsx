@@ -31,3 +31,5 @@ export const Modal = ({ children }: Modal): JSX.Element =>
     </div>,
     document.getElementById('__next')!
   );
+
+Modal.displayName = 'Modal';

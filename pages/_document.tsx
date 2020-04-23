@@ -1,6 +1,5 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-
 const globalStyle = {
   __html: `
   *,
@@ -24,6 +23,7 @@ const globalStyle = {
     font-family: 'Didact Gothic';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot'); /* IE9 Compat Modes */
     src: local('Didact Gothic Regular'), local('DidactGothic-Regular'),
        url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -38,6 +38,7 @@ const globalStyle = {
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url('/static/fonts/Raleway/raleway-v14-latin-regular.eot'); /* IE9 Compat Modes */
     src: local('Raleway'), local('Raleway-Regular'),
        url('/static/fonts/Raleway/raleway-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */

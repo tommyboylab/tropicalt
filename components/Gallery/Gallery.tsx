@@ -2,9 +2,6 @@ import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './Gallery.module.scss';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
 
 type Albums = {
   id: string;
@@ -16,8 +13,8 @@ type Albums = {
   location: string;
 };
 
-const getAlbum = gql`
-  query getAlbums {
+const AlbumFragment = gql`
+  fragment AlbumFragment on Query {
     albums(sort: "date:desc", where: { published: true }) {
       id
       slug
@@ -38,17 +35,12 @@ const getAlbum = gql`
   }
 `;
 
-const Albums = (): JSX.Element => {
-  const { data, error, loading } = useQuery(getAlbum);
-
-  if (loading && !data) return <Load />;
-  if (error) return <Err />;
-
-  const albums = data?.albums as Albums[];
+const Albums = (albums: any): JSX.Element => {
+  albums = albums.data?.albums as Albums[];
 
   return (
     <div className={s.albumList}>
-      {albums.map((album) => (
+      {albums.map((album: Albums) => (
         <Recents
           key={album.id}
           type='albums'
@@ -67,5 +59,9 @@ const Albums = (): JSX.Element => {
 };
 
 Albums.displayName = 'Album Gallery';
+
+Albums.fragments = {
+  AlbumFragment: AlbumFragment,
+};
 
 export default Albums;

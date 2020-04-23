@@ -2,9 +2,6 @@ import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './List.module.scss';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
 
 type Videos = {
   id: string;
@@ -16,8 +13,8 @@ type Videos = {
   tag: [{ tag: { id: string; tag: string } }];
 };
 
-const getVideo = gql`
-  query getAlbums {
+const VideoFragment = gql`
+  fragment VideoFragment on Query {
     videos(sort: "date:desc", where: { published: true }) {
       id
       slug
@@ -40,17 +37,12 @@ const getVideo = gql`
   }
 `;
 
-const Videos = (): JSX.Element => {
-  const { data, error, loading } = useQuery(getVideo);
-
-  if (loading && !data) return <Load />;
-  if (error) return <Err />;
-
-  const videos = data?.videos as Videos[];
+const Videos = (videos: any): JSX.Element => {
+  videos = videos.data?.videos as Videos[];
 
   return (
     <div className={s.videoList}>
-      {videos.map((video) => (
+      {videos.map((video: Videos) => (
         <Recents
           key={video.id}
           type='vlog'
@@ -70,4 +62,7 @@ const Videos = (): JSX.Element => {
 
 Videos.displayName = 'Video Gallery';
 
+Videos.fragments = {
+  VideoFragment: VideoFragment,
+};
 export default Videos;

@@ -26,6 +26,7 @@ type Article = {
 
 const getArticle = gql`
   query Article($slug: String) {
+    ...NavigationFragment
     articles(where: { slug: $slug }) {
       id
       slug
@@ -43,7 +44,10 @@ const getArticle = gql`
         tag
       }
     }
+    ...SidebarArticlesFragment
   }
+  ${Nav.fragments.NavigationFragment}
+  ${Sidebar.fragments.SidebarArticlesFragment}
 `;
 
 const Post = (): JSX.Element => {
@@ -56,6 +60,7 @@ const Post = (): JSX.Element => {
   if (error) return <Err />;
 
   const articles = data?.articles as Article[];
+  const sidebar = data;
 
   return (
     <>
@@ -69,7 +74,7 @@ const Post = (): JSX.Element => {
             slug={`${slug}`}
           />
           <main className={s.layout} key={article.id}>
-            <Nav />
+            <Nav data={data} />
             <MobileHeader />
             <CoverImg
               title={article.title}
@@ -83,8 +88,8 @@ const Post = (): JSX.Element => {
               ))}
             </TagList>
             <Body content={article.content} />
-            <Sidebar />
-            <Footer />
+            <Sidebar data={sidebar} />
+            <Footer data={data} />
           </main>
         </>
       ))}

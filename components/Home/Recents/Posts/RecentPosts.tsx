@@ -1,23 +1,22 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import Post from '../Recents';
-import Load from '../../../Other/Load/Load';
-import Err from '../../../Other/Error/Error';
 import s from './RecentPosts.module.scss';
 
-type Article = {
-  id: string;
-  slug: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  title: string;
-  date: string;
-  user: { username: string };
-  excerpt: string;
-};
+type Article = [
+  {
+    id: string;
+    slug: string;
+    cover: { img: { id: string; url: string; hash: string } };
+    title: string;
+    date: string;
+    user: { username: string };
+    excerpt: string;
+  }
+];
 
-const getArticles = gql`
-  query getArticles {
+const RecentArticlesFragment = gql`
+  fragment RecentArticlesFragment on Query {
     articles(limit: 3, sort: "date:desc", where: { published: true }) {
       id
       slug
@@ -31,7 +30,6 @@ const getArticles = gql`
           hash
         }
       }
-
       user {
         username
       }
@@ -39,18 +37,13 @@ const getArticles = gql`
   }
 `;
 
-const Articles = (): JSX.Element => {
-  const { data, error, loading } = useQuery(getArticles);
-
-  if (loading && !data) return <Load />;
-  if (error) return <Err />;
-
-  const articles = data?.articles as Article[];
+const Articles = (articles: any): JSX.Element => {
+  articles = articles.data?.articles as Article[];
 
   return (
     <div className={s.recentArticles}>
       <h2>Recent Posts</h2>
-      {articles.map((article) => (
+      {articles.map((article: any) => (
         <Post
           id={article.id}
           type='blog'
@@ -70,4 +63,7 @@ const Articles = (): JSX.Element => {
 
 Articles.displayName = 'Recent Articles';
 
+Articles.fragments = {
+  RecentArticlesFragment: RecentArticlesFragment,
+};
 export default Articles;

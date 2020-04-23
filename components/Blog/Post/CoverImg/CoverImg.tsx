@@ -8,6 +8,7 @@ type PostImg = {
   url: string;
   alt: string;
 };
+
 const Image = (PostImg: PostImg): JSX.Element => (
   <div className={s.postImg}>
     <h1>{PostImg.title}</h1>

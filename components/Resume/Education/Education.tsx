@@ -1,16 +1,32 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
+import gql from 'graphql-tag';
 
 type Education = {
-  content: string;
+  edu: string;
 };
 
-const Education = (education: Education): JSX.Element => (
-  <div className={s.education}>
-    <h2>Education</h2>
-    <ReactMarkdown source={education.content} />
-  </div>
-);
+const EducationFragment = gql`
+  fragment EducationFragment on Resume {
+    edu
+  }
+`;
+
+const Education = (education: any): JSX.Element => {
+  education = education.data?.resume as Education;
+  return (
+    <div className={s.education}>
+      <h2>Education</h2>
+      <ReactMarkdown source={education.edu} />
+    </div>
+  );
+};
+
+Education.displayName = 'Education';
+
+Education.fragments = {
+  EducationFragment: EducationFragment,
+};
 
 export default Education;

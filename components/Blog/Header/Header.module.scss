@@ -2,6 +2,7 @@
 
 .postHeader {
   grid-area: PostHeader;
+  padding-top: 2.5em;
   padding-bottom: 1em;
 }
 
@@ -22,7 +23,7 @@
 @media ( max-width: 1000px ) {
 
   .postHeader {
-    padding-top: 3em;
+    padding-top: 3.5em;
   }
 
   .postHeader h1 {
@@ -33,10 +34,11 @@
 @media ( max-width: 770px ) {
 
   .postHeader {
-    padding-top: 0;
+    padding-top: 2.5em;
   }
 
   .postHeader h1 {
+    margin-bottom: .25em;
     text-align: center;
     margin-left: .8em;
   }

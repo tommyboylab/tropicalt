@@ -23,7 +23,12 @@ export default function Home(): JSX.Element {
   if (error) return <Err />;
   return (
     <main className={s.layout}>
-      <Meta title={'T^T - About Me'} excerpt={data.aboutCards[0].excerpt} imgUrl={data.aboutCards[0].img.img.url} />
+      <Meta
+        title={'T^T - About Me'}
+        excerpt={data.aboutCards[0].excerpt}
+        imgUrl={data.aboutCards[0].img.img.url}
+        url={'/about'}
+      />
       <Nav data={data} />
       <AboutCards data={data} />
     </main>

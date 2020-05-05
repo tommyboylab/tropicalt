@@ -22,7 +22,7 @@ export default function VlogPage(): JSX.Element {
   if (error) return <Err />;
   return (
     <main>
-      <Meta title={'TropicalT - Vlog'} excerpt={'Smile for the camera'} />
+      <Meta title={'TropicalT - Vlog'} excerpt={'Smile for the camera'} url={'/vlog'} />
       <Nav data={data} />
       <Videos data={data} />
     </main>

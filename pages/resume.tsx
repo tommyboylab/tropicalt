@@ -43,7 +43,12 @@ export default function ResumePage(): JSX.Element {
 
   return (
     <main className={s.layout}>
-      <Meta title={'T^T - Resume'} excerpt={`Thomas Fiala's Current Resume`} imgUrl={data.resume.highlight.img.url} />
+      <Meta
+        title={'T^T - Resume'}
+        excerpt={`Thomas Fiala's Current Resume`}
+        imgUrl={data.resume.highlight.img.url}
+        url={'/resume'}
+      />
       <Header />
       <Contact data={data} />
       <WorkExp data={data} />

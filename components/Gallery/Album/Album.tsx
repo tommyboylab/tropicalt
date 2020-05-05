@@ -70,11 +70,10 @@ const Album = (): JSX.Element => {
   return (
     <>
       <Meta
-        type={'albums'}
         title={albums[0].title}
         excerpt={albums[0].excerpt}
         imgUrl={albums[0].cover.img.url}
-        slug={`${router.query.slug}`}
+        url={`/albums/${router.query.slug}`}
       />
       <Sidebar
         title={albums[0].title}

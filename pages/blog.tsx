@@ -24,8 +24,12 @@ const getArticlesQuery = gql`
 
 export default function Blog(): JSX.Element {
   const [nextPosts, setNextPosts] = useState(0);
-  const prev = useCallback((): void => setNextPosts(nextPosts - 7), [nextPosts]);
-  const next = useCallback((): void => setNextPosts(nextPosts + 7), [nextPosts]);
+  const prev = useCallback((): void => {
+    setNextPosts(nextPosts - 7), window.scrollTo(0, 0);
+  }, [nextPosts]);
+  const next = useCallback((): void => {
+    setNextPosts(nextPosts + 7), window.scrollTo(0, 0);
+  }, [nextPosts]);
   const { data, error, loading } = useQuery(getArticlesQuery, {
     variables: {
       start: nextPosts,
@@ -41,6 +45,7 @@ export default function Blog(): JSX.Element {
         title={'T^T - Blog'}
         excerpt={'The blog that involves me, drinking a pot of tea and sharing some thoughts.'}
         imgUrl={data.list[0].cover.img.url}
+        url={'/blog'}
       />
       <Nav data={data} />
       <Header />

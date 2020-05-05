@@ -12,6 +12,7 @@ import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
 import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
+// import Comment from '../../components/Other/CommentBox/Comment';
 import React from 'react';
 import gql from 'graphql-tag';
 
@@ -66,13 +67,7 @@ const Post = (): JSX.Element => {
     <>
       {articles.map((article) => (
         <>
-          <Meta
-            type={'post'}
-            title={article.title}
-            excerpt={article.excerpt}
-            imgUrl={article.cover.img.url}
-            slug={`${slug}`}
-          />
+          <Meta title={article.title} excerpt={article.excerpt} imgUrl={article.cover.img.url} url={`/blog/${slug}`} />
           <main className={s.layout} key={article.id}>
             <Nav data={data} />
             <MobileHeader />
@@ -89,6 +84,7 @@ const Post = (): JSX.Element => {
             </TagList>
             <Body content={article.content} />
             <Sidebar data={sidebar} />
+            {/*<Comment />*/}
             <Footer data={data} />
           </main>
         </>

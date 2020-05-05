@@ -33,7 +33,12 @@ export default function Home(): JSX.Element {
   if (error) return <Err />;
   return (
     <main className={s.layout}>
-      <Meta title={'T^T - TropicalT'} excerpt={'The homepage of Thomas Fiala'} imgUrl={data.avatar.avatar.img.url} />
+      <Meta
+        title={'T^T - TropicalT'}
+        excerpt={'The homepage of Thomas Fiala'}
+        imgUrl={data.avatar.avatar.img.url}
+        url={'/'}
+      />
       <Nav data={data} />
       <ImgB data={data} />
       <Bio data={data} />

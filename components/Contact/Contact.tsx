@@ -26,18 +26,9 @@ const sendEmail = gql`
 `;
 
 const contactSchema = object().shape({
-  name: string()
-    .min(2, `That's not a name!`)
-    .max(22)
-    .required(),
-  email: string()
-    .email(`That's not a real email!`)
-    .min(6, `That's not a real email!`)
-    .required(),
-  message: string()
-    .min(2, 'What kind of message is that?')
-    .max(500)
-    .required(),
+  name: string().min(2, `That's not a name!`).max(22).required(),
+  email: string().email(`That's not a real email!`).min(6, `That's not a real email!`).required(),
+  message: string().min(2, 'What kind of message is that?').max(500).required(),
 });
 
 const HideModal = (hide: MouseEventHandler): JSX.Element => (

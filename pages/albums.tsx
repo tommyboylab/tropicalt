@@ -22,7 +22,12 @@ export default function Albums(): JSX.Element {
   if (error) return <Err />;
   return (
     <main>
-      <Meta title={'T^T - Gallery'} excerpt={'My life through pictures '} imgUrl={data.albums[0].cover.img.url} />
+      <Meta
+        title={'T^T - Gallery'}
+        excerpt={'My life through pictures '}
+        imgUrl={data.albums[0].cover.img.url}
+        url={'/albums'}
+      />
       <Nav data={data} />
       <Gallery data={data} />
     </main>

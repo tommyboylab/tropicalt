@@ -21,7 +21,7 @@ export default function ContactPage(): JSX.Element {
   if (error) return <Err />;
   return (
     <main className={s.layout}>
-      <Meta title={'T^T - Contact Me'} excerpt={'Send me a message and let me know what you think'} />
+      <Meta title={'T^T - Contact Me'} excerpt={'Send me a message and let me know what you think'} url={'/contact'} />
       <Nav data={data} />
       <Contact />
     </main>

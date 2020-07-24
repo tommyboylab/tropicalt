@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import axios from 'axios';
+import axios from 'redaxios';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import Router from 'next/router';
 

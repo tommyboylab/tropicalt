@@ -43,6 +43,7 @@ const Form = (): JSX.Element => {
   const [addEmail, { loading: mutationLoading, error: mutationError }] = useMutation(sendEmail);
   const { register, errors, handleSubmit, formState, reset } = useForm<FormFields>({
     mode: 'onChange',
+    // @ts-ignore
     validationSchema: contactSchema,
   });
 

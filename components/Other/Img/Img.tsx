@@ -8,13 +8,6 @@ type Img = {
   style?: React.CSSProperties;
 };
 
-// Add the lazy tag to HTML attributes
-declare module 'react' {
-  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
-    loading?: 'eager' | 'lazy';
-  }
-}
-
 const Image = (Img: Img): JSX.Element => (
   <img
     className={Img.class}

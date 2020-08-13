@@ -1,3 +1,5 @@
+import React from 'react';
+import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/react-hooks';
 import Load from '../../components/Other/Load/Load';
@@ -12,9 +14,7 @@ import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
 import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
-// import Comment from '../../components/Other/CommentBox/Comment';
-import React from 'react';
-import gql from 'graphql-tag';
+import Comments from '../../components/Blog/Post/Comments/CommentList/CommentList';
 
 type Article = {
   id: string;
@@ -83,8 +83,8 @@ const Post = (): JSX.Element => {
               ))}
             </TagList>
             <Body content={article.content} />
+            <Comments />
             <Sidebar data={sidebar} />
-            {/*<Comment />*/}
             <Footer data={data} />
           </main>
         </>

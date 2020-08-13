@@ -2,8 +2,7 @@ import React, { ReactNode } from 'react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { NormalizedCacheObject } from 'apollo-cache-inmemory';
+import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext, NextPage } from 'next';
 import createApolloClient from './apolloClient';
 

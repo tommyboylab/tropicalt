@@ -11,13 +11,13 @@ import Err from '../../../../Other/Error/Error';
 
 type CommentList = {
   id: string | undefined;
-  user: { avatar: string; name: string };
+  user: { avatar: string; username: string };
   article: { id: string };
   content: string;
   newComment: ConcatArray<never>;
   parent: { id: string };
-  likes: [{ user: string; comment: string; article: string }];
-  dislikes: [{ user: string; comment: string; article: string }];
+  likes: [{ user: string }];
+  dislikes: [{ user: string }];
 };
 
 const getCommentList = gql`
@@ -31,9 +31,6 @@ const getCommentList = gql`
       user {
         username
         avatar
-      }
-      parent {
-        id
       }
       likes {
         user {
@@ -52,39 +49,35 @@ const getCommentList = gql`
 const CommentList = (): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
-  // const [commentList, setCommentList] = useState([]);
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
 
   if (loading && !data) return <Load />;
   if (error) return <Err />;
 
   const comments = data?.comments as CommentList[];
-
   return (
     <>
       <CommentHeader totalComments={comments.length} />
       <CommentForm
-        user={{ avatar: '/static/images/avatar.jpg', name: 'Thomas Fiala' }}
+        user={{ avatar: '/static/images/avatar.jpg', username: 'Thomas Fiala' }}
         article={comments[0].article}
         updateState={() => {}}
         content={''}
       />
-      {comments.map((comment, index) => {
-        !comments.length && (
-          <>
-            <Comment
-              article={comment.article}
-              key={index}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={() => {}}
-            />
-            <NestedComment parent={comment.id} />
-          </>
-        );
-      })}
+      {comments.map((comment) => (
+        <div>
+          <Comment
+            article={comment.article}
+            key={comment.id}
+            user={comment.user}
+            content={comment.content}
+            likes={comment.likes}
+            dislikes={comment.dislikes}
+            updateState={() => {}}
+          />
+          <NestedComment parent={comment.id} article={slug} />
+        </div>
+      ))}
     </>
   );
 };

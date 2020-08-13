@@ -8,7 +8,7 @@ import gql from 'graphql-tag';
 import s from '../../../../Contact/Contact.module.scss';
 
 type CommentForm = {
-  user: { avatar: string; name: string };
+  user: { avatar: string; username: string };
   article: { id: string };
   updateState: CallableFunction;
   content: string;
@@ -91,7 +91,7 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <img style={{ width: '1.5rem', height: '2rem' }} src={user.avatar} alt={`${user.name}'s Avatar`} />
+        <img style={{ width: '1.5rem', height: '2rem' }} src={user.avatar} alt={`${user.username}'s Avatar`} />
         <input
           type='text'
           placeholder='Leave a comment'

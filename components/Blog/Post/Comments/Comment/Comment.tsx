@@ -4,7 +4,7 @@ import Rating from './Rating/Rating';
 import CommentForm from '../CommentForm/CommentForm';
 
 type Comment = {
-  user: { avatar: string; name: string };
+  user: { avatar: string; username: string };
   content: string;
   likes: [{ user: string }];
   dislikes: [{ user: string }];
@@ -35,8 +35,8 @@ const Comment = ({ user, content, likes, dislikes, article }: Comment): JSX.Elem
 
   return (
     <div>
-      <img alt={`${user.name}'s avatar image`} />
-      <h3>{user.name}</h3>
+      <img alt={`${user.username}'s avatar image`} />
+      <h3>{user.username}</h3>
       <ReactMarkdown>{content}</ReactMarkdown>
       <Rating likes={likes} dislikes={dislikes} />
       <span onClick={openReply}>Reply</span>

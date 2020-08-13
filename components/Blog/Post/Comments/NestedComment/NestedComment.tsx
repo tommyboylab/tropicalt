@@ -7,10 +7,11 @@ import Err from '../../../../Other/Error/Error';
 
 type NestedComment = {
   parent: string | undefined;
+  article: string | string[] | undefined;
 };
 
 type CommentArr = {
-  user: { name: string; avatar: string };
+  user: { username: string; avatar: string };
   parent: { id: string };
   article: { id: string };
   likes: [{ user: string }];
@@ -20,8 +21,8 @@ type CommentArr = {
 };
 
 const getNestedComment = gql`
-  query NestedComments($slug: String, $articleID: String!) {
-    comments(where: { article: { slug: $slug }, parent: { id: $articleID } }) {
+  query NestedComments($article: String!, $parent: String!) {
+    comments(where: { article: { slug: $article }, parent: { id: $parent } }) {
       id
       content
       article {
@@ -48,9 +49,9 @@ const getNestedComment = gql`
   }
 `;
 
-const NestedComment = ({ parent }: NestedComment): JSX.Element => {
+const NestedComment = ({ parent, article }: NestedComment): JSX.Element => {
   const [openReply, setOpenReply] = useState(false);
-  const { data, error, loading } = useQuery(getNestedComment, { variables: { parent } });
+  const { data, error, loading } = useQuery(getNestedComment, { variables: { parent, article } });
 
   if (loading && !data) return <Load />;
   if (error) return <Err />;
@@ -65,24 +66,20 @@ const NestedComment = ({ parent }: NestedComment): JSX.Element => {
   return (
     <div>
       {nCommentNumber > 0 && <p onClick={handleChange}>View {nCommentNumber} More Comments</p>}
-      {nComments.map((comment, index) => {
-        {
-          openReply && (
-            <div>
-              <Comment
-                key={index}
-                article={comment.article}
-                user={comment.user}
-                content={comment.content}
-                likes={comment.likes}
-                dislikes={comment.dislikes}
-                updateState={() => {}}
-              />
-              <NestedComment parent={comment.parent.id} />
-            </div>
-          );
-        }
-      })}
+      {nComments.map((comment, index) => (
+        <>
+          <Comment
+            key={index}
+            article={comment.article}
+            user={comment.user}
+            content={comment.content}
+            likes={comment.likes}
+            dislikes={comment.dislikes}
+            updateState={() => {}}
+          />
+          <NestedComment parent={comment.parent.id} article={article} />
+        </>
+      ))}
     </div>
   );
 };

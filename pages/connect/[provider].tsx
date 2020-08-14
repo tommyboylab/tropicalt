@@ -20,10 +20,20 @@ const Callback = (): JSX.Element => {
       })
       .catch((error: any) => {
         console.log(error);
-        router.push('/login');
       })
       .then(() => {
-        router.push('/');
+        console.log('success');
+      });
+    axios({
+      method: 'GET',
+      withCredentials: true,
+      url: `https://api.tropicalt.ca/users/me`,
+    })
+      .then((res: any) => {
+        console.log('Returned Response', res);
+      })
+      .catch((err: any) => {
+        console.log(err);
       });
   }, []);
   return (

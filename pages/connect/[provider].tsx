@@ -12,28 +12,25 @@ const Callback = (): JSX.Element => {
     axios
       .get(redirectURL)
       .then((res: any) => {
-        console.log(res);
         setCookie(undefined, 'id', res.data.user.id, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: '/',
+        });
+        setCookie(undefined, 'name', res.data.user.username, {
+          maxAge: 30 * 24 * 60 * 60,
+          path: '/',
+        });
+        setCookie(undefined, 'avatar', res.data.user.avatar, {
           maxAge: 30 * 24 * 60 * 60,
           path: '/',
         });
       })
       .catch((error: any) => {
         console.log(error);
+        router.push('/login');
       })
       .then(() => {
-        console.log('success');
-      });
-    axios({
-      method: 'GET',
-      withCredentials: true,
-      url: `https://api.tropicalt.ca/users/me`,
-    })
-      .then((res: any) => {
-        console.log('Returned Response', res);
-      })
-      .catch((err: any) => {
-        console.log(err);
+        router.push('/');
       });
   }, []);
   return (

@@ -6,7 +6,7 @@ import Comment from './Comment/Comment';
 type Comments = {
   totalComments: number;
   comment: {
-    user: { avatar: string; name: string };
+    user: { avatar: string; username: string };
     date: string;
     likes: [{ user: string; comment: string; article: string }];
     dislikes: [{ user: string; comment: string; article: string }];

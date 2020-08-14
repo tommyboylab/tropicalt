@@ -12,8 +12,7 @@ const Callback = (): JSX.Element => {
     axios
       .get(redirectURL)
       .then((res: any) => {
-        console.log(res);
-        setCookie(undefined, 'token', res.data.jwt, {
+        setCookie(undefined, 'token', res.data.user, {
           maxAge: 30 * 24 * 60 * 60,
           path: '/',
         });

@@ -13,21 +13,22 @@ const Callback = (): JSX.Element => {
       .get(redirectURL)
       .then((res: any) => {
         console.log(res);
-        setCookie(undefined, 'token', res.data.jwt, {
+        setCookie(undefined, 'id', res.data.user.id, {
           maxAge: 30 * 24 * 60 * 60,
           path: '/',
         });
       })
       .catch((error: any) => {
         console.log(error);
+        router.push('/login');
       })
       .then(() => {
-        return <h3>Done.</h3>;
+        router.push('/');
       });
   }, []);
   return (
     <div>
-      <h2>Retreving your token and storing it in a cookie</h2>
+      <h2>Doing some stuff...</h2>
     </div>
   );
 };

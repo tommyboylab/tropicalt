@@ -12,15 +12,7 @@ const Callback = (): JSX.Element => {
     axios
       .get(redirectURL)
       .then((res: any) => {
-        setCookie(undefined, 'id', res.data.user.id, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
-        });
-        setCookie(undefined, 'name', res.data.user.username, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
-        });
-        setCookie(undefined, 'avatar', res.data.user.avatar, {
+        setCookie(undefined, 'token', res.data.jwt, {
           maxAge: 30 * 24 * 60 * 60,
           path: '/',
         });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import { withApollo } from '../apollo/withApollo';
 
 const TropicalT = ({ Component, pageProps, apollo, router }: any) => (

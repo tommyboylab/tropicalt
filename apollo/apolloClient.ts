@@ -12,6 +12,9 @@ export default function createApolloClient(initialState: any, ctx: any) {
       uri: process.env.API, // Server URL (must be absolute)
       credentials: 'include', // Additional fetch() options like `credentials` or `headers`
       fetch,
+      fetchOptions: {
+        mode: 'no-cors',
+      },
       headers: {
         authorization: token ? `Bearer ${token}` : '',
       },

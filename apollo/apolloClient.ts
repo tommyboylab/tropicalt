@@ -1,19 +1,29 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
 import { parseCookies } from 'nookies';
+import { setContext } from '@apollo/client/link/context';
 
 export default function createApolloClient(initialState: any, ctx: any) {
   const { token } = parseCookies(ctx);
-  // The `ctx` (NextPageContext) will only be present on the server.
-  // use it to extract auth headers (ctx.req) or similar.
+
+  const httpLink = new HttpLink({
+    uri: process.env.API,
+    credentials: 'include',
+  });
+
+  const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
+    // return the headers to the context so httpLink can read them
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer= ${token}` : '',
+      },
+    };
+  });
+
   return new ApolloClient({
     ssrMode: Boolean(ctx),
-    link: new HttpLink({
-      uri: process.env.API, // Server URL (must be absolute)
-      credentials: 'include',
-      headers: {
-        authorization: token ? `Bearer ${token}` : '',
-      },
-    }),
+    link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState),
   });
 }

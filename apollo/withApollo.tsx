@@ -3,7 +3,7 @@ import App, { AppContext } from 'next/app';
 import Head from 'next/head';
 import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext, NextPage } from 'next';
-import { createApolloClient } from './apolloClient';
+import createApolloClient from './apolloClient';
 
 interface NextPageContextWithApollo extends NextPageContext {
   apolloClient: ApolloClient<NormalizedCacheObject> | null;

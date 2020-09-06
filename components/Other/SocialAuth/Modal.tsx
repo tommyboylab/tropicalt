@@ -37,17 +37,13 @@ export const Modal = ({ children }: Modal): JSX.Element =>
 const Toggle = (): JSX.Element => {
   const receiveAuthInfo = (e: any) => {
     if (e.origin !== 'https://www.tropicalt.ca') {
-      console.log('wrong origin', { origin });
       return;
     }
     const { data } = e;
-    console.log('real data', data);
-    if (data.source === 'oauthWindow') {
-      setCookie(undefined, 'token', data, {
-        maxAge: 30 * 24 * 60 * 60,
-        path: '/',
-      });
-    }
+    setCookie(undefined, 'token', data, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
   };
 
   useEffect(() => {

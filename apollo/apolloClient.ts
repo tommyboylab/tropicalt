@@ -1,5 +1,4 @@
 import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
-import fetch from 'isomorphic-unfetch';
 import { parseCookies } from 'nookies';
 
 export default function createApolloClient(initialState: any, ctx: any) {
@@ -10,11 +9,7 @@ export default function createApolloClient(initialState: any, ctx: any) {
     ssrMode: Boolean(ctx),
     link: new HttpLink({
       uri: process.env.API, // Server URL (must be absolute)
-      credentials: 'include', // Additional fetch() options like `credentials` or `headers`
-      fetch,
-      fetchOptions: {
-        mode: 'no-cors',
-      },
+      credentials: 'include',
       headers: {
         authorization: token ? `Bearer ${token}` : '',
       },

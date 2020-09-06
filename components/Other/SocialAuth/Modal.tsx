@@ -1,11 +1,25 @@
-import React, { MouseEventHandler, SetStateAction, useState } from 'react';
+import React, { MouseEventHandler, SetStateAction, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import s from './Modal.module.scss';
 import SocialButton from './Button/Button';
+import { setCookie } from 'nookies';
 
 type Toggle = {
   toggle: Function;
   content: Function;
+};
+
+const receiveAuthInfo = (e: any) => {
+  if (e.origin !== 'tropicalt.ca') {
+    return;
+  }
+  const { data } = e;
+  if (data.source === 'oauthWindow') {
+    setCookie(undefined, 'token', data, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
+  }
 };
 
 export const ToggleContent = ({ toggle, content }: Toggle): JSX.Element => {
@@ -34,6 +48,10 @@ export const Modal = ({ children }: Modal): JSX.Element =>
   );
 
 const Toggle = (): JSX.Element => {
+  useEffect(() => {
+    window.addEventListener('message', receiveAuthInfo);
+  }, []);
+
   return (
     <ToggleContent
       toggle={(show: MouseEventHandler): JSX.Element => (
@@ -52,8 +70,6 @@ const Toggle = (): JSX.Element => {
           <SocialButton provider='twitter' />
           <SocialButton provider='google' />
           <SocialButton provider='github' />
-          <h2>Thanks for reaching out</h2>
-          <p>{`I'll get back to you shortly.`}</p>
           <button onClick={hide}>Close</button>
         </Modal>
       )}

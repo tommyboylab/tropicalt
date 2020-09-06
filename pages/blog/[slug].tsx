@@ -83,8 +83,8 @@ const Post = (): JSX.Element => {
               ))}
             </TagList>
             <Body content={article.content} />
-            <Comments />
             <Sidebar data={sidebar} />
+            <Comments />
             <Footer data={data} />
           </main>
         </>

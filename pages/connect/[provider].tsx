@@ -1,6 +1,5 @@
 import React, { useLayoutEffect } from 'react';
 import { useRouter } from 'next/router';
-import { setCookie } from 'nookies';
 import axios from 'redaxios';
 
 const Callback = (): JSX.Element => {
@@ -8,22 +7,22 @@ const Callback = (): JSX.Element => {
   const provider = router.query.provider;
   const accessToken = router.query.access_token;
   const redirectURL = `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
+
   useLayoutEffect(() => {
-    axios
-      .get(redirectURL)
-      .then((res: any) => {
-        setCookie(undefined, 'token', res.data.jwt, {
-          maxAge: 30 * 24 * 60 * 60,
-          path: '/',
+    if (window.opener) {
+      axios
+        .get(redirectURL)
+        .then((res: any) => {
+          window.opener.postMessage(res.data.jwt);
+        })
+        .catch((error: any) => {
+          router.push('/login');
+          console.log(error);
+        })
+        .then(() => {
+          window.close();
         });
-      })
-      .catch((error: any) => {
-        console.log(error);
-        router.push('/login');
-      })
-      .then(() => {
-        router.push('/');
-      });
+    }
   }, []);
   return (
     <div>

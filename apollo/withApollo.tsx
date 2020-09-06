@@ -1,8 +1,7 @@
 import React, { ReactNode } from 'react';
 import App, { AppContext } from 'next/app';
 import Head from 'next/head';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient, NormalizedCacheObject } from '@apollo/client';
+import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/client';
 import { NextPageContext, NextPage } from 'next';
 import createApolloClient from './apolloClient';
 
@@ -124,7 +123,7 @@ export const withApollo = ({ ssr = false } = {}) => (PageComponent: NextPage): R
   }
 
   if (ssr || PageComponent.getInitialProps) {
-    WithApollo.getInitialProps = async (ctx: NextPageContextApp): Promise<object> => {
+    WithApollo.getInitialProps = async (ctx: NextPageContextApp): Promise<Record<string, unknown>> => {
       const inAppContext = Boolean(ctx.ctx);
       const { apolloClient } = initOnContext(ctx);
 

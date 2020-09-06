@@ -1,14 +1,13 @@
 import React from 'react';
-import { parseCookies } from 'nookies';
 import { useForm } from 'react-hook-form';
 import { object, string } from 'yup';
 import moment from 'moment';
 import { useMutation } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import s from '../../../../Contact/Contact.module.scss';
+import s from '../Comments.module.scss';
 
 type CommentForm = {
-  user: { avatar: string; username: string };
+  user: { id: number; avatar: string | undefined; username: string };
   article: { id: string };
   updateState: CallableFunction;
   content: string;
@@ -25,8 +24,7 @@ const createComment = gql`
         id
         content
         user {
-          username
-          email
+          id
         }
         article {
           id
@@ -52,10 +50,6 @@ const commentSchema = object().shape({
 });
 
 const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
-  // const [liked, setLiked] = useState({ user: undefined, liked: false });
-  // const [disliked, setDisliked] = useState({ user: undefined, disliked: false });
-  const userCookie = parseCookies();
-
   const commentCreateDate = moment().toISOString();
 
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
@@ -77,7 +71,7 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
     // Handle Likes and dislikes based on number gathered from endpoint
     await addComment({
       variables: {
-        user: userCookie.id,
+        user: user.id,
         article: article.id,
         content: data.content,
         date: commentCreateDate,
@@ -87,11 +81,11 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
       content: '',
     });
   };
-
+  // ${user.username}'s Avatar
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div>
-        <img style={{ width: '1.5rem', height: '2rem' }} src={user.avatar} alt={`${user.username}'s Avatar`} />
+    <form className={s.commentForm} onSubmit={handleSubmit(onSubmit)}>
+      <img className={s.commentAvatar} src={user.avatar} alt={``} />
+      <div className={s.formInput}>
         <input
           type='text'
           placeholder='Leave a comment'
@@ -101,33 +95,18 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
           minLength={2}
           required={true}
         />
-        {/*<span*/}
-        {/*  onClick={() =>*/}
-        {/*    // @ts-ignore*/}
-        {/*    liked.liked ? setLiked({ user: undefined, liked: false }) : setLiked({ user: userCookie.id, liked: true })*/}
-        {/*  }>*/}
-        {/*  Liked: {liked}*/}
-        {/*</span>{' '}*/}
-        {/*<span*/}
-        {/*  onClick={() =>*/}
-        {/*    disliked.disliked*/}
-        {/*      ? setDisliked({ user: undefined, disliked: false })*/}
-        {/*      : // @ts-ignore*/}
-        {/*        setDisliked({ user: userCookie.id, disliked: true })*/}
-        {/*  }>*/}
-        {/*  Disliked {disliked}*/}
-        {/*</span>*/}
-        {errors.content && <p className={s.error}>{errors.content.message}</p>}
-        <button
-          type='submit'
-          onClick={(event) => {
-            handleSubmit(onSubmit);
-          }}
-          disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
-          Submit
-        </button>
-        {mutationError && <p className={s.submitError}>Error :( Please try again</p>}
       </div>
+      {errors.content && <p className={s.error}>{errors.content.message}</p>}
+      <button
+        className={s.formButton}
+        type='submit'
+        onClick={(event) => {
+          handleSubmit(onSubmit);
+        }}
+        disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
+        Send
+      </button>
+      {mutationError && <p className={s.submitError}>Error :( Please try again</p>}
     </form>
   );
 };

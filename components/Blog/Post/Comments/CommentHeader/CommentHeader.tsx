@@ -1,21 +1,16 @@
 import React from 'react';
-
+import s from '../Comments.module.scss';
 
 type commentHeader = {
-
-  totalComments:number
-}
-const CommentHeader = ({ totalComments }:commentHeader): JSX.Element => {
-
-
+  totalComments: number;
+};
+const CommentHeader = ({ totalComments }: commentHeader): JSX.Element => {
   return (
-    <div>
-      <h3>
-        {totalComments} Comments
-        <button>Sort By:</button>
-      </h3>
+    <div className={s.commentHeader}>
+      <h3>Comments:</h3>
+      <h3>{totalComments} Comments</h3>
     </div>
-  )
-}
+  );
+};
 
-export default CommentHeader
+export default CommentHeader;

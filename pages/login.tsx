@@ -1,5 +1,4 @@
 import React from 'react';
-import { parseCookies } from 'nookies';
 import Modal from '../components/Other/SocialAuth/Modal';
 
 const SignUp = (authorization: any) => {
@@ -12,11 +11,3 @@ const SignUp = (authorization: any) => {
 };
 
 export default SignUp;
-
-SignUp.getInitialProps = (ctx: any) => {
-  const { authorization } = parseCookies(ctx);
-  const { token } = ctx.query;
-  return {
-    authorization: authorization || token,
-  };
-};

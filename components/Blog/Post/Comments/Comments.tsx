@@ -6,10 +6,10 @@ import Comment from './Comment/Comment';
 type Comments = {
   totalComments: number;
   comment: {
-    user: { avatar: string; username: string };
+    user: { id: number; avatar: string; username: string };
     date: string;
-    likes: [{ user: string; comment: string; article: string }];
-    dislikes: [{ user: string; comment: string; article: string }];
+    likes: [{ user: { id: string }; comment: string; article: string }];
+    dislikes: [{ user: { id: string }; comment: string; article: string }];
     content: string;
     parentID?: string;
     article: { id: string };

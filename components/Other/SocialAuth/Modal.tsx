@@ -9,19 +9,6 @@ type Toggle = {
   content: Function;
 };
 
-const receiveAuthInfo = (e: any) => {
-  if (e.origin !== 'tropicalt.ca') {
-    return;
-  }
-  const { data } = e;
-  if (data.source === 'oauthWindow') {
-    setCookie(undefined, 'token', data, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
-  }
-};
-
 export const ToggleContent = ({ toggle, content }: Toggle): JSX.Element => {
   const [isShown, setIsShown] = useState(false);
   const hide = (): SetStateAction<void> => setIsShown(false);
@@ -48,6 +35,20 @@ export const Modal = ({ children }: Modal): JSX.Element =>
   );
 
 const Toggle = (): JSX.Element => {
+  const receiveAuthInfo = (e: any) => {
+    if (e.origin !== 'tropicalt.ca') {
+      console.log('wrong origin', { origin });
+      return;
+    }
+    const { data } = e;
+    if (data.source === 'oauthWindow') {
+      setCookie(undefined, 'token', data, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+    }
+  };
+
   useEffect(() => {
     window.addEventListener('message', receiveAuthInfo);
   }, []);

@@ -104,9 +104,9 @@ const CommentList = ({ article }: any): JSX.Element => {
   const totalCommentLength = nestedCommentLength + parentCommentLength;
   const user = data?.me as UserType;
 
-  const cookies = parseCookies();
-  console.log({ cookies });
-  return (
+  const { token } = parseCookies();
+
+  return token ? (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
       <CommentForm user={user} article={article} updateState={() => {}} content={''} />
@@ -126,6 +126,11 @@ const CommentList = ({ article }: any): JSX.Element => {
         </>
       ))}
     </div>
+  ) : (
+    <p>
+      {' '}
+      Please <a href='https://tropicalt.ca/login'> Login</a>
+    </p>
   );
 };
 

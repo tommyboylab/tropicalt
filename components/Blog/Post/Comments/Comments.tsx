@@ -6,7 +6,8 @@ import Comment from './Comment/Comment';
 type Comments = {
   totalComments: number;
   comment: {
-    user: { id: number; avatar: string; username: string };
+    id: number | undefined;
+    user: { id: string; avatar: string; username: string };
     date: string;
     likes: [{ user: { id: string }; comment: string; article: string }];
     dislikes: [{ user: { id: string }; comment: string; article: string }];
@@ -22,6 +23,7 @@ const Comments = ({ totalComments, comment }: Comments): JSX.Element => {
       <CommentHeader totalComments={totalComments} />
       <CommentForm user={comment.user} article={comment.article} content={''} updateState={() => {}} />
       <Comment
+        comment={comment}
         content={comment.content}
         user={comment.user}
         likes={comment.likes}

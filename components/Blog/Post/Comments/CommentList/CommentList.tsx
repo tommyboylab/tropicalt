@@ -27,7 +27,7 @@ type CommentList = {
       id: number | undefined;
       article: { id: string };
       content: string;
-      user: { id: number; username: string; avatar: string };
+      user: { id: string; username: string; avatar: string };
       likes: [{ user: { id: string } }];
       dislikes: [{ user: { id: string } }];
     }

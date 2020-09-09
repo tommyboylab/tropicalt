@@ -9,7 +9,7 @@ import s from '../Comments.module.scss';
 type CommentForm = {
   comment?: { id: number | undefined };
   user: { id: string; avatar: string | undefined; username: string };
-  article: { id: string };
+  article: string;
   updateState: CallableFunction;
   content: string;
   nested?: boolean;
@@ -63,7 +63,7 @@ const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Eleme
     await addComment({
       variables: {
         userID: user.id,
-        articleID: article.id,
+        articleID: article,
         content: data.content,
         date: commentCreateDate,
         parentID: commentParentID,

@@ -19,7 +19,7 @@ type UserType = {
 type CommentList = {
   id: number | undefined;
   user: { id: string; avatar: string; username: string };
-  article: { id: string };
+  article: string;
   content: string;
   newComment: ConcatArray<never>;
   children: [
@@ -37,13 +37,13 @@ type CommentList = {
 };
 
 const getCommentList = gql`
-  query Comments {
+  query Comments($slug: String) {
     me {
       id
       username
       avatar
     }
-    comments(where: { article: { slug: "for-jack" }, parent_null: true }) {
+    comments(where: { article: { slug: $slug }, parent_null: true }) {
       id
       content
       article {
@@ -87,7 +87,7 @@ const getCommentList = gql`
   }
 `;
 
-const CommentList = (): JSX.Element => {
+const CommentList = ({ article }: any): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
@@ -105,12 +105,12 @@ const CommentList = (): JSX.Element => {
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
+      <CommentForm user={user} article={article} updateState={() => {}} content={''} />
       {comments.map((comment) => (
         <>
           <Comment
             comment={comment}
-            article={comment.article}
+            article={article}
             key={comment.id}
             user={comment.user}
             content={comment.content}
@@ -121,7 +121,6 @@ const CommentList = (): JSX.Element => {
           <NestedComment parent={comment.children} />
         </>
       ))}
-      he-places-youll-go
     </div>
   );
 };

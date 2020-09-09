@@ -12,7 +12,7 @@ type Comment = {
   likes: [{ user: { id: string } }];
   dislikes: [{ user: { id: string } }];
   updateState: CallableFunction;
-  article: { id: string };
+  article: string;
 };
 const Comment = ({ comment, user, content, likes, dislikes, article, nested }: Comment): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);

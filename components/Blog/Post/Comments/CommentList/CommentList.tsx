@@ -102,32 +102,26 @@ const CommentList = (): JSX.Element => {
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
   const user = data?.me as UserType;
-  return typeof window !== 'undefined' ? (
-    document.cookie.split(';').some((item: any) => item.trim().startsWith('token=')) ? (
-      <div className={s.commentList}>
-        <CommentHeader totalComments={totalCommentLength} />
-        <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
-        {comments.map((comment) => (
-          <>
-            <Comment
-              comment={comment}
-              article={comment.article}
-              key={comment.id}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={() => {}}
-            />
-            <NestedComment parent={comment.children} />
-          </>
-        ))}
-      </div>
-    ) : (
-      <p>No Cookie Please Login</p>
-    )
-  ) : (
-    <Load />
+  return (
+    <div className={s.commentList}>
+      <CommentHeader totalComments={totalCommentLength} />
+      <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
+      {comments.map((comment) => (
+        <>
+          <Comment
+            comment={comment}
+            article={comment.article}
+            key={comment.id}
+            user={comment.user}
+            content={comment.content}
+            likes={comment.likes}
+            dislikes={comment.dislikes}
+            updateState={() => {}}
+          />
+          <NestedComment parent={comment.children} />
+        </>
+      ))}
+    </div>
   );
 };
 

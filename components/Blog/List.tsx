@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import Post from '../Home/Recents/Recents';
 import s from './List.module.scss';
+import { parseCookies } from 'nookies';
 type ArticleList = {
   id: string;
   slug: string;
@@ -37,6 +38,8 @@ const ArticleListFragment = gql`
 const Articles = (articles: any): JSX.Element => {
   articles = articles.data?.list as ArticleList[];
 
+  const cookie = parseCookies;
+  console.log('Cookie', cookie);
   return (
     <div className={s.postList}>
       {articles &&

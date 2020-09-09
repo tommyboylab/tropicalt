@@ -5,7 +5,7 @@ import s from '../Comments.module.scss';
 type NestedComment = {
   parent: [
     {
-      id: string;
+      id: number | undefined;
       article: { id: string };
       content: string;
       user: { id: number; username: string; avatar: string };
@@ -33,6 +33,8 @@ const NestedComment = ({ parent }: NestedComment): JSX.Element => {
         parent.map((comment, index) => (
           <>
             <Comment
+              nested
+              comment={comment}
               article={comment.article}
               key={index}
               user={comment.user}

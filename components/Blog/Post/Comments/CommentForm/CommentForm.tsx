@@ -7,18 +7,18 @@ import gql from 'graphql-tag';
 import s from '../Comments.module.scss';
 
 type CommentForm = {
-  user: { id: number; avatar: string | undefined; username: string };
+  comment?: { id: number | undefined };
+  user: { id: string; avatar: string | undefined; username: string };
   article: { id: string };
   updateState: CallableFunction;
   content: string;
+  nested?: boolean;
 };
 
 const createComment = gql`
-  mutation AddComment($articleID: String!, $userID: String!, $content: String!, $date: String!) {
+  mutation AddComment($articleID: ID!, $userID: ID!, $content: String!, $date: DateTime!, $parentID: ID) {
     createComment(
-      input: {
-        data: { article: $articleID, user: $userID, content: $content, date: $date, likes: $likes, dislikes: $dislikes }
-      }
+      input: { data: { article: $articleID, user: $userID, content: $content, date: $date, parent: $parentID } }
     ) {
       comment {
         id
@@ -30,15 +30,8 @@ const createComment = gql`
           id
         }
         date
-        likes {
-          user {
-            id
-          }
-        }
-        dislikes {
-          user {
-            id
-          }
+        parent {
+          id
         }
       }
     }
@@ -49,9 +42,9 @@ const commentSchema = object().shape({
   content: string().min(2, `That's not good enough!`).max(40).required(),
 });
 
-const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
+const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Element => {
   const commentCreateDate = moment().toISOString();
-
+  const commentParentID = nested ? comment?.id : null;
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
 
   const { register, errors, handleSubmit, formState, reset } = useForm<CommentForm>({
@@ -61,20 +54,19 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
   });
 
   const onSubmit = async (data: {
-    user: string;
-    article: string;
+    user: number;
+    article: number;
     content: string;
     date: string;
-    likes: { user: { id: string } };
-    dislikes: { user: { id: string } };
+    parentID: number;
   }): Promise<void> => {
-    // Handle Likes and dislikes based on number gathered from endpoint
     await addComment({
       variables: {
-        user: user.id,
-        article: article.id,
+        userID: user.id,
+        articleID: article.id,
         content: data.content,
         date: commentCreateDate,
+        parentID: commentParentID,
       },
     });
     reset({
@@ -100,13 +92,12 @@ const CommentForm = ({ user, article }: CommentForm): JSX.Element => {
       <button
         className={s.formButton}
         type='submit'
-        onClick={(event) => {
+        onClick={() => {
           handleSubmit(onSubmit);
         }}
         disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
-        Send
+        {mutationError ? `Error :( Please try again` : `Send`}
       </button>
-      {mutationError && <p className={s.submitError}>Error :( Please try again</p>}
     </form>
   );
 };

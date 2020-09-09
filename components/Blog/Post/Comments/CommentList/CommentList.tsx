@@ -10,21 +10,21 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import Err from '../../../../Other/Error/Error';
 
-// type UserType = {
-//   id: number;
-//   username: string;
-//   avatar: string | undefined;
-// };
+type UserType = {
+  id: string;
+  username: string;
+  avatar: string | undefined;
+};
 
 type CommentList = {
-  id: string | undefined;
-  user: { id: number; avatar: string; username: string };
+  id: number | undefined;
+  user: { id: string; avatar: string; username: string };
   article: { id: string };
   content: string;
   newComment: ConcatArray<never>;
   children: [
     {
-      id: string;
+      id: number | undefined;
       article: { id: string };
       content: string;
       user: { id: number; username: string; avatar: string };
@@ -38,12 +38,12 @@ type CommentList = {
 
 const getCommentList = gql`
   query Comments($slug: String) {
-    #    me {
-    #      id
-    #      username
-    #      avatar
-    #    }
-    comments(where: { article: { slug: $slug }, children_null: false }) {
+    me {
+      id
+      username
+      avatar
+    }
+    comments(where: { article: { slug: $slug }, parent_null: true }) {
       id
       content
       article {
@@ -96,19 +96,20 @@ const CommentList = (): JSX.Element => {
   if (error) return <Err />;
 
   const comments = data?.comments as CommentList[];
-  // const user = data?.me as UserType;
+
+  const parentCommentLength = comments.length;
+  let nestedCommentLength = 0;
+  comments.forEach((comment) => (nestedCommentLength += comment.children.length));
+  const totalCommentLength = nestedCommentLength + parentCommentLength;
+  const user = data?.me as UserType;
   return (
     <div className={s.commentList}>
-      <CommentHeader totalComments={comments.length} />
-      <CommentForm
-        user={{ id: 2, avatar: '/static/images/avatar.jpg', username: 'Thomas Fiala' }}
-        article={comments[0].article}
-        updateState={() => {}}
-        content={''}
-      />
+      <CommentHeader totalComments={totalCommentLength} />
+      <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
       {comments.map((comment) => (
         <>
           <Comment
+            comment={comment}
             article={comment.article}
             key={comment.id}
             user={comment.user}

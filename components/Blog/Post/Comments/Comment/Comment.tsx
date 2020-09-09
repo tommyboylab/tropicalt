@@ -5,16 +5,19 @@ import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
 
 type Comment = {
-  user: { id: number; avatar: string; username: string };
+  nested?: boolean;
+  comment: { id: number | undefined };
+  user: { id: string; avatar: string; username: string };
   content: string;
   likes: [{ user: { id: string } }];
   dislikes: [{ user: { id: string } }];
   updateState: CallableFunction;
   article: { id: string };
 };
-const Comment = ({ user, content, likes, dislikes, article }: Comment): JSX.Element => {
+const Comment = ({ comment, user, content, likes, dislikes, article, nested }: Comment): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
+  console.log(openReplyBox);
   // const onSubmit = (e: any) => {
   //   e.preventDefault();
 
@@ -39,8 +42,25 @@ const Comment = ({ user, content, likes, dislikes, article }: Comment): JSX.Elem
       <img src='/static/images/avatar.jpg' className={s.commentAvatar} alt={`${user.username}'s avatar image`} />
       <h3 className={s.commentName}>{user.username}</h3>
       <ReactMarkdown className={s.commentContent}>{content}</ReactMarkdown>
-      <Rating reply={openReply} likes={likes} dislikes={dislikes} />
-      {openReplyBox && <CommentForm user={user} article={article} updateState={() => {}} content={''} />}
+      <Rating
+        comment={comment}
+        user={user}
+        replyIsOpen={openReplyBox}
+        nested={nested}
+        reply={openReply}
+        likes={likes}
+        dislikes={dislikes}
+      />
+      {openReplyBox && (
+        <CommentForm
+          comment={comment}
+          nested={nested}
+          user={user}
+          article={article}
+          updateState={() => {}}
+          content={''}
+        />
+      )}
     </div>
   );
 };

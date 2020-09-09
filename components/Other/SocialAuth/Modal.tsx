@@ -14,23 +14,6 @@ export const ToggleContent = ({ toggle, content }: Toggle): JSX.Element => {
   const hide = (): SetStateAction<void> => setIsShown(false);
   const show = (): SetStateAction<void> => setIsShown(true);
 
-  const receiveAuthInfo = (e: any) => {
-    if (e.origin !== 'https://www.tropicalt.ca') {
-      return;
-    }
-    const { data } = e;
-    setCookie(undefined, 'token', data, {
-      maxAge: 30 * 24 * 60 * 60,
-      path: '/',
-    });
-  };
-
-  useEffect(() => {
-    isShown
-      ? window.addEventListener('message', receiveAuthInfo)
-      : window.removeEventListener('message', receiveAuthInfo);
-  }, []);
-
   return (
     <>
       {toggle(show)}
@@ -52,6 +35,21 @@ export const Modal = ({ children }: Modal): JSX.Element =>
   );
 
 const Toggle = (): JSX.Element => {
+  const receiveAuthInfo = (e: any) => {
+    if (e.origin !== 'https://www.tropicalt.ca') {
+      return;
+    }
+    const { data } = e;
+    setCookie(undefined, 'token', data, {
+      maxAge: 30 * 24 * 60 * 60,
+      path: '/',
+    });
+  };
+
+  useEffect(() => {
+    window.addEventListener('message', receiveAuthInfo);
+  }, []);
+
   return (
     <ToggleContent
       toggle={(show: MouseEventHandler): JSX.Element => (

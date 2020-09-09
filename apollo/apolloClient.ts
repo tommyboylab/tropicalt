@@ -7,6 +7,7 @@ export default function createApolloClient(initialState: any, ctx: any) {
 
   const httpLink = new HttpLink({
     uri: process.env.API,
+    credentials: 'include',
   });
 
   const authLink = setContext((_, { headers }) => {

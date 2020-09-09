@@ -9,7 +9,6 @@ import CommentForm from '../CommentForm/CommentForm';
 import Comment from '../Comment/Comment';
 import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
-import Err from '../../../../Other/Error/Error';
 
 type UserType = {
   id: string;

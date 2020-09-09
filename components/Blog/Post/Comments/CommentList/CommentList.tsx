@@ -102,7 +102,7 @@ const CommentList = (): JSX.Element => {
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
   const user = data?.me as UserType;
-  return (
+  return document.cookie.split(';').some((item: any) => item.trim().startsWith('token=')) ? (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
       <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
@@ -122,6 +122,8 @@ const CommentList = (): JSX.Element => {
         </>
       ))}
     </div>
+  ) : (
+    <p>No Cookie Please Login</p>
   );
 };
 

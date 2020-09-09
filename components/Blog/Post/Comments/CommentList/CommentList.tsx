@@ -1,6 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
+import { parseCookies } from 'nookies';
 import { useRouter } from 'next/router';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
@@ -102,6 +103,9 @@ const CommentList = ({ article }: any): JSX.Element => {
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
   const user = data?.me as UserType;
+
+  const cookies = parseCookies();
+  console.log({ cookies });
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />

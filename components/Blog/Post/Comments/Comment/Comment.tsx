@@ -18,21 +18,6 @@ const Comment = ({ comment, user, content, likes, dislikes, article, nested }: C
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
   console.log(openReplyBox);
-  // const onSubmit = (e: any) => {
-  //   e.preventDefault();
-
-  // const payload = {
-  //   user: user,
-  //   articleID,
-  //   comment: content,
-  // };
-
-  // post request to api enpoint to create a new comment, using payload of form
-  // then reset the state of the comment if sucess setComment=''
-  // then set open reply back
-  // then set refresh function to new data
-  // };
-
   const openReply = () => {
     setOpenReplyBox(!openReplyBox);
   };

@@ -37,13 +37,13 @@ type CommentList = {
 };
 
 const getCommentList = gql`
-  query Comments($slug: String) {
+  query Comments {
     me {
       id
       username
       avatar
     }
-    comments(where: { article: { slug: $slug }, parent_null: true }) {
+    comments(where: { article: { slug: "for-jack" }, parent_null: true }) {
       id
       content
       article {
@@ -121,6 +121,7 @@ const CommentList = (): JSX.Element => {
           <NestedComment parent={comment.children} />
         </>
       ))}
+      he-places-youll-go
     </div>
   );
 };

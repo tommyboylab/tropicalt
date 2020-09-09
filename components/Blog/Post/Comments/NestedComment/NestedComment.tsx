@@ -3,10 +3,10 @@ import Comment from '../Comment/Comment';
 import s from '../Comments.module.scss';
 
 type NestedComment = {
+  article: string;
   parent: [
     {
       id: number | undefined;
-      article: { id: string };
       content: string;
       user: { id: string; username: string; avatar: string };
       likes: [{ user: { id: string } }];
@@ -15,7 +15,7 @@ type NestedComment = {
   ];
 };
 
-const NestedComment = ({ parent }: NestedComment): JSX.Element => {
+const NestedComment = ({ parent, article }: NestedComment): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
   const CommentNumber = parent.length;
 
@@ -35,7 +35,7 @@ const NestedComment = ({ parent }: NestedComment): JSX.Element => {
             <Comment
               nested
               comment={comment}
-              article={comment.article}
+              article={article}
               key={index}
               user={comment.user}
               content={comment.content}

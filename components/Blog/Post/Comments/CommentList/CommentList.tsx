@@ -25,7 +25,7 @@ type CommentList = {
   children: [
     {
       id: number | undefined;
-      article: { id: string };
+      article: string;
       content: string;
       user: { id: string; username: string; avatar: string };
       likes: [{ user: { id: string } }];
@@ -118,7 +118,7 @@ const CommentList = ({ article }: any): JSX.Element => {
             dislikes={comment.dislikes}
             updateState={() => {}}
           />
-          <NestedComment parent={comment.children} />
+          <NestedComment article={article} parent={comment.children} />
         </>
       ))}
     </div>

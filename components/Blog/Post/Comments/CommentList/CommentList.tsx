@@ -97,7 +97,7 @@ const CommentList = ({ article }: any): JSX.Element => {
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   const { data: userData, error: userError, loading: userLoading } = useQuery(getUser);
   if (loading && userLoading && !data && !userData) return <Load />;
-  if (error && userError) return <>{userError ? <Modal /> : <p> Some Other Error</p>}</>;
+  if (error && document !== undefined) return <>{userError ? <Modal /> : <p> Some Other Error</p>}</>;
 
   const comments = data?.comments as CommentList[];
 

@@ -10,12 +10,6 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import Modal from 'components/Other/SocialAuth/Modal';
 
-type UserType = {
-  id: string;
-  username: string;
-  avatar: string | undefined;
-};
-
 type CommentList = {
   id: number | undefined;
   user: { id: string; avatar: string; username: string };

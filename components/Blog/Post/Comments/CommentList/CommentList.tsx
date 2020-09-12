@@ -97,21 +97,8 @@ const CommentList = ({ article }: any): JSX.Element => {
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   const { data: userData, error: userError, loading: userLoading } = useQuery(getUser);
   if (loading && userLoading && !data && !userData) return <Load />;
-  if (error)
-    return (
-      <>
-        {userError ? (
-          <div>
-            <h3>
-              Want to see something secret?
-              <Modal />
-            </h3>
-          </div>
-        ) : (
-          <p> Some Other Error</p>
-        )}
-      </>
-    );
+  if (error && userError) return <>{userError ? <Modal /> : <p> Some Other Error</p>}</>;
+
   const comments = data?.comments as CommentList[];
 
   const parentCommentLength = comments.length;

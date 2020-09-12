@@ -7,7 +7,7 @@ const oauth = (provider: string) => {
 const SocialButton = ({ provider }: any) => {
   return (
     <button onClick={() => oauth(provider)} className={s.link} type='button'>
-      {provider}
+      <img src={`/static/images/social/${provider}.svg`} />
     </button>
   );
 };

@@ -53,17 +53,21 @@ const Toggle = (): JSX.Element => {
   return (
     <ToggleContent
       toggle={(show: MouseEventHandler): JSX.Element => (
-        <button
-          className={s.submit}
-          onClick={(event) => {
-            event.preventDefault();
-            show(event);
-          }}>
-          Social
-        </button>
+        <div className={s.modalContainer}>
+          <h3 className={s.modalHeader}>Would you like to know a secret? </h3>
+          <button
+            className={s.modalToggle}
+            onClick={(event) => {
+              event.preventDefault();
+              show(event);
+            }}>
+            Click Me
+          </button>
+        </div>
       )}
       content={(hide: MouseEventHandler): JSX.Element => (
         <Modal>
+          <h3 className={s.modalHeader}>Choose your weapon:</h3>
           <SocialButton provider='facebook' />
           <SocialButton provider='twitter' />
           <SocialButton provider='google' />

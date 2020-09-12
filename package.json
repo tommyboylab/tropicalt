@@ -26,12 +26,14 @@
 		"next": "^9.5.3",
 		"nookies": "^2.4.0",
 		"react": "^16.13.1",
+		"react-check-auth": "^0.2.0-alpha.2",
 		"react-dom": "^16.13.1",
 		"react-hook-form": "^6.7.2",
 		"react-markdown": "^4.2.2",
 		"react-moment": "^0.9.7",
 		"redaxios": "^0.3.0",
 		"sass": "^1.26.9",
+		"swr": "^0.3.2",
 		"yup": "^0.29.3"
 	},
 	"devDependencies": {

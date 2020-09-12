@@ -7,6 +7,7 @@ import gql from 'graphql-tag';
 import s from '../Comments.module.scss';
 
 type CommentForm = {
+  query: any;
   comment?: { id: number | undefined };
   user: { id: string; avatar: string | undefined; username: string };
   article: string;
@@ -42,7 +43,7 @@ const commentSchema = object().shape({
   content: string().min(2, `That's not good enough!`).max(40).required(),
 });
 
-const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Element => {
+const CommentForm = ({ query, comment, user, article, nested }: CommentForm): JSX.Element => {
   const commentCreateDate = moment().toISOString();
   const commentParentID = nested ? comment?.id : null;
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
@@ -68,6 +69,11 @@ const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Eleme
         date: commentCreateDate,
         parentID: commentParentID,
       },
+      refetchQueries: [
+        {
+          query: query,
+        },
+      ],
     });
     reset({
       content: '',

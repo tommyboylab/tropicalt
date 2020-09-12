@@ -10,6 +10,11 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import Modal from 'components/Other/SocialAuth/Modal';
 
+type UserType = {
+  id: string;
+  username: string;
+  avatar: string | undefined;
+};
 type CommentList = {
   id: number | undefined;
   user: { id: string; avatar: string; username: string };
@@ -92,15 +97,20 @@ const CommentList = ({ article }: any): JSX.Element => {
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   const { data: userData, error: userError, loading: userLoading } = useQuery(getUser);
   if (loading && userLoading && !data && !userData) return <Load />;
-  if (error) return <></>;
-  if (userError)
+  if (error)
     return (
-      <div>
-        <h3>
-          Want to see something secret?
-          <Modal />
-        </h3>
-      </div>
+      <>
+        {userError ? (
+          <div>
+            <h3>
+              Want to see something secret?
+              <Modal />
+            </h3>
+          </div>
+        ) : (
+          <p> Some Other Error</p>
+        )}
+      </>
     );
   const comments = data?.comments as CommentList[];
 
@@ -108,8 +118,8 @@ const CommentList = ({ article }: any): JSX.Element => {
   let nestedCommentLength = 0;
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
-  // const user = data?.me as UserType;
-  const user = { id: '1', avatar: '/static/images/avatar.jpg', username: 'Thomas Fiala' };
+  const user = userData?.me as UserType;
+
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />

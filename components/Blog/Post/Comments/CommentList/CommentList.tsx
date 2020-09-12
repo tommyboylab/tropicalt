@@ -113,7 +113,7 @@ const CommentList = ({ article }: any): JSX.Element => {
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm query={getCommentList} user={user} article={article} updateState={() => {}} content={''} />
+      <CommentForm user={user} article={article} updateState={() => {}} content={''} />
       {comments.map((comment) => (
         <>
           <Comment

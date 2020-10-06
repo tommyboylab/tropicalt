@@ -35,18 +35,13 @@ type CommentList = {
   dislikes: [{ user: { id: string } }];
 };
 
-const getUser = gql`
-  query User {
+const getCommentList = gql`
+  query Comments($slug: String) {
     me {
       id
       username
       avatar
     }
-  }
-`;
-
-const getCommentList = gql`
-  query Comments($slug: String) {
     comments(where: { article: { slug: $slug }, parent_null: true }) {
       id
       content
@@ -95,10 +90,9 @@ const CommentList = ({ article }: any): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
-  const { data: userData, error: userError, loading: userLoading } = useQuery(getUser);
-  if (loading && userLoading && !data && !userData) return <Load />;
+  if (loading && !data) return <Load />;
   if (window.document !== undefined)
-    return userError && error ? (
+    return error ? (
       <>
         <Modal />
       </>
@@ -107,12 +101,12 @@ const CommentList = ({ article }: any): JSX.Element => {
     );
 
   const comments = data?.comments as CommentList[];
+  const user = data?.user as UserType;
 
   const parentCommentLength = comments.length;
   let nestedCommentLength = 0;
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
-  const user = userData?.me as UserType;
 
   return (
     <div className={s.commentList}>

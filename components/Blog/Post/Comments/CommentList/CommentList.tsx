@@ -91,7 +91,13 @@ const CommentList = ({ article }: any): JSX.Element => {
   const slug = router.query.slug;
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   if (loading && !data) return <Load />;
-  if (error) return <Modal />;
+  if (error)
+    return (
+      <>
+        {console.log(error)}
+        <Modal />
+      </>
+    );
 
   const comments = data?.comments as CommentList[];
   const user = data?.user as UserType;

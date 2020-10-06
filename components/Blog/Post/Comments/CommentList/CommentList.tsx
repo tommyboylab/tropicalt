@@ -40,7 +40,6 @@ const getCommentList = gql`
     me {
       id
       username
-      avatar
     }
     comments(where: { article: { slug: $slug }, parent_null: true }) {
       id

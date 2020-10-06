@@ -1,7 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
-import { useRouter } from 'next/router';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
 import CommentForm from '../CommentForm/CommentForm';
@@ -85,9 +84,7 @@ const getCommentList = gql`
   }
 `;
 
-const CommentList = ({ article }: any): JSX.Element => {
-  const router = useRouter();
-  const slug = router.query.slug;
+const CommentList = ({ article, slug }: any): JSX.Element => {
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   if (loading && !data) return <Load />;
   if (error) return <Modal />;

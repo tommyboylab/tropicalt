@@ -8,7 +8,9 @@ const CommentHeader = ({ totalComments }: commentHeader): JSX.Element => {
   return (
     <div className={s.commentHeader}>
       <h3>Comments:</h3>
-      <h3>{totalComments} Comments</h3>
+      <h3>
+        {totalComments} {totalComments > 0 ? 'Comments' : 'Comment'}
+      </h3>
     </div>
   );
 };

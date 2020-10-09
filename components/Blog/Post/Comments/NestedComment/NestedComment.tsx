@@ -26,7 +26,7 @@ const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
     <div className={s.commentNested}>
       {commentNumber > 0 && (
         <p className={s.commentViewMore} onClick={handleChange}>
-          View {commentNumber} {commentNumber > 0 ? 'Comments' : 'Comment'}
+          View {commentNumber} {commentNumber > 1 ? 'Comments' : 'Comment'}
         </p>
       )}
       {openReplies &&

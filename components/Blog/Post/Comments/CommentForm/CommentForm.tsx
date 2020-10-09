@@ -8,9 +8,8 @@ import s from '../Comments.module.scss';
 
 type CommentForm = {
   comment?: { id: number | undefined };
-  user: { id: string; avatar: string | undefined; username: string };
-  article: string;
-  updateState: CallableFunction;
+  user: { id: number; avatar: string; username: string };
+  articleID: number;
   content: string;
   nested?: boolean;
 };
@@ -42,7 +41,7 @@ const commentSchema = object().shape({
   content: string().min(2, `That's not good enough!`).max(40).required(),
 });
 
-const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Element => {
+const CommentForm = ({ comment, user, articleID, nested }: CommentForm): JSX.Element => {
   const commentCreateDate = moment().toISOString();
   const commentParentID = nested ? comment?.id : null;
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
@@ -54,8 +53,8 @@ const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Eleme
   });
 
   const onSubmit = async (data: {
-    user: number;
-    article: number;
+    userID: number;
+    articleID: number;
     content: string;
     date: string;
     parentID: number;
@@ -63,21 +62,20 @@ const CommentForm = ({ comment, user, article, nested }: CommentForm): JSX.Eleme
     await addComment({
       variables: {
         userID: user.id,
-        articleID: article,
+        articleID: articleID,
         content: data.content,
         date: commentCreateDate,
         parentID: commentParentID,
       },
-      refetchQueries: [],
+      refetchQueries: ['getCommentList'],
     });
     reset({
       content: '',
     });
   };
-  // ${user.username}'s Avatar
   return (
     <form className={s.commentForm} onSubmit={handleSubmit(onSubmit)}>
-      <img className={s.commentAvatar} src={user.avatar} alt={``} />
+      <img className={s.commentAvatar} src={user.avatar} alt={`${user.username}'s Avatar`} />
       <div className={s.formInput}>
         <input
           type='text'

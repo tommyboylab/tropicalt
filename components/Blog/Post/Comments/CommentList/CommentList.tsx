@@ -10,28 +10,28 @@ import Load from '../../../../Other/Load/Load';
 import Modal from 'components/Other/SocialAuth/Modal';
 
 type UserType = {
-  id: string;
+  id: number;
   username: string;
-  avatar: string | undefined;
+  avatar: string;
 };
 type CommentList = {
-  id: number | undefined;
-  user: { id: string; avatar: string; username: string };
-  article: string;
+  id: number;
+  user: { id: number; avatar: string; username: string };
+  articleID: number;
   content: string;
   newComment: ConcatArray<never>;
   children: [
     {
-      id: number | undefined;
-      article: string;
+      id: number;
+      articleID: number;
       content: string;
-      user: { id: string; username: string; avatar: string };
-      likes: [{ user: { id: string } }];
-      dislikes: [{ user: { id: string } }];
+      user: { id: number; username: string; avatar: string };
+      likes: [{ user: { id: number } }];
+      dislikes: [{ user: { id: number } }];
     }
   ];
-  likes: [{ user: { id: string } }];
-  dislikes: [{ user: { id: string } }];
+  likes: [{ user: { id: number } }];
+  dislikes: [{ user: { id: number } }];
 };
 
 const getCommentList = gql`
@@ -39,6 +39,7 @@ const getCommentList = gql`
     me {
       id
       username
+      avatar
     }
     comments(where: { article: { slug: $slug }, parent_null: true }) {
       id
@@ -84,15 +85,16 @@ const getCommentList = gql`
   }
 `;
 
-const CommentList = ({ article, slug }: any): JSX.Element => {
+const CommentList = ({ articleID, slug }: any): JSX.Element => {
   const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
   if (loading && !data) return <Load />;
   if (error) return <Modal />;
 
   const comments = data?.comments as CommentList[];
-  const user = data?.user as UserType;
+  const user = data?.me as UserType;
 
   const parentCommentLength = comments.length;
+
   let nestedCommentLength = 0;
   comments.forEach((comment) => (nestedCommentLength += comment.children.length));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
@@ -100,22 +102,24 @@ const CommentList = ({ article, slug }: any): JSX.Element => {
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm user={user} article={article} updateState={() => {}} content={''} />
-      {comments.map((comment) => (
-        <>
-          <Comment
-            comment={comment}
-            article={article}
-            key={comment.id}
-            user={comment.user}
-            content={comment.content}
-            likes={comment.likes}
-            dislikes={comment.dislikes}
-            updateState={() => {}}
-          />
-          <NestedComment article={article} parent={comment.children} />
-        </>
-      ))}
+      <CommentForm user={user} articleID={articleID} content={''} />
+
+      {comments.length === 0 &&
+        comments.map((comment) => (
+          <>
+            <Comment
+              comment={comment}
+              articleID={articleID}
+              key={comment.id}
+              user={comment.user}
+              content={comment.content}
+              likes={comment.likes}
+              dislikes={comment.dislikes}
+              updateState={() => {}}
+            />
+            <NestedComment articleID={articleID} parent={comment.children} />
+          </>
+        ))}
     </div>
   );
 };

@@ -5,15 +5,15 @@ import s from '../../Comments.module.scss';
 
 type Rating = {
   nested?: boolean;
-  comment: { id: number | undefined };
-  user: { id: string };
-  likes: [{ user: { id: string } }];
-  dislikes: [{ user: { id: string } }];
+  comment: { id: number };
+  user: { id: number };
+  likes: [{ user: { id: number } }];
+  dislikes: [{ user: { id: number } }];
   reply: any;
   replyIsOpen: boolean;
 };
 
-type ArrayType = ConcatArray<{ user: { id: string } }>;
+type ArrayType = ConcatArray<{ user: { id: number } }>;
 
 const updateCommentLikes = gql`
   mutation updateCommentLikes(
@@ -72,7 +72,7 @@ const Rating = ({ comment, user, likes, dislikes, reply, replyIsOpen, nested }: 
       ? dislikes.filter((dislike) => dislike.user?.id !== user.id)
       : dislikes;
   };
-  const updateLike = async (commentID: number | undefined): Promise<void> => {
+  const updateLike = async (commentID: number): Promise<void> => {
     await updateCommentLike({
       variables: {
         commentID: commentID,
@@ -82,7 +82,7 @@ const Rating = ({ comment, user, likes, dislikes, reply, replyIsOpen, nested }: 
     });
   };
 
-  const updateDislike = async (commentID: number | undefined): Promise<void> => {
+  const updateDislike = async (commentID: number): Promise<void> => {
     await updateCommentDislike({
       variables: {
         commentID: commentID,

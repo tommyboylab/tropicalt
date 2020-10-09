@@ -6,15 +6,15 @@ import s from '../Comments.module.scss';
 
 type Comment = {
   nested?: boolean;
-  comment: { id: number | undefined };
-  user: { id: string; avatar: string; username: string };
+  comment: { id: number };
+  user: { id: number; avatar: string; username: string };
   content: string;
-  likes: [{ user: { id: string } }];
-  dislikes: [{ user: { id: string } }];
+  likes: [{ user: { id: number } }];
+  dislikes: [{ user: { id: number } }];
   updateState: CallableFunction;
-  article: string;
+  articleID: number;
 };
-const Comment = ({ comment, user, content, likes, dislikes, article, nested }: Comment): JSX.Element => {
+const Comment = ({ comment, user, content, likes, dislikes, articleID, nested }: Comment): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
   console.log(openReplyBox);
@@ -24,7 +24,7 @@ const Comment = ({ comment, user, content, likes, dislikes, article, nested }: C
 
   return (
     <div className={s.comment}>
-      <img src='/static/images/avatar.jpg' className={s.commentAvatar} alt={`${user.username}'s avatar image`} />
+      <img src={user.avatar} className={s.commentAvatar} alt={`${user.username}'s avatar image`} />
       <h3 className={s.commentName}>{user.username}</h3>
       <ReactMarkdown className={s.commentContent}>{content}</ReactMarkdown>
       <Rating
@@ -36,16 +36,7 @@ const Comment = ({ comment, user, content, likes, dislikes, article, nested }: C
         likes={likes}
         dislikes={dislikes}
       />
-      {openReplyBox && (
-        <CommentForm
-          comment={comment}
-          nested={nested}
-          user={user}
-          article={article}
-          updateState={() => {}}
-          content={''}
-        />
-      )}
+      {openReplyBox && <CommentForm comment={comment} nested={nested} user={user} articleID={articleID} content={''} />}
     </div>
   );
 };

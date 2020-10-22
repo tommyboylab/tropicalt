@@ -90,6 +90,10 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
   if (loading && !data) return <Load />;
   if (error) return <Modal />;
 
+  const updateState = () => {
+    return useQuery(getCommentList, { variables: { slug } });
+  };
+
   const comments = data?.comments as CommentList[];
   const user = data?.me as UserType;
 
@@ -108,6 +112,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
         comments.map((comment) => (
           <>
             <Comment
+              id={comment.id}
               comment={comment}
               articleID={articleID}
               key={comment.id}
@@ -115,7 +120,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
-              updateState={() => {}}
+              updateState={updateState}
             />
             <NestedComment articleID={articleID} parent={comment.children} />
           </>

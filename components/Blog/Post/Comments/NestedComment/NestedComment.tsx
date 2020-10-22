@@ -34,6 +34,7 @@ const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
         parent.map((comment, index) => (
           <>
             <Comment
+              id={comment.id}
               nested
               comment={comment}
               articleID={articleID}
@@ -42,7 +43,7 @@ const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
-              updateState={() => {}}
+              updateState={useState}
             />
           </>
         ))}

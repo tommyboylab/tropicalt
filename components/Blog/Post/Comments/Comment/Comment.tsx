@@ -5,6 +5,7 @@ import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
 
 type Comment = {
+  id: number;
   nested?: boolean;
   comment: { id: number };
   user: { id: number; avatar: string; username: string };

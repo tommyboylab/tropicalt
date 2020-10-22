@@ -1,50 +1,59 @@
+@use '../../../Other/Styles/Styles';
+
 .commentList {
   grid-area: CommentList;
+  display: flex;
+  flex-direction: column;
+  background: rgb(20, 20, 25);
   max-height: 40rem;
   margin-right: .5em;
   margin-bottom: 1em;
   border-radius: .5em;
-  display: flex;
-  flex-direction: column;
-  background: #141419;
   box-shadow: black 0 .25em 1em;
 }
 
 .commentHeader {
-  border-top-right-radius: .5em;
-  border-top-left-radius: .5em;
-  background: #0FA;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  background: Styles.$PRIMARY_COLOR;
+  border-top-right-radius: .5em;
+  border-top-left-radius: .5em;
 
   h3 {
     margin: 0 1em;
   }
 }
 
+.commentAvatar {
+  object-fit: cover;
+  margin: .25em 0 .25em .25em;
+  border-radius: 50%;
+}
+
 .commentForm {
-  min-width: 0;
   display: flex;
+  min-width: 0;
   margin-bottom: .25em;
 
   .formInput {
     margin: auto 0;
 
     input {
+      color: Styles.$PRIMARY_COLOR;
       background: transparent;
-      border: none;
+      width: 95%;
       margin-left: .25em;
-      color:#0FA;
+      border: none;
     }
   }
 
   .formButton {
     cursor: pointer;
-    border: none;
-    color: #0FA;
-    background: #BE0AFF;
+    color: Styles.$PRIMARY_COLOR;
+    background: Styles.$SECONDARY_COLOR;
     padding: 0 .25em;
+    border: none;
   }
 
   .formInput,
@@ -59,17 +68,11 @@
   }
 }
 
-.commentAvatar {
-  margin: .25em 0 .25em .25em;
-  object-fit: cover;
-  border-radius: 50%;
-}
-
 .comment {
+  color: Styles.$SECONDARY_COLOR;
   background: rgb(30, 30, 40);
-  color: #BE0AFF;
-  border-radius: .75em;
   padding-bottom: .25em;
+  border-radius: .75em;
 
   .commentAvatar {
     float: left;
@@ -83,11 +86,11 @@
   }
 
   .commentContent {
+    color: gainsboro;
+    background: Styles.$QUATERNARY_COLOR;
+    margin: 0 .5em 0 2em;
     border-top-right-radius: .25em;
     border-bottom-left-radius: .25em;
-    background: rgba(255, 200, 90, .75);
-    color: gainsboro;
-    margin: 0 .5em 0 2em;
   }
 
   .commentForm {
@@ -98,17 +101,38 @@
     }
   }
 
+  .commentNested {
+    border-radius: .25em;
+
+    .commentAvatar {
+      width: 2em;
+      height: 2em;
+    }
+
+    .comment {
+      color: Styles.$PRIMARY_COLOR;
+      background: Styles.$SECONDARY_COLOR;
+      margin-bottom: .5em;
+      margin-left: 2em;
+    }
+  }
+
   .commentRating {
-    color: #BE0AFF;
-    border-bottom-left-radius: .25em;
-    border-bottom-right-radius: .25em;
-    background: grey;
     display: flex;
     flex-direction: row;
-    margin-left: auto;
+    color: Styles.$SECONDARY_COLOR;
+    background: grey;
+    width: max-content;
     margin-right: .5em;
     margin-bottom: .5em;
-    width: max-content;
+    margin-left: auto;
+
+    border-bottom-right-radius: .25em;
+    border-bottom-left-radius: .25em;
+
+    .commentReply {
+      margin: auto .5em auto 1em;
+    }
 
     .commentLikeImg,
     .commentDislikeImg,
@@ -124,7 +148,7 @@
     }
 
     .commentLikeImg:hover {
-      fill: #0FA;
+      fill: Styles.$PRIMARY_COLOR;
     }
 
     .commentDislikeImg:hover {
@@ -132,55 +156,34 @@
     }
 
     .commentReply:hover {
-      fill: rgba(255, 200, 90, .75);
+      fill: Styles.$QUATERNARY_COLOR;
     }
 
     .commentLike {
+      color: Styles.$PRIMARY_COLOR;
       margin-right: 1em;
-      color: #0FA;
     }
 
     .commentDislike {
-      margin-right:.5em;
       color: red;
+      margin-right: .5em;
     }
-  }
-
-  .commentReply {
-    margin: auto .5em auto 1em;
   }
 }
 
 .commentViewMore {
-  text-align: center;
   cursor: pointer;
-  background: #141419;
-  color: rgba(255, 200, 90, .75);
+  text-align: center;
+
+  color: Styles.$QUATERNARY_COLOR;
+  background: rgb(20, 20, 25);
 }
 
-.commentNested {
-  border-bottom-right-radius: .25em;
-  border-bottom-left-radius: .25em;
-  border-top-right-radius: .25em;
-  border-top-left-radius: .25em;
-
-  .commentAvatar {
-    width: 2em;
-    height: 2em;
-  }
-
-  .comment {
-    background: #BE0AFF;
-    color: #0FA;
-    margin-left: 2em;
-    margin-bottom: .5em;
-  }
-}
-
-.submitError{
-  flex-wrap: wrap;
+.submitError {
   flex-basis: 100%;
-  color:red;
+  flex-wrap: wrap;
+
+  color: red;
 }
 
 @media ( max-width: 1100px ) {

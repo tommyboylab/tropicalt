@@ -1,14 +1,14 @@
 @use '../../Other/Styles/Styles';
 
-
-.modalContainer{
+.modalContainer {
   border: 1px solid Styles.$PRIMARY_COLOR;
   border-radius: .25em;
   text-align: center;
   margin-bottom: 1em;
-  padding:2em;
-  margin-right:.5em;
+  padding: 2em;
+  margin-right: .5em;
 }
+
 .modalHeader {
   color: Styles.$SECONDARY_COLOR;
   margin-bottom: .5em;
@@ -16,9 +16,9 @@
 
 .modalToggle {
   background: Styles.$QUATERNARY_COLOR_MUTED;
-  border:0;
+  border: 0;
   border-radius: .25em;
-  padding:.25em;
+  padding: .25em;
   transition: background 250ms ease-in-out;
 }
 
@@ -64,13 +64,14 @@
   cursor: pointer;
   color: Styles.$PRIMARY_COLOR;
   background-color: Styles.$QUATERNARY_COLOR_MUTED;
-  padding:.5em;
+  padding: .5em;
   margin: .25em;
   border: none;
   border-radius: .75em;
+
   > img {
-    width:1em;
-    margin-top:.2em;
+    width: 1em;
+    margin-top: .2em;
   }
 }
 

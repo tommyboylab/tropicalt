@@ -92,8 +92,6 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
     notifyOnNetworkStatusChange: true,
   });
 
-  console.log('ArticleID', articleID);
-
   if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
   if (error) return <Modal />;
 

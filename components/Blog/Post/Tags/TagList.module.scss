@@ -1,0 +1,20 @@
+@use '../../../Other/Styles/Styles';
+
+.tagList {
+  grid-area: PostTags;
+  color: Styles.$PRIMARY_COLOR;
+  background-color: Styles.$SECONDARY_COLOR;
+  // weird margin to line up with Image :/
+  margin-right: .53rem;
+  margin-left: .5em;
+  border-right: 2px solid Styles.$PRIMARY_COLOR;
+  border-bottom: 2px solid Styles.$PRIMARY_COLOR;
+  border-bottom-right-radius: .5em;
+  list-style: none;
+  padding-inline-start: 2vw;
+}
+
+.tagList li {
+  float: left;
+  margin-right: .5em;
+}

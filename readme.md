@@ -1,0 +1,1 @@
+scp /Users/thomas/Documents/Github/tropicalt/.next.zip touchablet@tropicalt:/var/www/tropicalt

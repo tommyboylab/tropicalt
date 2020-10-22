@@ -87,8 +87,9 @@
 
   .commentContent {
     color: gainsboro;
-    background: Styles.$QUATERNARY_COLOR;
+    background: Styles.$QUATERNARY_COLOR_MUTED;
     margin: 0 .5em 0 2em;
+    padding-right: .25em;
     border-top-right-radius: .25em;
     border-bottom-left-radius: .25em;
   }

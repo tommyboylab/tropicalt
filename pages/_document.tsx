@@ -1,8 +1,8 @@
 import React from 'react';
 import Document, { Head, Main, NextScript } from 'next/document';
-
+import { setCookie } from 'nookies';
 const globalStyle = {
-	__html: `
+  __html: `
   *,
   *::before,
   *::after {
@@ -24,6 +24,7 @@ const globalStyle = {
     font-family: 'Didact Gothic';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url(/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot'); /* IE9 Compat Modes */
     src: local('Didact Gothic Regular'), local('DidactGothic-Regular'),
        url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -38,6 +39,7 @@ const globalStyle = {
     font-family: 'Raleway';
     font-style: normal;
     font-weight: 400;
+    font-display: swap;
     src: url('/static/fonts/Raleway/raleway-v14-latin-regular.eot'); /* IE9 Compat Modes */
     src: local('Raleway'), local('Raleway-Regular'),
        url('/static/fonts/Raleway/raleway-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
@@ -45,20 +47,6 @@ const globalStyle = {
        url('/static/fonts/Raleway/raleway-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
        url('/static/fonts/Raleway/raleway-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
        url('/static/fonts/Raleway/raleway-v14-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
-  }
-  
-  /* flamenco-regular - latin */
-  @font-face {
-    font-family: 'Flamenco';
-    font-style: normal;
-    font-weight: 400;
-    src: url('/static/fonts/flamenco-v10-latin-regular.eot'); /* IE9 Compat Modes */
-    src: local('Flamenco Regular'), local('Flamenco-Regular'),
-       url('/static/fonts/Flamenco/flamenco-v10-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('/static/fonts/Flamenco/flamenco-v10-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
-       url('/static/fonts/Flamenco/flamenco-v10-latin-regular.woff') format('woff'), /* Modern Browsers */
-       url('/static/fonts/Flamenco/flamenco-v10-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
-       url('/static/fonts/Flamenco/flamenco-v10-latin-regular.svg#Flamenco') format('svg'); /* Legacy iOS */
   }
   
   ::selection {
@@ -105,18 +93,29 @@ const globalStyle = {
 };
 
 export default class TropicalTStyle extends Document {
-	render(): JSX.Element {
-		return (
-			<html>
-				<Head>
-					<meta name='viewport' content='width=device-width, initial-scale=1' />
-					<meta charSet='utf-8' />
-					<style dangerouslySetInnerHTML={globalStyle} />
-					<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css' />
-				</Head>
-				<Main />
-				<NextScript />
-			</html>
-		);
-	}
+  static async getInitialProps(ctx: any) {
+    const initialProps = await Document.getInitialProps(ctx);
+    if (ctx.query.token) {
+      setCookie(ctx, 'authorization', ctx.query.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      });
+    }
+
+    return { ...initialProps };
+  }
+
+  render(): JSX.Element {
+    return (
+      <html lang='en'>
+        <Head>
+          <meta name='viewport' content='width=device-width, initial-scale=1' />
+          <meta charSet='utf-8' />
+          <style dangerouslySetInnerHTML={globalStyle} />
+        </Head>
+        <Main />
+        <NextScript />
+      </html>
+    );
+  }
 }

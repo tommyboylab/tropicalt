@@ -1,40 +1,11 @@
 import React from 'react';
-import App from 'next/app';
-import { ApolloProvider as ApolloHooksProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { createHttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
-import { ApolloLink } from 'apollo-link';
-import fetch from 'isomorphic-unfetch';
+import { ApolloProvider } from '@apollo/client';
+import { withApollo } from '../apollo/withApollo';
 
-const apollo = new ApolloClient({
-	link: ApolloLink.from([
-		onError(({ graphQLErrors, networkError }) => {
-			if (graphQLErrors)
-				graphQLErrors.map(({ message, locations, path }) =>
-					console.log(`Whoa there! [GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`)
-				);
-			if (networkError) console.log(`Oh No! [Network error]: ${networkError}`, networkError);
-		}),
-		createHttpLink({
-			uri: process.env.API,
-			fetch: fetch,
-		}),
-	]),
-	cache: new InMemoryCache(),
-});
+const TropicalT = ({ Component, pageProps, apollo, router }: any) => (
+  <ApolloProvider client={apollo}>
+    <Component {...pageProps} router={router} />
+  </ApolloProvider>
+);
 
-class TropicalT extends App {
-	render(): JSX.Element {
-		const { Component, pageProps, router } = this.props;
-
-		return (
-			<ApolloHooksProvider client={apollo}>
-				<Component {...pageProps} router={router} />
-			</ApolloHooksProvider>
-		);
-	}
-}
-
-export default TropicalT;
+export default withApollo({ ssr: true })(TropicalT);

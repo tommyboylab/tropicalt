@@ -3,6 +3,7 @@
   grid-template-areas: 'PostImg PostSidebar'
     'PostTags PostSidebar'
     'PostText PostSidebar'
+    'PostText CommentList'
     'Footer Footer';
   grid-template-columns: 3fr 1.25fr;
   grid-column-gap: 1em;
@@ -14,6 +15,7 @@
     grid-template-areas: 'PostImg'
       'PostTags'
       'PostText'
+      'CommentList'
       'PostSidebar'
       'Footer';
     grid-template-columns: 1fr;

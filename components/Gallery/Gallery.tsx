@@ -2,73 +2,66 @@ import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './Gallery.module.scss';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
-import Load from '../Other/Load/Load';
-import Err from '../Other/Error/Error';
 
 type Albums = {
-	id: string;
-	slug: string;
-	cover: { img: { url: string }; placeholder: { url: string } };
-	title: string;
-	date: string;
-	user: { username: string };
-	location: string;
+  id: string;
+  slug: string;
+  cover: { img: { id: string; url: string; hash: string } };
+  title: string;
+  date: string;
+  user: { username: string };
+  location: string;
 };
 
-const getAlbum = gql`
-	query getAlbums {
-		albums(sort: "date:desc", where: { published: true }) {
-			id
-			slug
-			title
-			cover {
-				img {
-					id
-					url
-				}
-				placeholder {
-					id
-					url
-				}
-			}
-			date
-			location
-			user {
-				username
-			}
-		}
-	}
+const AlbumFragment = gql`
+  fragment AlbumFragment on Query {
+    albums(sort: "date:desc", where: { published: true }) {
+      id
+      slug
+      title
+      cover {
+        img {
+          id
+          url
+          hash
+        }
+      }
+      date
+      location
+      user {
+        username
+      }
+    }
+  }
 `;
 
-const Albums = (): JSX.Element => {
-	const { data, error, loading } = useQuery(getAlbum);
+const Albums = (albums: any): JSX.Element => {
+  albums = albums.data?.albums as Albums[];
 
-	if (loading && !data) return <Load />;
-	if (error) return <Err />;
-
-	const albums = data?.albums as Albums[];
-
-	return (
-		<div className={s.albumList}>
-			{albums.map((album) => (
-				<Recents
-					key={album.id}
-					type='albums'
-					id={album.id}
-					slug={album.slug}
-					cover={album.cover.placeholder.url}
-					img={album.cover.img.url}
-					title={album.title}
-					date={album.date}
-					name={album.user.username}
-					excerpt={`Location: ${album.location}`}
-				/>
-			))}
-		</div>
-	);
+  return (
+    <div className={s.albumList}>
+      {albums.map((album: Albums) => (
+        <Recents
+          key={album.id}
+          type='albums'
+          id={album.id}
+          slug={album.slug}
+          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
+          img={album.cover.img.url}
+          title={album.title}
+          date={album.date}
+          name={album.user.username}
+          excerpt={`Location: ${album.location}`}
+        />
+      ))}
+    </div>
+  );
 };
 
 Albums.displayName = 'Album Gallery';
+
+Albums.fragments = {
+  AlbumFragment: AlbumFragment,
+};
 
 export default Albums;

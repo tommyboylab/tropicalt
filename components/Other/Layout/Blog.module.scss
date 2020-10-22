@@ -1,3 +1,5 @@
+@use '../Styles/Styles.scss';
+
 .layout {
   display: grid;
   grid-template-areas: 'PostHeader PostSidebar'
@@ -6,6 +8,30 @@
     'Footer Footer';
   grid-template-columns: 3.5fr 1fr;
   grid-template-rows: auto 2fr auto;
+}
+
+.postControls {
+  grid-area: PostControls;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  max-height: 6em;
+  margin-top: auto;
+}
+
+.postControls button {
+  color: Styles.$SECONDARY_COLOR;
+  background-color: Styles.$BUTTON_COLOR;
+  width: 6em;
+  height: 3em;
+  margin: .5em;
+  border: none;
+  border-radius: .25em;
+  transition: opacity 500ms ease-in-out;
+}
+
+.postControls button:disabled {
+  opacity: .5;
 }
 
 @media ( max-width: 1000px ) {

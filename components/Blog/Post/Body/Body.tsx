@@ -3,12 +3,12 @@ import ReactMarkdown from 'react-markdown';
 import s from './Body.module.scss';
 
 type Content = {
-	content: string;
+  content: string;
 };
 const Body = (Content: Content): JSX.Element => (
-	<div className={s.postText}>
-		<ReactMarkdown source={Content.content} />
-	</div>
+  <div className={s.postText}>
+    <ReactMarkdown source={Content.content} />
+  </div>
 );
 
 export default Body;

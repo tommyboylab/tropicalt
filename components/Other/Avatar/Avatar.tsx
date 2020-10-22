@@ -1,48 +1,46 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
 import Img from '../Img/Img';
-import Load from '../../Other/Load/Load';
-import Err from '../../Other/Error/Error';
 import s from './Avatar.module.scss';
 
-const getAvatar = gql`
-	query getAvatar {
-		avatar(id: "1") {
-			id
-			avatar {
-				img {
-					id
-					url
-				}
-				placeholder {
-					id
-					url
-				}
-			}
-			alt
-		}
-	}
+type Avatar = {
+  id: number;
+  avatar: { img: { id: string; url: string; hash: string } };
+};
+
+const AvatarFragment = gql`
+  fragment AvatarFragment on Avatar {
+    id
+    avatar {
+      img {
+        id
+        url
+        hash
+      }
+    }
+    alt
+  }
 `;
 
-const Avatar = (): JSX.Element => {
-	const { data, error, loading } = useQuery(getAvatar);
+const Avatar = (avatar: any): JSX.Element => {
+  avatar = avatar?.data?.avatar as Avatar;
 
-	if (loading && !data) return <Load />;
-	if (error) return <Err />;
-
-	return (
-		<div key={data.avatar.id} className={s.avatar}>
-			<Img
-				class={s.avatar}
-				url={data.avatar.avatar.img.url}
-				placeholder={data.avatar.avatar.placeholder.url}
-				alt={`Image for ${data.avatar.alt}`}
-			/>
-		</div>
-	);
+  return (
+    <div key={avatar.id} className={s.avatar}>
+      <Img
+        class={s.avatar}
+        url={avatar.img.url}
+        placeholder={`/uploads/${avatar.img.hash}-thumb.svg`}
+        alt={`Image for ${avatar.alt}`}
+      />
+    </div>
+  );
 };
 
 Avatar.displayName = 'Avatar';
+
+Avatar.fragments = {
+  AvatarFragment: AvatarFragment,
+};
 
 export default Avatar;

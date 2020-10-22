@@ -40,6 +40,7 @@ const Toggle = (): JSX.Element => {
       return;
     }
     const { data } = e;
+    
     setCookie(undefined, 'token', data, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',

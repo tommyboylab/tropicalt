@@ -1,0 +1,24 @@
+name: TropicalT - Prod Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: TropicalT - Prod Deployment
+      uses: appleboy/ssh-action@v0.1.4
+      with:
+        host: ${{secrets.SSH_HOST}}
+        username: ${{secrets.SSH_USERNAME}}
+        password: ${{secrets.SSH_PASSWORD}}
+     script: |
+       cd /var/www/tropicalt/
+       git pull
+       npm install
+       npm run build
+       pm2 restart tropicalt

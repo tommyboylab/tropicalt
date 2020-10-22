@@ -3,9 +3,14 @@
 .postText {
   grid-area: PostText;
   font-family: Styles.$PRIMARY_FONT;
+  background-color: rgb(20, 20, 25);
+  box-shadow: black 0 .25em 1em;
   color: Styles.$FONT_COLOR;
   margin: 0 .5em;
-  padding: 1em 2vw 1vw 1.5vw;
+  margin-bottom: 1em;
+  border-bottom-right-radius: .5em;
+  border-bottom-left-radius: .5em;
+  padding: 1em 2vw .5vw 1.5vw;
 }
 
 .postText h1 {

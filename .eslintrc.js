@@ -1,23 +1,18 @@
 module.exports = {
   root: true,
   env: {
-    "browser": true,
-    "node": true,
-    "es6": true,
+    browser: true,
+    node: true,
+    es6: true,
   },
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaVersion: 2017,
     ecmaFeatures: {
-      jsx: true
-    }
+      jsx: true,
+    },
   },
-  plugins: [
-    '@typescript-eslint',
-    'react',
-    'react-hooks',
-    'react-perf'
-  ],
+  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'react-perf'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/eslint-recommended',
@@ -26,12 +21,12 @@ module.exports = {
     'plugin:react-perf/recommended',
     'prettier',
     'prettier/@typescript-eslint',
-      'prettier',
-      'prettier/react'
+    'prettier',
+    'prettier/react',
   ],
   overrides: [
     {
-      files: "tests/**",
+      files: 'tests/**',
       rules: {
         'no-template-curly-in-string': 1,
         'react-hooks/rules-of-hooks': 'error',

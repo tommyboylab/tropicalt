@@ -1,6 +1,6 @@
 import React from 'react';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
 import CommentForm from '../CommentForm/CommentForm';

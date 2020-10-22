@@ -4,7 +4,7 @@
   grid-area: PostImg;
   position: relative;
   line-height: 0;
-  margin: 3.25em 1rem 0 .5em;
+  margin: 3.25em 1rem auto .5em;
   border: 2px solid Styles.$SECONDARY_COLOR;
   border-top-right-radius: .75rem;
   border-top-left-radius: .75rem;
@@ -16,7 +16,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  margin: 1em .5rem 0 .5em;
+  margin: 1em .5rem auto .5em;
   border: 2px solid Styles.$PRIMARY_COLOR;
   border-bottom: none;
 }

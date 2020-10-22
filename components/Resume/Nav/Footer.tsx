@@ -1,17 +1,33 @@
 import React from 'react';
 import s from '../Resume.module.scss';
+import gql from 'graphql-tag';
 
-type Footer = {
-	email: string;
+type Email = {
+  email: string;
 };
 
-const Footer = (footer: Footer): JSX.Element => (
-	<div className={s.contact}>
-		<p>
-			Contact Information:
-			<a href={`mailto:${footer.email}`}>Email</a>
-		</p>
-	</div>
-);
+const ResumeEmailFragment = gql`
+  fragment ResumeEmailFragment on Resume {
+    email
+  }
+`;
 
-export default Footer;
+const Email = (email: any): JSX.Element => {
+  email = email.data?.resume as Email;
+  return (
+    <div className={s.contact}>
+      <p>
+        Contact Information:
+        <a href={`mailto:${email.email}`}>Email</a>
+      </p>
+    </div>
+  );
+};
+
+Email.displayName = 'Footer';
+
+Email.fragments = {
+  ResumeEmailFragment: ResumeEmailFragment,
+};
+
+export default Email;

@@ -23,5 +23,8 @@ export default function createApolloClient(initialState: any, ctx: any) {
     ssrMode: Boolean(ctx),
     link: authLink.concat(httpLink),
     cache: new InMemoryCache().restore(initialState),
+    defaultOptions: {
+      mutate: { errorPolicy: 'ignore' },
+    },
   });
 }

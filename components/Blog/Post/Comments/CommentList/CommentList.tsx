@@ -87,12 +87,12 @@ const getCommentList = gql`
 `;
 
 const CommentList = ({ articleID, slug }: any): JSX.Element => {
-  const { data, error, loading, refetch } = useQuery(getCommentList, {
+  const { data, error, loading, refetch, networkStatus } = useQuery(getCommentList, {
     variables: { slug },
     notifyOnNetworkStatusChange: true,
   });
 
-  if ((loading && !data) || NetworkStatus.refetch) return <Load />;
+  if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
   if (error) return <Modal />;
 
   const comments = data?.comments as CommentList[];

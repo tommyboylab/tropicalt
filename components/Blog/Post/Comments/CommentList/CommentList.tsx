@@ -107,7 +107,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm user={user} articleID={articleID} content={''} />
+      <CommentForm updateState={refetch} user={user} articleID={articleID} content={''} />
 
       {comments.length > 0 &&
         comments.map((comment) => (

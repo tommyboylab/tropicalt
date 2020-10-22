@@ -84,7 +84,7 @@ const Post = (): JSX.Element => {
             </TagList>
             <Body content={article.content} />
             <Sidebar data={sidebar} />
-            <Comments slug={slug} article={article.id} />
+            <Comments slug={slug} articleID={article.id} />
             <Footer data={data} />
           </main>
         </>

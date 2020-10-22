@@ -8,6 +8,7 @@ import Comment from '../Comment/Comment';
 import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import Modal from 'components/Other/SocialAuth/Modal';
+import { NetworkStatus } from '@apollo/client';
 
 type UserType = {
   id: number;
@@ -86,13 +87,13 @@ const getCommentList = gql`
 `;
 
 const CommentList = ({ articleID, slug }: any): JSX.Element => {
-  const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
-  if (loading && !data) return <Load />;
-  if (error) return <Modal />;
+  const { data, error, loading, refetch } = useQuery(getCommentList, {
+    variables: { slug },
+    notifyOnNetworkStatusChange: true,
+  });
 
-  const updateState = () => {
-    return useQuery(getCommentList, { variables: { slug } });
-  };
+  if ((loading && !data) || NetworkStatus.refetch) return <Load />;
+  if (error) return <Modal />;
 
   const comments = data?.comments as CommentList[];
   const user = data?.me as UserType;
@@ -120,7 +121,6 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
-              updateState={updateState}
             />
             <NestedComment articleID={articleID} parent={comment.children} />
           </>

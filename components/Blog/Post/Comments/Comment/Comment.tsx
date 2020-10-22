@@ -12,7 +12,6 @@ type Comment = {
   content: string;
   likes: [{ user: { id: number } }];
   dislikes: [{ user: { id: number } }];
-  updateState: CallableFunction;
   articleID: number;
 };
 const Comment = ({ comment, user, content, likes, dislikes, articleID, nested }: Comment): JSX.Element => {

@@ -43,7 +43,6 @@ const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
-              updateState={useState}
             />
           </>
         ))}

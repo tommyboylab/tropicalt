@@ -121,8 +121,9 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
+              updateState={refetch}
             />
-            <NestedComment articleID={articleID} parent={comment.children} />
+            <NestedComment articleID={articleID} parent={comment.children} updateState={refetch} />
           </>
         ))}
     </div>

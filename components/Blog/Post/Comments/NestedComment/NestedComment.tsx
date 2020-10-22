@@ -13,9 +13,10 @@ type NestedComment = {
       dislikes: [{ user: { id: number } }];
     }
   ];
+  updateState: CallableFunction;
 };
 
-const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
+const NestedComment = ({ parent, articleID, updateState }: NestedComment): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
   const commentNumber = parent.length;
 
@@ -43,6 +44,7 @@ const NestedComment = ({ parent, articleID }: NestedComment): JSX.Element => {
               content={comment.content}
               likes={comment.likes}
               dislikes={comment.dislikes}
+              updateState={updateState}
             />
           </>
         ))}

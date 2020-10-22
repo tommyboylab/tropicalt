@@ -13,8 +13,9 @@ type Comment = {
   likes: [{ user: { id: number } }];
   dislikes: [{ user: { id: number } }];
   articleID: number;
+  updateState: CallableFunction;
 };
-const Comment = ({ comment, user, content, likes, dislikes, articleID, nested }: Comment): JSX.Element => {
+const Comment = ({ comment, user, content, likes, dislikes, articleID, nested, updateState }: Comment): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
   console.log(openReplyBox);
@@ -36,7 +37,16 @@ const Comment = ({ comment, user, content, likes, dislikes, articleID, nested }:
         likes={likes}
         dislikes={dislikes}
       />
-      {openReplyBox && <CommentForm comment={comment} nested={nested} user={user} articleID={articleID} content={''} />}
+      {openReplyBox && (
+        <CommentForm
+          updateState={updateState}
+          comment={comment}
+          nested={nested}
+          user={user}
+          articleID={articleID}
+          content={''}
+        />
+      )}
     </div>
   );
 };

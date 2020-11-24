@@ -37,7 +37,7 @@
 		"yup": "^0.29.3"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.11.6",
+		"@babel/core": "^7.12.8",
 		"@babel/plugin-proposal-optional-chaining": "^7.11.0",
 		"@babel/plugin-transform-react-jsx": "^7.10.4",
 		"@babel/plugin-transform-typescript": "^7.11.0",

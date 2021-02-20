@@ -2,7 +2,7 @@ import React from 'react';
 import s from '../components/Other/Layout/Resume.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import Err from '../components/Other/Error/Error';
 import Skills from '../components/Resume/Skills/Skills';
 import WorkExp from '../components/Resume/WorkExp/WorkExp';

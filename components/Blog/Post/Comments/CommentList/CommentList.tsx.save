@@ -1,0 +1,135 @@
+import React from 'react';
+import gql from 'graphql-tag';
+import { useQuery } from '@apollo/client';
+import { useRouter } from 'next/router';
+import s from '../Comments.module.scss';
+import CommentHeader from '../CommentHeader/CommentHeader';
+import CommentForm from '../CommentForm/CommentForm';
+import Comment from '../Comment/Comment';
+import NestedComment from '../NestedComment/NestedComment';
+import Load from '../../../../Other/Load/Load';
+import Err from '../../../../Other/Error/Error';
+
+type UserType = {
+  id: string;
+  username: string;
+  avatar: string | undefined;
+};
+
+type CommentList = {
+  id: number | undefined;
+  user: { id: string; avatar: string; username: string };
+  article: { id: string };
+  content: string;
+  newComment: ConcatArray<never>;
+  children: [
+    {
+      id: number | undefined;
+      article: { id: string };
+      content: string;
+      user: { id: string; username: string; avatar: string };
+      likes: [{ user: { id: string } }];
+      dislikes: [{ user: { id: string } }];
+    }
+  ];
+  likes: [{ user: { id: string } }];
+  dislikes: [{ user: { id: string } }];
+};
+
+const getCommentList = gql`
+<<<<<<< HEAD
+  query Comments() {
+=======
+  query Comments {
+>>>>>>> e418b4a51d439a5af3ca68b072ce508d46aae5cf
+    me {
+      id
+      username
+      avatar
+    }
+<<<<<<< HEAD
+    comments(where: { article: { slug:"for-jack" }, parent_null: true }) 
+    comments(where: { article: { slug: "for-jack" }, parent_null: true }) {
+      id
+      content
+      article {
+        id
+      }
+      user {
+        id
+        username
+        avatar
+      }
+      likes {
+        user {
+          id
+        }
+      }
+      dislikes {
+        user {
+          id
+        }
+      }
+      children {
+        id
+        content
+        user {
+          id
+          username
+          avatar
+        }
+        likes {
+          user {
+            id
+          }
+        }
+        dislikes {
+          user {
+            id
+          }
+        }
+      }
+    }
+  }
+`;
+
+const CommentList = (): JSX.Element => {
+  const router = useRouter();
+  const slug = router.query.slug;
+  const { data, error, loading } = useQuery(getCommentList, { variables: { slug } });
+
+  if (loading && !data) return <Load />;
+  if (error) return <Err />;
+
+  const comments = data?.comments as CommentList[];
+
+  const parentCommentLength = comments.length;
+  let nestedCommentLength = 0;
+  comments.forEach((comment) => (nestedCommentLength += comment.children.length));
+  const totalCommentLength = nestedCommentLength + parentCommentLength;
+  const user = data?.me as UserType;
+  return (
+    <div className={s.commentList}>
+      <CommentHeader totalComments={totalCommentLength} />
+      <CommentForm user={user} article={comments[0].article} updateState={() => {}} content={''} />
+      {comments.map((comment) => (
+        <>
+          <Comment
+            comment={comment}
+            article={comment.article}
+            key={comment.id}
+            user={comment.user}
+            content={comment.content}
+            likes={comment.likes}
+            dislikes={comment.dislikes}
+            updateState={() => {}}
+          />
+          <NestedComment parent={comment.children} />
+        </>
+      ))}
+      he-places-youll-go
+    </div>
+  );
+};
+
+export default CommentList;

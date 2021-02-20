@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+
+import { useQuery } from '@apollo/client';
 import axios from 'redaxios';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';

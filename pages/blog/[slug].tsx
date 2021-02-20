@@ -1,7 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import Load from '../../components/Other/Load/Load';
 import Err from '../../components/Other/Error/Error';
 import Meta from '../../components/Other/Meta/Meta';

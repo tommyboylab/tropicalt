@@ -8,7 +8,7 @@ import Bio from '../components/Home/Bio/Bio';
 import s from '../components/Other/Layout/Home.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 

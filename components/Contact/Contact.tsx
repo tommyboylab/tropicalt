@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 import { object, string } from 'yup';
 import gql from 'graphql-tag';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';

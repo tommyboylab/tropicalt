@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import gql from 'graphql-tag';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import axios from 'redaxios';
 import MainWindow from './MainWindow/MainWindow';
 import Sidebar from './Sidebar/Sidebar';

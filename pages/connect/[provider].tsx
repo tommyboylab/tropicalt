@@ -6,7 +6,11 @@ const Callback = (): JSX.Element => {
   const router = useRouter();
   const provider = router.query.provider;
   const accessToken = router.query.access_token;
-  const redirectURL = `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
+  const accessSecret = router.query.access_secret;
+  const redirectURL =
+    router.query.provider === 'twitter'
+      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
+      : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
 
   useLayoutEffect(() => {
     if (window.opener) {
@@ -20,6 +24,7 @@ const Callback = (): JSX.Element => {
           console.log(error);
         })
         .then(() => {
+          window.opener.location.reload();
           window.close();
         });
     }

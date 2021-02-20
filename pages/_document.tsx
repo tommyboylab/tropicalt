@@ -107,6 +107,7 @@ export default class TropicalTStyle extends Document {
 
   render(): JSX.Element {
     return (
+
       <Html lang='en'>
         <Head>
           <meta name='viewport' content='width=device-width, initial-scale=1' />
@@ -115,6 +116,7 @@ export default class TropicalTStyle extends Document {
         </Head>
         <Main />
         <NextScript />
+
       </Html>
     );
   }

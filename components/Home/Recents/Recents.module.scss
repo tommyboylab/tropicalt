@@ -1,10 +1,10 @@
-@use '../../Other/Styles/Styles';
+@use '../../Other/Styles/GlobalStyle';
 
 .recent {
   position: relative;
   cursor: pointer;
   user-select: none;
-  color: Styles.$QUATERNARY_COLOR_MUTED;
+  color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
   background-size: cover;
   background-position: center;
   border-radius: .25em;
@@ -31,19 +31,19 @@
 }
 
 .title {
-  font-size: Styles.$LARGE_FONT;
+  font-size: GlobalStyle.$LARGE_FONT;
   padding: .25em .5em 0 .5em;
 }
 
 .detailsList {
   display: none;
-  font-size: Styles.$SMALL_FONT;
+  font-size: GlobalStyle.$SMALL_FONT;
   padding: 0 .5em .5em .5em;
   list-style: none;
 }
 
 .recent:hover {
-  color: Styles.$QUATERNARY_COLOR;
+  color: GlobalStyle.$QUATERNARY_COLOR;
   transition: all 600ms ease-in-out;
 }
 

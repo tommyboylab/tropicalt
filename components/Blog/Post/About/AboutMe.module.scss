@@ -1,12 +1,12 @@
-@use '../../../Other/Styles/Styles';
+@use '../../../Other/Styles/GlobalStyle';
 
 .postAbout {
   text-align: center;
-  background-color: Styles.$TERTIARY_COLOR;
+  background-color: GlobalStyle.$TERTIARY_COLOR;
   margin: .5em 1em;
   padding: .5em;
   border-radius: .25em;
-  box-shadow: 0em 0em 5em Styles.$BOXSHADOW_COLOR;
+  box-shadow: 0em 0em 5em GlobalStyle.$BOXSHADOW_COLOR;
 }
 
 .postAbout > div {
@@ -15,16 +15,16 @@
 }
 
 .postAbout p {
-  font-size: Styles.$X_SMALL_FONT;
-  color: Styles.$PRIMARY_COLOR;
+  font-size: GlobalStyle.$X_SMALL_FONT;
+  color: GlobalStyle.$PRIMARY_COLOR;
 }
 
 .postAbout a {
   text-decoration: none;
-  color: Styles.$SECONDARY_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
 }
 
 .postAbout a:hover {
-  color: Styles.$SECONDARY_COLOR_MUTED;
+  color: GlobalStyle.$SECONDARY_COLOR_MUTED;
   transition: .25s ease-in-out;
 }

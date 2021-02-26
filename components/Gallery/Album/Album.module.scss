@@ -1,4 +1,4 @@
-@use '../../Other/Styles/Styles';
+@use '../../Other/Styles/GlobalStyle';
 
 .mainPane {
   width: 100vw;
@@ -11,7 +11,7 @@
   width: auto;
   height: 100%;
   margin-left: 50%;
-  box-shadow: Styles.$BOXSHADOW_COLOR 0 0 70px 10px;
+  box-shadow: GlobalStyle.$BOXSHADOW_COLOR 0 0 70px 10px;
   transform: translateX(-50%);
 }
 
@@ -22,8 +22,8 @@
   right: 0;
   bottom: 0;
   text-align: right;
-  color: Styles.$PRIMARY_COLOR;
-  background-color: Styles.$SIDEBAR_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background-color: GlobalStyle.$SIDEBAR_COLOR;
   width: 20em;
   overflow-y: auto;
   padding-top: .5em;
@@ -34,24 +34,24 @@
 
 .sidebar > a {
   text-decoration: none;
-  color: Styles.$SECONDARY_COLOR_MUTED;
+  color: GlobalStyle.$SECONDARY_COLOR_MUTED;
   margin-right: 1em;
 }
 
 .sidebar > a:hover {
-  color: Styles.$SECONDARY_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
   transition: color 500ms ease-in-out;
 }
 
 .sidebarHeader h2 {
-  font-size: Styles.$X_LARGE_FONT;
+  font-size: GlobalStyle.$X_LARGE_FONT;
   line-height: 2.75rem;
   margin: .25em .25em 0 .25em;
 }
 
 .sidebarHeader p {
-  font-size: Styles.$MEDIUM_FONT;
-  color: Styles.$PRIMARY_COLOR;
+  font-size: GlobalStyle.$MEDIUM_FONT;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin: .5em;
 }
 
@@ -71,17 +71,17 @@
 
 .sidebarFooter p:nth-child( 2 ) {
   text-align: center;
-  border-top: solid 1px Styles.$SECONDARY_COLOR;
+  border-top: solid 1px GlobalStyle.$SECONDARY_COLOR;
 }
 
 .sidebar svg {
   width: 50px;
   height: 50px;
-  fill: Styles.$SVG_COLOR;
+  fill: GlobalStyle.$SVG_COLOR;
 }
 
 .sidebar svg:hover {
-  fill: Styles.$PRIMARY_COLOR;
+  fill: GlobalStyle.$PRIMARY_COLOR;
   transition: fill .5s ease, border-bottom-color .25s ease;
 }
 
@@ -91,7 +91,7 @@
   height: 10em;
   object-fit: cover;
   object-position: center;
-  border: 2px solid Styles.$PRIMARY_COLOR_MUTED;
+  border: 2px solid GlobalStyle.$PRIMARY_COLOR_MUTED;
   border-radius: .25rem;
 }
 
@@ -117,13 +117,13 @@
   background-color: transparent;
   width: 3em;
   height: 3em;
-  border: 1px solid Styles.$PRIMARY_COLOR;
+  border: 1px solid GlobalStyle.$PRIMARY_COLOR;
   border-radius: .25em;
   transition: transform 1000ms cubic-bezier(.165, .84, .44, 1);
 
   > span {
     position: absolute;
-    background: Styles.$SECONDARY_COLOR;
+    background: GlobalStyle.$SECONDARY_COLOR;
     width: 28px;
     height: 4px;
     border-radius: .2em;
@@ -135,7 +135,7 @@
       display: block;
       position: absolute;
       content: '';
-      background: Styles.$PRIMARY_COLOR;
+      background: GlobalStyle.$PRIMARY_COLOR;
       width: 28px;
       height: 4px;
       transition: transform 2000ms cubic-bezier(.165, .84, .44, 1);
@@ -182,15 +182,15 @@ section.open {
   }
 
   .sidebar h2 {
-    font-size: Styles.$LARGE_FONT;
+    font-size: GlobalStyle.$LARGE_FONT;
   }
 
   .sidebar a {
-    font-size: Styles.$SMALL_FONT;
+    font-size: GlobalStyle.$SMALL_FONT;
   }
 
   .sidebar p {
-    font-size: Styles.$MEDIUM_FONT;
+    font-size: GlobalStyle.$MEDIUM_FONT;
   }
 
   .sidebar button {
@@ -223,15 +223,15 @@ section.open {
   }
 
   .sidebar h2 {
-    font-size: Styles.$LARGE_FONT;
+    font-size: GlobalStyle.$LARGE_FONT;
   }
 
   .sidebar a {
-    font-size: Styles.$X_SMALL_FONT;
+    font-size: GlobalStyle.$X_SMALL_FONT;
   }
 
   .sidebar p {
-    font-size: Styles.$SMALL_FONT;
+    font-size: GlobalStyle.$SMALL_FONT;
   }
 
   .sidebar button {

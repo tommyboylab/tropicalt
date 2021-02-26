@@ -1,4 +1,4 @@
-@use '../Other/Styles/Styles';
+@use '../Other/Styles/GlobalStyle';
 
 .nav {
   z-index: 10;
@@ -6,12 +6,12 @@
   right: 0;
   left: 0;
   text-decoration: none;
-  background: Styles.$NAV_COLOR;
+  background: GlobalStyle.$NAV_COLOR;
   width: min-content;
   height: min-content;
   margin: .25em auto;
   border-radius: .75em;
-  box-shadow: 0 0 .5em Styles.$SECONDARY_COLOR;
+  box-shadow: 0 0 .5em GlobalStyle.$SECONDARY_COLOR;
 }
 
 .nav ul {
@@ -23,17 +23,17 @@
 .nav li {
   cursor: pointer;
   user-select: none;
-  font-size: Styles.$MEDIUM_FONT;
-  color: Styles.$PRIMARY_COLOR;
+  font-size: GlobalStyle.$MEDIUM_FONT;
+  color: GlobalStyle.$PRIMARY_COLOR;
   padding: .25em;
 }
 
 .nav ul a {
-  border-right: 1px solid Styles.$SECONDARY_COLOR;
+  border-right: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
 .nav a:hover {
-  background: Styles.$PRIMARY_COLOR_MUTED;
+  background: GlobalStyle.$PRIMARY_COLOR_MUTED;
   transition: background .5s ease-in-out;
 }
 
@@ -61,8 +61,8 @@
 
   .menu {
     display: inline-block;
-    font-size: Styles.$X_SMALL_FONT;
-    background: Styles.$NAV_COLOR;
+    font-size: GlobalStyle.$X_SMALL_FONT;
+    background: GlobalStyle.$NAV_COLOR;
     padding: .25em;
     border-radius: .5em;
   }
@@ -76,7 +76,7 @@
     position: absolute;
     top: 2.5em;
     left: .5em;
-    background: Styles.$NAV_COLOR;
+    background: GlobalStyle.$NAV_COLOR;
     border-radius: 0 .5em .5em .5em;
     transition: visibility 0s, opacity .5s;
   }
@@ -88,9 +88,9 @@
   }
 
   .nav ul a {
-    font-size: Styles.$X_SMALL_FONT;
+    font-size: GlobalStyle.$X_SMALL_FONT;
     border-right: none;
-    border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+    border-bottom: 1px solid GlobalStyle.$SECONDARY_COLOR;
   }
 
   .nav ul a:first-child {

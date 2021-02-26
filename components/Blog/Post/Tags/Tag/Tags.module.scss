@@ -1,11 +1,11 @@
-@use '../../../../Other/Styles/Styles';
+@use '../../../../Other/Styles/GlobalStyle';
 
 .postTags a {
   text-decoration: none;
-  color: Styles.$QUATERNARY_COLOR_MUTED;
+  color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
   transition: color 300ms ease-in-out;
 }
 
 .postTags a:hover {
-  color: Styles.$QUATERNARY_COLOR;
+  color: GlobalStyle.$QUATERNARY_COLOR;
 }

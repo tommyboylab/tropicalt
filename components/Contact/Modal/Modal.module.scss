@@ -1,4 +1,4 @@
-@use '../../Other/Styles/Styles';
+@use '../../Other/Styles/GlobalStyle';
 
 .modalOverlay {
   display: flex;
@@ -7,7 +7,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: Styles.$MODAL_BACKGROUND_COLOR;
+  background-color: GlobalStyle.$MODAL_BACKGROUND_COLOR;
   width: 100%;
   height: 100%;
 }
@@ -15,7 +15,7 @@
 .modal {
   z-index: 11;
   text-align: center;
-  background: Styles.$BACKGROUND_COLOR;
+  background: GlobalStyle.$BACKGROUND_COLOR;
   max-width: 20em;
   height: max-content;
   margin: auto .5em;
@@ -24,20 +24,20 @@
 }
 
 .modal h2 {
-  font-size: Styles.$LARGE_FONT;
-  color: Styles.$SECONDARY_COLOR;
+  font-size: GlobalStyle.$LARGE_FONT;
+  color: GlobalStyle.$SECONDARY_COLOR;
   margin-bottom: .25em;
 }
 
 .modal p {
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin-bottom: 1em;
 }
 
 .modal button {
   cursor: pointer;
-  color: Styles.$PRIMARY_COLOR;
-  background-color: Styles.$QUATERNARY_COLOR_MUTED;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background-color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
   margin: 0 auto;
   padding: .5rem 1rem;
   border: none;
@@ -46,6 +46,6 @@
 
 .modal button:hover,
 .modal button:focus {
-  background-color: Styles.$QUATERNARY_COLOR;
+  background-color: GlobalStyle.$QUATERNARY_COLOR;
   transition: background-color 500ms ease-in-out;
 }

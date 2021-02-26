@@ -1,4 +1,4 @@
-@use '../../../Other/Styles/Styles';
+@use '../../../Other/Styles/GlobalStyle';
 
 .recentAlbums {
   grid-area: RecentAlbums;
@@ -11,10 +11,10 @@
 }
 
 .recentAlbums h2 {
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   width: max-content;
   margin: .5em auto .75em auto;
-  border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+  border-bottom: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
 .recentAlbums > article {

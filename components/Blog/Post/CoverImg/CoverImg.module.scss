@@ -1,11 +1,11 @@
-@use '../../../Other/Styles/Styles';
+@use '../../../Other/Styles/GlobalStyle';
 
 .postImg {
   grid-area: PostImg;
   position: relative;
   line-height: 0;
   margin: 3.25em 1rem auto .5em;
-  border: 2px solid Styles.$SECONDARY_COLOR;
+  border: 2px solid GlobalStyle.$SECONDARY_COLOR;
   border-top-right-radius: .75rem;
   border-top-left-radius: .75rem;
   border-bottom: none;
@@ -17,7 +17,7 @@
   object-fit: cover;
   object-position: center;
   margin: 1em .5rem auto .5em;
-  border: 2px solid Styles.$PRIMARY_COLOR;
+  border: 2px solid GlobalStyle.$PRIMARY_COLOR;
   border-bottom: none;
 }
 
@@ -26,9 +26,9 @@
   position: absolute;
   top: 25%;
   right: 0;
-  font-size: Styles.$CALC_FONT_MEDIUM;
-  color: Styles.$PRIMARY_COLOR;
-  background-color: Styles.$TERTIARY_COLOR_MUTED;
+  font-size: GlobalStyle.$CALC_FONT_MEDIUM;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background-color: GlobalStyle.$TERTIARY_COLOR_MUTED;
   // Account for margin of image+box
   margin-right: -.5rem;
   padding: .25em .5em;

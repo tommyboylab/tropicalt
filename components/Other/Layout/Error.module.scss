@@ -1,4 +1,4 @@
-@use '../Styles/Styles';
+@use '../Styles/GlobalStyle';
 
 .error {
   text-align: center;
@@ -13,14 +13,14 @@
 }
 
 .error h1 {
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin: 1em auto;
 }
 
 .error button {
   cursor: pointer;
-  color: Styles.$PRIMARY_COLOR;
-  background-color: Styles.$QUATERNARY_COLOR_MUTED;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background-color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
   margin: 0 auto;
   padding: .5rem 1rem;
   border: none;
@@ -29,13 +29,13 @@
 
 .error button:hover,
 .error button:focus {
-  background-color: Styles.$QUATERNARY_COLOR;
+  background-color: GlobalStyle.$QUATERNARY_COLOR;
   transition: background-color 500ms ease-in-out;
 }
 
 @media ( max-width: 600px ) {
 
   .error h1 {
-    font-size: Styles.$X_SMALL_FONT;
+    font-size: GlobalStyle.$X_SMALL_FONT;
   }
 }

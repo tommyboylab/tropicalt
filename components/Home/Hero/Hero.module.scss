@@ -1,4 +1,4 @@
-@use '../../Other/Styles/Styles';
+@use '../../Other/Styles/GlobalStyle';
 
 .imageBanner {
   grid-area: ImageBanner;
@@ -11,9 +11,9 @@
 .imageBanner h1 {
   z-index: 1;
   position: absolute;
-  font-size: Styles.$CALC_FONT_IB;
+  font-size: GlobalStyle.$CALC_FONT_IB;
   text-align: center;
-  color: Styles.$TERTIARY_COLOR;
+  color: GlobalStyle.$TERTIARY_COLOR;
   width: 100%;
   padding-top: 10vh;
 }

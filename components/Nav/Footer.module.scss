@@ -1,4 +1,4 @@
-@use '../Other/Styles/Styles';
+@use '../Other/Styles/GlobalStyle';
 
 .footer {
   grid-area: Footer;
@@ -7,23 +7,23 @@
   width: 100%;
   padding-top: .5em;
   padding-bottom: .5em;
-  border-top: 1px solid Styles.$SECONDARY_COLOR;
+  border-top: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
 .footer h3 {
-  color: Styles.$SECONDARY_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
   margin: auto 0;
   padding: 0 1em;
 }
 
 .footer a {
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   background: none;
   margin: auto 0;
 }
 
 .footer h3:hover {
-  color: Styles.$QUATERNARY_COLOR;
+  color: GlobalStyle.$QUATERNARY_COLOR;
   transition: .5s ease-in-out;
 }
 
@@ -34,7 +34,7 @@
 
 .footer li {
   cursor: pointer;
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   list-style: none;
 }
 

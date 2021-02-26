@@ -1,4 +1,4 @@
-@use '../../Other/Styles/Styles';
+@use '../../Other/Styles/GlobalStyle';
 
 .postHeader {
   grid-area: PostHeader;
@@ -7,15 +7,15 @@
 }
 
 .postHeader h1 {
-  font-size: Styles.$X_LARGE_FONT;
+  font-size: GlobalStyle.$X_LARGE_FONT;
   line-height: .5em;
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin-right: .5em;
   margin-left: .5em;
 }
 
 .postHeader h2 {
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin-right: .5em;
   margin-left: 2em;
 }
@@ -47,6 +47,6 @@
 @media ( max-width: 550px ) {
 
   .postHeader h2 {
-    font-size: Styles.$X_SMALL_FONT;
+    font-size: GlobalStyle.$X_SMALL_FONT;
   }
 }

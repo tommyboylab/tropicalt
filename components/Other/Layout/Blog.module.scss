@@ -1,4 +1,4 @@
-@use '../Styles/Styles.scss';
+@use '../Styles/GlobalStyle';
 
 .layout {
   display: grid;
@@ -20,8 +20,8 @@
 }
 
 .postControls button {
-  color: Styles.$SECONDARY_COLOR;
-  background-color: Styles.$BUTTON_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
+  background-color: GlobalStyle.$BUTTON_COLOR;
   width: 6em;
   height: 3em;
   margin: .5em;

@@ -1,13 +1,13 @@
-@use '../../../Other/Styles/Styles';
+@use '/components/Other/Styles/GlobalStyle';
 
 .postTags {
   grid-area: PostTags;
-  background-color: Styles.$SECONDARY_COLOR;
+  background-color: GlobalStyle.$SECONDARY_COLOR;
   // weird margin to line up with Image :/
   margin-right: .53rem;
   margin-left: .5em;
-  border-right: 2px solid Styles.$PRIMARY_COLOR;
-  border-bottom: 2px solid Styles.$PRIMARY_COLOR;
+  border-right: 2px solid GlobalStyle.$PRIMARY_COLOR;
+  border-bottom: 2px solid GlobalStyle.$PRIMARY_COLOR;
   border-bottom-right-radius: .5em;
   list-style: none;
   padding-inline-start: 2vw;
@@ -20,5 +20,5 @@
 
 .postTags a {
   text-decoration: none;
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
 }

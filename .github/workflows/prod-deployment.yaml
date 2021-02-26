@@ -18,8 +18,10 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
+           export NVM_DIR=~/.nvm
+           source ~/.nvm/nvm.sh
            cd /var/www/tropicalt/
-            git pull
-            npm install
-            npm run build
-            pm2 restart tropicalt
+           git pull
+           npm install
+           npm run build
+           pm2 restart tropicalt

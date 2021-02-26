@@ -1,4 +1,4 @@
-@use '../../../Other/Styles/Styles';
+@use '../../../Other/Styles/GlobalStyle';
 
 .recentArticles {
   grid-area: RecentArticles;
@@ -16,10 +16,10 @@
   position: absolute;
   right: 0;
   left: 0;
-  color: Styles.$PRIMARY_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
   width: max-content;
   margin: -2.5em auto 0 auto;
-  border-bottom: 1px solid Styles.$SECONDARY_COLOR;
+  border-bottom: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
 .recentArticles > article {

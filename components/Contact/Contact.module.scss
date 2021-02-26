@@ -1,9 +1,9 @@
-@use '../Other/Styles/Styles';
+@use '../Other/Styles/GlobalStyle';
 
 .form > form {
   display: flex;
   flex-direction: column;
-  background-color: Styles.$SECONDARY_COLOR_MUTED;
+  background-color: GlobalStyle.$SECONDARY_COLOR_MUTED;
   max-width: 100vw;
   width: max-content;
   margin: 0 auto .75em auto;
@@ -13,21 +13,21 @@
 }
 
 .form form h1 {
-  font-size: Styles.$LARGE_FONT;
-  color: Styles.$PRIMARY_COLOR;
+  font-size: GlobalStyle.$LARGE_FONT;
+  color: GlobalStyle.$PRIMARY_COLOR;
   margin-top: 2em;
 }
 
 .form input,
 .form textarea {
   opacity: .5;
-  color: Styles.$PRIMARY_COLOR;
-  background-color: Styles.$BACKGROUND_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background-color: GlobalStyle.$BACKGROUND_COLOR;
   width: 100%;
   padding: .5em;
   border: none;
   border-radius: .25em;
-  border-bottom: 2px solid Styles.$SECONDARY_COLOR;
+  border-bottom: 2px solid GlobalStyle.$SECONDARY_COLOR;
   outline: none;
   transition: opacity 500ms ease-in-out;
 }
@@ -61,8 +61,8 @@
 }
 
 .submit {
-  color: Styles.$SECONDARY_COLOR;
-  background-color: Styles.$BACKGROUND_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
+  background-color: GlobalStyle.$BACKGROUND_COLOR;
   width: min-content;
   margin: 0 auto;
   padding: .5em 3em;
@@ -81,7 +81,7 @@
 }
 
 .error {
-  color: Styles.$QUATERNARY_COLOR;
+  color: GlobalStyle.$QUATERNARY_COLOR;
 }
 
 @media ( max-width: 770px ) {

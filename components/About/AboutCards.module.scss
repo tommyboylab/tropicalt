@@ -1,4 +1,4 @@
-@use '../Other/Styles/Styles';
+@use '../Other/Styles/GlobalStyle';
 
 .aboutCardImg {
   position: sticky;
@@ -9,7 +9,7 @@
   object-position: center;
   overflow-x: hidden;
   margin: 0 auto 0 0;
-  box-shadow: -5px 0 10px Styles.$BOXSHADOW_COLOR;
+  box-shadow: -5px 0 10px GlobalStyle.$BOXSHADOW_COLOR;
 }
 
 .aboutCardText {
@@ -18,13 +18,13 @@
   align-items: center;
   position: sticky;
   top: 0;
-  color: Styles.$PRIMARY_COLOR;
-  background: Styles.$BACKGROUND_COLOR;
+  color: GlobalStyle.$PRIMARY_COLOR;
+  background: GlobalStyle.$BACKGROUND_COLOR;
   width: calc(50% + 1px);
   height: 100vh;
   overflow-x: hidden;
   margin: 0 0 1px auto;
-  box-shadow: -5px -5px 10px Styles.$BOXSHADOW_COLOR;
+  box-shadow: -5px -5px 10px GlobalStyle.$BOXSHADOW_COLOR;
 }
 
 .aboutCardImg:nth-of-type( 1 ),
@@ -33,8 +33,8 @@
 }
 
 .aboutCardText h2 {
-  font-family: Styles.$SECONDARY_FONT;
-  font-size: Styles.$CALC_FONT_LARGE;
+  font-family: GlobalStyle.$SECONDARY_FONT;
+  font-size: GlobalStyle.$CALC_FONT_LARGE;
   text-align: center;
   line-height: 1em;
   margin: 15vh .25em auto .25em;
@@ -42,8 +42,8 @@
 }
 
 .aboutCardText p {
-  font-family: Styles.$SECONDARY_FONT;
-  font-size: Styles.$CALC_FONT_MEDIUM;
+  font-family: GlobalStyle.$SECONDARY_FONT;
+  font-size: GlobalStyle.$CALC_FONT_MEDIUM;
   font-style: italic;
   text-align: right;
   margin: 0 .5em 2vw .25em;

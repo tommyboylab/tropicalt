@@ -1,4 +1,4 @@
-@use '../../../Other/Styles/Styles';
+@use '../../../Other/Styles/GlobalStyle';
 
 .commentList {
   grid-area: CommentList;
@@ -16,7 +16,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background: Styles.$PRIMARY_COLOR;
+  background: GlobalStyle.$PRIMARY_COLOR;
   border-top-right-radius: .5em;
   border-top-left-radius: .5em;
 
@@ -40,7 +40,7 @@
     margin: auto 0;
 
     input {
-      color: Styles.$PRIMARY_COLOR;
+      color: GlobalStyle.$PRIMARY_COLOR;
       background: transparent;
       width: 95%;
       margin-left: .25em;
@@ -50,8 +50,8 @@
 
   .formButton {
     cursor: pointer;
-    color: Styles.$PRIMARY_COLOR;
-    background: Styles.$SECONDARY_COLOR;
+    color: GlobalStyle.$PRIMARY_COLOR;
+    background: GlobalStyle.$SECONDARY_COLOR;
     padding: 0 .25em;
     border: none;
   }
@@ -69,7 +69,7 @@
 }
 
 .comment {
-  color: Styles.$SECONDARY_COLOR;
+  color: GlobalStyle.$SECONDARY_COLOR;
   background: rgb(30, 30, 40);
   padding-bottom: .25em;
   border-radius: .75em;
@@ -87,7 +87,7 @@
 
   .commentContent {
     color: gainsboro;
-    background: Styles.$QUATERNARY_COLOR_MUTED;
+    background: GlobalStyle.$QUATERNARY_COLOR_MUTED;
     margin: 0 .5em 0 2em;
     padding-right: .25em;
     border-top-right-radius: .25em;
@@ -111,8 +111,8 @@
     }
 
     .comment {
-      color: Styles.$PRIMARY_COLOR;
-      background: Styles.$SECONDARY_COLOR;
+      color: GlobalStyle.$PRIMARY_COLOR;
+      background: GlobalStyle.$SECONDARY_COLOR;
       margin-bottom: .5em;
       margin-left: 2em;
     }
@@ -121,7 +121,7 @@
   .commentRating {
     display: flex;
     flex-direction: row;
-    color: Styles.$SECONDARY_COLOR;
+    color: GlobalStyle.$SECONDARY_COLOR;
     background: grey;
     width: max-content;
     margin-right: .5em;
@@ -149,7 +149,7 @@
     }
 
     .commentLikeImg:hover {
-      fill: Styles.$PRIMARY_COLOR;
+      fill: GlobalStyle.$PRIMARY_COLOR;
     }
 
     .commentDislikeImg:hover {
@@ -157,11 +157,11 @@
     }
 
     .commentReply:hover {
-      fill: Styles.$QUATERNARY_COLOR;
+      fill: GlobalStyle.$QUATERNARY_COLOR;
     }
 
     .commentLike {
-      color: Styles.$PRIMARY_COLOR;
+      color: GlobalStyle.$PRIMARY_COLOR;
       margin-right: 1em;
     }
 
@@ -176,7 +176,7 @@
   cursor: pointer;
   text-align: center;
 
-  color: Styles.$QUATERNARY_COLOR;
+  color: GlobalStyle.$QUATERNARY_COLOR;
   background: rgb(20, 20, 25);
 }
 

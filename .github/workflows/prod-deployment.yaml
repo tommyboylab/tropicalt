@@ -1,24 +1,24 @@
-name: TropicalT - Prod Deploy
+name: TropicalT Prod Deploy
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  deploy:
 
+  build:
+    name: Build
     runs-on: ubuntu-latest
-
     steps:
-    - name: TropicalT - Prod Deployment
-      uses: appleboy/ssh-action@v0.1.4
-      with:
-        host: ${{secrets.SSH_HOST}}
-        username: ${{secrets.SSH_USERNAME}}
-        password: ${{secrets.SSH_PASSWORD}}
-     script: |
-       cd /var/www/tropicalt/
-       git pull
-       npm install
-       npm run build
-       pm2 restart tropicalt
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+           cd /var/www/tropicalt/
+            git pull
+            npm install
+            npm run build
+            pm2 restart tropicalt

@@ -2,10 +2,6 @@ import { NextRouter, withRouter } from 'next/router';
 import React, { MouseEventHandler, useCallback } from 'react';
 
 const getStyle = (router: NextRouter, href: string) => ({
-  // color: router.pathname.split('/').pop()
-  // 	.includes(href)
-  // 	? 'rgb(190, 55, 250)'
-  // 	: 'rgba(190, 55, 250, .35)',
   color: router.pathname === href ? 'rgb(190, 55, 250)' : 'rgba(190, 55, 250, .35)',
 });
 

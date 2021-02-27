@@ -11,6 +11,7 @@ import gql from 'graphql-tag';
 import { useQuery } from '@apollo/client';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import Nav_New from "../components/Nav/Nav_New";
 
 const getHomepageQuery = gql`
   query getImageBanner {
@@ -39,6 +40,7 @@ export default function Home(): JSX.Element {
         imgUrl={data.avatar.avatar.img.url}
         url={'/'}
       />
+      <Nav_New data={data}/>
       <Nav data={data} />
       <ImgB data={data} />
       <Bio data={data} />

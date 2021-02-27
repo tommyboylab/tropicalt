@@ -1,0 +1,28 @@
+.nav{
+  z-index: 10;
+  position: fixed;
+  left:0;
+  right:0;
+  bottom: 0;
+}
+
+.nav ul{
+  display: flex;
+  justify-content: space-around;
+  justify-items: center;
+  list-style: none;
+}
+
+.nav a{
+  flex-shrink: 2;
+  background-color: green;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  margin-top: auto;
+  margin-bottom:0;
+  text-align: center;
+}
+
+.active{
+  color:orange;
+}

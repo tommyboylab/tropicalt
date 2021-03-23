@@ -47,7 +47,7 @@
 		"@types/react-dom": "^17.0.1",
 		"@types/yup": "^0.29.11",
 		"@typescript-eslint/eslint-plugin": "^4.15.2",
-		"@typescript-eslint/parser": "^4.15.2",
+		"@typescript-eslint/parser": "^4.19.0",
 		"@typescript-eslint/typescript-estree": "^4.15.2",
 		"babel-loader": "^8.2.2",
 		"babel-plugin-import-graphql": "^2.8.1",

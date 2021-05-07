@@ -32,7 +32,7 @@ const Nav = (nav: any): JSX.Element => {
                 {nav &&
                 nav.map((nav: { url: string; id: string | number | undefined; title: React.ReactNode }) => {
                     return (
-                        <Link href={nav.url} key={nav.id} >
+                        <Link className={s.navLink} href={nav.url} key={nav.id} >
                             <>{nav.title}</>
                         </Link>
                     );

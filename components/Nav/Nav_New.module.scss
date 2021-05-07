@@ -13,7 +13,10 @@
   list-style: none;
 }
 
-.nav a{
+
+.navLink{
+  padding: 1rem;
+  color:orange;
   flex-shrink: 2;
   background-color: green;
   border-top-left-radius: 1rem;
@@ -23,6 +26,8 @@
   text-align: center;
 }
 
-.active{
-  color:orange;
+.navLink:hover{
+  color:red;
+  height: 3rem;
 }
+

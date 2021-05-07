@@ -5,6 +5,7 @@ import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';
+import {yupResolver} from "@hookform/resolvers/yup";
 
 type FormFields = {
   name: string;
@@ -41,10 +42,9 @@ const HideModal = (hide: MouseEventHandler): JSX.Element => (
 
 const Form = (): JSX.Element => {
   const [addEmail, { loading: mutationLoading, error: mutationError }] = useMutation(sendEmail);
-  const { register, errors, handleSubmit, formState, reset } = useForm<FormFields>({
+  const { register, handleSubmit, formState, reset, formState: { errors } } = useForm<FormFields>({
     mode: 'onChange',
-    // @ts-ignore
-    validationSchema: contactSchema,
+    resolver: yupResolver(contactSchema)
   });
 
   const onSubmit = async (data: FormFields): Promise<void> => {
@@ -66,29 +66,25 @@ const Form = (): JSX.Element => {
         <div className={s.name}>
           <input
             type='text'
+            {...register('name', { required: true })}
             placeholder='Your Name'
-            name='name'
-            ref={register}
             maxLength={22}
             minLength={2}
-            required={true}
           />
           {errors.name && <p className={s.error}>{errors.name.message}</p>}
         </div>
 
         <div className={s.email}>
-          <input type='email' placeholder='Your email' name='email' ref={register} minLength={6} required={true} />
+          <input type='email' {...register('email', { required: true })} placeholder='Your email'  minLength={6}  />
           {errors.email && <p className={s.error}>{errors.email.message}</p>}
         </div>
 
         <div className={s.message}>
           <textarea
+              {...register('message', { required: true })}
             placeholder='Your message'
-            name='message'
-            ref={register}
             maxLength={500}
             minLength={2}
-            required={true}
           />
           {errors.message && <p className={s.error}>{errors.message.message}</p>}
         </div>

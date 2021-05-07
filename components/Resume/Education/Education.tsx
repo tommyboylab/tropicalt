@@ -18,7 +18,7 @@ const Education = (education: any): JSX.Element => {
   return (
     <div className={s.education}>
       <h2>Education</h2>
-      <ReactMarkdown source={education.edu} />
+      <ReactMarkdown children={education.edu} />
     </div>
   );
 };

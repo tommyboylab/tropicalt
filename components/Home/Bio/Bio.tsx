@@ -25,7 +25,7 @@ const Bio = (bio: any): JSX.Element => {
   return (
     <div key={bio.id} className={s.bio}>
       <Avatar data={bio} />
-      <ReactMarkdown source={bio.bio} />
+      <ReactMarkdown children={bio.bio} />
     </div>
   );
 };

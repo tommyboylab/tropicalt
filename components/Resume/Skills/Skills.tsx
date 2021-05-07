@@ -17,7 +17,7 @@ const Skills = (skills: any): JSX.Element => {
   return (
     <div className={s.skills}>
       <h2>Skills</h2>
-      <ReactMarkdown source={skills.skills} />
+      <ReactMarkdown children={skills.skills} />
     </div>
   );
 };

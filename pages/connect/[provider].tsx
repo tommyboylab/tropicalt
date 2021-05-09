@@ -27,7 +27,6 @@ const Callback = (): JSX.Element => {
   }, []);
 
   useLayoutEffect(() => {
-    if (window.opener) {
       axios
         .get(redirectURL)
         .then((res: any) => {
@@ -44,7 +43,6 @@ const Callback = (): JSX.Element => {
           window.opener.location.reload();
           window.close();
         });
-    }
   }, []);
   return (
     <div>

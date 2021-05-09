@@ -5,11 +5,11 @@ import axios from 'redaxios';
 const Callback = (): JSX.Element => {
   const [width, setWidth] = useState<number>(0);
   const router = useRouter();
-  const provider = router.query.provider;
-  const accessToken = router.query.access_token;
-  const accessSecret = router.query.access_secret;
+  const {provider} = router.query;
+  const {accessToken} = router.query;
+  const {accessSecret} = router.query;
   const redirectURL =
-    router.query.provider === 'twitter'
+    provider === 'twitter'
       ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
       : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
    let isMobile = typeof window !== 'undefined' && width <= 268
@@ -24,7 +24,10 @@ const Callback = (): JSX.Element => {
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
     }
-  }, []);
+
+    if(!router.isReady) return;
+
+  }, [router.isReady]);
 
   useLayoutEffect(() => {
     if (window.opener) {

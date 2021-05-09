@@ -47,7 +47,6 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
             // this uses apollo-link-http under the hood, so all the options here come from that package
             new HttpLink({
                 uri: process.env.API,
-                authorization: `Bearer ${token }`,
                 credentials: 'include',
                 fetch: enhancedFetch,
             }),

@@ -30,7 +30,7 @@ const Callback = (): JSX.Element => {
   }, [router.isReady]);
 
   useLayoutEffect(() => {
-    if (window.opener && !!provider) {
+    if (window.opener && provider !== undefined) {
       axios
         .get(redirectURL)
         .then((res: any) => {

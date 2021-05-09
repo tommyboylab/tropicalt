@@ -7,7 +7,7 @@ import type {AppProps} from 'next/app'
 import {useMemo} from 'react'
 import isEqual from 'lodash.isequal'
 import {parseCookies} from "nookies";
-const cookies = parseCookies()
+const {token} = parseCookies()
 const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
@@ -22,6 +22,7 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
                 ...init.headers,
                 // here we pass the cookie along for each request
                 Cookie: headers?.cookie ?? '',
+                authorization: `Bearer ${token}`
             },
         }).then((response) => {
             console.log(cookies)

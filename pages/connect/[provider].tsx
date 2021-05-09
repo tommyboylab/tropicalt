@@ -5,12 +5,12 @@ import axios from 'redaxios';
 const Callback = (): JSX.Element => {
   const [width, setWidth] = useState<number>(0);
   const {query, push, isReady} = useRouter();
-  const {provider, accessToken, accessSecret} = query;
+  const {provider, access_token, access_secret} = query;
 
   const redirectURL =
     provider === 'twitter'
-      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
-      : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
+      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}&access_secret=${access_secret}`
+      : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}`;
    let isMobile = typeof window !== 'undefined' && width <= 268
 
   useEffect(() => {

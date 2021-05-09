@@ -25,12 +25,10 @@ const Callback = (): JSX.Element => {
       window.removeEventListener('resize', handleWindowSizeChange);
     }
 
-    if(!router.isReady) return;
-
-  }, [router.isReady]);
+  }, []);
 
   useLayoutEffect(() => {
-    if (window.opener && provider !== undefined) {
+    if (window.opener && router.isReady) {
       axios
         .get(redirectURL)
         .then((res: any) => {

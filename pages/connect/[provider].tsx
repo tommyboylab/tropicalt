@@ -1,8 +1,9 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'redaxios';
 
 const Callback = (): JSX.Element => {
+  const [width, setWidth] = useState<number>(0);
   const router = useRouter();
   const provider = router.query.provider;
   const accessToken = router.query.access_token;
@@ -11,6 +12,19 @@ const Callback = (): JSX.Element => {
     router.query.provider === 'twitter'
       ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
       : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
+   let isMobile = typeof window !== 'undefined' && width <= 768
+
+  useEffect(() => {
+
+    const handleWindowSizeChange = () => {
+      setWidth(window.innerWidth)
+    }
+
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    }
+  }, []);
 
   useLayoutEffect(() => {
     if (window.opener) {
@@ -24,6 +38,9 @@ const Callback = (): JSX.Element => {
           console.log(error);
         })
         .then(() => {
+          if (isMobile) {
+              router.push(window.opener.location.href)
+          }
           window.opener.location.reload();
           window.close();
         });

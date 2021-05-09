@@ -3,9 +3,9 @@ import { object, string } from 'yup';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
+import {yupResolver} from "@hookform/resolvers/yup";
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';
-import {yupResolver} from "@hookform/resolvers/yup";
 
 type FormFields = {
   name: string;

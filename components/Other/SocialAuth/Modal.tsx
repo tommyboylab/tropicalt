@@ -36,7 +36,7 @@ export const Modal = ({ children }: Modal): JSX.Element =>
 
 const Toggle = (): JSX.Element => {
   const receiveAuthInfo = (e: any) => {
-    if (e.origin !== 'https://www.tropicalt.ca') {
+    if (e.origin !== 'https://tropicalt.ca') {
       return;
     }
     const { data } = e;

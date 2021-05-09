@@ -28,7 +28,7 @@ const Callback = (): JSX.Element => {
 
   useLayoutEffect(() => {
     if (window.opener) {
-      console.log('provider', router.query.provider)
+      console.log('provider', router.query)
       console.log('redirectURL', redirectURL)
       axios
         .get(redirectURL)

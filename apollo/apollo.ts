@@ -25,7 +25,6 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
                 authorization: `Bearer ${token}`
             },
         }).then((response) => {
-            console.log(cookies)
             return response})
     }
 

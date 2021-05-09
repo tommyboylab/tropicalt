@@ -4,10 +4,9 @@ import axios from 'redaxios';
 
 const Callback = (): JSX.Element => {
   const [width, setWidth] = useState<number>(0);
-  const router = useRouter();
-  const {provider} = router.query;
-  const {accessToken} = router.query;
-  const {accessSecret} = router.query;
+  const {query, push, isReady} = useRouter();
+  const {provider, accessToken, accessSecret} = query;
+
   const redirectURL =
     provider === 'twitter'
       ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
@@ -28,27 +27,25 @@ const Callback = (): JSX.Element => {
   }, []);
 
   useLayoutEffect(() => {
-    if (window.opener && router.isReady) {
+    if (isReady) {
       axios
         .get(redirectURL)
         .then((res: any) => {
             window.opener.postMessage(res.data.jwt);
-            console.log(window.opener)
         })
         .catch((error: any) => {
-          router.push('/login');
+          push('/login');
           console.log(error);
-          console.log(window.opener)
         })
         .then(() => {
           if (isMobile) {
-              router.push(window.opener.location.href)
+              push(window.opener.location.href)
           }
           window.opener.location.reload();
           window.close();
         });}
 
-  }, []);
+  }, [isReady]);
   return (
     <div>
       <h2>Doing some stuff...</h2>

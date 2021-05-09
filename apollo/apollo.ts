@@ -27,7 +27,9 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
                 // here we pass the cookie along for each request
                 Cookie: headers?.cookie ?? '',
             },
-        }).then((response) => response)
+        }).then((response) => {
+            console.log(headers?.cookie)
+            return response})
     }
 
     return new ApolloClient({

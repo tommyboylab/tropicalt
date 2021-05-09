@@ -11,12 +11,12 @@ const Callback = (): JSX.Element => {
     provider === 'twitter'
       ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}&access_secret=${access_secret}`
       : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}`;
-   let isMobile = typeof window !== 'undefined' && width <= 268
+   let isMobile = typeof window !== 'undefined' && width <= 768
 
   useEffect(() => {
 
     const handleWindowSizeChange = () => {
-      setWidth(window.innerWidth)
+      setWidth(window.opener.innerWidth)
     }
 
     window.addEventListener('resize', handleWindowSizeChange);

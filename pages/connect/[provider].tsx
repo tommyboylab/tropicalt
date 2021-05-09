@@ -28,6 +28,7 @@ const Callback = (): JSX.Element => {
 
   useLayoutEffect(() => {
     if (isReady) {
+      console.log(query)
       axios
         .get(redirectURL)
         .then((res: any) => {

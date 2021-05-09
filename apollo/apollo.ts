@@ -1,21 +1,17 @@
-import {
-    ApolloClient,
-    ApolloLink,
-    InMemoryCache,
-    NormalizedCacheObject,
-    HttpLink
-} from '@apollo/client'
-import { onError } from '@apollo/link-error'
+import {ApolloClient, ApolloLink, HttpLink, InMemoryCache, NormalizedCacheObject} from '@apollo/client'
+import {onError} from '@apollo/link-error'
 import merge from 'deepmerge'
-import { IncomingHttpHeaders } from 'http'
+import {IncomingHttpHeaders} from 'http'
 import fetch from 'isomorphic-unfetch'
-import type { AppProps } from 'next/app'
-import { useMemo } from 'react'
+import type {AppProps} from 'next/app'
+import {useMemo} from 'react'
 import isEqual from 'lodash.isequal'
-
+import {parseCookies} from "nookies";
+const cookies = parseCookies()
 const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
+
 
 const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
     // isomorphic fetch for passing the cookies along with each GraphQL request
@@ -28,7 +24,7 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
                 Cookie: headers?.cookie ?? '',
             },
         }).then((response) => {
-            console.log(headers?.cookie)
+            console.log(cookies)
             return response})
     }
 
@@ -51,7 +47,7 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
             // this uses apollo-link-http under the hood, so all the options here come from that package
             new HttpLink({
                 uri: process.env.API,
-
+                authorization: `Bearer ${token }`,
                 credentials: 'include',
                 fetch: enhancedFetch,
             }),
@@ -117,8 +113,7 @@ export const addApolloState = (
 
 export function useApollo(pageProps: AppProps['pageProps']) {
     const state = pageProps[APOLLO_STATE_PROP_NAME]
-    const store = useMemo(() => initializeApollo({ initialState: state }), [
+    return useMemo(() => initializeApollo({initialState: state}), [
         state,
     ])
-    return store
 }

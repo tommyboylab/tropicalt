@@ -9,6 +9,7 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import Modal from 'components/Other/SocialAuth/Modal';
 import { NetworkStatus } from '@apollo/client';
+import {isSignedIn} from "../../../../../apollo/apollo";
 
 type UserType = {
   id: number;
@@ -87,13 +88,14 @@ const getCommentList = gql`
 `;
 
 const CommentList = ({ articleID, slug }: any): JSX.Element => {
-  const { data, error, loading, refetch, networkStatus } = useQuery(getCommentList, {
+  const { data, loading, refetch, networkStatus } = useQuery(getCommentList, {
     variables: { slug },
     notifyOnNetworkStatusChange: true,
   });
 
+  const authenticated = isSignedIn()
+
   if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
-  if (error) return <Modal />;
 
   const comments = data?.comments as CommentList[];
   const user = data?.me as UserType;
@@ -105,6 +107,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
   const totalCommentLength = nestedCommentLength + parentCommentLength;
 
   return (
+      authenticated ?
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
       <CommentForm updateState={refetch} user={user} articleID={articleID} content={''} />
@@ -126,7 +129,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
             <NestedComment articleID={articleID} parent={comment.children} updateState={refetch} />
           </>
         ))}
-    </div>
+    </div> : <Modal/>
   );
 };
 

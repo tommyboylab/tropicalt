@@ -7,9 +7,7 @@ import CommentForm from '../CommentForm/CommentForm';
 import Comment from '../Comment/Comment';
 import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
-import Modal from 'components/Other/SocialAuth/Modal';
 import { NetworkStatus } from '@apollo/client';
-import {isSignedIn} from "../../../../../apollo/apollo";
 
 type UserType = {
   id: number;
@@ -93,8 +91,6 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
     notifyOnNetworkStatusChange: true,
   });
 
-  const authenticated = isSignedIn()
-
   if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
 
   const comments = data?.comments as CommentList[];
@@ -107,7 +103,6 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
   const totalCommentLength = nestedCommentLength + parentCommentLength;
 
   return (
-      authenticated ?
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
       <CommentForm updateState={refetch} user={user} articleID={articleID} content={''} />
@@ -129,7 +124,7 @@ const CommentList = ({ articleID, slug }: any): JSX.Element => {
             <NestedComment articleID={articleID} parent={comment.children} updateState={refetch} />
           </>
         ))}
-    </div> : <Modal/>
+    </div>
   );
 };
 

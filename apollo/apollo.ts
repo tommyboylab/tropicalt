@@ -13,17 +13,22 @@ const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined
 
 
+export const isSignedIn = () => !!token;
+
+const authHeaders = (init: RequestInit) => {
+    if (!token) return {...init.headers}
+
+    return {
+        ...init.headers,
+        authorization: `Bearer ${token}`,
+    }
+}
 const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
     // isomorphic fetch for passing the cookies along with each GraphQL request
     const enhancedFetch = (url: RequestInfo, init: RequestInit) => {
         return fetch(url, {
             ...init,
-            headers: {
-                ...init.headers,
-                // here we pass the cookie along for each request
-                Cookie: headers?.cookie ?? '',
-                authorization:  `Bearer ${token}` ?? ''
-            },
+            headers: authHeaders(init),
         }).then((response) => {
             return response})
     }

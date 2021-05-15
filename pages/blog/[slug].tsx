@@ -15,6 +15,7 @@ import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
 import Comments from '../../components/Blog/Post/Comments/CommentList/CommentList';
+import {isSignedIn} from "../../apollo/apollo";
 
 type Article = {
   id: string;
@@ -54,6 +55,7 @@ const getArticle = gql`
 const Post = (): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
+  const user = isSignedIn()
 
   const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
 
@@ -84,7 +86,7 @@ const Post = (): JSX.Element => {
             </TagList>
             <Body content={article.content} />
             <Sidebar data={sidebar} />
-            <Comments slug={slug} articleID={article.id} />
+            {user && <Comments slug={slug} articleID={article.id}/>}
             <Footer data={data} />
           </main>
         </>

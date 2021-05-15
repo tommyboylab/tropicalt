@@ -22,7 +22,7 @@ const createApolloClient = (headers: IncomingHttpHeaders | null = null) => {
                 ...init.headers,
                 // here we pass the cookie along for each request
                 Cookie: headers?.cookie ?? '',
-                authorization: `Bearer ${token}`
+                authorization:  `Bearer ${token}` ?? ''
             },
         }).then((response) => {
             return response})

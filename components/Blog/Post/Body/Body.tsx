@@ -7,7 +7,7 @@ type Content = {
 };
 const Body = (Content: Content): JSX.Element => (
   <div className={s.postText}>
-    <ReactMarkdown source={Content.content} />
+    <ReactMarkdown children={Content.content} />
   </div>
 );
 

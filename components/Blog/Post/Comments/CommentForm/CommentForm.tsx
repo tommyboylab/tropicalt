@@ -1,5 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import {yupResolver} from "@hookform/resolvers/yup";
 import { object, string } from 'yup';
 import moment from 'moment';
 import { useMutation } from '@apollo/client';
@@ -7,7 +8,7 @@ import gql from 'graphql-tag';
 import s from '../Comments.module.scss';
 
 type CommentForm = {
-  updateState: CallableFunction;
+  updateState: any
   comment?: { id: number | undefined };
   user: { id: number; avatar: string; username: string };
   articleID: number;
@@ -47,10 +48,9 @@ const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentF
   const commentParentID = nested ? comment?.id : null;
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
 
-  const { register, errors, handleSubmit, formState, reset } = useForm<CommentForm>({
+  const { register, handleSubmit, formState, reset, formState:{errors} } = useForm<CommentForm>({
     mode: 'onChange',
-    //@ts-ignore
-    validationSchema: commentSchema,
+    resolver: yupResolver(commentSchema)
   });
 
   const onSubmit = async (data: {
@@ -81,11 +81,9 @@ const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentF
         <input
           type='text'
           placeholder='Leave a comment'
-          name='content'
-          ref={register}
+          {...register('content', { required: true })}
           maxLength={40}
           minLength={2}
-          required={true}
         />
       </div>
       {errors.content && <p className={s.error}>{errors.content.message}</p>}

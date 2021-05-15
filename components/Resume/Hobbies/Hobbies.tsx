@@ -19,7 +19,7 @@ const Hobbies = (hobbies: any): JSX.Element => {
   return (
     <div className={s.hobbies}>
       <h2>Hobbies</h2>
-      <ReactMarkdown source={hobbies.hobbies} />
+      <ReactMarkdown children={hobbies.hobbies} />
     </div>
   );
 };

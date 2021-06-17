@@ -63,7 +63,7 @@
 		"stylelint-order": "^4.1.0",
 		"stylelint-prettier": "^1.1.2",
 		"stylelint-scss": "^3.19.0",
-		"typescript": "^4.1.5"
+		"typescript": "^4.3.3"
 	},
 	"plugins": [
 		"@semantic-release/commit-analyzer",

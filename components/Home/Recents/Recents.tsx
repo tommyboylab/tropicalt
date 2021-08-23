@@ -19,7 +19,7 @@ const Recent = (Recent: Recent): JSX.Element => (
   <Link href={`/${Recent.type}/${Recent.slug}`} as={`/${Recent.type}/${Recent.slug}`}>
     <article
       id={Recent.id}
-      className={`${s.recent} js-touch-trigger`}
+      className={`${s.recent}`}
       style={{ backgroundImage: `url(https://api.tropicalt.ca${Recent.cover})` }}>
       <img
         className={s.img}
@@ -27,7 +27,7 @@ const Recent = (Recent: Recent): JSX.Element => (
         alt={`Image for ${Recent.title}`}
         loading='lazy'
       />
-      <div className={`${s.content} js-touch-trigger`}>
+      <div className={`${s.content}`}>
         <h3 className={s.title}>{Recent.title}</h3>
         <ul className={s.detailsList}>
           <li className={s.details}>

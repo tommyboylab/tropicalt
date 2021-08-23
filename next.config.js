@@ -7,4 +7,6 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
+    webpack5: true,
+    strictPostcssConfiguration: true
 };

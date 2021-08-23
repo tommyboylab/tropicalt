@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {CSSProperties} from 'react';
 
 type Img = {
   class: string;
   url: string;
   alt: string;
   placeholder: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties
 };
 
-const Image = (Img: Img): JSX.Element => (
+const ImgComp = (Img: Img): JSX.Element => (
   <img
     className={Img.class}
     src={`https://api.tropicalt.ca${Img.url}`}
@@ -23,4 +23,4 @@ const Image = (Img: Img): JSX.Element => (
     }}
   />
 );
-export default Image;
+export default ImgComp;

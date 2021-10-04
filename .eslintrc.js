@@ -20,9 +20,7 @@ module.exports = {
     'plugin:react/recommended',
     'plugin:react-perf/recommended',
     'prettier',
-    'prettier/@typescript-eslint',
-    'prettier',
-    'prettier/react',
+    "plugin:prettier/recommended",
   ],
   overrides: [
     {

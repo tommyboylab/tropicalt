@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import {yupResolver} from "@hookform/resolvers/yup";
-import { object, string } from 'yup';
+import * as yup from 'yup';
 import moment from 'moment';
 import { useMutation } from '@apollo/client';
 import gql from 'graphql-tag';
@@ -39,16 +39,15 @@ const createComment = gql`
   }
 `;
 
-const commentSchema = object().shape({
-  content: string().min(2, `That's not good enough!`).max(40).required(),
-});
+const commentSchema = yup.object({content: yup.string().min(2, `That's not good enough!`).max(40).required()});
+type commentType = yup.InferType<typeof commentSchema>;
 
 const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentForm): JSX.Element => {
   const commentCreateDate = moment().toISOString();
   const commentParentID = nested ? comment?.id : null;
   const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
 
-  const { register, handleSubmit, formState, reset, formState:{errors} } = useForm<CommentForm>({
+  const { register, handleSubmit, formState, reset, formState:{errors} } = useForm<commentType>({
     mode: 'onChange',
     resolver: yupResolver(commentSchema)
   });

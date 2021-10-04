@@ -1,5 +1,5 @@
 import React, { MouseEventHandler } from 'react';
-import { object, string } from 'yup';
+import * as yup from 'yup';
 import gql from 'graphql-tag';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
@@ -26,10 +26,10 @@ const sendEmail = gql`
   }
 `;
 
-const contactSchema = object().shape({
-  name: string().min(2, `That's not a name!`).max(22).required(),
-  email: string().email(`That's not a real email!`).min(6, `That's not a real email!`).required(),
-  message: string().min(2, 'What kind of message is that?').max(500).required(),
+const contactSchema = yup.object({
+  name: yup.string().min(2, `That's not a name!`).max(22).required(),
+  email: yup.string().email(`That's not a real email!`).min(6, `That's not a real email!`).required(),
+  message: yup.string().min(2, 'What kind of message is that?').max(500).required(),
 });
 
 const HideModal = (hide: MouseEventHandler): JSX.Element => (

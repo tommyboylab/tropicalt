@@ -1,16 +1,10 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Img from '../Img/Img';
 import s from './Avatar.module.scss';
 
-type Avatar = {
-  id: number;
-  avatar: { img: { id: string; url: string; hash: string } };
-};
-
-const AvatarFragment = gql`
+const AvatarFragment = gql(`
   fragment AvatarFragment on Avatar {
-    id
     avatar {
       img {
         id
@@ -18,20 +12,17 @@ const AvatarFragment = gql`
         hash
       }
     }
-    alt
   }
-`;
+`);
 
-const Avatar = (avatar: any): JSX.Element => {
-  avatar = avatar?.data?.avatar as Avatar;
-
+const Avatar = ({ avatar }: DocumentType<typeof AvatarFragment>): JSX.Element => {
   return (
-    <div key={avatar.id} className={s.avatar}>
+    <div key={avatar?.img?.id} className={s.avatar}>
       <Img
         class={s.avatar}
-        url={avatar.img.url}
-        placeholder={`/uploads/${avatar.img.hash}-thumb.svg`}
-        alt={`Image for ${avatar.alt}`}
+        url={String(avatar?.img?.url)}
+        placeholder={`/uploads/${String(avatar?.img?.hash)}-thumb.svg`}
+        alt={`Image for Avatar`}
       />
     </div>
   );

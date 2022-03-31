@@ -4,49 +4,51 @@ import axios from 'redaxios';
 
 const Callback = (): JSX.Element => {
   const [width, setWidth] = useState<number>(0);
-  const {query, push, isReady} = useRouter();
-  const {provider, access_token, access_secret} = query;
+  const { query, push, isReady } = useRouter();
+  const { provider, access_token, access_secret } = query;
 
   const redirectURL =
     provider === 'twitter'
-      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}&access_secret=${access_secret}`
-      : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${access_token}`;
-   let isMobile = typeof window !== 'undefined' && width <= 768
+      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${String(access_token)}&access_secret=${String(
+          access_secret
+        )}`
+      : `https://api.tropicalt.ca/auth/${String(provider)}/callback?access_token=${String(access_token)}`;
+  const isMobile = typeof window !== 'undefined' && width <= 768;
 
   useEffect(() => {
-
     const handleWindowSizeChange = () => {
-      setWidth(window.opener.innerWidth)
-    }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+      setWidth(window.opener.innerWidth);
+    };
 
     window.addEventListener('resize', handleWindowSizeChange);
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange);
-    }
-
+    };
   }, []);
 
   useLayoutEffect(() => {
     if (isReady) {
-      console.log(query)
-      axios
+      console.log(query);
+      void axios
         .get(redirectURL)
-        .then((res: any) => {
-            window.opener.postMessage(res.data.jwt);
+        .then(({ data }: { data: { jwt: string } }) => {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call,@typescript-eslint/no-unsafe-member-access
+          window.opener.postMessage(data?.jwt);
         })
-        .catch((error: any) => {
-          push('/login');
+        .catch(async (error) => {
+          await push('/login');
           console.log(error);
         })
-        .then(() => {
+        .then(async () => {
           if (isMobile) {
-              push(window.opener.location.href)
+            await push(location.href);
           }
-          window.opener.location.reload();
+          location.reload();
           window.close();
-        });}
-
-  }, [isReady]);
+        });
+    }
+  }, [isReady, isMobile, push, query, redirectURL]);
   return (
     <div>
       <h2>Doing some stuff...</h2>

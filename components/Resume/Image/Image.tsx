@@ -1,16 +1,10 @@
 import React from 'react';
 import Img from '../../Other/Img/Img';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
+import { HighlightImgFragmentFragment } from '../../../apollo/gql/graphql';
 
-type Img = {
-  id: string;
-  url: string;
-  hash: string;
-  alt: string;
-};
-
-const HighlightImgFragment = gql`
+const HighlightImgFragment = gql(`
   fragment HighlightImgFragment on Resume {
     highlight {
       img {
@@ -20,16 +14,15 @@ const HighlightImgFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Highlight = (highlightImg: any): JSX.Element => {
-  highlightImg = highlightImg.data?.resume as Img;
+const Highlight = (highlightImg: HighlightImgFragmentFragment): JSX.Element => {
   return (
     <div className={s.highlightImg}>
       <Img
         class={s.highlightImg}
-        url={highlightImg.highlight.img.url}
-        placeholder={`/uploads/${highlightImg.highlight.img.hash}-thumb.svg`}
+        url={String(highlightImg?.highlight?.img?.url)}
+        placeholder={`/uploads/${String(highlightImg?.highlight?.img?.hash)}-thumb.svg`}
         alt={`Image for Resume`}
       />
     </div>

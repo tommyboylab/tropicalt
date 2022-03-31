@@ -1,16 +1,17 @@
 .layout {
   display: grid;
-  grid-template-areas: 'ImageBanner ImageBanner'
+  grid-template-areas:
+    'ImageBanner ImageBanner'
     'Bio RecentAlbums'
     'RecentArticles RecentAlbums'
     'Footer Footer';
   grid-template-columns: 3fr 1.25fr;
 }
 
-@media ( max-width: 1100px ) {
-
+@media (max-width: 1100px) {
   .layout {
-    grid-template-areas: 'ImageBanner'
+    grid-template-areas:
+      'ImageBanner'
       'Bio'
       'RecentArticles'
       'RecentAlbums'

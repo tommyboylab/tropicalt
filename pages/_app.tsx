@@ -1,8 +1,8 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
-// import { withApollo } from '../apollo/withApollo';
+import { ApolloProvider, NormalizedCacheObject } from '@apollo/client';
 import Head from 'next/head';
-import { useApollo } from '../apollo/apollo';
+import { useApollo } from '../apollo/apolloClient';
+import { AppContext, AppInitialProps } from 'next/app';
 
 const globalStyle = {
   __html: `
@@ -95,14 +95,15 @@ const globalStyle = {
 `,
 };
 
-const TropicalT = ({ Component, pageProps, apollo, router }: any) => {
-  const apolloClient = useApollo(pageProps);
+const TropicalT = ({ Component, pageProps, router }: AppContext & AppInitialProps) => {
+  const apolloClient = useApollo(pageProps as { [x: string]: NormalizedCacheObject | undefined });
   return (
     <>
       <Head>
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <meta charSet='utf-8' />
         <style dangerouslySetInnerHTML={globalStyle} />
+        <title />
       </Head>
       <ApolloProvider client={apolloClient}>
         <Component {...pageProps} router={router} />

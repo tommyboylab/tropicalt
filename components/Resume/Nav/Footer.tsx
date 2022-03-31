@@ -1,19 +1,15 @@
 import React from 'react';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
+import { ResumeEmailFragmentFragment } from '../../../apollo/gql/graphql';
 
-type Email = {
-  email: string;
-};
-
-const ResumeEmailFragment = gql`
+const ResumeEmailFragment = gql(`
   fragment ResumeEmailFragment on Resume {
     email
   }
-`;
+`);
 
-const Email = (email: any): JSX.Element => {
-  email = email.data?.resume as Email;
+const Email = (email: ResumeEmailFragmentFragment): JSX.Element => {
   return (
     <div className={s.contact}>
       <p>

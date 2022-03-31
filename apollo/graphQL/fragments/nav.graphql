@@ -1,5 +1,0 @@
-fragment PostFragment on Nav {
-    id
-    title
-    url
-}

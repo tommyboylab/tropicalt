@@ -1,5 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import { useRouter } from 'next/router';
 import { useQuery } from '@apollo/client';
 import Load from '../../components/Other/Load/Load';
@@ -10,24 +10,15 @@ import Nav from '../../components/Nav/Nav';
 import MobileHeader from '../../components/Blog/Post/MobileHeader/MobileHeader';
 import CoverImg from '../../components/Blog/Post/CoverImg/CoverImg';
 import TagList from '../../components/Blog/Post/Tags/TagList';
-import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
+// import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
 import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
-import Comments from '../../components/Blog/Post/Comments/CommentList/CommentList';
-import {isSignedIn} from "../../apollo/apollo";
+import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
+import { isSignedIn } from '../../apollo/apolloClient';
 import Modal from '../../components/Other/SocialAuth/Modal';
 
-type Article = {
-  id: string;
-  title: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  tag: [{ tag: { id: string; tag: string } }];
-  content: string;
-  excerpt: string;
-};
-
-const getArticle = gql`
+const getArticle = gql(`
   query Article($slug: String) {
     ...NavigationFragment
     articles(where: { slug: $slug }) {
@@ -48,47 +39,42 @@ const getArticle = gql`
       }
     }
     ...SidebarArticlesFragment
-  }
-  ${Nav.fragments.NavigationFragment}
-  ${Sidebar.fragments.SidebarArticlesFragment}
-`;
+  }`);
 
 const Post = (): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
-  const authenticated = isSignedIn()
+  const authenticated = isSignedIn();
 
-  const { data, error, loading } = useQuery(getArticle, { variables: { slug } });
+  const { data, error, loading } = useQuery(getArticle, { variables: { slug: String(slug) } });
 
   if (loading && !data) return <Load />;
   if (error) return <Err />;
 
-  const articles = data?.articles as Article[];
-  const sidebar = data;
-
   return (
     <>
-      {articles.map((article) => (
+      {data?.articles?.map((article) => (
         <>
-          <Meta title={article.title} excerpt={article.excerpt} imgUrl={article.cover.img.url} url={`/blog/${slug}`} />
-          <main className={s.layout} key={article.id}>
-            <Nav data={data} />
+          <Meta
+            title={article?.title}
+            excerpt={article?.excerpt}
+            imgUrl={article?.cover?.img?.url}
+            url={`/blog/${String(slug)}`}
+          />
+          <main className={s.layout} key={article?.id}>
+            <Nav nav={data.nav} />
             <MobileHeader />
             <CoverImg
-              title={article.title}
-              url={article.cover.img.url}
-              placeholder={`/uploads/${article.cover.img.hash}-thumb.svg`}
-              alt={article.title}
+              title={String(article?.title)}
+              url={String(article?.cover?.img?.url)}
+              placeholder={`/uploads/${String(article?.cover?.img?.hash)}-thumb.svg`}
+              alt={String(article?.title)}
             />
-            <TagList>
-              {article.tag.map(({ tag: tag }) => (
-                <Tags key={tag.id} tag={tag} />
-              ))}
-            </TagList>
-            <Body content={article.content} />
-            <Sidebar data={sidebar} />
-            {authenticated ? <Comments slug={slug} articleID={article.id}/> : <Modal/>}
-            <Footer data={data} />
+            <TagList>{article?.tag?.map((tag) => tag?.tag)}</TagList>
+            <Body content={String(article?.content)} />
+            <Sidebar sidebar={data.sidebar} />
+            {authenticated ? <CommentList slug={String(article?.slug)} articleID={String(article?.id)} /> : <Modal />}
+            <Footer nav={data.nav} />
           </main>
         </>
       ))}

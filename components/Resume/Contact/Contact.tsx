@@ -1,21 +1,16 @@
 import React from 'react';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
+import { ContactFragmentFragment } from '../../../apollo/gql/graphql';
 
-type Contact = {
-  phoneNum: string;
-  address: string;
-};
-
-const ContactFragment = gql`
+const ContactFragment = gql(`
   fragment ContactFragment on Resume {
     address
     phoneNum
   }
-`;
+`);
 
-const Contact = (contact: any): JSX.Element => {
-  contact = contact.data?.resume as Contact;
+const Contact = (contact: ContactFragmentFragment): JSX.Element => {
   return (
     <div className={s.contactInfo}>
       <p className={s.cellphone}>{contact.phoneNum}</p>

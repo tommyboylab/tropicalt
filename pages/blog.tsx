@@ -6,21 +6,17 @@ import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
 import List from '../components/Blog/List';
 import s from '../components/Other/Layout/Blog.module.scss';
 import Meta from '../components/Other/Meta/Meta';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import { useQuery } from '@apollo/client';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
-const getArticlesQuery = gql`
+const getArticlesQuery = gql(`
   query getArticles($start: Int!) {
     ...NavigationFragment
     ...ArticleListFragment
     ...SidebarArticlesFragment
-  }
-  ${Nav.fragments.NavigationFragment}
-  ${List.fragments.ArticleListFragment}
-  ${Sidebar.fragments.SidebarArticlesFragment}
-`;
+  }`);
 
 export default function Blog(): JSX.Element {
   const [nextPosts, setNextPosts] = useState(0);
@@ -44,22 +40,22 @@ export default function Blog(): JSX.Element {
       <Meta
         title={'T^T - Blog'}
         excerpt={'The blog that involves me, drinking a pot of tea and sharing some thoughts.'}
-        imgUrl={data.list[0].cover.img.url}
+        imgUrl={data?.list?.[0]?.cover?.img?.url}
         url={'/blog'}
       />
-      <Nav data={data} />
+      <Nav nav={data?.nav} />
       <Header />
-      <List data={data} />
+      <List list={data?.list} />
       <div className={s.postControls}>
         <button onClick={prev} disabled={nextPosts === 0}>
           Prev
         </button>
-        <button onClick={next} disabled={data.list.length < 7}>
+        <button onClick={next} disabled={data?.list ? data.list.length < 7 : true}>
           Next
         </button>
       </div>
-      <Sidebar data={data} />
-      <Footer data={data} />
+      <Sidebar sidebar={data?.sidebar} />
+      <Footer nav={data?.nav} />
     </main>
   );
 }

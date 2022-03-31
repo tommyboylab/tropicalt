@@ -6,7 +6,7 @@
   background-color: GlobalStyle.$SECONDARY_COLOR_MUTED;
   max-width: 100vw;
   width: max-content;
-  margin: 0 auto .75em auto;
+  margin: 0 auto 0.75em auto;
   padding: 0 6vw 5vw 6vw;
   border-bottom-right-radius: 1em;
   border-bottom-left-radius: 1em;
@@ -20,13 +20,13 @@
 
 .form input,
 .form textarea {
-  opacity: .5;
+  opacity: 0.5;
   color: GlobalStyle.$PRIMARY_COLOR;
   background-color: GlobalStyle.$BACKGROUND_COLOR;
   width: 100%;
-  padding: .5em;
+  padding: 0.5em;
   border: none;
-  border-radius: .25em;
+  border-radius: 0.25em;
   border-bottom: 2px solid GlobalStyle.$SECONDARY_COLOR;
   outline: none;
   transition: opacity 500ms ease-in-out;
@@ -65,14 +65,14 @@
   background-color: GlobalStyle.$BACKGROUND_COLOR;
   width: min-content;
   margin: 0 auto;
-  padding: .5em 3em;
+  padding: 0.5em 3em;
   border: none;
-  border-radius: .75em;
+  border-radius: 0.75em;
   transition: opacity 500ms ease-in-out;
 }
 
 .submit:disabled {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .submitError {
@@ -84,8 +84,7 @@
   color: GlobalStyle.$QUATERNARY_COLOR;
 }
 
-@media ( max-width: 770px ) {
-
+@media (max-width: 770px) {
   .form {
     padding-top: 0;
   }

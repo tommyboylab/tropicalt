@@ -3,49 +3,120 @@ import ReactMarkdown from 'react-markdown';
 import Rating from './Rating/Rating';
 import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
+// import {Comment, CommentsQuery} from '../../../../../apollo/gql/graphql';
 
-type Comment = {
-  id: number;
+export type Me =
+  | {
+      __typename?: 'UsersPermissionsMe' | undefined;
+      id: string;
+      username: string;
+      avatar?: string | null | undefined;
+    }
+  | null
+  | undefined;
+
+export type Comment =
+  | {
+      __typename?: 'Comment';
+      id: string;
+      content?: string | null | undefined;
+      article?: { __typename?: 'Article'; id: string } | null | undefined;
+      user?:
+        | { __typename?: 'UsersPermissionsUser'; id: string; username: string; avatar?: string | null | undefined }
+        | null
+        | undefined;
+      likes?:
+        | Array<
+            | {
+                __typename?: 'ComponentBlogLikes';
+                user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+              }
+            | null
+            | undefined
+          >
+        | null
+        | undefined;
+      dislikes?:
+        | Array<
+            | {
+                __typename?: 'ComponentBlogDislike';
+                user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+              }
+            | null
+            | undefined
+          >
+        | null
+        | undefined;
+      children?:
+        | Array<
+            | {
+                __typename?: 'Comment';
+                id: string;
+                content?: string | null | undefined;
+                user?:
+                  | {
+                      __typename?: 'UsersPermissionsUser';
+                      id: string;
+                      username: string;
+                      avatar?: string | null | undefined;
+                    }
+                  | null
+                  | undefined;
+                likes?:
+                  | Array<
+                      | {
+                          __typename?: 'ComponentBlogLikes';
+                          user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+                        }
+                      | null
+                      | undefined
+                    >
+                  | null
+                  | undefined;
+                dislikes?:
+                  | Array<
+                      | {
+                          __typename?: 'ComponentBlogDislike';
+                          user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+                        }
+                      | null
+                      | undefined
+                    >
+                  | null
+                  | undefined;
+              }
+            | null
+            | undefined
+          >
+        | null
+        | undefined;
+    }
+  | null
+  | undefined;
+
+type CommentProps = {
+  comment?: Comment | null;
+  me: Me;
   nested?: boolean;
-  comment: { id: number };
-  user: { id: number; avatar: string; username: string };
-  content: string;
-  likes: [{ user: { id: number } }];
-  dislikes: [{ user: { id: number } }];
-  articleID: number;
-  updateState: CallableFunction;
 };
-const Comment = ({ comment, user, content, likes, dislikes, articleID, nested, updateState }: Comment): JSX.Element => {
+
+const Comment = ({ comment, me, nested }: CommentProps): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
-  console.log(openReplyBox);
+  const { content, article, id, user } = comment!;
+
   const openReply = () => {
     setOpenReplyBox(!openReplyBox);
   };
 
   return (
     <div className={s.comment}>
-      <img src={user.avatar} className={s.commentAvatar} alt={`${user.username}'s avatar image`} />
-      <h3 className={s.commentName}>{user.username}</h3>
-      <ReactMarkdown className={s.commentContent}>{content}</ReactMarkdown>
-      <Rating
-        comment={comment}
-        user={user}
-        replyIsOpen={openReplyBox}
-        nested={nested}
-        reply={openReply}
-        likes={likes}
-        dislikes={dislikes}
-      />
+      <img src={String(user?.avatar)} className={s.commentAvatar} alt={`${String(user?.username)}'s avatar image`} />
+      <h3 className={s.commentName}>{user?.username}</h3>
+      <ReactMarkdown className={s.commentContent}>{String(content)}</ReactMarkdown>
+      <Rating comment={comment} me={me} replyIsOpen={openReplyBox} nested={nested} reply={openReply} />
       {openReplyBox && (
-        <CommentForm
-          updateState={updateState}
-          comment={comment}
-          nested={nested}
-          user={user}
-          articleID={articleID}
-          content={''}
-        />
+        <CommentForm commentId={id} nested={nested} me={me} articleId={String(article?.id)} content='' />
       )}
     </div>
   );

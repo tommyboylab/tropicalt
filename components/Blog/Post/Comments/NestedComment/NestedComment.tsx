@@ -1,24 +1,58 @@
 import React, { useState } from 'react';
-import Comment from '../Comment/Comment';
+import Comment, { Me } from '../Comment/Comment';
 import s from '../Comments.module.scss';
 
 type NestedComment = {
-  articleID: number;
-  parent: [
-    {
-      id: number;
-      content: string;
-      user: { id: number; username: string; avatar: string };
-      likes: [{ user: { id: number } }];
-      dislikes: [{ user: { id: number } }];
-    }
-  ];
-  updateState: CallableFunction;
+  me: Me;
+  articleID: string;
+  child:
+    | Array<
+        | {
+            __typename?: 'Comment';
+            id: string;
+            content?: string | null | undefined;
+            user?:
+              | {
+                  __typename?: 'UsersPermissionsUser';
+                  id: string;
+                  username: string;
+                  avatar?: string | null | undefined;
+                }
+              | null
+              | undefined;
+            likes?:
+              | Array<
+                  | {
+                      __typename?: 'ComponentBlogLikes';
+                      user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+            dislikes?:
+              | Array<
+                  | {
+                      __typename?: 'ComponentBlogDislike';
+                      user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
+                    }
+                  | null
+                  | undefined
+                >
+              | null
+              | undefined;
+          }
+        | null
+        | undefined
+      >
+    | null
+    | undefined;
 };
 
-const NestedComment = ({ parent, articleID, updateState }: NestedComment): JSX.Element => {
+const NestedComment = ({ child, me }: NestedComment): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
-  const commentNumber = parent.length;
+  const commentNumber = Number(child?.length);
 
   const handleChange = () => {
     setOpenReplies(!openReplies);
@@ -32,20 +66,9 @@ const NestedComment = ({ parent, articleID, updateState }: NestedComment): JSX.E
       )}
       {openReplies &&
         commentNumber > 0 &&
-        parent.map((comment, index) => (
+        child?.map((comment, index) => (
           <>
-            <Comment
-              id={comment.id}
-              nested
-              comment={comment}
-              articleID={articleID}
-              key={index}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={updateState}
-            />
+            <Comment nested comment={comment} key={index} me={me} />
           </>
         ))}
     </div>

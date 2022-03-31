@@ -1,22 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import moment from 'moment';
 import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import s from '../Comments.module.scss';
+import { GetCommentList } from '../CommentList/CommentList';
 
-type CommentForm = {
-  updateState: any
-  comment?: { id: number | undefined };
-  user: { id: number; avatar: string; username: string };
-  articleID: number;
-  content: string;
-  nested?: boolean;
-};
-
-const createComment = gql`
+const CreateComment = gql(`
   mutation AddComment($articleID: ID!, $userID: ID!, $content: String!, $date: DateTime!, $parentID: ID) {
     createComment(
       input: { data: { article: $articleID, user: $userID, content: $content, date: $date, parent: $parentID } }
@@ -37,32 +29,53 @@ const createComment = gql`
       }
     }
   }
-`;
+`);
 
-const commentSchema = yup.object({content: yup.string().min(2, `That's not good enough!`).max(40).required()});
+const commentSchema = yup.object({ content: yup.string().min(2, `That's not good enough!`).max(40).required() });
 type commentType = yup.InferType<typeof commentSchema>;
 
-const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentForm): JSX.Element => {
-  const commentCreateDate = moment().toISOString();
-  const commentParentID = nested ? comment?.id : null;
-  const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
+type Props = {
+  commentId?: string;
+  content: string;
+  me:
+    | {
+        __typename?: 'UsersPermissionsMe' | undefined;
+        id: string;
+        username: string;
+        avatar?: string | null | undefined;
+      }
+    | null
+    | undefined;
+  articleId: string;
+  nested?: boolean;
+};
 
-  const { register, handleSubmit, formState, reset, formState:{errors} } = useForm<commentType>({
-    mode: 'onChange',
-    resolver: yupResolver(commentSchema)
+const CommentForm = ({ commentId, me, articleId, nested }: Props): JSX.Element => {
+  const commentCreateDate = moment().toISOString();
+  const commentParentID = nested ? commentId : null;
+  const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(CreateComment, {
+    refetchQueries: [
+      GetCommentList, // DocumentNode object parsed with gql
+      'Comments', // Query name
+    ],
   });
 
-  const onSubmit = async (data: {
-    userID: number;
-    articleID: number;
-    content: string;
-    date: string;
-    parentID: number;
-  }): Promise<void> => {
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    formState: { errors },
+  } = useForm<commentType>({
+    mode: 'onChange',
+    resolver: yupResolver(commentSchema),
+  });
+
+  const onSubmit = async (data: { content: string }): Promise<void> => {
     await addComment({
       variables: {
-        userID: user.id,
-        articleID: articleID,
+        userID: String(me?.id),
+        articleID: articleId,
         content: data.content,
         date: commentCreateDate,
         parentID: commentParentID,
@@ -71,11 +84,11 @@ const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentF
     reset({
       content: '',
     });
-    updateState();
+    // updateState();
   };
   return (
-    <form className={s.commentForm} onSubmit={handleSubmit(onSubmit)}>
-      <img className={s.commentAvatar} src={user.avatar} alt={`${user.username}'s Avatar`} />
+    <form className={s.commentForm} onSubmit={void handleSubmit(onSubmit)}>
+      <img className={s.commentAvatar} src={String(me?.avatar)} alt={`${String(me?.username)}'s Avatar`} />
       <div className={s.formInput}>
         <input
           type='text'

@@ -1,23 +1,10 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { DocumentType, gql } from '@app/gql';
 import Post from '../../../Home/Recents/Recents';
 import AboutMe from '../About/AboutMe';
 import s from './Sidebar.module.scss';
-import Avatar from '../../../Other/Avatar/Avatar';
 
-type Article = [
-  {
-    id: string;
-    slug: string;
-    cover: { img: { id: string; url: string; hash: string } };
-    title: string;
-    date: string;
-    user: { username: string };
-    excerpt: string;
-  }
-];
-
-const SidebarArticlesFragment = gql`
+const SidebarArticlesFragment = gql(`
   fragment SidebarArticlesFragment on Query {
     sidebar: articles(limit: 4, sort: "date:desc", where: { published: true }) {
       id
@@ -40,29 +27,26 @@ const SidebarArticlesFragment = gql`
       ...AvatarFragment
     }
   }
-  ${Avatar.fragments.AvatarFragment}
-`;
+`);
 
-const PostSidebar = (data: any): JSX.Element => {
-  const articles = data?.data.sidebar as Article;
-  const avatar = data?.data.avatar;
+const PostSidebar = ({ sidebar, avatar }: DocumentType<typeof SidebarArticlesFragment>): JSX.Element => {
   return (
     <div className={s.blogSidebar}>
       <h2>ˇˇˇ</h2>
-      <AboutMe data={avatar} />
-      {articles &&
-        articles.map((article: any) => (
+      <AboutMe avatar={avatar?.avatar} />
+      {sidebar &&
+        sidebar.map((article) => (
           <Post
-            id={article.id}
+            id={article?.id}
             type='blog'
-            key={article.id}
-            slug={article.slug}
-            cover={`/uploads/${article.cover.img.hash}-thumb.svg`}
-            img={article.cover.img.url}
-            title={article.title}
-            date={article.date}
-            name={article.user.username}
-            excerpt={article.excerpt}
+            key={article?.id}
+            slug={String(article?.slug)}
+            cover={`/uploads/${String(article?.cover?.img?.hash)}-thumb.svg`}
+            img={article?.cover?.img?.url}
+            title={article?.title}
+            date={String(article?.date)}
+            name={article?.user?.username}
+            excerpt={article?.excerpt}
           />
         ))}
     </div>

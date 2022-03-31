@@ -1,23 +1,20 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
+import { SkillsFragmentFragment } from '../../../apollo/gql/graphql';
 
-type Skills = {
-  skills: string;
-};
-const SkillsFragment = gql`
+const SkillsFragment = gql(`
   fragment SkillsFragment on Resume {
     skills
   }
-`;
+`);
 
-const Skills = (skills: any): JSX.Element => {
-  skills = skills.data?.resume as Skills;
+const Skills = (skills: SkillsFragmentFragment): JSX.Element => {
   return (
     <div className={s.skills}>
       <h2>Skills</h2>
-      <ReactMarkdown children={skills.skills} />
+      <ReactMarkdown>{skills.skills}</ReactMarkdown>
     </div>
   );
 };

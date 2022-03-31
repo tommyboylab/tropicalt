@@ -1,34 +1,55 @@
 {
-	"compilerOptions": {
-		"outDir": "build/lib",
-		"module": "esnext",
-		"moduleResolution": "node",
-		"target": "es5",
-		"lib": ["es5", "es6", "es7", "es2017", "dom", "dom.iterable", "esnext"],
-		"sourceMap": true,
-		"allowJs": false,
-		"skipLibCheck": true,
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"strict": true,
-		"jsx": "preserve",
-		"noEmit": true,
-		"rootDirs": ["components", "pages", "public", "stories"],
-		"baseUrl": ".",
-		"forceConsistentCasingInFileNames": true,
-		"noImplicitReturns": true,
-		"noImplicitThis": true,
-		"noImplicitAny": true,
-		"strictNullChecks": true,
-		"esModuleInterop": true,
-		"suppressImplicitAnyIndexErrors": true,
-		"noUnusedLocals": true,
-		"declaration": true,
-		"allowSyntheticDefaultImports": true,
-		"experimentalDecorators": true,
-		"emitDecoratorMetadata": true
-	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "outDir": "build/lib",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "es2017",
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "sourceMap": true,
+    "allowJs": false,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "strict": true,
+    "jsx": "preserve",
+    "noEmit": true,
+    "rootDirs": [
+      "components",
+      "pages",
+      "public",
+      "stories"
+    ],
+    "baseUrl": ".",
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "esModuleInterop": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "noUnusedLocals": true,
+    "declaration": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "incremental": true
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".eslintrc.js",
+    "babel.config.js"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
-

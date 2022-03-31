@@ -4,27 +4,27 @@ import Moment from 'react-moment';
 import s from './Recents.module.scss';
 
 type Recent = {
-  id: string;
+  id?: string;
   type: string;
-  slug: string;
+  slug: string | null;
   cover: string;
-  img: string;
-  title: string;
+  img?: string;
+  title?: string;
   date: string;
-  name: string;
-  excerpt: string;
+  name?: string;
+  excerpt?: string;
 };
 
 const Recent = (Recent: Recent): JSX.Element => (
-  <Link href={`/${Recent.type}/${Recent.slug}`} as={`/${Recent.type}/${Recent.slug}`}>
+  <Link href={`/${Recent.type}/${String(Recent.slug)}`} as={`/${Recent.type}/${String(Recent.slug)}`}>
     <article
       id={Recent.id}
       className={`${s.recent}`}
       style={{ backgroundImage: `url(https://api.tropicalt.ca${Recent.cover})` }}>
       <img
         className={s.img}
-        src={`https://api.tropicalt.ca${Recent.img}`}
-        alt={`Image for ${Recent.title}`}
+        src={`https://api.tropicalt.ca${String(Recent.img)}`}
+        alt={`Image for ${String(Recent.title)}`}
         loading='lazy'
       />
       <div className={`${s.content}`}>

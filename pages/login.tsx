@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../components/Other/SocialAuth/Modal';
 
-const SignUp = (authorization: any) => {
+const SignUp = (authorization: boolean) => {
   return (
     <>
       {!authorization && <h1>Fuck Yeah Authenticated</h1>}

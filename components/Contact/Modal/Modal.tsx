@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import s from './Modal.module.scss';
 
 type Toggle = {
-  toggle: Function;
-  content: Function;
+  toggle: CallableFunction;
+  content: CallableFunction;
 };
 
 export const ToggleContent = ({ toggle, content }: Toggle): JSX.Element => {

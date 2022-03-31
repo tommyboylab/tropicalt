@@ -1,5 +1,5 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import { useQuery } from '@apollo/client';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
@@ -9,32 +9,7 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 import { NetworkStatus } from '@apollo/client';
 
-type UserType = {
-  id: number;
-  username: string;
-  avatar: string;
-};
-type CommentList = {
-  id: number;
-  user: { id: number; avatar: string; username: string };
-  articleID: number;
-  content: string;
-  newComment: ConcatArray<never>;
-  children: [
-    {
-      id: number;
-      articleID: number;
-      content: string;
-      user: { id: number; username: string; avatar: string };
-      likes: [{ user: { id: number } }];
-      dislikes: [{ user: { id: number } }];
-    }
-  ];
-  likes: [{ user: { id: number } }];
-  dislikes: [{ user: { id: number } }];
-};
-
-const getCommentList = gql`
+export const GetCommentList = gql(`
   query Comments($slug: String) {
     me {
       id
@@ -83,45 +58,41 @@ const getCommentList = gql`
       }
     }
   }
-`;
+`);
 
-const CommentList = ({ articleID, slug }: any): JSX.Element => {
-  const { data, loading, refetch, networkStatus } = useQuery(getCommentList, {
+type CommentList = {
+  slug: string;
+  articleID: string;
+};
+
+const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
+  const { data, loading, networkStatus } = useQuery(GetCommentList, {
     variables: { slug },
     notifyOnNetworkStatusChange: true,
   });
 
+  const comments = data?.comments;
+  const me = data?.me;
+
   if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
 
-  const comments = data?.comments as CommentList[];
-  const user = data?.me as UserType;
+  const parentCommentLength = Number(comments?.length);
 
-  const parentCommentLength = comments.length;
+  const nestedCommentLength = Number(comments?.forEach((comment) => comment?.children?.length));
 
-  let nestedCommentLength = 0;
-  comments.forEach((comment) => (nestedCommentLength += comment.children.length));
+  // const childCommentLength = comments?.forEach((comment) => (nestedCommentLength += Number(comment?.children?.length)));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
 
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm updateState={refetch} user={user} articleID={articleID} content={''} />
+      <CommentForm me={me} articleId={String(articleID)} content={''} />
 
-      {comments.length > 0 &&
-        comments.map((comment) => (
+      {parentCommentLength > 0 &&
+        comments?.map((comment) => (
           <>
-            <Comment
-              id={comment.id}
-              comment={comment}
-              articleID={articleID}
-              key={comment.id}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={refetch}
-            />
-            <NestedComment articleID={articleID} parent={comment.children} updateState={refetch} />
+            <Comment comment={comment} key={comment?.id} me={me} />
+            <NestedComment articleID={String(articleID)} child={comment?.children} me={me} />
           </>
         ))}
     </div>

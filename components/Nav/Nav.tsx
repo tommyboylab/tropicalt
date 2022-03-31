@@ -1,17 +1,9 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Link from './ActiveLink/ActiveLink';
 import s from './Nav.module.scss';
 
-type Nav = [
-  {
-    id: string;
-    title: string;
-    url: string;
-  }
-];
-
-const NavFragment = gql`
+const NavFragment = gql(`
   fragment NavigationFragment on Query {
     nav(id: 1) {
       nav {
@@ -21,11 +13,9 @@ const NavFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Nav = (nav: any): JSX.Element => {
-  nav = nav.data?.nav?.nav as Nav;
-
+const Nav = ({ nav }: DocumentType<typeof NavFragment>): JSX.Element => {
   return (
     <nav className={s.nav}>
       <li className={s.menu}>T^T</li>
@@ -38,10 +28,10 @@ const Nav = (nav: any): JSX.Element => {
           }
         `}</style>
         {nav &&
-          nav.map((nav: { url: string; id: string | number | undefined; title: React.ReactNode }) => {
+          nav?.nav?.map((nav) => {
             return (
-              <Link href={nav.url} key={nav.id}>
-                <li className='link'>{nav.title}</li>
+              <Link href={nav ? nav.url : '/'} key={nav?.id}>
+                <li className='link'>{nav?.title}</li>
               </Link>
             );
           })}

@@ -1,7 +1,7 @@
 require('dotenv').config();
 const path = require('path')
-const withPreact = require('next-plugin-preact');
-module.exports = withPreact({
+// const withPreact = require('next-plugin-preact');
+module.exports = {
   env: {
     API: process.env.API,
   },
@@ -9,4 +9,4 @@ module.exports = withPreact({
     includePaths: [path.join(__dirname, 'styles')],
   },
     strictPostcssConfiguration: true
-});
+};

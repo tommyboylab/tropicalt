@@ -1,26 +1,27 @@
-import React, {CSSProperties} from 'react';
+import React, { CSSProperties } from 'react';
+import Image from 'next/image';
 
 type Img = {
+  id?: string;
   class: string;
   url: string;
   alt: string;
   placeholder: string;
-  style?: CSSProperties
+  style?: CSSProperties;
 };
 
+const placeholder = () => 'url(https://api.tropicalt.ca${Img.placeholder})';
+
 const ImgComp = (Img: Img): JSX.Element => (
-  <img
+  <Image
+    id={Img.id}
     className={Img.class}
     src={`https://api.tropicalt.ca${Img.url}`}
     loading='lazy'
     alt={Img.alt}
-    style={{
-      backgroundImage: `url(https://api.tropicalt.ca${Img.placeholder})`,
-      backgroundPosition: 'center',
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      ...Img.style,
-    }}
+    layout='fill'
+    objectFit='cover'
+    loader={placeholder}
   />
 );
 export default ImgComp;

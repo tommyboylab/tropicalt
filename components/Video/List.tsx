@@ -1,7 +1,8 @@
 import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './List.module.scss';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
+import { VideoFragmentFragment } from '../../apollo/gql/graphql';
 
 type Videos = {
   id: string;
@@ -13,7 +14,7 @@ type Videos = {
   tag: [{ tag: { id: string; tag: string } }];
 };
 
-const VideoFragment = gql`
+const VideoFragment = gql(`
   fragment VideoFragment on Query {
     videos(sort: "date:desc", where: { published: true }) {
       id
@@ -35,25 +36,23 @@ const VideoFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Videos = (videos: any): JSX.Element => {
-  videos = videos.data?.videos as Videos[];
-
+const Videos = (videos: VideoFragmentFragment): JSX.Element => {
   return (
     <div className={s.videoList}>
-      {videos.map((video: Videos) => (
+      {videos?.videos?.map((video) => (
         <Recents
-          key={video.id}
+          key={video?.id}
           type='vlog'
-          id={video.id}
-          slug={video.slug}
-          cover={`/uploads/${video.cover.img.hash}-thumb.svg`}
-          img={video.cover.img.url}
-          title={video.title}
-          date={video.date}
-          name={video.user.username}
-          excerpt={`Location: ${video.tag.map(({ tag }) => tag)}`}
+          id={video?.id}
+          slug={String(video?.slug)}
+          cover={`/uploads/${String(video?.cover?.img?.hash)}-thumb.svg`}
+          img={String(video?.cover?.img?.url)}
+          title={video?.title}
+          date={video?.date as string}
+          name={video?.user?.username}
+          excerpt={`Location: ${String(video?.tag?.[0])}`}
         />
       ))}
     </div>

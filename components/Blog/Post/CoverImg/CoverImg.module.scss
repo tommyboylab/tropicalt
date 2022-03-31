@@ -4,10 +4,10 @@
   grid-area: PostImg;
   position: relative;
   line-height: 0;
-  margin: 3.25em 1rem auto .5em;
+  margin: 3.25em 1rem auto 0.5em;
   border: 2px solid GlobalStyle.$SECONDARY_COLOR;
-  border-top-right-radius: .75rem;
-  border-top-left-radius: .75rem;
+  border-top-right-radius: 0.75rem;
+  border-top-left-radius: 0.75rem;
   border-bottom: none;
 }
 
@@ -16,7 +16,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center;
-  margin: 1em .5rem auto .5em;
+  margin: 1em 0.5rem auto 0.5em;
   border: 2px solid GlobalStyle.$PRIMARY_COLOR;
   border-bottom: none;
 }
@@ -30,8 +30,8 @@
   color: GlobalStyle.$PRIMARY_COLOR;
   background-color: GlobalStyle.$TERTIARY_COLOR_MUTED;
   // Account for margin of image+box
-  margin-right: -.5rem;
-  padding: .25em .5em;
-  border-top-left-radius: .5em;
-  border-bottom-left-radius: .5em;
+  margin-right: -0.5rem;
+  padding: 0.25em 0.5em;
+  border-top-left-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
 }

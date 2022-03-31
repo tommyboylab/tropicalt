@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, MutableRefObject, SetStateAction } from 'react';
+import React, { useRef, useState, useEffect, MutableRefObject, SetStateAction, Dispatch } from 'react';
 import Link from 'next/link';
 import ThumbButton from './ThumbButton';
 import s from '../Album.module.scss';
@@ -6,18 +6,18 @@ import s from '../Album.module.scss';
 function useOnClickOutside(onClickOutside: EventListener): MutableRefObject<HTMLElement | null> {
   const insideRef = useRef<HTMLElement | null>(null);
 
-  function handleBodyClick(event: MouseEvent) {
-    if (!insideRef?.current?.contains(event.target as Node)) {
-      onClickOutside(event as Event);
-    }
-  }
-
   useEffect(() => {
+    function handleBodyClick(event: MouseEvent) {
+      if (!insideRef?.current?.contains(event.target as Node)) {
+        onClickOutside(event as Event);
+      }
+    }
+
     document.body.addEventListener('click', handleBodyClick, true);
     return function cleanup() {
       document.body.removeEventListener('click', handleBodyClick, true);
     };
-  }, [insideRef.current]);
+  }, [insideRef, onClickOutside]);
   return insideRef;
 }
 
@@ -41,17 +41,17 @@ function useSidebar(defaultOpen: boolean) {
   };
 }
 
-type photo = {
+type Photo = {
   original: string;
   thumbnail: string;
 };
 
 type Sidebar = {
-  photos: photo[];
-  activeItemID: any;
-  setActiveItem: any;
-  title: string;
-  excerpt: string;
+  photos: Photo[];
+  activeItemID: Photo | undefined;
+  setActiveItem: Dispatch<SetStateAction<Photo | undefined>>;
+  title?: string;
+  excerpt?: string;
 };
 
 const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar): JSX.Element => {
@@ -106,8 +106,8 @@ const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar): JSX.Elemen
           <ThumbButton
             key={photo.original}
             src={photo.thumbnail}
-            setActive={(): SetStateAction<void> => {
-              setActiveItem(photo.original);
+            setActive={() => {
+              setActiveItem(photo);
             }}
             id={photo.original}
           />

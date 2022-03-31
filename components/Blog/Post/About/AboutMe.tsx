@@ -1,10 +1,12 @@
 import React from 'react';
 import Avatar from '../../../Other/Avatar/Avatar';
 import s from './AboutMe.module.scss';
+import { DocumentType } from '../../../../apollo/gql';
+import { AvatarFragmentFragmentDoc } from '../../../../apollo/gql/graphql';
 
-const About = (aboutMe: any): JSX.Element => (
+const About = ({ avatar }: DocumentType<typeof AvatarFragmentFragmentDoc>): JSX.Element => (
   <div className={s.postAbout}>
-    <Avatar data={aboutMe.data} />
+    <Avatar avatar={avatar} />
     <p>{`I'm just a simple man with a dream of building a personal website.`}</p>
     <a href='/about'>Read More...</a>
   </div>

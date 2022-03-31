@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import { useQuery } from '@apollo/client';
-import axios from 'redaxios';
+import axios, { Response } from 'redaxios';
 import MainWindow from './MainWindow/MainWindow';
 import Sidebar from './Sidebar/Sidebar';
 import Meta from '../../Other/Meta/Meta';
 import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 
-const getAlbum = gql`
+const getAlbum = gql(`
   query getAlbums($slug: [String!]) {
     albums(where: { slug: $slug }) {
       id
@@ -25,16 +25,9 @@ const getAlbum = gql`
       albumID
     }
   }
-`;
+`);
 
-type Albums = {
-  title: string;
-  excerpt: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  albumID: number;
-};
-
-type Photo = {
+export type Photo = {
   original: string;
   thumbnail: string;
 };
@@ -47,12 +40,14 @@ const Album = (): JSX.Element => {
 
   const { data, error, loading } = useQuery(getAlbum, {
     variables: { slug: router.query.slug },
-    onCompleted: async (d) => {
-      const albumId = d?.albums[0].albumID;
+    async onCompleted(data) {
+      const albumId = data?.albums?.[0]?.albumID;
       if (albumId) {
-        const photosArray = await axios.get(`https://tropicalt-google-photos.glitch.me/${albumId}`);
+        const { data }: Response<Array<string>> = await axios.get(
+          `https://tropicalt-google-photos.glitch.me/${albumId}`
+        );
         setPhotos(
-          photosArray?.data?.map((url: string) => ({
+          data?.map((url: string) => ({
             original: `${url}=w2048`,
             thumbnail: `${url}=w400`,
           }))
@@ -65,24 +60,24 @@ const Album = (): JSX.Element => {
   if (isLoading || loading) return <Load />;
   if (error || (!isLoading && !photos.length)) return <Err />;
 
-  const albums = data?.albums as Albums[];
+  const albums = data?.albums;
 
   return (
     <>
       <Meta
-        title={albums[0].title}
-        excerpt={albums[0].excerpt}
-        imgUrl={albums[0].cover.img.url}
-        url={`/albums/${router.query.slug}`}
+        title={albums?.[0]?.title}
+        excerpt={albums?.[0]?.excerpt}
+        imgUrl={albums?.[0]?.cover?.img?.url}
+        url={`/albums/${String(router.query.slug)}`}
       />
       <Sidebar
-        title={albums[0].title}
-        excerpt={albums[0].excerpt}
+        title={albums?.[0]?.title}
+        excerpt={albums?.[0]?.excerpt}
         photos={photos}
         activeItemID={activePhoto}
         setActiveItem={setActivePhoto}
       />
-      <MainWindow src={activePhoto} />
+      <MainWindow src={String(activePhoto?.original)} />
     </>
   );
 };

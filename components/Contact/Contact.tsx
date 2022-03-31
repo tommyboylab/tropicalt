@@ -1,9 +1,9 @@
 import React, { MouseEventHandler } from 'react';
 import * as yup from 'yup';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 import { useMutation } from '@apollo/client';
 import { useForm } from 'react-hook-form';
-import {yupResolver} from "@hookform/resolvers/yup";
+import { yupResolver } from '@hookform/resolvers/yup';
 import { ToggleContent, Modal } from './Modal/Modal';
 import s from './Contact.module.scss';
 
@@ -13,7 +13,7 @@ type FormFields = {
   message: string;
 };
 
-const sendEmail = gql`
+const sendEmail = gql(`
   mutation AddEmail($name: String!, $email: String!, $message: String!) {
     createEmail(input: { data: { name: $name, email: $email, message: $message } }) {
       email {
@@ -24,7 +24,7 @@ const sendEmail = gql`
       }
     }
   }
-`;
+`);
 
 const contactSchema = yup.object({
   name: yup.string().min(2, `That's not a name!`).max(22).required(),
@@ -42,9 +42,15 @@ const HideModal = (hide: MouseEventHandler): JSX.Element => (
 
 const Form = (): JSX.Element => {
   const [addEmail, { loading: mutationLoading, error: mutationError }] = useMutation(sendEmail);
-  const { register, handleSubmit, formState, reset, formState: { errors } } = useForm<FormFields>({
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    formState: { errors },
+  } = useForm<FormFields>({
     mode: 'onChange',
-    resolver: yupResolver(contactSchema)
+    resolver: yupResolver(contactSchema),
   });
 
   const onSubmit = async (data: FormFields): Promise<void> => {
@@ -60,7 +66,7 @@ const Form = (): JSX.Element => {
 
   return (
     <section className={s.form}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={void handleSubmit(onSubmit)}>
         <h1>Want to get in touch?</h1>
 
         <div className={s.name}>
@@ -75,13 +81,13 @@ const Form = (): JSX.Element => {
         </div>
 
         <div className={s.email}>
-          <input type='email' {...register('email', { required: true })} placeholder='Your email'  minLength={6}  />
+          <input type='email' {...register('email', { required: true })} placeholder='Your email' minLength={6} />
           {errors.email && <p className={s.error}>{errors.email.message}</p>}
         </div>
 
         <div className={s.message}>
           <textarea
-              {...register('message', { required: true })}
+            {...register('message', { required: true })}
             placeholder='Your message'
             maxLength={500}
             minLength={2}

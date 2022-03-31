@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import gql from 'graphql-tag';
+import { gql } from '@app/gql';
 
 import { useQuery } from '@apollo/client';
 import axios from 'redaxios';
@@ -9,7 +9,7 @@ import Err from '../../Other/Error/Error';
 import s from './VideoPlayer.module.scss';
 import Nav from '../../Nav/Nav';
 
-const getVideo = gql`
+const getVideo = gql(`
   query getVideos($slug: [String!]) {
     videos(where: { slug: $slug }) {
       id
@@ -28,14 +28,13 @@ const getVideo = gql`
       videoID
     }
   }
-`;
+`);
 
 type Video = {
   title: string;
   excerpt: string;
   cover: { img: { id: string; url: string } };
   // tag: [{ tag: { id: string; tag: string } }];
-  albumID: number;
 };
 
 type VideoLink = {
@@ -49,10 +48,12 @@ const VideoPlayer = (): JSX.Element => {
 
   const { data, error, loading } = useQuery(getVideo, {
     variables: { slug: router.query.slug },
-    onCompleted: async (d) => {
-      const videoID = d?.videos[0].videoID;
+    async onCompleted(data) {
+      const videoID = data?.videos?.[0]?.videoID;
       if (videoID) {
-        const videoLink = await axios.get(`https://tropicalt-google-video.glitch.me/${videoID}`);
+        const videoLink: { data: Array<string> } = await axios.get(
+          `https://tropicalt-google-video.glitch.me/${videoID}`
+        );
         setVideo(
           videoLink?.data?.map((url: string) => ({
             url,

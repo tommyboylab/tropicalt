@@ -1,31 +1,23 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Avatar from '../../Other/Avatar/Avatar';
 import s from './Bio.module.scss';
 
-type Bio = {
-  id: number;
-  bio: string;
-};
-
-const BioFragment = gql`
+const BioFragment = gql(`
   fragment BiographyFragment on Query {
     avatar(id: "1") {
+      id
       bio
       ...AvatarFragment
     }
-  }
-  ${Avatar.fragments.AvatarFragment}
-`;
+  }`);
 
-const Bio = (bio: any): JSX.Element => {
-  bio = bio?.data?.avatar as Bio;
-
+const Bio = ({ avatar }: DocumentType<typeof BioFragment>): JSX.Element => {
   return (
-    <div key={bio.id} className={s.bio}>
-      <Avatar data={bio} />
-      <ReactMarkdown children={bio.bio} />
+    <div key={avatar?.id} className={s.bio}>
+      <Avatar avatar={avatar?.avatar} />
+      <ReactMarkdown>{String(avatar?.bio)}</ReactMarkdown>
     </div>
   );
 };

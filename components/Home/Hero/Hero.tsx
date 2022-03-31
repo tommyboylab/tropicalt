@@ -1,17 +1,9 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
 import s from './Hero.module.scss';
 import Img from '../../Other/Img/Img';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 
-export type Heroes = [
-  {
-    id: number;
-    title: string;
-    cover: { img: { id: string; url: string; hash: string } };
-  }
-];
-
-const ImgBFragment = gql`
+const ImgBFragment = gql(`
   fragment ImageBannerFragment on Query {
     hero(id: 1) {
       id
@@ -28,15 +20,13 @@ const ImgBFragment = gql`
       }
     }
   }
-`;
+`);
 
-const ImgB = (heroes: any): JSX.Element => {
+const ImgB = ({ hero }: DocumentType<typeof ImgBFragment>): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  heroes = heroes.data?.hero?.hero as Heroes;
-
   const nextHero = (): SetStateAction<void> => {
-    setCurrentIndex(currentIndex === heroes.length - 1 ? 0 : currentIndex + 1);
+    setCurrentIndex(currentIndex === Number(hero?.hero?.length) - 1 ? 0 : currentIndex + 1);
   };
 
   useEffect(() => {
@@ -48,57 +38,54 @@ const ImgB = (heroes: any): JSX.Element => {
 
   return (
     <>
-      {heroes.map(
-        (
-          hero: { id: string | number | undefined; title: React.ReactNode; cover: { img: { url: string; hash: any } } },
-          index: number
-        ) => (
-          <div
-            className={s.imageBanner}
-            key={hero.id}
-            style={{
-              animation: `${currentIndex === index ? 'fadeInOut' : 'fadeOut'} 5s infinite ease-in-out`,
-            }}>
-            <h1>{hero.title}</h1>
-            <Img
-              class={s.imageBanner}
-              url={hero.cover.img.url}
-              placeholder={`/uploads/${hero.cover.img.hash}-thumb.svg`}
-              alt={`Image for ${hero.title}`}
-            />
-            <style global jsx>{`
-              @keyframes fadeInOut {
-                0% {
-                  opacity: 0;
-                  animation-timing-function: ease-in;
-                }
-
-                10% {
-                  opacity: 1;
-                  animation-timing-function: ease-out;
-                }
-
-                85% {
-                  opacity: 1;
-                }
-
-                100% {
-                  opacity: 0;
-                }
+      {hero?.hero?.map((hero, index: number) => (
+        <div
+          className={s.imageBanner}
+          key={hero?.id}
+          style={{
+            animation: `${currentIndex === index ? 'fadeInOut' : 'fadeOut'} 5s infinite ease-in-out`,
+          }}>
+          <h1>{hero?.title}</h1>
+          <Img
+            key={hero?.id}
+            id={hero?.id}
+            class={s.imageBanner}
+            url={String(hero?.cover?.img?.url)}
+            placeholder={`/uploads/${String(hero?.cover?.img?.hash)}-thumb.svg`}
+            alt={`Image for ${String(hero?.title)}`}
+          />
+          <style global jsx>{`
+            @keyframes fadeInOut {
+              0% {
+                opacity: 0;
+                animation-timing-function: ease-in;
               }
 
-              @keyframes fadeOut {
-                0% {
-                  opacity: 0;
-                }
-                100% {
-                  opacity: 0;
-                }
+              10% {
+                opacity: 1;
+                animation-timing-function: ease-out;
               }
-            `}</style>
-          </div>
-        )
-      )}
+
+              85% {
+                opacity: 1;
+              }
+
+              100% {
+                opacity: 0;
+              }
+            }
+
+            @keyframes fadeOut {
+              0% {
+                opacity: 0;
+              }
+              100% {
+                opacity: 0;
+              }
+            }
+          `}</style>
+        </div>
+      ))}
     </>
   );
 };

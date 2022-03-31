@@ -1,19 +1,9 @@
 import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './Gallery.module.scss';
-import gql from 'graphql-tag';
+import { DocumentType, gql } from '@app/gql';
 
-type Albums = {
-  id: string;
-  slug: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  title: string;
-  date: string;
-  user: { username: string };
-  location: string;
-};
-
-const AlbumFragment = gql`
+const AlbumFragment = gql(`
   fragment AlbumFragment on Query {
     albums(sort: "date:desc", where: { published: true }) {
       id
@@ -33,27 +23,26 @@ const AlbumFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Albums = (albums: any): JSX.Element => {
-  albums = albums.data?.albums as Albums[];
-
+const Albums = ({ albums }: DocumentType<typeof AlbumFragment>): JSX.Element => {
   return (
     <div className={s.albumList}>
-      {albums.map((album: Albums) => (
-        <Recents
-          key={album.id}
-          type='albums'
-          id={album.id}
-          slug={album.slug}
-          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
-          img={album.cover.img.url}
-          title={album.title}
-          date={album.date}
-          name={album.user.username}
-          excerpt={`Location: ${album.location}`}
-        />
-      ))}
+      {albums &&
+        albums.map((album) => (
+          <Recents
+            key={album?.id}
+            type='albums'
+            id={album?.id}
+            slug={String(album?.slug)}
+            cover={`/uploads/${String(album?.cover?.img?.hash)}-thumb.svg`}
+            img={album?.cover?.img?.url}
+            title={album?.title}
+            date={String(album?.date)}
+            name={album?.user?.username}
+            excerpt={`Location: ${String(album?.location)}`}
+          />
+        ))}
     </div>
   );
 };

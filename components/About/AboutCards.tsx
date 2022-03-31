@@ -1,19 +1,10 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Text from './AboutCard/AboutCardText';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
 
-type AboutCard = [
-  {
-    img: { img: { id: string; url: string; hash: string } };
-    id: string;
-    title: string;
-    excerpt: string;
-  }
-];
-
-const AboutCardFragment = gql`
+const AboutCardFragment = gql(`
   fragment AboutCardFragment on Query {
     aboutCards {
       id
@@ -28,23 +19,21 @@ const AboutCardFragment = gql`
       }
     }
   }
-`;
+`);
 
-const AboutCards = (aboutCards: any): JSX.Element => {
-  aboutCards = aboutCards.data?.aboutCards as AboutCard;
-
+const AboutCards = ({ aboutCards }: DocumentType<typeof AboutCardFragment>): JSX.Element => {
   return (
     <>
-      {aboutCards.map((aboutCard: any) => {
+      {aboutCards?.map((aboutCard) => {
         return (
-          <Fragment key={aboutCard.id}>
+          <Fragment key={aboutCard?.id}>
             <Img
               class={s.aboutCardImg}
-              url={aboutCard.img.img.url}
-              placeholder={`/uploads/${aboutCard.img.img.hash}-thumb.svg`}
-              alt={`Image for ${aboutCard.title}`}
+              url={String(aboutCard?.img?.img?.url)}
+              placeholder={`/uploads/${String(aboutCard?.img?.img?.hash)}-thumb.svg`}
+              alt={`Image for ${String(aboutCard?.title)}`}
             />
-            <Text title={aboutCard.title} excerpt={aboutCard.excerpt} />
+            <Text title={String(aboutCard?.title)} excerpt={String(aboutCard?.excerpt)} />
           </Fragment>
         );
       })}

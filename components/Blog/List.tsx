@@ -1,19 +1,9 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Post from '../Home/Recents/Recents';
 import s from './List.module.scss';
 
-type ArticleList = {
-  id: string;
-  slug: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  title: string;
-  date: string;
-  user: { username: string };
-  excerpt: string;
-};
-
-const ArticleListFragment = gql`
+const ArticleListFragment = gql(`
   fragment ArticleListFragment on Query {
     list: articles(limit: 7, start: $start, sort: "date:desc", where: { published: true }) {
       id
@@ -33,26 +23,24 @@ const ArticleListFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Articles = (articles: any): JSX.Element => {
-  articles = articles.data?.list as ArticleList[];
-
+const Articles = ({ list }: DocumentType<typeof ArticleListFragment>): JSX.Element => {
   return (
     <div className={s.postList}>
-      {articles &&
-        articles.map((article: any) => (
+      {list &&
+        list.map((article) => (
           <Post
-            id={article.id}
+            id={article?.id}
             type='blog'
-            slug={article.slug}
-            key={article.id}
-            cover={`/uploads/${article.cover.img.hash}-thumb.svg`}
-            img={article.cover.img.url}
-            title={article.title}
-            date={article.date}
-            name={article.user.username}
-            excerpt={article.excerpt}
+            slug={String(article?.slug)}
+            key={article?.id}
+            cover={`/uploads/${String(article?.cover?.img?.hash)}-thumb.svg`}
+            img={article?.cover?.img?.url}
+            title={article?.title}
+            date={String(article?.date)}
+            name={article?.user?.username}
+            excerpt={article?.excerpt}
           />
         ))}
     </div>

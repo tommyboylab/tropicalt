@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
-import { gql, DocumentType } from '@app/gql';
+import { gql, DocumentType } from '../../apollo/gql';
+// import { gql } from 'urql';
 import Text from './AboutCard/AboutCardText';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';

@@ -47,7 +47,6 @@
     "**/*.ts",
     "**/*.tsx",
     ".eslintrc.js",
-    "babel.config.js"
   ],
   "exclude": [
     "node_modules"

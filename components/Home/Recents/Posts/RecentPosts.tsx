@@ -1,31 +1,42 @@
 import React from 'react';
-import { gql, DocumentType } from '@app/gql';
+import { gql } from 'urql';
 import Post from '../Recents';
 import s from './RecentPosts.module.scss';
 
-const RecentArticlesFragment = gql(`
+export const RecentArticlesFragment = gql(`
   fragment RecentArticlesFragment on Query {
-    articles(limit: 3, sort: "date:desc", where: { published: true }) {
+ articles(sort:"Published:desc", pagination: { start: 0, limit: 3}){
+    data {
       id
-      slug
-      title
-      excerpt
-      date
-      cover {
-        img {
-          id
-          url
-          hash
+      attributes {
+        Slug
+        Title
+        Tagline
+        Published
+        Author{
+          data{
+            attributes{
+              username
+            }
+          }
         }
-      }
-      user {
-        username
+        Cover {
+          img {
+            data {
+              attributes {
+                url
+                hash
+              }
+            }
+          }
+        }
       }
     }
   }
+  }
 `);
 
-const Articles = ({ articles }: DocumentType<typeof RecentArticlesFragment>): JSX.Element => {
+const Articles = ({ articles }): JSX.Element => {
   return (
     <div className={s.recentArticles}>
       <h2>Recent Posts</h2>
@@ -34,13 +45,13 @@ const Articles = ({ articles }: DocumentType<typeof RecentArticlesFragment>): JS
           id={article?.id}
           type='blog'
           key={article?.id}
-          slug={String(article?.slug)}
-          cover={`/uploads/${String(article?.cover?.img?.hash)}-thumb.svg`}
-          img={String(article?.cover?.img?.url)}
-          title={String(article?.title)}
-          date={String(article?.date)}
-          name={String(article?.user?.username)}
-          excerpt={String(article?.excerpt)}
+          slug={String(article?.attributes.slug)}
+          cover={`/uploads/sqip_${String(article?.attributes.Cover?.img?.data.attributes.hash)}.svg`}
+          img={String(article?.attributes.Cover?.img?.data.attributes.url)}
+          title={String(article?.attributes.Title)}
+          date={String(article?.attributes.Published)}
+          name={String(article?.attributes.Author.data.attributes.username)}
+          excerpt={String(article?.attributes.Tagline)}
         />
       ))}
     </div>

@@ -3,7 +3,8 @@ import Gallery from '../components/Gallery/Gallery';
 import Nav from '../components/Nav/Nav';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
@@ -14,8 +15,11 @@ const getGalleryQuery = gql(`
   }`);
 
 export default function Albums(): JSX.Element {
-  const { data, error, loading } = useQuery(getGalleryQuery);
-  if (loading && !data) return <Load />;
+  // const { data, error, loading } = useQuery(getGalleryQuery);
+  const [result] = useQuery({ query: getGalleryQuery });
+  const { data, fetching, error } = result;
+
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
   return (
     <main>

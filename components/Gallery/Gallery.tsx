@@ -1,7 +1,7 @@
 import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './Gallery.module.scss';
-import { DocumentType, gql } from '@app/gql';
+import { gql } from '@app/gql';
 
 const AlbumFragment = gql(`
   fragment AlbumFragment on Query {
@@ -25,7 +25,7 @@ const AlbumFragment = gql(`
   }
 `);
 
-const Albums = ({ albums }: DocumentType<typeof AlbumFragment>): JSX.Element => {
+const Albums = ({ albums }): JSX.Element => {
   return (
     <div className={s.albumList}>
       {albums &&

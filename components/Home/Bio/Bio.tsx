@@ -1,23 +1,35 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
-import { gql, DocumentType } from '@app/gql';
+import { gql } from 'urql';
 import Avatar from '../../Other/Avatar/Avatar';
 import s from './Bio.module.scss';
 
-const BioFragment = gql(`
+export const BioFragment = gql(`
   fragment BiographyFragment on Query {
-    avatar(id: "1") {
-      id
-      bio
-      ...AvatarFragment
+usersPermissionsUser(id:1){
+  data{
+    id
+    attributes{
+      Biography
+      Img{
+        img{
+          data{
+            attributes{
+              url
+              hash
+            }
+          }
+        }
+      }
     }
-  }`);
+  }
+}}`);
 
-const Bio = ({ avatar }: DocumentType<typeof BioFragment>): JSX.Element => {
+const Bio = ({ avatar }): JSX.Element => {
   return (
     <div key={avatar?.id} className={s.bio}>
-      <Avatar avatar={avatar?.avatar} />
-      <ReactMarkdown>{String(avatar?.bio)}</ReactMarkdown>
+      <Avatar avatar={avatar?.Img} />
+      <ReactMarkdown>{String(avatar?.Biography)}</ReactMarkdown>
     </div>
   );
 };

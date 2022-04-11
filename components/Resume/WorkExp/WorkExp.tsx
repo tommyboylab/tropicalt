@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
-import { WorkExpFragmentFragment } from '../../../apollo/gql/graphql';
+// import { WorkExpFragmentFragment } from '../../../apollo/gql/graphql';
 
 const WorkExpFragment = gql(`
   fragment WorkExpFragment on Resume {
@@ -10,7 +10,7 @@ const WorkExpFragment = gql(`
   }
 `);
 
-const WorkExp = (workExp: WorkExpFragmentFragment): JSX.Element => {
+const WorkExp = (workExp): JSX.Element => {
   return (
     <div className={s.workHistory}>
       <h2>Work History</h2>

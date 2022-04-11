@@ -1,7 +1,9 @@
 import React from 'react';
-import { ApolloProvider, NormalizedCacheObject } from '@apollo/client';
+// import { ApolloProvider, NormalizedCacheObject } from '@apollo/client';
+import { Provider } from 'urql';
+import { client } from '../gql/urqlClient';
 import Head from 'next/head';
-import { useApollo } from '../apollo/apolloClient';
+// import { useApollo } from '../apollo/apolloClient';
 import { AppContext, AppInitialProps } from 'next/app';
 
 const globalStyle = {
@@ -96,7 +98,7 @@ const globalStyle = {
 };
 
 const TropicalT = ({ Component, pageProps, router }: AppContext & AppInitialProps) => {
-  const apolloClient = useApollo(pageProps as { [x: string]: NormalizedCacheObject | undefined });
+  // const apolloClient = useApollo(pageProps as { [x: string]: NormalizedCacheObject | undefined });
   return (
     <>
       <Head>
@@ -105,9 +107,11 @@ const TropicalT = ({ Component, pageProps, router }: AppContext & AppInitialProp
         <style dangerouslySetInnerHTML={globalStyle} />
         <title />
       </Head>
-      <ApolloProvider client={apolloClient}>
+      {/*<ApolloProvider client={apolloClient}>*/}
+      <Provider value={client}>
         <Component {...pageProps} router={router} />
-      </ApolloProvider>
+      </Provider>
+      {/*</ApolloProvider>*/}
     </>
   );
 };

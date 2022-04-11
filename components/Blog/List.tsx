@@ -1,5 +1,6 @@
 import React from 'react';
-import { gql, DocumentType } from '@app/gql';
+import { gql } from '@app/gql';
+// import { gql } from 'urql';
 import Post from '../Home/Recents/Recents';
 import s from './List.module.scss';
 
@@ -25,7 +26,7 @@ const ArticleListFragment = gql(`
   }
 `);
 
-const Articles = ({ list }: DocumentType<typeof ArticleListFragment>): JSX.Element => {
+const Articles = ({ list }): JSX.Element => {
   return (
     <div className={s.postList}>
       {list &&

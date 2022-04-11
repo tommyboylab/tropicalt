@@ -3,7 +3,6 @@ import ReactMarkdown from 'react-markdown';
 import Rating from './Rating/Rating';
 import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
-// import {Comment, CommentsQuery} from '../../../../../apollo/gql/graphql';
 
 export type Me =
   | {

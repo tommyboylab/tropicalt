@@ -7,7 +7,8 @@ import List from '../components/Blog/List';
 import s from '../components/Other/Layout/Blog.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
@@ -26,13 +27,16 @@ export default function Blog(): JSX.Element {
   const next = useCallback((): void => {
     setNextPosts(nextPosts + 7), window.scrollTo(0, 0);
   }, [nextPosts]);
-  const { data, error, loading } = useQuery(getArticlesQuery, {
-    variables: {
-      start: nextPosts,
-    },
-    fetchPolicy: 'cache-and-network',
-  });
-  if (loading && !data) return <Load />;
+
+  const [result] = useQuery({ query: getArticlesQuery, variables: { start: nextPosts } });
+  const { data, fetching, error } = result;
+  //   const { data, error, loading } = useQuery(getArticlesQuery, {
+  //   variables: {
+  //     start: nextPosts,
+  //   },
+  //   fetchPolicy: 'cache-and-network',
+  // });
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
 
   return (

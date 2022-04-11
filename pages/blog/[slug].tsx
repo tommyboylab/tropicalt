@@ -1,7 +1,8 @@
 import React from 'react';
 import { gql } from '@app/gql';
 import { useRouter } from 'next/router';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 import Load from '../../components/Other/Load/Load';
 import Err from '../../components/Other/Error/Error';
 import Meta from '../../components/Other/Meta/Meta';
@@ -46,9 +47,12 @@ const Post = (): JSX.Element => {
   const slug = router.query.slug;
   const authenticated = isSignedIn();
 
-  const { data, error, loading } = useQuery(getArticle, { variables: { slug: String(slug) } });
+  const [result] = useQuery({ query: getArticle, variables: { slug: String(slug) } });
+  const { data, fetching, error } = result;
 
-  if (loading && !data) return <Load />;
+  // const { data, error, loading } = useQuery(getArticle, { variables: { slug: String(slug) } });
+
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
 
   return (

@@ -1,31 +1,43 @@
 import React from 'react';
-import { gql, DocumentType } from '@app/gql';
+import { gql } from 'urql';
 import Recents from '../Recents';
 import s from './RecentAlbums.module.scss';
 
-const RecentAlbumFragment = gql(`
+export const RecentAlbumFragment = gql(`
   fragment RecentAlbumFragment on Query {
-    albums(limit: 4, sort: "date:desc", where: { published: true }) {
-      slug
+      albums(sort: "Date:desc", pagination: { start: 0, limit: 4 }) {
+    data {
       id
-      cover {
-        img {
-          id
-          url
-          hash
+      attributes {
+        Slug
+        Name
+        Tagline
+        Date
+        Location
+        Photographer {
+          data {
+            attributes {
+              username
+            }
+          }
         }
-      }
-      title
-      date
-      location
-      user {
-        username
+        Cover {
+          img {
+            data {
+              attributes {
+                url
+                hash
+              }
+            }
+          }
+        }
       }
     }
   }
+  }
 `);
 
-const Albums = ({ albums }: DocumentType<typeof RecentAlbumFragment>): JSX.Element => {
+const Albums = ({ albums }): JSX.Element => {
   return (
     <div className={s.recentAlbums}>
       <h2>Recent Albums</h2>
@@ -34,13 +46,13 @@ const Albums = ({ albums }: DocumentType<typeof RecentAlbumFragment>): JSX.Eleme
           id={album?.id}
           type='albums'
           key={album?.id}
-          slug={String(album?.slug)}
-          cover={`/uploads/${String(album?.cover?.img?.hash)}-thumb.svg`}
-          img={String(album?.cover?.img?.url)}
-          title={String(album?.title)}
-          date={String(album?.date)}
-          name={String(album?.user?.username)}
-          excerpt={`Location: ${String(album?.location)}`}
+          slug={String(album?.attributes.Slug)}
+          cover={`/uploads/sqip_${String(album?.attributes.Cover?.img?.data.attributes.hash)}.svg`}
+          img={String(album?.attributes.Cover?.img?.data.attributes.url)}
+          title={String(album?.attributes.Name)}
+          date={String(album?.attributes.Date)}
+          name={String(album?.attributes.Photographer.data.attributes.username)}
+          excerpt={`Location: ${String(album?.attributes.Location)}`}
         />
       ))}
     </div>

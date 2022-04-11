@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from './ActiveLink/ActiveLink';
 import s from './Footer.module.scss';
-import { NavigationFragmentFragment } from '../../apollo/gql/graphql';
 
 type Footer = [
   {
@@ -11,7 +10,7 @@ type Footer = [
   }
 ];
 
-const Footer = ({ nav }: NavigationFragmentFragment): JSX.Element => {
+const Footer = ({ nav }): JSX.Element => {
   return (
     <footer className={s.footer}>
       <Link href='/'>
@@ -19,14 +18,13 @@ const Footer = ({ nav }: NavigationFragmentFragment): JSX.Element => {
       </Link>
       <h3>Made by Thomas Fiala with a little help from Education</h3>
       <ul>
-        {nav &&
-          nav?.nav?.map((nav) => {
-            return (
-              <Link href={String(nav?.url)} key={nav?.id}>
-                <li>{nav?.title}</li>
-              </Link>
-            );
-          })}
+        {nav?.map((nav) => {
+          return (
+            <Link href={String(nav?.URL)} key={nav?.id}>
+              <li>{nav?.Name}</li>
+            </Link>
+          );
+        })}
       </ul>
     </footer>
   );

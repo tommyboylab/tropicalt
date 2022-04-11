@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
-import { HobbiesFragmentFragment } from '../../../apollo/gql/graphql';
+// import { HobbiesFragmentFragment } from '../../../apollo/gql/graphql';
 
 const HobbiesFragment = gql(`
   fragment HobbiesFragment on Resume {
@@ -10,7 +10,7 @@ const HobbiesFragment = gql(`
   }
 `);
 
-const Hobbies = (hobbies: HobbiesFragmentFragment): JSX.Element => {
+const Hobbies = (hobbies): JSX.Element => {
   return (
     <div className={s.hobbies}>
       <h2>Hobbies</h2>

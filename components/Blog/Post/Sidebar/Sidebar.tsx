@@ -1,5 +1,5 @@
 import React from 'react';
-import { DocumentType, gql } from '@app/gql';
+import { gql } from '@app/gql';
 import Post from '../../../Home/Recents/Recents';
 import AboutMe from '../About/AboutMe';
 import s from './Sidebar.module.scss';
@@ -29,7 +29,7 @@ const SidebarArticlesFragment = gql(`
   }
 `);
 
-const PostSidebar = ({ sidebar, avatar }: DocumentType<typeof SidebarArticlesFragment>): JSX.Element => {
+const PostSidebar = ({ sidebar, avatar }): JSX.Element => {
   return (
     <div className={s.blogSidebar}>
       <h2>ˇˇˇ</h2>

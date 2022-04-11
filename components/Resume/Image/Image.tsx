@@ -2,7 +2,7 @@ import React from 'react';
 import Img from '../../Other/Img/Img';
 import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
-import { HighlightImgFragmentFragment } from '../../../apollo/gql/graphql';
+// import { HighlightImgFragmentFragment } from '../../../apollo/gql/graphql';
 
 const HighlightImgFragment = gql(`
   fragment HighlightImgFragment on Resume {
@@ -16,7 +16,7 @@ const HighlightImgFragment = gql(`
   }
 `);
 
-const Highlight = (highlightImg: HighlightImgFragmentFragment): JSX.Element => {
+const Highlight = (highlightImg): JSX.Element => {
   return (
     <div className={s.highlightImg}>
       <Img

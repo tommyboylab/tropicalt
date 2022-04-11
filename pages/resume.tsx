@@ -2,7 +2,8 @@ import React from 'react';
 import s from '../components/Other/Layout/Resume.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 import Err from '../components/Other/Error/Error';
 import Skills from '../components/Resume/Skills/Skills';
 import WorkExp from '../components/Resume/WorkExp/WorkExp';
@@ -29,8 +30,10 @@ const getResumeQuery = gql(`
   }`);
 
 export default function ResumePage(): JSX.Element {
-  const { data, error, loading } = useQuery(getResumeQuery);
-  if (loading && !data) return <Load />;
+  const [result] = useQuery({ query: getResumeQuery });
+  const { data, fetching, error } = result;
+  //      const { data, error, loading } = useQuery(getResumeQuery);
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
 
   return (

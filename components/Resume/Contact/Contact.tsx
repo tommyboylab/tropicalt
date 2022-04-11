@@ -1,7 +1,7 @@
 import React from 'react';
 import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
-import { ContactFragmentFragment } from '../../../apollo/gql/graphql';
+// import { ContactFragmentFragment } from '../../../apollo/gql/graphql';
 
 const ContactFragment = gql(`
   fragment ContactFragment on Resume {
@@ -10,7 +10,7 @@ const ContactFragment = gql(`
   }
 `);
 
-const Contact = (contact: ContactFragmentFragment): JSX.Element => {
+const Contact = (contact): JSX.Element => {
   return (
     <div className={s.contactInfo}>
       <p className={s.cellphone}>{contact.phoneNum}</p>

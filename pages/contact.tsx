@@ -4,7 +4,8 @@ import Nav from '../components/Nav/Nav';
 import s from '../components/Other/Layout/Contact.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
-import { useQuery } from '@apollo/client';
+// import { useQuery } from '@apollo/client';
+import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
@@ -14,8 +15,10 @@ const getContactQuery = gql(`
   }`);
 
 export default function ContactPage(): JSX.Element {
-  const { data, error, loading } = useQuery(getContactQuery);
-  if (loading && !data) return <Load />;
+  const [result] = useQuery({ query: getContactQuery });
+  const { data, fetching, error } = result;
+  // nst { data, error, loading } = useQuery(getContactQuery);
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
   return (
     <main className={s.layout}>

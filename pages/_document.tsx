@@ -18,9 +18,7 @@ export default class TropicalTStyle extends Document {
   render(): JSX.Element {
     return (
       <Html lang='en'>
-        <Head>
-          <title />
-        </Head>
+        <Head />
         <Main />
         <NextScript />
       </Html>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql, DocumentType } from '@app/gql';
+import { gql } from '@app/gql';
 import Img from '../Img/Img';
 import s from './Avatar.module.scss';
 
@@ -15,13 +15,13 @@ const AvatarFragment = gql(`
   }
 `);
 
-const Avatar = ({ avatar }: DocumentType<typeof AvatarFragment>): JSX.Element => {
+const Avatar = ({ avatar }): JSX.Element => {
   return (
-    <div key={avatar?.img?.id} className={s.avatar}>
+    <div key={avatar?.img?.data.attributes.id} className={s.avatar}>
       <Img
         class={s.avatar}
-        url={String(avatar?.img?.url)}
-        placeholder={`/uploads/${String(avatar?.img?.hash)}-thumb.svg`}
+        url={String(avatar?.img?.data.attributes.url)}
+        placeholder={`/uploads/sqip_${String(avatar.img.data.attributes.hash)}.svg`}
         alt={`Image for Avatar`}
       />
     </div>

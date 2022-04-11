@@ -1,17 +1,18 @@
 import React, { MouseEventHandler } from 'react';
 import { OperationVariables, TypedDocumentNode, useMutation } from '@apollo/client';
 import { gql } from '@app/gql';
+// import { gql } from 'urql';
 import s from '../../Comments.module.scss';
-import { EditComponentBlogLikeInput, Maybe } from '../../../../../../apollo/gql/graphql';
+// import { Maybe } from '../../../../../../apollo/gql/graphql';
 import { Comment } from '../Comment';
 
-type Mutation = NonNullable<Maybe<EditComponentBlogLikeInput>>;
+// type Mutation = NonNullable<>;
 
 const UpdateCommentLikes = gql(`
   mutation updateCommentLikes(
     $commentID: ID!
-    $likes: [ComponentBlogLikes]
-    $dislikes: [ComponentBlogDislikes]
+    $likes: [editComponentBlogLikeInput]
+    $dislikes: [editComponentBlogDislikeInput]]
   ) {
     updateComment(input: { where: { id: $commentID }, data: { likes: $likes, dislikes: $dislikes } }) {
       comment {
@@ -67,20 +68,20 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element
 
   const disliked = () =>
     isDisliked
-      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as Mutation)
+      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as any)
       : dislike
       ? [...dislike, { id: String(dislike?.length + 1), me }]
       : dislike;
 
   const removeLike = () =>
     like?.some((like) => like?.user?.id === me?.id)
-      ? (like?.filter((like) => like?.user?.id !== me?.id) as Mutation)
-      : (like as Mutation);
+      ? (like?.filter((like) => like?.user?.id !== me?.id) as any)
+      : (like as any);
 
   const removeDislike = () =>
     dislike?.some((dislike) => dislike?.user?.id === me?.id)
-      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as Mutation)
-      : (dislike as Mutation);
+      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as any)
+      : (dislike as any);
 
   const [updateCommentLike] = useMutation(UpdateCommentLikes as TypedDocumentNode<never, OperationVariables>);
 

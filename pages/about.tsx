@@ -1,19 +1,21 @@
 import React from 'react';
-import Nav from '../components/Nav/Nav';
-import AboutCards from '../components/About/AboutCards';
+import Nav, { NavFragment } from '../components/Nav/Nav';
+import AboutCards, { AboutCardFragment } from '../components/About/AboutCards';
 import s from '../components/Other/Layout/About.module.scss';
 import Meta from '../components/Other/Meta/Meta';
-import { gql } from '@app/gql';
-// import { useQuery } from '@apollo/client';
+import { gql } from 'urql';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
-const getAboutCardQuery = gql(`
-  query getAboutCards {
+const getAboutCardQuery = gql`
+  query {
     ...NavigationFragment
     ...AboutCardFragment
-  }`);
+  }
+  ${NavFragment}
+  ${AboutCardFragment}
+`;
 
 export default function Home(): JSX.Element {
   const [result] = useQuery({ query: getAboutCardQuery });
@@ -26,12 +28,12 @@ export default function Home(): JSX.Element {
     <main className={s.layout}>
       <Meta
         title={'T^T - About Me'}
-        excerpt={data?.aboutCards?.[0]?.excerpt}
-        imgUrl={data?.aboutCards?.[0]?.img?.img?.url}
+        excerpt={data?.about.data.attributes.AboutCard?.[0]?.Extension}
+        imgUrl={data?.about.data.attributes.AboutCard?.[0]?.Img?.img?.data.attributes.url}
         url={'/about'}
       />
-      <Nav nav={data?.nav} />
-      <AboutCards aboutCards={data?.aboutCards} />
+      <Nav nav={data?.navLink.data.attributes.Link} />
+      <AboutCards aboutCards={data?.about.data.attributes.AboutCard} />
     </main>
   );
 }

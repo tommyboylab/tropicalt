@@ -8,6 +8,7 @@ type Img = {
   alt: string;
   placeholder: string;
   style?: CSSProperties;
+  layout?: string;
 };
 
 const ImgComp = (Img: Img): JSX.Element => {
@@ -19,8 +20,10 @@ const ImgComp = (Img: Img): JSX.Element => {
       src={`https://api.tropicalt.ca${Img.url}`}
       loading='lazy'
       alt={Img.alt}
-      layout='fill'
-      objectFit='cover'
+      sizes='100%'
+      width='100%'
+      height='100%'
+      layout='raw'
     />
   );
 };

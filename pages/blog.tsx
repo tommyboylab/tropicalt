@@ -1,23 +1,26 @@
 import React, { useCallback, useState } from 'react';
-import Nav from '../components/Nav/Nav';
+import Nav, { NavFragment } from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
 import Header from '../components/Blog/Header/Header';
 import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
 import List from '../components/Blog/List';
 import s from '../components/Other/Layout/Blog.module.scss';
 import Meta from '../components/Other/Meta/Meta';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { useQuery } from '@apollo/client';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
-const getArticlesQuery = gql(`
+const getArticlesQuery = gql`
   query getArticles($start: Int!) {
     ...NavigationFragment
     ...ArticleListFragment
     ...SidebarArticlesFragment
-  }`);
+  }
+  ${NavFragment}
+  ${}
+`;
 
 export default function Blog(): JSX.Element {
   const [nextPosts, setNextPosts] = useState(0);

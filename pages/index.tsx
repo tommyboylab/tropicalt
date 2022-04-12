@@ -7,8 +7,6 @@ import ImgB, { ImgBFragment } from '../components/Home/Hero/Hero';
 import Bio, { BioFragment } from '../components/Home/Bio/Bio';
 import s from '../components/Other/Layout/Home.module.scss';
 import Meta from '../components/Other/Meta/Meta';
-// import { gql } from '@app/gql';
-// import { useQuery } from '@apollo/client';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 

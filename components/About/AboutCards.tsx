@@ -1,24 +1,32 @@
 import React, { Fragment } from 'react';
-import { gql, DocumentType } from '../../apollo/gql';
-// import { gql } from 'urql';
+import { gql } from 'urql';
 import Text from './AboutCard/AboutCardText';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
 
-const AboutCardFragment = gql(`
+export const AboutCardFragment = gql(`
   fragment AboutCardFragment on Query {
-    aboutCards {
-      id
-      title
-      excerpt
-      img {
-        img {
+  about {
+    data {
+      attributes {
+        AboutCard {
           id
-          url
-          hash
+          Tagline
+          Extension
+          Img {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
+          }
         }
       }
     }
+  }
   }
 `);
 
@@ -30,11 +38,11 @@ const AboutCards = ({ aboutCards }: DocumentType<typeof AboutCardFragment>): JSX
           <Fragment key={aboutCard?.id}>
             <Img
               class={s.aboutCardImg}
-              url={String(aboutCard?.img?.img?.url)}
-              placeholder={`/uploads/${String(aboutCard?.img?.img?.hash)}-thumb.svg`}
-              alt={`Image for ${String(aboutCard?.title)}`}
+              url={String(aboutCard?.Img[0].img.data.attributes.url)}
+              placeholder={`/uploads/sqip_${String(aboutCard?.Img[0].img?.data.attributes.hash)}.svg`}
+              alt={`Image for ${String(aboutCard?.Tagline)}`}
             />
-            <Text title={String(aboutCard?.title)} excerpt={String(aboutCard?.excerpt)} />
+            <Text title={String(aboutCard?.Tagline)} excerpt={String(aboutCard?.Extension)} />
           </Fragment>
         );
       })}

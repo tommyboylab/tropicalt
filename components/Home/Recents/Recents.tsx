@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Moment from 'react-moment';
 import s from './Recents.module.scss';
+import Img from '../../Other/Img/Img';
 
 type Recent = {
   id?: string;
@@ -21,11 +22,11 @@ const Recent = (Recent: Recent): JSX.Element => (
       id={Recent.id}
       className={`${s.recent}`}
       style={{ backgroundImage: `url(https://api.tropicalt.ca${Recent.cover})` }}>
-      <img
-        className={s.img}
-        src={`https://api.tropicalt.ca${String(Recent.img)}`}
+      <Img
+        class={s.img}
+        url={`${String(Recent.img)}`}
+        placeholder={Recent.cover}
         alt={`Image for ${String(Recent.title)}`}
-        loading='lazy'
       />
       <div className={`${s.content}`}>
         <h3 className={s.title}>{Recent.title}</h3>

@@ -1,6 +1,5 @@
 import React from 'react';
 import { gql } from '@app/gql';
-// import { useQuery } from '@apollo/client';
 import { useQuery } from 'urql';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
@@ -8,7 +7,6 @@ import CommentForm from '../CommentForm/CommentForm';
 import Comment from '../Comment/Comment';
 import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
-// import { NetworkStatus } from '@apollo/client';
 
 export const GetCommentList = gql(`
   query Comments($slug: String) {
@@ -69,11 +67,6 @@ type CommentList = {
 };
 
 const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
-  // const { data, loading, networkStatus } = useQuery(GetCommentList, {
-  //   variables: { slug },
-  //   notifyOnNetworkStatusChange: true,
-  // });
-
   const [result] = useQuery({ query: GetCommentList, variables: { slug } });
   const { data, loading, fetching, error } = result;
 

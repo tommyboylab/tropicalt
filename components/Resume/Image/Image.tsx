@@ -2,7 +2,6 @@ import React from 'react';
 import Img from '../../Other/Img/Img';
 import s from '../Resume.module.scss';
 import { gql } from 'urql';
-// import { HighlightImgFragmentFragment } from '../../../apollo/gql/graphql';
 
 export const HighlightImgFragment = gql`
   fragment HighlightImgFragment on Resume {

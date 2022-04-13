@@ -1,12 +1,8 @@
 import React, { MouseEventHandler } from 'react';
 import { OperationVariables, TypedDocumentNode, useMutation } from '@apollo/client';
 import { gql } from '@app/gql';
-// import { gql } from 'urql';
 import s from '../../Comments.module.scss';
-// import { Maybe } from '../../../../../../apollo/gql/graphql';
 import { Comment } from '../Comment';
-
-// type Mutation = NonNullable<>;
 
 const UpdateCommentLikes = gql(`
   mutation updateCommentLikes(

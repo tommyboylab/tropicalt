@@ -1,4 +1,4 @@
-schema: './graphql-schema.json'
+schema: 'https://api.tropicalt.ca/graphql'
 overwrite: true
 documents:
   - "./**/*.tsx"

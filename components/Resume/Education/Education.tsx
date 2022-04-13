@@ -2,7 +2,6 @@ import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
 import { gql } from 'urql';
-// import { EducationFragmentFragment } from '../../../apollo/gql/graphql';
 
 export const EducationFragment = gql`
   fragment EducationFragment on Resume {

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { gql } from '@app/gql';
-// import { useQuery } from '@apollo/client';
-import axios, { Response } from 'redaxios';
+import { gql } from 'urql';
+import axios from 'redaxios';
 import MainWindow from './MainWindow/MainWindow';
 import Sidebar from './Sidebar/Sidebar';
 import Meta from '../../Other/Meta/Meta';
@@ -10,23 +9,30 @@ import Load from '../../Other/Load/Load';
 import Err from '../../Other/Error/Error';
 import { useQuery } from 'urql';
 
-const getAlbum = gql(`
-  query getAlbums($slug: [String!]) {
-    albums(where: { slug: $slug }) {
-      id
-      title
-      slug
-      cover {
-        img {
-          id
-          url
+const getAlbum = gql`
+  query getAlbums($slug: String!) {
+    albums(filters: { Slug: { eq: $slug } }) {
+      data {
+        attributes {
+          Name
+          Tagline
+          Slug
+          Cover {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
+          }
+          GPhotoId
         }
       }
-      excerpt
-      albumID
     }
   }
-`);
+`;
 
 export type Photo = {
   original: string;
@@ -39,14 +45,15 @@ const Album = (): JSX.Element => {
   const [activePhoto, setActivePhoto] = useState<Photo>();
   const [photos, setPhotos] = useState<Photo[]>([]);
 
-  const [result] = useQuery({ query: getAlbum, variables: { slug: router.query.slug }, on });
+  const [result] = useQuery({ query: getAlbum, variables: { slug: router.query.slug } });
   const { data, fetching, error } = result;
 
   useEffect(() => {
-    const albumId = data?.albums?.[0]?.albumID;
+    const albumId = data?.albums.data[0].attributes.GPhotoId;
+    const url = `https://tropicalt-google-photos.glitch.me/${albumId}`;
     if (albumId) {
       axios
-        .get(`https://tropicalt-google-photos.glitch.me/${String(albumId)}`)
+        .get(url)
         .then((res) => {
           return setPhotos(
             res.data?.map((url: string) => ({
@@ -61,43 +68,24 @@ const Album = (): JSX.Element => {
       return;
     }
     setIsLoading(false);
-  }, [data?.albums]);
-
-  // const { data, error, loading } = useQuery(getAlbum, {
-  //   variables: { slug: router.query.slug },
-  //   async onCompleted(data) {
-  //     const albumId = data?.albums?.[0]?.albumID;
-  //     if (albumId) {
-  //       const { data }: Response<Array<string>> = await axios.get(
-  //         `https://tropicalt-google-photos.glitch.me/${albumId}`
-  //       );
-  //       setPhotos(
-  //         data?.map((url: string) => ({
-  //           original: `${url}=w2048`,
-  //           thumbnail: `${url}=w400`,
-  //         }))
-  //       );
-  //     }
-  //     setIsLoading(false);
-  //   },
-  // });
+  }, [data?.albums.data]);
 
   if (isLoading || fetching) return <Load />;
   if (error || (!isLoading && !photos.length)) return <Err />;
 
-  const albums = data?.albums;
+  const albumData = data?.albums.data[0].attributes;
 
   return (
     <>
       <Meta
-        title={albums?.[0]?.title}
-        excerpt={albums?.[0]?.excerpt}
-        imgUrl={albums?.[0]?.cover?.img?.url}
+        title={albumData?.Name}
+        excerpt={albumData?.Tagline}
+        imgUrl={albumData?.Cover.img.data.attributes.url}
         url={`/albums/${String(router.query.slug)}`}
       />
       <Sidebar
-        title={albums?.[0]?.title}
-        excerpt={albums?.[0]?.excerpt}
+        title={albumData?.Name}
+        excerpt={albumData?.Tagline}
         photos={photos}
         activeItemID={activePhoto}
         setActiveItem={setActivePhoto}

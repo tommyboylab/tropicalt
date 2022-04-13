@@ -1,7 +1,6 @@
 import React from 'react';
 import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
-// import { ResumeEmailFragmentFragment } from '../../../apollo/gql/graphql';
 
 export const ResumeEmailFragment = gql(`
   fragment ResumeEmailFragment on Resume {

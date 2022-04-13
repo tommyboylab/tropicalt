@@ -30,7 +30,7 @@ export const AboutCardFragment = gql(`
   }
 `);
 
-const AboutCards = ({ aboutCards }: DocumentType<typeof AboutCardFragment>): JSX.Element => {
+const AboutCards = ({ aboutCards }): JSX.Element => {
   return (
     <>
       {aboutCards?.map((aboutCard) => {

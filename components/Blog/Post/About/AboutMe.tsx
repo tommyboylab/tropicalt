@@ -1,8 +1,6 @@
 import React from 'react';
 import Avatar from '../../../Other/Avatar/Avatar';
 import s from './AboutMe.module.scss';
-// import { DocumentType } from '../../../../apollo/gql';
-// import { AvatarFragmentFragmentDoc } from '../../../../apollo/gql/graphql';
 
 const About = ({ avatar }): JSX.Element => (
   <div className={s.postAbout}>

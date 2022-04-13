@@ -31,7 +31,6 @@ export default function Home(): JSX.Element {
   const [result] = useQuery({ query: getHomepageQuery });
 
   const { data, error, fetching } = result;
-  // const { data, error, loading } = useQuery(getHomepageQuery);
 
   if (fetching && !data) return <Load />;
   if (error) return <Err />;
@@ -53,15 +52,3 @@ export default function Home(): JSX.Element {
     </main>
   );
 }
-
-// export async function getServerSideProps() {
-//   // const apolloClient = initializeApollo();
-//   //
-//   // await apolloClient.query({
-//   //   query: getHomepageQuery,
-//   // });
-//   //
-//   // return addApolloState(apolloClient, {
-//   //   props: {},
-//   // });
-// }

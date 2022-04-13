@@ -3,7 +3,7 @@ import s from '../Resume.module.scss';
 import { gql } from '@app/gql';
 // import { ResumeEmailFragmentFragment } from '../../../apollo/gql/graphql';
 
-const ResumeEmailFragment = gql(`
+export const ResumeEmailFragment = gql(`
   fragment ResumeEmailFragment on Resume {
     email
   }

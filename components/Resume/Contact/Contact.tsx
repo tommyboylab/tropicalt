@@ -1,14 +1,14 @@
 import React from 'react';
 import s from '../Resume.module.scss';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { ContactFragmentFragment } from '../../../apollo/gql/graphql';
 
-const ContactFragment = gql(`
+export const ContactFragment = gql`
   fragment ContactFragment on Resume {
-    address
-    phoneNum
+    Address
+    Phone
   }
-`);
+`;
 
 const Contact = (contact): JSX.Element => {
   return (

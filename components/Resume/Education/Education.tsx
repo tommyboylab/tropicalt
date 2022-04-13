@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { EducationFragmentFragment } from '../../../apollo/gql/graphql';
 
-const EducationFragment = gql(`
+export const EducationFragment = gql`
   fragment EducationFragment on Resume {
-    edu
+    Education
   }
-`);
+`;
 
 const Education = (education): JSX.Element => {
   return (

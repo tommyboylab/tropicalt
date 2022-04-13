@@ -1,54 +1,71 @@
 import React from 'react';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 import Post from '../../../Home/Recents/Recents';
 import AboutMe from '../About/AboutMe';
 import s from './Sidebar.module.scss';
 
-const SidebarArticlesFragment = gql(`
+export const SidebarArticlesFragment = gql`
   fragment SidebarArticlesFragment on Query {
-    sidebar: articles(limit: 4, sort: "date:desc", where: { published: true }) {
-      id
-      slug
-      cover {
-        img {
-          id
-          url
-          hash
+    sidebar: articles(sort: "Published:desc", pagination: { limit: 4 }) {
+      data {
+        id
+        attributes {
+          Slug
+          Title
+          Tagline
+          Published
+          Author {
+            data {
+              attributes {
+                username
+                Img {
+                  img {
+                    data {
+                      attributes {
+                        url
+                        hash
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          Cover {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
+          }
         }
       }
-      title
-      date
-      excerpt
-      user {
-        username
-      }
-    }
-    avatar(id: "1") {
-      ...AvatarFragment
     }
   }
-`);
+`;
 
-const PostSidebar = ({ sidebar, avatar }): JSX.Element => {
+const PostSidebar = ({ sidebar }): JSX.Element => {
   return (
     <div className={s.blogSidebar}>
       <h2>ˇˇˇ</h2>
-      <AboutMe avatar={avatar?.avatar} />
-      {sidebar &&
-        sidebar.map((article) => (
-          <Post
-            id={article?.id}
-            type='blog'
-            key={article?.id}
-            slug={String(article?.slug)}
-            cover={`/uploads/${String(article?.cover?.img?.hash)}-thumb.svg`}
-            img={article?.cover?.img?.url}
-            title={article?.title}
-            date={String(article?.date)}
-            name={article?.user?.username}
-            excerpt={article?.excerpt}
-          />
-        ))}
+      <AboutMe avatar={sidebar[0]?.attributes.Author.data.attributes} />
+      {sidebar.map((article) => (
+        <Post
+          id={article?.id}
+          type='blog'
+          key={article?.id}
+          slug={String(article?.attributes.Slug)}
+          cover={`/uploads/sqip_${String(article?.attributes.Cover?.img?.data.attributes.hash)}.svg`}
+          img={article?.attributes.Cover?.img?.data.attributes.url}
+          title={article?.attributes.Title}
+          date={String(article?.attributes.Published)}
+          name={article?.attributes.Author?.data.attributes.username}
+          excerpt={article?.attributes.Tagline}
+        />
+      ))}
     </div>
   );
 };

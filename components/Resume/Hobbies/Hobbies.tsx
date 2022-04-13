@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { HobbiesFragmentFragment } from '../../../apollo/gql/graphql';
 
-const HobbiesFragment = gql(`
+export const HobbiesFragment = gql(`
   fragment HobbiesFragment on Resume {
-    hobbies
+    Hobbies
   }
 `);
 

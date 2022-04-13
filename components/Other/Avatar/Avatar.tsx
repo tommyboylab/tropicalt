@@ -16,12 +16,13 @@ const AvatarFragment = gql(`
 `);
 
 const Avatar = ({ avatar }): JSX.Element => {
+  console.log(avatar);
   return (
-    <div key={avatar?.img?.data.attributes.id} className={s.avatar}>
+    <div key={avatar?.Img.img?.data.attributes.id} className={s.avatar}>
       <Img
         class={s.avatar}
-        url={String(avatar?.img?.data.attributes.url)}
-        placeholder={`/uploads/sqip_${String(avatar.img.data.attributes.hash)}.svg`}
+        url={String(avatar?.Img.img?.data.attributes.url)}
+        placeholder={`/uploads/sqip_${String(avatar.Img.img.data.attributes.hash)}.svg`}
         alt={`Image for Avatar`}
       />
     </div>

@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { WorkExpFragmentFragment } from '../../../apollo/gql/graphql';
 
-const WorkExpFragment = gql(`
+export const WorkExpFragment = gql`
   fragment WorkExpFragment on Resume {
-    workExp
+    Experience
   }
-`);
+`;
 
 const WorkExp = (workExp): JSX.Element => {
   return (

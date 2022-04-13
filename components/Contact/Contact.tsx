@@ -1,7 +1,7 @@
 import React, { MouseEventHandler } from 'react';
 import * as yup from 'yup';
-import { gql } from '@app/gql';
-import { useMutation } from '@apollo/client';
+import { gql } from 'urql';
+import { useMutation } from 'urql';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { ToggleContent, Modal } from './Modal/Modal';
@@ -13,7 +13,7 @@ type FormFields = {
   message: string;
 };
 
-const sendEmail = gql(`
+const sendEmail = gql`
   mutation AddEmail($name: String!, $email: String!, $message: String!) {
     createEmail(input: { data: { name: $name, email: $email, message: $message } }) {
       email {
@@ -24,7 +24,7 @@ const sendEmail = gql(`
       }
     }
   }
-`);
+`;
 
 const contactSchema = yup.object({
   name: yup.string().min(2, `That's not a name!`).max(22).required(),

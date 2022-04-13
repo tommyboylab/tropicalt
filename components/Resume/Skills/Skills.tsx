@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactMarkdown from 'react-markdown';
 import s from '../Resume.module.scss';
-import { gql } from '@app/gql';
+import { gql } from 'urql';
 // import { SkillsFragmentFragment } from '../../../apollo/gql/graphql';
 
-const SkillsFragment = gql(`
+export const SkillsFragment = gql`
   fragment SkillsFragment on Resume {
-    skills
+    Skills
   }
-`);
+`;
 
 const Skills = (skills): JSX.Element => {
   return (

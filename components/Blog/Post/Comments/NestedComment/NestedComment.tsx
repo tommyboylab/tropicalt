@@ -1,56 +1,8 @@
 import React, { useState } from 'react';
-import Comment, { Me } from '../Comment/Comment';
+import Comment from '../Comment/Comment';
 import s from '../Comments.module.scss';
 
-type NestedComment = {
-  me: Me;
-  articleID: string;
-  child:
-    | Array<
-        | {
-            __typename?: 'Comment';
-            id: string;
-            content?: string | null | undefined;
-            user?:
-              | {
-                  __typename?: 'UsersPermissionsUser';
-                  id: string;
-                  username: string;
-                  avatar?: string | null | undefined;
-                }
-              | null
-              | undefined;
-            likes?:
-              | Array<
-                  | {
-                      __typename?: 'ComponentBlogLikes';
-                      user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
-                    }
-                  | null
-                  | undefined
-                >
-              | null
-              | undefined;
-            dislikes?:
-              | Array<
-                  | {
-                      __typename?: 'ComponentBlogDislike';
-                      user?: { __typename?: 'UsersPermissionsUser'; id: string } | null | undefined;
-                    }
-                  | null
-                  | undefined
-                >
-              | null
-              | undefined;
-          }
-        | null
-        | undefined
-      >
-    | null
-    | undefined;
-};
-
-const NestedComment = ({ child, me }: NestedComment): JSX.Element => {
+const NestedComment = ({ child, me }): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
   const commentNumber = Number(child?.length);
 
@@ -68,7 +20,7 @@ const NestedComment = ({ child, me }: NestedComment): JSX.Element => {
         commentNumber > 0 &&
         child?.map((comment, index) => (
           <>
-            <Comment nested comment={comment} key={index} me={me} />
+            <Comment nested comment={comment.attributes} key={index} me={me} />
           </>
         ))}
     </div>

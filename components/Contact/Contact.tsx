@@ -15,14 +15,14 @@ type FormFields = {
 
 const sendEmail = gql`
   mutation AddEmail($name: String!, $email: String!, $message: String!) {
-    createEmail(input: { data: { name: $name, email: $email, message: $message } }) {
-      email {
-        id
-        name
-        email
-        message
-      }
+  createContact(data: { Name:$name, Email:$email, Message:$message }) {
+    data {
+     attributes{
+      Name
+      Email
+      Message
     }
+  }
   }
 `;
 
@@ -41,7 +41,7 @@ const HideModal = (hide: MouseEventHandler): JSX.Element => (
 );
 
 const Form = (): JSX.Element => {
-  const [addEmail, { loading: mutationLoading, error: mutationError }] = useMutation(sendEmail);
+  const [addEmailResult, addEmail] = useMutation(sendEmail);
   const {
     register,
     handleSubmit,
@@ -104,13 +104,13 @@ const Form = (): JSX.Element => {
                 handleSubmit(onSubmit);
                 show(event);
               }}
-              disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
+              disabled={!!addEmailResult.error || !formState.isValid || (errors && addEmailResult.fetching)}>
               Submit
             </button>
           )}
           content={HideModal}
         />
-        {mutationError && <p className={s.submitError}>Error :( Please try again</p>}
+        {addEmailResult.error && <p className={s.submitError}>Error :( Please try again</p>}
       </form>
     </section>
   );

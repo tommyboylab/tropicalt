@@ -1,50 +1,48 @@
 import React, { MouseEventHandler } from 'react';
-import { OperationVariables, TypedDocumentNode, useMutation } from '@apollo/client';
-import { gql } from '@app/gql';
+import { useMutation } from 'urql';
+import { gql } from 'urql';
 import s from '../../Comments.module.scss';
 import { Comment } from '../Comment';
 
-const UpdateCommentLikes = gql(`
+const UpdateCommentLikes = gql`
   mutation updateCommentLikes(
     $commentID: ID!
     $likes: [editComponentBlogLikeInput]
     $dislikes: [editComponentBlogDislikeInput]]
   ) {
-    updateComment(input: { where: { id: $commentID }, data: { likes: $likes, dislikes: $dislikes } }) {
-      comment {
-        id
-        likes {
-          user {
-            id
-          }
+     updateComment(id: $commentId, data: { Likes:{UserId:$likes}, Dislikes: {UserId:$dislikes} }) {
+    data {
+      id
+      attributes {
+        Likes {
+          UserId
         }
-        dislikes {
-          user {
-            id
-          }
+        Dislikes {
+          UserId
         }
       }
     }
   }
-`);
+  }
+`;
+//
+// type Props = {
+//   comment: Comment;
+//   me:
+//     | {
+//         __typename?: 'UsersPermissionsMe' | undefined;
+//         id: string;
+//         username: string;
+//         avatar?: string | null | undefined;
+//       }
+//     | null
+//     | undefined;
+//   nested?: boolean;
+//   reply: MouseEventHandler<SVGSVGElement>;
+//   replyIsOpen: boolean;
+// };
 
-type Props = {
-  comment: Comment;
-  me:
-    | {
-        __typename?: 'UsersPermissionsMe' | undefined;
-        id: string;
-        username: string;
-        avatar?: string | null | undefined;
-      }
-    | null
-    | undefined;
-  nested?: boolean;
-  reply: MouseEventHandler<SVGSVGElement>;
-  replyIsOpen: boolean;
-};
-
-const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element => {
+const Rating = ({ comment, me, nested, reply, replyIsOpen }): JSX.Element => {
   const like = comment?.likes;
   const dislike = comment?.dislikes;
 
@@ -64,27 +62,25 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element
 
   const disliked = () =>
     isDisliked
-      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as any)
+      ? dislike?.filter((dislike) => dislike?.user?.id !== me?.id)
       : dislike
       ? [...dislike, { id: String(dislike?.length + 1), me }]
       : dislike;
 
   const removeLike = () =>
-    like?.some((like) => like?.user?.id === me?.id)
-      ? (like?.filter((like) => like?.user?.id !== me?.id) as any)
-      : (like as any);
+    like?.some((like) => like?.user?.id === me?.id) ? like?.filter((like) => like?.user?.id !== me?.id) : like;
 
   const removeDislike = () =>
     dislike?.some((dislike) => dislike?.user?.id === me?.id)
-      ? (dislike?.filter((dislike) => dislike?.user?.id !== me?.id) as any)
-      : (dislike as any);
+      ? dislike?.filter((dislike) => dislike?.user?.id !== me?.id)
+      : dislike;
 
-  const [updateCommentLike] = useMutation(UpdateCommentLikes as TypedDocumentNode<never, OperationVariables>);
+  const [UpdateCommentLikesResult, updateCommentLikes] = useMutation(UpdateCommentLikes);
 
-  const [updateCommentDislike] = useMutation(UpdateCommentLikes as TypedDocumentNode<never, OperationVariables>);
+  const [UpdateCommentDislikesResult, updateCommentDislikes] = useMutation(UpdateCommentLikes);
 
   const updateLike = async (commentID: string) => {
-    await updateCommentLike({
+    await updateCommentLikes({
       variables: {
         commentID,
         likes: liked(),
@@ -94,7 +90,7 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element
   };
 
   const updateDislike = async (commentID: string) => {
-    await updateCommentDislike({
+    await updateCommentDislikes({
       variables: {
         commentID,
         likes: removeLike(),
@@ -106,6 +102,7 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element
   return (
     <div className={s.commentRating}>
       <svg
+        aria-disabled={UpdateCommentLikesResult.fetching}
         onClick={void updateLike(String(comment?.id))}
         style={{ fill: `${isLiked ? '#0FA' : 'black'}` }}
         className={s.commentLikeImg}
@@ -116,6 +113,7 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }: Props): JSX.Element
       </svg>
       <h3 className={s.commentLike}>{likeNum}</h3>
       <svg
+        aria-disabled={UpdateCommentDislikesResult.fetching}
         onClick={void updateDislike(String(comment?.id))}
         style={{ fill: `${isDisliked ? 'red' : 'black'}` }}
         className={s.commentDislikeImg}

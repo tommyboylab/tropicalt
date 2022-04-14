@@ -27,9 +27,9 @@ usersPermissionsUser(id:1){
 
 const Bio = ({ avatar }): JSX.Element => {
   return (
-    <div key={avatar?.id} className={s.bio}>
+    <div key={avatar.id} className={s.bio}>
       <Avatar avatar={avatar} />
-      <ReactMarkdown>{String(avatar?.Biography)}</ReactMarkdown>
+      <ReactMarkdown>{String(avatar?.attributes.Biography)}</ReactMarkdown>
     </div>
   );
 };

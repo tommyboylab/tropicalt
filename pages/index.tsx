@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
       />
       <Nav nav={data?.navLink.data.attributes.Link} />
       <ImgB hero={data?.home.data.attributes.Hero} />
-      <Bio avatar={data?.usersPermissionsUser.data.attributes} />
+      <Bio avatar={data?.usersPermissionsUser.data} />
       <RecentPosts articles={data?.articles.data} />
       <RecentAlbums albums={data?.albums.data} />
       <Footer nav={data?.navLink.data.attributes.Link} />

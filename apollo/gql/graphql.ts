@@ -16,625 +16,621 @@ export type Scalars = {
   Date: any;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: any;
+  /** A string used to identify an i18n locale */
+  I18NLocaleCode: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
-  /** The `Long` scalar type represents 52-bit integers */
-  Long: any;
-  /** A time string with format: HH:mm:ss.SSS */
-  Time: any;
   /** The `Upload` scalar type represents a file upload. */
   Upload: any;
 };
 
-export type AboutCard = {
-  __typename?: 'AboutCard';
-  created_at: Scalars['DateTime'];
-  excerpt: Scalars['String'];
-  id: Scalars['ID'];
-  img?: Maybe<ComponentOtherImg>;
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
+export type About = {
+  __typename?: 'About';
+  AboutCard: Array<Maybe<ComponentAboutAboutCard>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<AboutRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type AboutCardAggregator = {
-  __typename?: 'AboutCardAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type AboutAboutCardArgs = {
+  filters?: InputMaybe<ComponentAboutAboutCardFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type AboutCardConnection = {
-  __typename?: 'AboutCardConnection';
-  aggregate?: Maybe<AboutCardAggregator>;
-  groupBy?: Maybe<AboutCardGroupBy>;
-  values?: Maybe<Array<Maybe<AboutCard>>>;
+
+export type AboutLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type AboutCardConnectionCreated_At = {
-  __typename?: 'AboutCardConnectionCreated_at';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type AboutEntity = {
+  __typename?: 'AboutEntity';
+  attributes?: Maybe<About>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type AboutCardConnectionExcerpt = {
-  __typename?: 'AboutCardConnectionExcerpt';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['String']>;
+export type AboutEntityResponse = {
+  __typename?: 'AboutEntityResponse';
+  data?: Maybe<AboutEntity>;
 };
 
-export type AboutCardConnectionId = {
-  __typename?: 'AboutCardConnectionId';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type AboutInput = {
+  AboutCard?: InputMaybe<Array<InputMaybe<ComponentAboutAboutCardInput>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type AboutCardConnectionImg = {
-  __typename?: 'AboutCardConnectionImg';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type AboutCardConnectionTitle = {
-  __typename?: 'AboutCardConnectionTitle';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type AboutCardConnectionUpdated_At = {
-  __typename?: 'AboutCardConnectionUpdated_at';
-  connection?: Maybe<AboutCardConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type AboutCardGroupBy = {
-  __typename?: 'AboutCardGroupBy';
-  created_at?: Maybe<Array<Maybe<AboutCardConnectionCreated_At>>>;
-  excerpt?: Maybe<Array<Maybe<AboutCardConnectionExcerpt>>>;
-  id?: Maybe<Array<Maybe<AboutCardConnectionId>>>;
-  img?: Maybe<Array<Maybe<AboutCardConnectionImg>>>;
-  title?: Maybe<Array<Maybe<AboutCardConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<AboutCardConnectionUpdated_At>>>;
-};
-
-export type AboutCardInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  excerpt: Scalars['String'];
-  img: ComponentOtherImgInput;
-  title: Scalars['String'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type AdminUser = {
-  __typename?: 'AdminUser';
-  firstname: Scalars['String'];
-  id: Scalars['ID'];
-  lastname: Scalars['String'];
-  username?: Maybe<Scalars['String']>;
+export type AboutRelationResponseCollection = {
+  __typename?: 'AboutRelationResponseCollection';
+  data: Array<AboutEntity>;
 };
 
 export type Album = {
   __typename?: 'Album';
-  albumID: Scalars['String'];
-  cover?: Maybe<ComponentOtherImg>;
-  created_at: Scalars['DateTime'];
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  id: Scalars['ID'];
-  location: Enum_Album_Location;
-  published?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-  user?: Maybe<UsersPermissionsUser>;
+  Cover?: Maybe<ComponentMediaImg>;
+  Date?: Maybe<Scalars['Date']>;
+  GPhotoId: Scalars['String'];
+  Location?: Maybe<Enum_Album_Location>;
+  Name?: Maybe<Scalars['String']>;
+  Photographer?: Maybe<UsersPermissionsUserEntityResponse>;
+  Slug?: Maybe<Scalars['String']>;
+  Tagline?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<AlbumRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type AlbumAggregator = {
-  __typename?: 'AlbumAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type AlbumLocalizationsArgs = {
+  filters?: InputMaybe<AlbumFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type AlbumConnection = {
-  __typename?: 'AlbumConnection';
-  aggregate?: Maybe<AlbumAggregator>;
-  groupBy?: Maybe<AlbumGroupBy>;
-  values?: Maybe<Array<Maybe<Album>>>;
+export type AlbumEntity = {
+  __typename?: 'AlbumEntity';
+  attributes?: Maybe<Album>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type AlbumConnectionAlbumId = {
-  __typename?: 'AlbumConnectionAlbumID';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['String']>;
+export type AlbumEntityResponse = {
+  __typename?: 'AlbumEntityResponse';
+  data?: Maybe<AlbumEntity>;
 };
 
-export type AlbumConnectionCover = {
-  __typename?: 'AlbumConnectionCover';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type AlbumEntityResponseCollection = {
+  __typename?: 'AlbumEntityResponseCollection';
+  data: Array<AlbumEntity>;
+  meta: ResponseCollectionMeta;
 };
 
-export type AlbumConnectionCreated_At = {
-  __typename?: 'AlbumConnectionCreated_at';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type AlbumConnectionDate = {
-  __typename?: 'AlbumConnectionDate';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type AlbumConnectionExcerpt = {
-  __typename?: 'AlbumConnectionExcerpt';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type AlbumConnectionId = {
-  __typename?: 'AlbumConnectionId';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type AlbumConnectionLocation = {
-  __typename?: 'AlbumConnectionLocation';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type AlbumConnectionPublished = {
-  __typename?: 'AlbumConnectionPublished';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type AlbumConnectionSlug = {
-  __typename?: 'AlbumConnectionSlug';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type AlbumConnectionTitle = {
-  __typename?: 'AlbumConnectionTitle';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type AlbumConnectionUpdated_At = {
-  __typename?: 'AlbumConnectionUpdated_at';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type AlbumConnectionUser = {
-  __typename?: 'AlbumConnectionUser';
-  connection?: Maybe<AlbumConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type AlbumGroupBy = {
-  __typename?: 'AlbumGroupBy';
-  albumID?: Maybe<Array<Maybe<AlbumConnectionAlbumId>>>;
-  cover?: Maybe<Array<Maybe<AlbumConnectionCover>>>;
-  created_at?: Maybe<Array<Maybe<AlbumConnectionCreated_At>>>;
-  date?: Maybe<Array<Maybe<AlbumConnectionDate>>>;
-  excerpt?: Maybe<Array<Maybe<AlbumConnectionExcerpt>>>;
-  id?: Maybe<Array<Maybe<AlbumConnectionId>>>;
-  location?: Maybe<Array<Maybe<AlbumConnectionLocation>>>;
-  published?: Maybe<Array<Maybe<AlbumConnectionPublished>>>;
-  slug?: Maybe<Array<Maybe<AlbumConnectionSlug>>>;
-  title?: Maybe<Array<Maybe<AlbumConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<AlbumConnectionUpdated_At>>>;
-  user?: Maybe<Array<Maybe<AlbumConnectionUser>>>;
+export type AlbumFiltersInput = {
+  Date?: InputMaybe<DateFilterInput>;
+  GPhotoId?: InputMaybe<StringFilterInput>;
+  Location?: InputMaybe<StringFilterInput>;
+  Name?: InputMaybe<StringFilterInput>;
+  Photographer?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  Slug?: InputMaybe<StringFilterInput>;
+  Tagline?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<AlbumFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<AlbumFiltersInput>;
+  not?: InputMaybe<AlbumFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<AlbumFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type AlbumInput = {
-  albumID: Scalars['String'];
-  cover: ComponentOtherImgInput;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  location: Enum_Album_Location;
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  title: Scalars['String'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
+  Cover?: InputMaybe<ComponentMediaImgInput>;
+  Date?: InputMaybe<Scalars['Date']>;
+  GPhotoId?: InputMaybe<Scalars['String']>;
+  Location?: InputMaybe<Enum_Album_Location>;
+  Name?: InputMaybe<Scalars['String']>;
+  Photographer?: InputMaybe<Scalars['ID']>;
+  Slug?: InputMaybe<Scalars['String']>;
+  Tagline?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type AlbumRelationResponseCollection = {
+  __typename?: 'AlbumRelationResponseCollection';
+  data: Array<AlbumEntity>;
 };
 
 export type Article = {
   __typename?: 'Article';
-  comments?: Maybe<Array<Maybe<Comment>>>;
-  content: Scalars['String'];
-  cover?: Maybe<ComponentOtherImg>;
-  created_at: Scalars['DateTime'];
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  id: Scalars['ID'];
-  published?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  tag?: Maybe<Array<Maybe<ComponentBlogTag>>>;
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-  user?: Maybe<UsersPermissionsUser>;
+  Author?: Maybe<UsersPermissionsUserEntityResponse>;
+  Content: Scalars['String'];
+  Cover?: Maybe<ComponentMediaImg>;
+  Published?: Maybe<Scalars['Date']>;
+  Slug?: Maybe<Scalars['String']>;
+  Tagline?: Maybe<Scalars['String']>;
+  Tags?: Maybe<Array<Maybe<ComponentBlogTag>>>;
+  Title: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<ArticleRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 
-export type ArticleCommentsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type ArticleTagsArgs = {
+  filters?: InputMaybe<ComponentBlogTagFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ArticleAggregator = {
-  __typename?: 'ArticleAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type ArticleLocalizationsArgs = {
+  filters?: InputMaybe<ArticleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ArticleConnection = {
-  __typename?: 'ArticleConnection';
-  aggregate?: Maybe<ArticleAggregator>;
-  groupBy?: Maybe<ArticleGroupBy>;
-  values?: Maybe<Array<Maybe<Article>>>;
+export type ArticleEntity = {
+  __typename?: 'ArticleEntity';
+  attributes?: Maybe<Article>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type ArticleConnectionContent = {
-  __typename?: 'ArticleConnectionContent';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
+export type ArticleEntityResponse = {
+  __typename?: 'ArticleEntityResponse';
+  data?: Maybe<ArticleEntity>;
 };
 
-export type ArticleConnectionCover = {
-  __typename?: 'ArticleConnectionCover';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type ArticleEntityResponseCollection = {
+  __typename?: 'ArticleEntityResponseCollection';
+  data: Array<ArticleEntity>;
+  meta: ResponseCollectionMeta;
 };
 
-export type ArticleConnectionCreated_At = {
-  __typename?: 'ArticleConnectionCreated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionDate = {
-  __typename?: 'ArticleConnectionDate';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionExcerpt = {
-  __typename?: 'ArticleConnectionExcerpt';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionId = {
-  __typename?: 'ArticleConnectionId';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleConnectionPublished = {
-  __typename?: 'ArticleConnectionPublished';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type ArticleConnectionSlug = {
-  __typename?: 'ArticleConnectionSlug';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionTitle = {
-  __typename?: 'ArticleConnectionTitle';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ArticleConnectionUpdated_At = {
-  __typename?: 'ArticleConnectionUpdated_at';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ArticleConnectionUser = {
-  __typename?: 'ArticleConnectionUser';
-  connection?: Maybe<ArticleConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ArticleGroupBy = {
-  __typename?: 'ArticleGroupBy';
-  content?: Maybe<Array<Maybe<ArticleConnectionContent>>>;
-  cover?: Maybe<Array<Maybe<ArticleConnectionCover>>>;
-  created_at?: Maybe<Array<Maybe<ArticleConnectionCreated_At>>>;
-  date?: Maybe<Array<Maybe<ArticleConnectionDate>>>;
-  excerpt?: Maybe<Array<Maybe<ArticleConnectionExcerpt>>>;
-  id?: Maybe<Array<Maybe<ArticleConnectionId>>>;
-  published?: Maybe<Array<Maybe<ArticleConnectionPublished>>>;
-  slug?: Maybe<Array<Maybe<ArticleConnectionSlug>>>;
-  title?: Maybe<Array<Maybe<ArticleConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<ArticleConnectionUpdated_At>>>;
-  user?: Maybe<Array<Maybe<ArticleConnectionUser>>>;
+export type ArticleFiltersInput = {
+  Author?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  Content?: InputMaybe<StringFilterInput>;
+  Published?: InputMaybe<DateFilterInput>;
+  Slug?: InputMaybe<StringFilterInput>;
+  Tagline?: InputMaybe<StringFilterInput>;
+  Title?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  locale?: InputMaybe<StringFilterInput>;
+  localizations?: InputMaybe<ArticleFiltersInput>;
+  not?: InputMaybe<ArticleFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ArticleFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type ArticleInput = {
-  comments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  content: Scalars['String'];
-  cover: ComponentOtherImgInput;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  tag?: InputMaybe<Array<ComponentBlogTagInput>>;
-  title: Scalars['String'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
+  Author?: InputMaybe<Scalars['ID']>;
+  Content?: InputMaybe<Scalars['String']>;
+  Cover?: InputMaybe<ComponentMediaImgInput>;
+  Published?: InputMaybe<Scalars['Date']>;
+  Slug?: InputMaybe<Scalars['String']>;
+  Tagline?: InputMaybe<Scalars['String']>;
+  Tags?: InputMaybe<Array<InputMaybe<ComponentBlogTagInput>>>;
+  Title?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type Avatar = {
-  __typename?: 'Avatar';
-  alt: Scalars['String'];
-  avatar?: Maybe<ComponentOtherImg>;
-  bio: Scalars['String'];
-  created_at: Scalars['DateTime'];
-  id: Scalars['ID'];
-  updated_at: Scalars['DateTime'];
+export type ArticleRelationResponseCollection = {
+  __typename?: 'ArticleRelationResponseCollection';
+  data: Array<ArticleEntity>;
 };
 
-export type AvatarAggregator = {
-  __typename?: 'AvatarAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+export type Blog = {
+  __typename?: 'Blog';
+  Description: Scalars['String'];
+  Title: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<BlogRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type AvatarConnection = {
-  __typename?: 'AvatarConnection';
-  aggregate?: Maybe<AvatarAggregator>;
-  groupBy?: Maybe<AvatarGroupBy>;
-  values?: Maybe<Array<Maybe<Avatar>>>;
+
+export type BlogLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type AvatarConnectionAlt = {
-  __typename?: 'AvatarConnectionAlt';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['String']>;
+export type BlogEntity = {
+  __typename?: 'BlogEntity';
+  attributes?: Maybe<Blog>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type AvatarConnectionAvatar = {
-  __typename?: 'AvatarConnectionAvatar';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type BlogEntityResponse = {
+  __typename?: 'BlogEntityResponse';
+  data?: Maybe<BlogEntity>;
 };
 
-export type AvatarConnectionBio = {
-  __typename?: 'AvatarConnectionBio';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['String']>;
+export type BlogInput = {
+  Description?: InputMaybe<Scalars['String']>;
+  Title?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type AvatarConnectionCreated_At = {
-  __typename?: 'AvatarConnectionCreated_at';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type BlogRelationResponseCollection = {
+  __typename?: 'BlogRelationResponseCollection';
+  data: Array<BlogEntity>;
 };
 
-export type AvatarConnectionId = {
-  __typename?: 'AvatarConnectionId';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type AvatarConnectionUpdated_At = {
-  __typename?: 'AvatarConnectionUpdated_at';
-  connection?: Maybe<AvatarConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type AvatarGroupBy = {
-  __typename?: 'AvatarGroupBy';
-  alt?: Maybe<Array<Maybe<AvatarConnectionAlt>>>;
-  avatar?: Maybe<Array<Maybe<AvatarConnectionAvatar>>>;
-  bio?: Maybe<Array<Maybe<AvatarConnectionBio>>>;
-  created_at?: Maybe<Array<Maybe<AvatarConnectionCreated_At>>>;
-  id?: Maybe<Array<Maybe<AvatarConnectionId>>>;
-  updated_at?: Maybe<Array<Maybe<AvatarConnectionUpdated_At>>>;
-};
-
-export type AvatarInput = {
-  alt: Scalars['String'];
-  avatar: ComponentOtherImgInput;
-  bio: Scalars['String'];
-  created_by?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
+export type BooleanFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  contains?: InputMaybe<Scalars['Boolean']>;
+  containsi?: InputMaybe<Scalars['Boolean']>;
+  endsWith?: InputMaybe<Scalars['Boolean']>;
+  eq?: InputMaybe<Scalars['Boolean']>;
+  gt?: InputMaybe<Scalars['Boolean']>;
+  gte?: InputMaybe<Scalars['Boolean']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  lt?: InputMaybe<Scalars['Boolean']>;
+  lte?: InputMaybe<Scalars['Boolean']>;
+  ne?: InputMaybe<Scalars['Boolean']>;
+  not?: InputMaybe<BooleanFilterInput>;
+  notContains?: InputMaybe<Scalars['Boolean']>;
+  notContainsi?: InputMaybe<Scalars['Boolean']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Boolean']>>>;
+  startsWith?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type Comment = {
   __typename?: 'Comment';
-  article?: Maybe<Article>;
-  children?: Maybe<Array<Maybe<Comment>>>;
-  content?: Maybe<Scalars['String']>;
-  created_at: Scalars['DateTime'];
-  date?: Maybe<Scalars['DateTime']>;
-  dislikes?: Maybe<Array<Maybe<ComponentBlogDislike>>>;
-  flagged?: Maybe<Scalars['Boolean']>;
-  id: Scalars['ID'];
-  likes?: Maybe<Array<Maybe<ComponentBlogLikes>>>;
-  parent?: Maybe<Comment>;
-  updated_at: Scalars['DateTime'];
-  user?: Maybe<UsersPermissionsUser>;
+  Author?: Maybe<UsersPermissionsUserEntityResponse>;
+  Children?: Maybe<CommentRelationResponseCollection>;
+  Content?: Maybe<Scalars['String']>;
+  Depth?: Maybe<Scalars['Int']>;
+  Dislikes?: Maybe<Array<Maybe<ComponentCommentLikes>>>;
+  Flagged?: Maybe<Scalars['Boolean']>;
+  Likes?: Maybe<Array<Maybe<ComponentCommentLikes>>>;
+  Parent?: Maybe<CommentEntityResponse>;
+  Published?: Maybe<Scalars['DateTime']>;
+  article?: Maybe<ArticleEntityResponse>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
 
 export type CommentChildrenArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  filters?: InputMaybe<CommentFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type CommentAggregator = {
-  __typename?: 'CommentAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type CommentDislikesArgs = {
+  filters?: InputMaybe<ComponentCommentLikesFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type CommentConnection = {
-  __typename?: 'CommentConnection';
-  aggregate?: Maybe<CommentAggregator>;
-  groupBy?: Maybe<CommentGroupBy>;
-  values?: Maybe<Array<Maybe<Comment>>>;
+
+export type CommentLikesArgs = {
+  filters?: InputMaybe<ComponentCommentLikesFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type CommentConnectionArticle = {
-  __typename?: 'CommentConnectionArticle';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type CommentEntity = {
+  __typename?: 'CommentEntity';
+  attributes?: Maybe<Comment>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type CommentConnectionContent = {
-  __typename?: 'CommentConnectionContent';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['String']>;
+export type CommentEntityResponse = {
+  __typename?: 'CommentEntityResponse';
+  data?: Maybe<CommentEntity>;
 };
 
-export type CommentConnectionCreated_At = {
-  __typename?: 'CommentConnectionCreated_at';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type CommentEntityResponseCollection = {
+  __typename?: 'CommentEntityResponseCollection';
+  data: Array<CommentEntity>;
+  meta: ResponseCollectionMeta;
 };
 
-export type CommentConnectionDate = {
-  __typename?: 'CommentConnectionDate';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type CommentConnectionFlagged = {
-  __typename?: 'CommentConnectionFlagged';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type CommentConnectionId = {
-  __typename?: 'CommentConnectionId';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type CommentConnectionParent = {
-  __typename?: 'CommentConnectionParent';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type CommentConnectionUpdated_At = {
-  __typename?: 'CommentConnectionUpdated_at';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type CommentConnectionUser = {
-  __typename?: 'CommentConnectionUser';
-  connection?: Maybe<CommentConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type CommentGroupBy = {
-  __typename?: 'CommentGroupBy';
-  article?: Maybe<Array<Maybe<CommentConnectionArticle>>>;
-  content?: Maybe<Array<Maybe<CommentConnectionContent>>>;
-  created_at?: Maybe<Array<Maybe<CommentConnectionCreated_At>>>;
-  date?: Maybe<Array<Maybe<CommentConnectionDate>>>;
-  flagged?: Maybe<Array<Maybe<CommentConnectionFlagged>>>;
-  id?: Maybe<Array<Maybe<CommentConnectionId>>>;
-  parent?: Maybe<Array<Maybe<CommentConnectionParent>>>;
-  updated_at?: Maybe<Array<Maybe<CommentConnectionUpdated_At>>>;
-  user?: Maybe<Array<Maybe<CommentConnectionUser>>>;
+export type CommentFiltersInput = {
+  Author?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  Children?: InputMaybe<CommentFiltersInput>;
+  Content?: InputMaybe<StringFilterInput>;
+  Depth?: InputMaybe<IntFilterInput>;
+  Flagged?: InputMaybe<BooleanFilterInput>;
+  Parent?: InputMaybe<CommentFiltersInput>;
+  Published?: InputMaybe<DateTimeFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<CommentFiltersInput>>>;
+  article?: InputMaybe<ArticleFiltersInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<CommentFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<CommentFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
 };
 
 export type CommentInput = {
+  Author?: InputMaybe<Scalars['ID']>;
+  Children?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  Content?: InputMaybe<Scalars['String']>;
+  Depth?: InputMaybe<Scalars['Int']>;
+  Dislikes?: InputMaybe<Array<InputMaybe<ComponentCommentLikesInput>>>;
+  Flagged?: InputMaybe<Scalars['Boolean']>;
+  Likes?: InputMaybe<Array<InputMaybe<ComponentCommentLikesInput>>>;
+  Parent?: InputMaybe<Scalars['ID']>;
+  Published?: InputMaybe<Scalars['DateTime']>;
   article?: InputMaybe<Scalars['ID']>;
-  children?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  content?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date?: InputMaybe<Scalars['DateTime']>;
-  dislikes?: InputMaybe<Array<InputMaybe<ComponentBlogDislikeInput>>>;
-  flagged?: InputMaybe<Scalars['Boolean']>;
-  likes?: InputMaybe<Array<InputMaybe<ComponentBlogLikeInput>>>;
-  parent?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type ComponentBlogDislike = {
-  __typename?: 'ComponentBlogDislike';
+export type CommentRelationResponseCollection = {
+  __typename?: 'CommentRelationResponseCollection';
+  data: Array<CommentEntity>;
+};
+
+export type ComponentAboutAboutCard = {
+  __typename?: 'ComponentAboutAboutCard';
+  Extension: Scalars['String'];
+  Img?: Maybe<Array<Maybe<ComponentMediaImg>>>;
+  Tagline: Scalars['String'];
   id: Scalars['ID'];
-  user?: Maybe<UsersPermissionsUser>;
 };
 
-export type ComponentBlogDislikeInput = {
-  user?: InputMaybe<Scalars['ID']>;
+
+export type ComponentAboutAboutCardImgArgs = {
+  filters?: InputMaybe<ComponentMediaImgFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ComponentBlogLikeInput = {
-  user?: InputMaybe<Scalars['ID']>;
+export type ComponentAboutAboutCardFiltersInput = {
+  Extension?: InputMaybe<StringFilterInput>;
+  Tagline?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentAboutAboutCardFiltersInput>>>;
+  not?: InputMaybe<ComponentAboutAboutCardFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentAboutAboutCardFiltersInput>>>;
 };
 
-export type ComponentBlogLikes = {
-  __typename?: 'ComponentBlogLikes';
+export type ComponentAboutAboutCardInput = {
+  Extension?: InputMaybe<Scalars['String']>;
+  Img?: InputMaybe<Array<InputMaybe<ComponentMediaImgInput>>>;
+  Tagline?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentBlogComment = {
+  __typename?: 'ComponentBlogComment';
+  Content?: Maybe<Scalars['String']>;
+  Depth: Scalars['Int'];
+  Dislikes?: Maybe<Array<Maybe<ComponentCommentLikes>>>;
+  Flagged?: Maybe<Scalars['Boolean']>;
+  Likes?: Maybe<Array<Maybe<ComponentCommentLikes>>>;
+  Published?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
-  user?: Maybe<UsersPermissionsUser>;
+  users_permissions_user?: Maybe<UsersPermissionsUserEntityResponse>;
+};
+
+
+export type ComponentBlogCommentDislikesArgs = {
+  filters?: InputMaybe<ComponentCommentLikesFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type ComponentBlogCommentLikesArgs = {
+  filters?: InputMaybe<ComponentCommentLikesFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type ComponentBlogTag = {
   __typename?: 'ComponentBlogTag';
+  Name: Enum_Componentblogtag_Name;
   id: Scalars['ID'];
-  tag?: Maybe<Enum_Componentblogtag_Tag>;
+};
+
+export type ComponentBlogTagFiltersInput = {
+  Name?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentBlogTagFiltersInput>>>;
+  not?: InputMaybe<ComponentBlogTagFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentBlogTagFiltersInput>>>;
 };
 
 export type ComponentBlogTagInput = {
-  tag?: InputMaybe<Enum_Componentblogtag_Tag>;
+  Name?: InputMaybe<Enum_Componentblogtag_Name>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
-export type ComponentHeroesHero = {
-  __typename?: 'ComponentHeroesHero';
-  cover?: Maybe<ComponentOtherImg>;
+export type ComponentCommentLikes = {
+  __typename?: 'ComponentCommentLikes';
+  UserId?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
-  title?: Maybe<Scalars['String']>;
 };
 
-export type ComponentHeroesHeroInput = {
-  cover?: InputMaybe<ComponentOtherImgInput>;
-  title?: InputMaybe<Scalars['String']>;
+export type ComponentCommentLikesFiltersInput = {
+  UserId?: InputMaybe<IntFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentCommentLikesFiltersInput>>>;
+  not?: InputMaybe<ComponentCommentLikesFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentCommentLikesFiltersInput>>>;
 };
 
-export type ComponentNavNav = {
-  __typename?: 'ComponentNavNav';
+export type ComponentCommentLikesInput = {
+  UserId?: InputMaybe<Scalars['Int']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentHomeHero = {
+  __typename?: 'ComponentHomeHero';
+  Caption: Scalars['String'];
+  Img?: Maybe<Array<Maybe<ComponentMediaImg>>>;
   id: Scalars['ID'];
-  title: Scalars['String'];
-  url: Scalars['String'];
 };
 
-export type ComponentNavNavInput = {
-  title: Scalars['String'];
-  url: Scalars['String'];
+
+export type ComponentHomeHeroImgArgs = {
+  filters?: InputMaybe<ComponentMediaImgFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type ComponentOtherImg = {
-  __typename?: 'ComponentOtherImg';
+export type ComponentHomeHeroFiltersInput = {
+  Caption?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentHomeHeroFiltersInput>>>;
+  not?: InputMaybe<ComponentHomeHeroFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentHomeHeroFiltersInput>>>;
+};
+
+export type ComponentHomeHeroInput = {
+  Caption?: InputMaybe<Scalars['String']>;
+  Img?: InputMaybe<Array<InputMaybe<ComponentMediaImgInput>>>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentMediaImg = {
+  __typename?: 'ComponentMediaImg';
   id: Scalars['ID'];
-  img?: Maybe<UploadFile>;
-  placeholder?: Maybe<UploadFile>;
+  img: UploadFileEntityResponse;
 };
 
-export type ComponentOtherImgInput = {
+export type ComponentMediaImgFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<ComponentMediaImgFiltersInput>>>;
+  not?: InputMaybe<ComponentMediaImgFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentMediaImgFiltersInput>>>;
+};
+
+export type ComponentMediaImgInput = {
+  id?: InputMaybe<Scalars['ID']>;
   img?: InputMaybe<Scalars['ID']>;
-  placeholder?: InputMaybe<Scalars['ID']>;
+};
+
+export type ComponentNavigationLink = {
+  __typename?: 'ComponentNavigationLink';
+  Name: Scalars['String'];
+  URL: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+export type ComponentNavigationLinkFiltersInput = {
+  Name?: InputMaybe<StringFilterInput>;
+  URL?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ComponentNavigationLinkFiltersInput>>>;
+  not?: InputMaybe<ComponentNavigationLinkFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ComponentNavigationLinkFiltersInput>>>;
+};
+
+export type ComponentNavigationLinkInput = {
+  Name?: InputMaybe<Scalars['String']>;
+  URL?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['ID']>;
+};
+
+export type Contact = {
+  __typename?: 'Contact';
+  Email?: Maybe<Scalars['String']>;
+  Message?: Maybe<Scalars['String']>;
+  Name?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type ContactEntity = {
+  __typename?: 'ContactEntity';
+  attributes?: Maybe<Contact>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type ContactEntityResponse = {
+  __typename?: 'ContactEntityResponse';
+  data?: Maybe<ContactEntity>;
+};
+
+export type ContactEntityResponseCollection = {
+  __typename?: 'ContactEntityResponseCollection';
+  data: Array<ContactEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type ContactFiltersInput = {
+  Email?: InputMaybe<StringFilterInput>;
+  Message?: InputMaybe<StringFilterInput>;
+  Name?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<ContactFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<ContactFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<ContactFiltersInput>>>;
+  publishedAt?: InputMaybe<DateTimeFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type ContactInput = {
+  Email?: InputMaybe<Scalars['String']>;
+  Message?: InputMaybe<Scalars['String']>;
+  Name?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type DateFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  contains?: InputMaybe<Scalars['Date']>;
+  containsi?: InputMaybe<Scalars['Date']>;
+  endsWith?: InputMaybe<Scalars['Date']>;
+  eq?: InputMaybe<Scalars['Date']>;
+  gt?: InputMaybe<Scalars['Date']>;
+  gte?: InputMaybe<Scalars['Date']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  lt?: InputMaybe<Scalars['Date']>;
+  lte?: InputMaybe<Scalars['Date']>;
+  ne?: InputMaybe<Scalars['Date']>;
+  not?: InputMaybe<DateFilterInput>;
+  notContains?: InputMaybe<Scalars['Date']>;
+  notContainsi?: InputMaybe<Scalars['Date']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Date']>>>;
+  startsWith?: InputMaybe<Scalars['Date']>;
+};
+
+export type DateTimeFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  contains?: InputMaybe<Scalars['DateTime']>;
+  containsi?: InputMaybe<Scalars['DateTime']>;
+  endsWith?: InputMaybe<Scalars['DateTime']>;
+  eq?: InputMaybe<Scalars['DateTime']>;
+  gt?: InputMaybe<Scalars['DateTime']>;
+  gte?: InputMaybe<Scalars['DateTime']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  lt?: InputMaybe<Scalars['DateTime']>;
+  lte?: InputMaybe<Scalars['DateTime']>;
+  ne?: InputMaybe<Scalars['DateTime']>;
+  not?: InputMaybe<DateTimeFilterInput>;
+  notContains?: InputMaybe<Scalars['DateTime']>;
+  notContainsi?: InputMaybe<Scalars['DateTime']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['DateTime']>>>;
+  startsWith?: InputMaybe<Scalars['DateTime']>;
 };
 
 export enum Enum_Album_Location {
@@ -649,7 +645,7 @@ export enum Enum_Album_Location {
   Usa = 'USA'
 }
 
-export enum Enum_Componentblogtag_Tag {
+export enum Enum_Componentblogtag_Name {
   Css = 'CSS',
   Diy = 'DIY',
   Html = 'HTML',
@@ -660,346 +656,443 @@ export enum Enum_Componentblogtag_Tag {
   Work = 'Work'
 }
 
-export type Email = {
-  __typename?: 'Email';
-  created_at: Scalars['DateTime'];
-  email?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
-  message?: Maybe<Scalars['String']>;
-  name?: Maybe<Scalars['String']>;
-  updated_at: Scalars['DateTime'];
-};
-
-export type EmailAggregator = {
-  __typename?: 'EmailAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type EmailConnection = {
-  __typename?: 'EmailConnection';
-  aggregate?: Maybe<EmailAggregator>;
-  groupBy?: Maybe<EmailGroupBy>;
-  values?: Maybe<Array<Maybe<Email>>>;
-};
-
-export type EmailConnectionCreated_At = {
-  __typename?: 'EmailConnectionCreated_at';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type EmailConnectionEmail = {
-  __typename?: 'EmailConnectionEmail';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type EmailConnectionId = {
-  __typename?: 'EmailConnectionId';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type EmailConnectionMessage = {
-  __typename?: 'EmailConnectionMessage';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type EmailConnectionName = {
-  __typename?: 'EmailConnectionName';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type EmailConnectionUpdated_At = {
-  __typename?: 'EmailConnectionUpdated_at';
-  connection?: Maybe<EmailConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type EmailGroupBy = {
-  __typename?: 'EmailGroupBy';
-  created_at?: Maybe<Array<Maybe<EmailConnectionCreated_At>>>;
-  email?: Maybe<Array<Maybe<EmailConnectionEmail>>>;
-  id?: Maybe<Array<Maybe<EmailConnectionId>>>;
-  message?: Maybe<Array<Maybe<EmailConnectionMessage>>>;
-  name?: Maybe<Array<Maybe<EmailConnectionName>>>;
-  updated_at?: Maybe<Array<Maybe<EmailConnectionUpdated_At>>>;
-};
-
-export type EmailInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  email?: InputMaybe<Scalars['String']>;
-  message?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
 export type FileInfoInput = {
   alternativeText?: InputMaybe<Scalars['String']>;
   caption?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
-export type FileInput = {
-  alternativeText?: InputMaybe<Scalars['String']>;
-  caption?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  ext?: InputMaybe<Scalars['String']>;
-  formats?: InputMaybe<Scalars['JSON']>;
-  hash: Scalars['String'];
-  height?: InputMaybe<Scalars['Int']>;
-  mime: Scalars['String'];
-  name: Scalars['String'];
-  previewUrl?: InputMaybe<Scalars['String']>;
-  provider: Scalars['String'];
-  provider_metadata?: InputMaybe<Scalars['JSON']>;
-  related?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  size: Scalars['Float'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-  url: Scalars['String'];
-  width?: InputMaybe<Scalars['Int']>;
+export type FloatFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  contains?: InputMaybe<Scalars['Float']>;
+  containsi?: InputMaybe<Scalars['Float']>;
+  endsWith?: InputMaybe<Scalars['Float']>;
+  eq?: InputMaybe<Scalars['Float']>;
+  gt?: InputMaybe<Scalars['Float']>;
+  gte?: InputMaybe<Scalars['Float']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  lt?: InputMaybe<Scalars['Float']>;
+  lte?: InputMaybe<Scalars['Float']>;
+  ne?: InputMaybe<Scalars['Float']>;
+  not?: InputMaybe<FloatFilterInput>;
+  notContains?: InputMaybe<Scalars['Float']>;
+  notContainsi?: InputMaybe<Scalars['Float']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Float']>>>;
+  startsWith?: InputMaybe<Scalars['Float']>;
 };
 
-export type Hero = {
-  __typename?: 'Hero';
-  created_at: Scalars['DateTime'];
-  hero?: Maybe<Array<Maybe<ComponentHeroesHero>>>;
-  id: Scalars['ID'];
-  updated_at: Scalars['DateTime'];
+export type Gallery = {
+  __typename?: 'Gallery';
+  Title?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<GalleryRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type HeroAggregator = {
-  __typename?: 'HeroAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type GalleryLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type HeroConnection = {
-  __typename?: 'HeroConnection';
-  aggregate?: Maybe<HeroAggregator>;
-  groupBy?: Maybe<HeroGroupBy>;
-  values?: Maybe<Array<Maybe<Hero>>>;
+export type GalleryEntity = {
+  __typename?: 'GalleryEntity';
+  attributes?: Maybe<Gallery>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type HeroConnectionCreated_At = {
-  __typename?: 'HeroConnectionCreated_at';
-  connection?: Maybe<HeroConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type GalleryEntityResponse = {
+  __typename?: 'GalleryEntityResponse';
+  data?: Maybe<GalleryEntity>;
 };
 
-export type HeroConnectionId = {
-  __typename?: 'HeroConnectionId';
-  connection?: Maybe<HeroConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type GalleryInput = {
+  Title?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type HeroConnectionUpdated_At = {
-  __typename?: 'HeroConnectionUpdated_at';
-  connection?: Maybe<HeroConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type GalleryRelationResponseCollection = {
+  __typename?: 'GalleryRelationResponseCollection';
+  data: Array<GalleryEntity>;
 };
 
-export type HeroGroupBy = {
-  __typename?: 'HeroGroupBy';
-  created_at?: Maybe<Array<Maybe<HeroConnectionCreated_At>>>;
-  id?: Maybe<Array<Maybe<HeroConnectionId>>>;
-  updated_at?: Maybe<Array<Maybe<HeroConnectionUpdated_At>>>;
+export type GenericMorph = About | Album | Article | Blog | Comment | ComponentAboutAboutCard | ComponentBlogComment | ComponentBlogTag | ComponentCommentLikes | ComponentHomeHero | ComponentMediaImg | ComponentNavigationLink | Contact | Gallery | Home | I18NLocale | NavLink | Resume | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsUser;
+
+export type Home = {
+  __typename?: 'Home';
+  Hero?: Maybe<Array<Maybe<ComponentHomeHero>>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<HomeRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type HeroInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  hero?: InputMaybe<Array<ComponentHeroesHeroInput>>;
-  updated_by?: InputMaybe<Scalars['ID']>;
+
+export type HomeHeroArgs = {
+  filters?: InputMaybe<ComponentHomeHeroFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type InputId = {
-  id: Scalars['ID'];
+
+export type HomeLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type Morph = AboutCard | AboutCardAggregator | AboutCardConnection | AboutCardConnectionCreated_At | AboutCardConnectionExcerpt | AboutCardConnectionId | AboutCardConnectionImg | AboutCardConnectionTitle | AboutCardConnectionUpdated_At | AboutCardGroupBy | Album | AlbumAggregator | AlbumConnection | AlbumConnectionAlbumId | AlbumConnectionCover | AlbumConnectionCreated_At | AlbumConnectionDate | AlbumConnectionExcerpt | AlbumConnectionId | AlbumConnectionLocation | AlbumConnectionPublished | AlbumConnectionSlug | AlbumConnectionTitle | AlbumConnectionUpdated_At | AlbumConnectionUser | AlbumGroupBy | Article | ArticleAggregator | ArticleConnection | ArticleConnectionContent | ArticleConnectionCover | ArticleConnectionCreated_At | ArticleConnectionDate | ArticleConnectionExcerpt | ArticleConnectionId | ArticleConnectionPublished | ArticleConnectionSlug | ArticleConnectionTitle | ArticleConnectionUpdated_At | ArticleConnectionUser | ArticleGroupBy | Avatar | AvatarAggregator | AvatarConnection | AvatarConnectionAlt | AvatarConnectionAvatar | AvatarConnectionBio | AvatarConnectionCreated_At | AvatarConnectionId | AvatarConnectionUpdated_At | AvatarGroupBy | Comment | CommentAggregator | CommentConnection | CommentConnectionArticle | CommentConnectionContent | CommentConnectionCreated_At | CommentConnectionDate | CommentConnectionFlagged | CommentConnectionId | CommentConnectionParent | CommentConnectionUpdated_At | CommentConnectionUser | CommentGroupBy | ComponentBlogDislike | ComponentBlogLikes | ComponentBlogTag | ComponentHeroesHero | ComponentNavNav | ComponentOtherImg | Email | EmailAggregator | EmailConnection | EmailConnectionCreated_At | EmailConnectionEmail | EmailConnectionId | EmailConnectionMessage | EmailConnectionName | EmailConnectionUpdated_At | EmailGroupBy | Hero | HeroAggregator | HeroConnection | HeroConnectionCreated_At | HeroConnectionId | HeroConnectionUpdated_At | HeroGroupBy | Nav | NavAggregator | NavConnection | NavConnectionCreated_At | NavConnectionId | NavConnectionUpdated_At | NavGroupBy | Resume | ResumeAggregator | ResumeConnection | ResumeConnectionAddress | ResumeConnectionCreated_At | ResumeConnectionEdu | ResumeConnectionEmail | ResumeConnectionHighlight | ResumeConnectionHobbies | ResumeConnectionId | ResumeConnectionPhoneNum | ResumeConnectionSkills | ResumeConnectionUpdated_At | ResumeConnectionWorkExp | ResumeGroupBy | UploadFile | UploadFileAggregator | UploadFileAggregatorAvg | UploadFileAggregatorMax | UploadFileAggregatorMin | UploadFileAggregatorSum | UploadFileConnection | UploadFileConnectionAlternativeText | UploadFileConnectionCaption | UploadFileConnectionCreated_At | UploadFileConnectionExt | UploadFileConnectionFormats | UploadFileConnectionHash | UploadFileConnectionHeight | UploadFileConnectionId | UploadFileConnectionMime | UploadFileConnectionName | UploadFileConnectionPreviewUrl | UploadFileConnectionProvider | UploadFileConnectionProvider_Metadata | UploadFileConnectionSize | UploadFileConnectionUpdated_At | UploadFileConnectionUrl | UploadFileConnectionWidth | UploadFileGroupBy | UserPermissionsPasswordPayload | UsersPermissionsLoginPayload | UsersPermissionsMe | UsersPermissionsMeRole | UsersPermissionsPermission | UsersPermissionsRole | UsersPermissionsRoleAggregator | UsersPermissionsRoleConnection | UsersPermissionsRoleConnectionDescription | UsersPermissionsRoleConnectionId | UsersPermissionsRoleConnectionName | UsersPermissionsRoleConnectionType | UsersPermissionsRoleGroupBy | UsersPermissionsUser | UsersPermissionsUserAggregator | UsersPermissionsUserConnection | UsersPermissionsUserConnectionAvatar | UsersPermissionsUserConnectionBlocked | UsersPermissionsUserConnectionConfirmed | UsersPermissionsUserConnectionCreated_At | UsersPermissionsUserConnectionEmail | UsersPermissionsUserConnectionId | UsersPermissionsUserConnectionProvider | UsersPermissionsUserConnectionRole | UsersPermissionsUserConnectionUpdated_At | UsersPermissionsUserConnectionUsername | UsersPermissionsUserGroupBy | Video | VideoAggregator | VideoConnection | VideoConnectionCover | VideoConnectionCreated_At | VideoConnectionDate | VideoConnectionExcerpt | VideoConnectionId | VideoConnectionPublished | VideoConnectionSlug | VideoConnectionTitle | VideoConnectionUpdated_At | VideoConnectionUser | VideoConnectionVideoId | VideoGroupBy | CreateAboutCardPayload | CreateAlbumPayload | CreateArticlePayload | CreateAvatarPayload | CreateCommentPayload | CreateEmailPayload | CreateHeroPayload | CreateNavPayload | CreateResumePayload | CreateRolePayload | CreateUserPayload | CreateVideoPayload | DeleteAboutCardPayload | DeleteAlbumPayload | DeleteArticlePayload | DeleteAvatarPayload | DeleteCommentPayload | DeleteEmailPayload | DeleteFilePayload | DeleteHeroPayload | DeleteNavPayload | DeleteResumePayload | DeleteRolePayload | DeleteUserPayload | DeleteVideoPayload | UpdateAboutCardPayload | UpdateAlbumPayload | UpdateArticlePayload | UpdateAvatarPayload | UpdateCommentPayload | UpdateEmailPayload | UpdateHeroPayload | UpdateNavPayload | UpdateResumePayload | UpdateRolePayload | UpdateUserPayload | UpdateVideoPayload;
+export type HomeEntity = {
+  __typename?: 'HomeEntity';
+  attributes?: Maybe<Home>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type HomeEntityResponse = {
+  __typename?: 'HomeEntityResponse';
+  data?: Maybe<HomeEntity>;
+};
+
+export type HomeInput = {
+  Hero?: InputMaybe<Array<InputMaybe<ComponentHomeHeroInput>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type HomeRelationResponseCollection = {
+  __typename?: 'HomeRelationResponseCollection';
+  data: Array<HomeEntity>;
+};
+
+export type I18NLocale = {
+  __typename?: 'I18NLocale';
+  code?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  name?: Maybe<Scalars['String']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type I18NLocaleEntity = {
+  __typename?: 'I18NLocaleEntity';
+  attributes?: Maybe<I18NLocale>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type I18NLocaleEntityResponse = {
+  __typename?: 'I18NLocaleEntityResponse';
+  data?: Maybe<I18NLocaleEntity>;
+};
+
+export type I18NLocaleEntityResponseCollection = {
+  __typename?: 'I18NLocaleEntityResponseCollection';
+  data: Array<I18NLocaleEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type I18NLocaleFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<I18NLocaleFiltersInput>>>;
+  code?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<I18NLocaleFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<I18NLocaleFiltersInput>>>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type IdFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  contains?: InputMaybe<Scalars['ID']>;
+  containsi?: InputMaybe<Scalars['ID']>;
+  endsWith?: InputMaybe<Scalars['ID']>;
+  eq?: InputMaybe<Scalars['ID']>;
+  gt?: InputMaybe<Scalars['ID']>;
+  gte?: InputMaybe<Scalars['ID']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  lt?: InputMaybe<Scalars['ID']>;
+  lte?: InputMaybe<Scalars['ID']>;
+  ne?: InputMaybe<Scalars['ID']>;
+  not?: InputMaybe<IdFilterInput>;
+  notContains?: InputMaybe<Scalars['ID']>;
+  notContainsi?: InputMaybe<Scalars['ID']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  startsWith?: InputMaybe<Scalars['ID']>;
+};
+
+export type IntFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  contains?: InputMaybe<Scalars['Int']>;
+  containsi?: InputMaybe<Scalars['Int']>;
+  endsWith?: InputMaybe<Scalars['Int']>;
+  eq?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  ne?: InputMaybe<Scalars['Int']>;
+  not?: InputMaybe<IntFilterInput>;
+  notContains?: InputMaybe<Scalars['Int']>;
+  notContainsi?: InputMaybe<Scalars['Int']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['Int']>>>;
+  startsWith?: InputMaybe<Scalars['Int']>;
+};
+
+export type JsonFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  contains?: InputMaybe<Scalars['JSON']>;
+  containsi?: InputMaybe<Scalars['JSON']>;
+  endsWith?: InputMaybe<Scalars['JSON']>;
+  eq?: InputMaybe<Scalars['JSON']>;
+  gt?: InputMaybe<Scalars['JSON']>;
+  gte?: InputMaybe<Scalars['JSON']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  lt?: InputMaybe<Scalars['JSON']>;
+  lte?: InputMaybe<Scalars['JSON']>;
+  ne?: InputMaybe<Scalars['JSON']>;
+  not?: InputMaybe<JsonFilterInput>;
+  notContains?: InputMaybe<Scalars['JSON']>;
+  notContainsi?: InputMaybe<Scalars['JSON']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['JSON']>>>;
+  startsWith?: InputMaybe<Scalars['JSON']>;
+};
 
 export type Mutation = {
   __typename?: 'Mutation';
-  createAboutCard?: Maybe<CreateAboutCardPayload>;
-  createAlbum?: Maybe<CreateAlbumPayload>;
-  createArticle?: Maybe<CreateArticlePayload>;
-  createAvatar?: Maybe<CreateAvatarPayload>;
-  createComment?: Maybe<CreateCommentPayload>;
-  createEmail?: Maybe<CreateEmailPayload>;
-  createHero?: Maybe<CreateHeroPayload>;
-  createNav?: Maybe<CreateNavPayload>;
-  createResume?: Maybe<CreateResumePayload>;
+  createAboutLocalization?: Maybe<AboutEntityResponse>;
+  createAlbum?: Maybe<AlbumEntityResponse>;
+  createAlbumLocalization?: Maybe<AlbumEntityResponse>;
+  createArticle?: Maybe<ArticleEntityResponse>;
+  createArticleLocalization?: Maybe<ArticleEntityResponse>;
+  createBlogLocalization?: Maybe<BlogEntityResponse>;
+  createComment?: Maybe<CommentEntityResponse>;
+  createContact?: Maybe<ContactEntityResponse>;
+  createGalleryLocalization?: Maybe<GalleryEntityResponse>;
+  createHomeLocalization?: Maybe<HomeEntityResponse>;
+  createNavLinkLocalization?: Maybe<NavLinkEntityResponse>;
+  createResumeLocalization?: Maybe<ResumeEntityResponse>;
+  createUploadFile?: Maybe<UploadFileEntityResponse>;
   /** Create a new role */
-  createRole?: Maybe<CreateRolePayload>;
+  createUsersPermissionsRole?: Maybe<UsersPermissionsCreateRolePayload>;
   /** Create a new user */
-  createUser?: Maybe<CreateUserPayload>;
-  createVideo?: Maybe<CreateVideoPayload>;
-  deleteAboutCard?: Maybe<DeleteAboutCardPayload>;
-  deleteAlbum?: Maybe<DeleteAlbumPayload>;
-  deleteArticle?: Maybe<DeleteArticlePayload>;
-  deleteAvatar?: Maybe<DeleteAvatarPayload>;
-  deleteComment?: Maybe<DeleteCommentPayload>;
-  deleteEmail?: Maybe<DeleteEmailPayload>;
-  /** Delete one file */
-  deleteFile?: Maybe<DeleteFilePayload>;
-  deleteHero?: Maybe<DeleteHeroPayload>;
-  deleteNav?: Maybe<DeleteNavPayload>;
-  deleteResume?: Maybe<DeleteResumePayload>;
+  createUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  deleteAbout?: Maybe<AboutEntityResponse>;
+  deleteAlbum?: Maybe<AlbumEntityResponse>;
+  deleteArticle?: Maybe<ArticleEntityResponse>;
+  deleteBlog?: Maybe<BlogEntityResponse>;
+  deleteComment?: Maybe<CommentEntityResponse>;
+  deleteContact?: Maybe<ContactEntityResponse>;
+  deleteGallery?: Maybe<GalleryEntityResponse>;
+  deleteHome?: Maybe<HomeEntityResponse>;
+  deleteNavLink?: Maybe<NavLinkEntityResponse>;
+  deleteResume?: Maybe<ResumeEntityResponse>;
+  deleteUploadFile?: Maybe<UploadFileEntityResponse>;
   /** Delete an existing role */
-  deleteRole?: Maybe<DeleteRolePayload>;
-  /** Delete an existing user */
-  deleteUser?: Maybe<DeleteUserPayload>;
-  deleteVideo?: Maybe<DeleteVideoPayload>;
-  emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
-  forgotPassword?: Maybe<UserPermissionsPasswordPayload>;
-  login: UsersPermissionsLoginPayload;
-  multipleUpload: Array<Maybe<UploadFile>>;
-  register: UsersPermissionsLoginPayload;
-  resetPassword?: Maybe<UsersPermissionsLoginPayload>;
-  updateAboutCard?: Maybe<UpdateAboutCardPayload>;
-  updateAlbum?: Maybe<UpdateAlbumPayload>;
-  updateArticle?: Maybe<UpdateArticlePayload>;
-  updateAvatar?: Maybe<UpdateAvatarPayload>;
-  updateComment?: Maybe<UpdateCommentPayload>;
-  updateEmail?: Maybe<UpdateEmailPayload>;
-  updateFileInfo: UploadFile;
-  updateHero?: Maybe<UpdateHeroPayload>;
-  updateNav?: Maybe<UpdateNavPayload>;
-  updateResume?: Maybe<UpdateResumePayload>;
-  /** Update an existing role */
-  updateRole?: Maybe<UpdateRolePayload>;
+  deleteUsersPermissionsRole?: Maybe<UsersPermissionsDeleteRolePayload>;
   /** Update an existing user */
-  updateUser?: Maybe<UpdateUserPayload>;
-  updateVideo?: Maybe<UpdateVideoPayload>;
-  upload: UploadFile;
+  deleteUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  /** Confirm an email users email address */
+  emailConfirmation?: Maybe<UsersPermissionsLoginPayload>;
+  /** Request a reset password token */
+  forgotPassword?: Maybe<UsersPermissionsPasswordPayload>;
+  login: UsersPermissionsLoginPayload;
+  multipleUpload: Array<Maybe<UploadFileEntityResponse>>;
+  /** Register a user */
+  register: UsersPermissionsLoginPayload;
+  removeFile?: Maybe<UploadFileEntityResponse>;
+  /** Reset user password. Confirm with a code (resetToken from forgotPassword) */
+  resetPassword?: Maybe<UsersPermissionsLoginPayload>;
+  updateAbout?: Maybe<AboutEntityResponse>;
+  updateAlbum?: Maybe<AlbumEntityResponse>;
+  updateArticle?: Maybe<ArticleEntityResponse>;
+  updateBlog?: Maybe<BlogEntityResponse>;
+  updateComment?: Maybe<CommentEntityResponse>;
+  updateContact?: Maybe<ContactEntityResponse>;
+  updateFileInfo: UploadFileEntityResponse;
+  updateGallery?: Maybe<GalleryEntityResponse>;
+  updateHome?: Maybe<HomeEntityResponse>;
+  updateNavLink?: Maybe<NavLinkEntityResponse>;
+  updateResume?: Maybe<ResumeEntityResponse>;
+  updateUploadFile?: Maybe<UploadFileEntityResponse>;
+  /** Update an existing role */
+  updateUsersPermissionsRole?: Maybe<UsersPermissionsUpdateRolePayload>;
+  /** Update an existing user */
+  updateUsersPermissionsUser: UsersPermissionsUserEntityResponse;
+  upload: UploadFileEntityResponse;
 };
 
 
-export type MutationCreateAboutCardArgs = {
-  input?: InputMaybe<CreateAboutCardInput>;
+export type MutationCreateAboutLocalizationArgs = {
+  data?: InputMaybe<AboutInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationCreateAlbumArgs = {
-  input?: InputMaybe<CreateAlbumInput>;
+  data: AlbumInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateAlbumLocalizationArgs = {
+  data?: InputMaybe<AlbumInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationCreateArticleArgs = {
-  input?: InputMaybe<CreateArticleInput>;
+  data: ArticleInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationCreateAvatarArgs = {
-  input?: InputMaybe<CreateAvatarInput>;
+export type MutationCreateArticleLocalizationArgs = {
+  data?: InputMaybe<ArticleInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationCreateBlogLocalizationArgs = {
+  data?: InputMaybe<BlogInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationCreateCommentArgs = {
-  input?: InputMaybe<CreateCommentInput>;
+  data: CommentInput;
 };
 
 
-export type MutationCreateEmailArgs = {
-  input?: InputMaybe<CreateEmailInput>;
+export type MutationCreateContactArgs = {
+  data: ContactInput;
 };
 
 
-export type MutationCreateHeroArgs = {
-  input?: InputMaybe<CreateHeroInput>;
+export type MutationCreateGalleryLocalizationArgs = {
+  data?: InputMaybe<GalleryInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationCreateNavArgs = {
-  input?: InputMaybe<CreateNavInput>;
+export type MutationCreateHomeLocalizationArgs = {
+  data?: InputMaybe<HomeInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationCreateResumeArgs = {
-  input?: InputMaybe<CreateResumeInput>;
+export type MutationCreateNavLinkLocalizationArgs = {
+  data?: InputMaybe<NavLinkInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationCreateRoleArgs = {
-  input?: InputMaybe<CreateRoleInput>;
+export type MutationCreateResumeLocalizationArgs = {
+  data?: InputMaybe<ResumeInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationCreateUserArgs = {
-  input?: InputMaybe<CreateUserInput>;
+export type MutationCreateUploadFileArgs = {
+  data: UploadFileInput;
 };
 
 
-export type MutationCreateVideoArgs = {
-  input?: InputMaybe<CreateVideoInput>;
+export type MutationCreateUsersPermissionsRoleArgs = {
+  data: UsersPermissionsRoleInput;
 };
 
 
-export type MutationDeleteAboutCardArgs = {
-  input?: InputMaybe<DeleteAboutCardInput>;
+export type MutationCreateUsersPermissionsUserArgs = {
+  data: UsersPermissionsUserInput;
+};
+
+
+export type MutationDeleteAboutArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationDeleteAlbumArgs = {
-  input?: InputMaybe<DeleteAlbumInput>;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationDeleteArticleArgs = {
-  input?: InputMaybe<DeleteArticleInput>;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationDeleteAvatarArgs = {
-  input?: InputMaybe<DeleteAvatarInput>;
+export type MutationDeleteBlogArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationDeleteCommentArgs = {
-  input?: InputMaybe<DeleteCommentInput>;
+  id: Scalars['ID'];
 };
 
 
-export type MutationDeleteEmailArgs = {
-  input?: InputMaybe<DeleteEmailInput>;
+export type MutationDeleteContactArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type MutationDeleteFileArgs = {
-  input?: InputMaybe<DeleteFileInput>;
+export type MutationDeleteGalleryArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationDeleteHeroArgs = {
-  input?: InputMaybe<DeleteHeroInput>;
+export type MutationDeleteHomeArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationDeleteNavArgs = {
-  input?: InputMaybe<DeleteNavInput>;
+export type MutationDeleteNavLinkArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationDeleteResumeArgs = {
-  input?: InputMaybe<DeleteResumeInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationDeleteRoleArgs = {
-  input?: InputMaybe<DeleteRoleInput>;
+export type MutationDeleteUploadFileArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type MutationDeleteUserArgs = {
-  input?: InputMaybe<DeleteUserInput>;
+export type MutationDeleteUsersPermissionsRoleArgs = {
+  id: Scalars['ID'];
 };
 
 
-export type MutationDeleteVideoArgs = {
-  input?: InputMaybe<DeleteVideoInput>;
+export type MutationDeleteUsersPermissionsUserArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1023,12 +1116,16 @@ export type MutationMultipleUploadArgs = {
   files: Array<InputMaybe<Scalars['Upload']>>;
   ref?: InputMaybe<Scalars['String']>;
   refId?: InputMaybe<Scalars['ID']>;
-  source?: InputMaybe<Scalars['String']>;
 };
 
 
 export type MutationRegisterArgs = {
   input: UsersPermissionsRegisterInput;
+};
+
+
+export type MutationRemoveFileArgs = {
+  id: Scalars['ID'];
 };
 
 
@@ -1039,69 +1136,89 @@ export type MutationResetPasswordArgs = {
 };
 
 
-export type MutationUpdateAboutCardArgs = {
-  input?: InputMaybe<UpdateAboutCardInput>;
+export type MutationUpdateAboutArgs = {
+  data: AboutInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationUpdateAlbumArgs = {
-  input?: InputMaybe<UpdateAlbumInput>;
+  data: AlbumInput;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationUpdateArticleArgs = {
-  input?: InputMaybe<UpdateArticleInput>;
+  data: ArticleInput;
+  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationUpdateAvatarArgs = {
-  input?: InputMaybe<UpdateAvatarInput>;
+export type MutationUpdateBlogArgs = {
+  data: BlogInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationUpdateCommentArgs = {
-  input?: InputMaybe<UpdateCommentInput>;
+  data: CommentInput;
+  id: Scalars['ID'];
 };
 
 
-export type MutationUpdateEmailArgs = {
-  input?: InputMaybe<UpdateEmailInput>;
+export type MutationUpdateContactArgs = {
+  data: ContactInput;
+  id: Scalars['ID'];
 };
 
 
 export type MutationUpdateFileInfoArgs = {
   id: Scalars['ID'];
-  info: FileInfoInput;
+  info?: InputMaybe<FileInfoInput>;
 };
 
 
-export type MutationUpdateHeroArgs = {
-  input?: InputMaybe<UpdateHeroInput>;
+export type MutationUpdateGalleryArgs = {
+  data: GalleryInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationUpdateNavArgs = {
-  input?: InputMaybe<UpdateNavInput>;
+export type MutationUpdateHomeArgs = {
+  data: HomeInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+};
+
+
+export type MutationUpdateNavLinkArgs = {
+  data: NavLinkInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type MutationUpdateResumeArgs = {
-  input?: InputMaybe<UpdateResumeInput>;
+  data: ResumeInput;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
-export type MutationUpdateRoleArgs = {
-  input?: InputMaybe<UpdateRoleInput>;
+export type MutationUpdateUploadFileArgs = {
+  data: UploadFileInput;
+  id: Scalars['ID'];
 };
 
 
-export type MutationUpdateUserArgs = {
-  input?: InputMaybe<UpdateUserInput>;
+export type MutationUpdateUsersPermissionsRoleArgs = {
+  data: UsersPermissionsRoleInput;
+  id: Scalars['ID'];
 };
 
 
-export type MutationUpdateVideoArgs = {
-  input?: InputMaybe<UpdateVideoInput>;
+export type MutationUpdateUsersPermissionsUserArgs = {
+  data: UsersPermissionsUserInput;
+  id: Scalars['ID'];
 };
 
 
@@ -1111,59 +1228,64 @@ export type MutationUploadArgs = {
   info?: InputMaybe<FileInfoInput>;
   ref?: InputMaybe<Scalars['String']>;
   refId?: InputMaybe<Scalars['ID']>;
-  source?: InputMaybe<Scalars['String']>;
 };
 
-export type Nav = {
-  __typename?: 'Nav';
-  created_at: Scalars['DateTime'];
-  id: Scalars['ID'];
-  nav?: Maybe<Array<Maybe<ComponentNavNav>>>;
-  updated_at: Scalars['DateTime'];
+export type NavLink = {
+  __typename?: 'NavLink';
+  Link: Array<Maybe<ComponentNavigationLink>>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<NavLinkRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type NavAggregator = {
-  __typename?: 'NavAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type NavLinkLinkArgs = {
+  filters?: InputMaybe<ComponentNavigationLinkFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type NavConnection = {
-  __typename?: 'NavConnection';
-  aggregate?: Maybe<NavAggregator>;
-  groupBy?: Maybe<NavGroupBy>;
-  values?: Maybe<Array<Maybe<Nav>>>;
+
+export type NavLinkLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type NavConnectionCreated_At = {
-  __typename?: 'NavConnectionCreated_at';
-  connection?: Maybe<NavConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type NavLinkEntity = {
+  __typename?: 'NavLinkEntity';
+  attributes?: Maybe<NavLink>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type NavConnectionId = {
-  __typename?: 'NavConnectionId';
-  connection?: Maybe<NavConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type NavLinkEntityResponse = {
+  __typename?: 'NavLinkEntityResponse';
+  data?: Maybe<NavLinkEntity>;
 };
 
-export type NavConnectionUpdated_At = {
-  __typename?: 'NavConnectionUpdated_at';
-  connection?: Maybe<NavConnection>;
-  key?: Maybe<Scalars['DateTime']>;
+export type NavLinkInput = {
+  Link?: InputMaybe<Array<InputMaybe<ComponentNavigationLinkInput>>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type NavGroupBy = {
-  __typename?: 'NavGroupBy';
-  created_at?: Maybe<Array<Maybe<NavConnectionCreated_At>>>;
-  id?: Maybe<Array<Maybe<NavConnectionId>>>;
-  updated_at?: Maybe<Array<Maybe<NavConnectionUpdated_At>>>;
+export type NavLinkRelationResponseCollection = {
+  __typename?: 'NavLinkRelationResponseCollection';
+  data: Array<NavLinkEntity>;
 };
 
-export type NavInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  nav?: InputMaybe<Array<InputMaybe<ComponentNavNavInput>>>;
-  updated_by?: InputMaybe<Scalars['ID']>;
+export type Pagination = {
+  __typename?: 'Pagination';
+  page: Scalars['Int'];
+  pageCount: Scalars['Int'];
+  pageSize: Scalars['Int'];
+  total: Scalars['Int'];
+};
+
+export type PaginationArg = {
+  limit?: InputMaybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  pageSize?: InputMaybe<Scalars['Int']>;
+  start?: InputMaybe<Scalars['Int']>;
 };
 
 export enum PublicationState {
@@ -1173,698 +1295,343 @@ export enum PublicationState {
 
 export type Query = {
   __typename?: 'Query';
-  aboutCard?: Maybe<AboutCard>;
-  aboutCards?: Maybe<Array<Maybe<AboutCard>>>;
-  aboutCardsConnection?: Maybe<AboutCardConnection>;
-  album?: Maybe<Album>;
-  albums?: Maybe<Array<Maybe<Album>>>;
-  albumsConnection?: Maybe<AlbumConnection>;
-  article?: Maybe<Article>;
-  articles?: Maybe<Array<Maybe<Article>>>;
-  articlesConnection?: Maybe<ArticleConnection>;
-  avatar?: Maybe<Avatar>;
-  avatars?: Maybe<Array<Maybe<Avatar>>>;
-  avatarsConnection?: Maybe<AvatarConnection>;
-  comment?: Maybe<Comment>;
-  comments?: Maybe<Array<Maybe<Comment>>>;
-  commentsConnection?: Maybe<CommentConnection>;
-  email?: Maybe<Email>;
-  emails?: Maybe<Array<Maybe<Email>>>;
-  emailsConnection?: Maybe<EmailConnection>;
-  files?: Maybe<Array<Maybe<UploadFile>>>;
-  filesConnection?: Maybe<UploadFileConnection>;
-  hero?: Maybe<Hero>;
-  heroes?: Maybe<Array<Maybe<Hero>>>;
-  heroesConnection?: Maybe<HeroConnection>;
+  about?: Maybe<AboutEntityResponse>;
+  album?: Maybe<AlbumEntityResponse>;
+  albums?: Maybe<AlbumEntityResponseCollection>;
+  article?: Maybe<ArticleEntityResponse>;
+  articles?: Maybe<ArticleEntityResponseCollection>;
+  blog?: Maybe<BlogEntityResponse>;
+  comment?: Maybe<CommentEntityResponse>;
+  comments?: Maybe<CommentEntityResponseCollection>;
+  contact?: Maybe<ContactEntityResponse>;
+  contacts?: Maybe<ContactEntityResponseCollection>;
+  gallery?: Maybe<GalleryEntityResponse>;
+  home?: Maybe<HomeEntityResponse>;
+  i18NLocale?: Maybe<I18NLocaleEntityResponse>;
+  i18NLocales?: Maybe<I18NLocaleEntityResponseCollection>;
   me?: Maybe<UsersPermissionsMe>;
-  nav?: Maybe<Nav>;
-  navs?: Maybe<Array<Maybe<Nav>>>;
-  navsConnection?: Maybe<NavConnection>;
-  resume?: Maybe<Resume>;
-  resumes?: Maybe<Array<Maybe<Resume>>>;
-  resumesConnection?: Maybe<ResumeConnection>;
-  role?: Maybe<UsersPermissionsRole>;
-  /** Retrieve all the existing roles. You can't apply filters on this query. */
-  roles?: Maybe<Array<Maybe<UsersPermissionsRole>>>;
-  rolesConnection?: Maybe<UsersPermissionsRoleConnection>;
-  user?: Maybe<UsersPermissionsUser>;
-  users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
-  usersConnection?: Maybe<UsersPermissionsUserConnection>;
-  video?: Maybe<Video>;
-  videos?: Maybe<Array<Maybe<Video>>>;
-  videosConnection?: Maybe<VideoConnection>;
+  navLink?: Maybe<NavLinkEntityResponse>;
+  resume?: Maybe<ResumeEntityResponse>;
+  uploadFile?: Maybe<UploadFileEntityResponse>;
+  uploadFiles?: Maybe<UploadFileEntityResponseCollection>;
+  usersPermissionsRole?: Maybe<UsersPermissionsRoleEntityResponse>;
+  usersPermissionsRoles?: Maybe<UsersPermissionsRoleEntityResponseCollection>;
+  usersPermissionsUser?: Maybe<UsersPermissionsUserEntityResponse>;
+  usersPermissionsUsers?: Maybe<UsersPermissionsUserEntityResponseCollection>;
 };
 
 
-export type QueryAboutCardArgs = {
-  id: Scalars['ID'];
+export type QueryAboutArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   publicationState?: InputMaybe<PublicationState>;
-};
-
-
-export type QueryAboutCardsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryAboutCardsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryAlbumArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type QueryAlbumsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
+  filters?: InputMaybe<AlbumFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryAlbumsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
 export type QueryArticleArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
+  id?: InputMaybe<Scalars['ID']>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
 };
 
 
 export type QueryArticlesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
+  filters?: InputMaybe<ArticleFiltersInput>;
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryArticlesConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryAvatarArgs = {
-  id: Scalars['ID'];
+export type QueryBlogArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   publicationState?: InputMaybe<PublicationState>;
-};
-
-
-export type QueryAvatarsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryAvatarsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
 };
 
 
 export type QueryCommentArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
 export type QueryCommentsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
+  filters?: InputMaybe<CommentFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryCommentsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryContactArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
-export type QueryEmailArgs = {
-  id: Scalars['ID'];
+export type QueryContactsArgs = {
+  filters?: InputMaybe<ContactFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
   publicationState?: InputMaybe<PublicationState>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryEmailsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryEmailsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryFilesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryFilesConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryHeroArgs = {
-  id: Scalars['ID'];
+export type QueryGalleryArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   publicationState?: InputMaybe<PublicationState>;
 };
 
 
-export type QueryHeroesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryHeroesConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryNavArgs = {
-  id: Scalars['ID'];
+export type QueryHomeArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   publicationState?: InputMaybe<PublicationState>;
 };
 
 
-export type QueryNavsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryI18NLocaleArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
-export type QueryNavsConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryI18NLocalesArgs = {
+  filters?: InputMaybe<I18NLocaleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+};
+
+
+export type QueryNavLinkArgs = {
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
+  publicationState?: InputMaybe<PublicationState>;
 };
 
 
 export type QueryResumeArgs = {
-  id: Scalars['ID'];
+  locale?: InputMaybe<Scalars['I18NLocaleCode']>;
   publicationState?: InputMaybe<PublicationState>;
 };
 
 
-export type QueryResumesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryUploadFileArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
-export type QueryResumesConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryUploadFilesArgs = {
+  filters?: InputMaybe<UploadFileFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryRoleArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
+export type QueryUsersPermissionsRoleArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
-export type QueryRolesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryUsersPermissionsRolesArgs = {
+  filters?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
-export type QueryRolesConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type QueryUsersPermissionsUserArgs = {
+  id?: InputMaybe<Scalars['ID']>;
 };
 
 
-export type QueryUserArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
+export type QueryUsersPermissionsUsersArgs = {
+  filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-
-export type QueryUsersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryUsersConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryVideoArgs = {
-  id: Scalars['ID'];
-  publicationState?: InputMaybe<PublicationState>;
-};
-
-
-export type QueryVideosArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  publicationState?: InputMaybe<PublicationState>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type QueryVideosConnectionArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type ResponseCollectionMeta = {
+  __typename?: 'ResponseCollectionMeta';
+  pagination: Pagination;
 };
 
 export type Resume = {
   __typename?: 'Resume';
-  address: Scalars['String'];
-  created_at: Scalars['DateTime'];
-  edu: Scalars['String'];
-  email: Scalars['String'];
-  highlight?: Maybe<ComponentOtherImg>;
-  hobbies: Scalars['String'];
-  id: Scalars['ID'];
-  phoneNum: Scalars['String'];
-  skills: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-  workExp: Scalars['String'];
+  Address?: Maybe<Scalars['String']>;
+  Education?: Maybe<Scalars['String']>;
+  Experience?: Maybe<Scalars['String']>;
+  Hobbies?: Maybe<Scalars['String']>;
+  Img?: Maybe<ComponentMediaImg>;
+  Name?: Maybe<Scalars['String']>;
+  Phone?: Maybe<Scalars['String']>;
+  Skills?: Maybe<Scalars['String']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email?: Maybe<Scalars['String']>;
+  locale?: Maybe<Scalars['String']>;
+  localizations?: Maybe<ResumeRelationResponseCollection>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
-export type ResumeAggregator = {
-  __typename?: 'ResumeAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+
+export type ResumeLocalizationsArgs = {
+  publicationState?: InputMaybe<PublicationState>;
 };
 
-export type ResumeConnection = {
-  __typename?: 'ResumeConnection';
-  aggregate?: Maybe<ResumeAggregator>;
-  groupBy?: Maybe<ResumeGroupBy>;
-  values?: Maybe<Array<Maybe<Resume>>>;
+export type ResumeEntity = {
+  __typename?: 'ResumeEntity';
+  attributes?: Maybe<Resume>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type ResumeConnectionAddress = {
-  __typename?: 'ResumeConnectionAddress';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionCreated_At = {
-  __typename?: 'ResumeConnectionCreated_at';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ResumeConnectionEdu = {
-  __typename?: 'ResumeConnectionEdu';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionEmail = {
-  __typename?: 'ResumeConnectionEmail';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionHighlight = {
-  __typename?: 'ResumeConnectionHighlight';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ResumeConnectionHobbies = {
-  __typename?: 'ResumeConnectionHobbies';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionId = {
-  __typename?: 'ResumeConnectionId';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type ResumeConnectionPhoneNum = {
-  __typename?: 'ResumeConnectionPhoneNum';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionSkills = {
-  __typename?: 'ResumeConnectionSkills';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeConnectionUpdated_At = {
-  __typename?: 'ResumeConnectionUpdated_at';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type ResumeConnectionWorkExp = {
-  __typename?: 'ResumeConnectionWorkExp';
-  connection?: Maybe<ResumeConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type ResumeGroupBy = {
-  __typename?: 'ResumeGroupBy';
-  address?: Maybe<Array<Maybe<ResumeConnectionAddress>>>;
-  created_at?: Maybe<Array<Maybe<ResumeConnectionCreated_At>>>;
-  edu?: Maybe<Array<Maybe<ResumeConnectionEdu>>>;
-  email?: Maybe<Array<Maybe<ResumeConnectionEmail>>>;
-  highlight?: Maybe<Array<Maybe<ResumeConnectionHighlight>>>;
-  hobbies?: Maybe<Array<Maybe<ResumeConnectionHobbies>>>;
-  id?: Maybe<Array<Maybe<ResumeConnectionId>>>;
-  phoneNum?: Maybe<Array<Maybe<ResumeConnectionPhoneNum>>>;
-  skills?: Maybe<Array<Maybe<ResumeConnectionSkills>>>;
-  updated_at?: Maybe<Array<Maybe<ResumeConnectionUpdated_At>>>;
-  workExp?: Maybe<Array<Maybe<ResumeConnectionWorkExp>>>;
+export type ResumeEntityResponse = {
+  __typename?: 'ResumeEntityResponse';
+  data?: Maybe<ResumeEntity>;
 };
 
 export type ResumeInput = {
-  address: Scalars['String'];
-  created_by?: InputMaybe<Scalars['ID']>;
-  edu: Scalars['String'];
-  email: Scalars['String'];
-  highlight: ComponentOtherImgInput;
-  hobbies: Scalars['String'];
-  phoneNum: Scalars['String'];
-  skills: Scalars['String'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-  workExp: Scalars['String'];
+  Address?: InputMaybe<Scalars['String']>;
+  Education?: InputMaybe<Scalars['String']>;
+  Experience?: InputMaybe<Scalars['String']>;
+  Hobbies?: InputMaybe<Scalars['String']>;
+  Img?: InputMaybe<ComponentMediaImgInput>;
+  Name?: InputMaybe<Scalars['String']>;
+  Phone?: InputMaybe<Scalars['String']>;
+  Skills?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
-export type RoleInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  description?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
-  permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  type?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  users?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+export type ResumeRelationResponseCollection = {
+  __typename?: 'ResumeRelationResponseCollection';
+  data: Array<ResumeEntity>;
+};
+
+export type StringFilterInput = {
+  and?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  between?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  contains?: InputMaybe<Scalars['String']>;
+  containsi?: InputMaybe<Scalars['String']>;
+  endsWith?: InputMaybe<Scalars['String']>;
+  eq?: InputMaybe<Scalars['String']>;
+  gt?: InputMaybe<Scalars['String']>;
+  gte?: InputMaybe<Scalars['String']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  lt?: InputMaybe<Scalars['String']>;
+  lte?: InputMaybe<Scalars['String']>;
+  ne?: InputMaybe<Scalars['String']>;
+  not?: InputMaybe<StringFilterInput>;
+  notContains?: InputMaybe<Scalars['String']>;
+  notContainsi?: InputMaybe<Scalars['String']>;
+  notIn?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  notNull?: InputMaybe<Scalars['Boolean']>;
+  null?: InputMaybe<Scalars['Boolean']>;
+  or?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
+  startsWith?: InputMaybe<Scalars['String']>;
 };
 
 export type UploadFile = {
   __typename?: 'UploadFile';
   alternativeText?: Maybe<Scalars['String']>;
   caption?: Maybe<Scalars['String']>;
-  created_at: Scalars['DateTime'];
+  createdAt?: Maybe<Scalars['DateTime']>;
   ext?: Maybe<Scalars['String']>;
   formats?: Maybe<Scalars['JSON']>;
   hash: Scalars['String'];
   height?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
   mime: Scalars['String'];
   name: Scalars['String'];
   previewUrl?: Maybe<Scalars['String']>;
   provider: Scalars['String'];
   provider_metadata?: Maybe<Scalars['JSON']>;
-  related?: Maybe<Array<Maybe<Morph>>>;
+  related?: Maybe<Array<Maybe<GenericMorph>>>;
   size: Scalars['Float'];
-  updated_at: Scalars['DateTime'];
+  updatedAt?: Maybe<Scalars['DateTime']>;
   url: Scalars['String'];
   width?: Maybe<Scalars['Int']>;
 };
 
-
-export type UploadFileRelatedArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+export type UploadFileEntity = {
+  __typename?: 'UploadFileEntity';
+  attributes?: Maybe<UploadFile>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type UploadFileAggregator = {
-  __typename?: 'UploadFileAggregator';
-  avg?: Maybe<UploadFileAggregatorAvg>;
-  count?: Maybe<Scalars['Int']>;
-  max?: Maybe<UploadFileAggregatorMax>;
-  min?: Maybe<UploadFileAggregatorMin>;
-  sum?: Maybe<UploadFileAggregatorSum>;
-  totalCount?: Maybe<Scalars['Int']>;
+export type UploadFileEntityResponse = {
+  __typename?: 'UploadFileEntityResponse';
+  data?: Maybe<UploadFileEntity>;
 };
 
-export type UploadFileAggregatorAvg = {
-  __typename?: 'UploadFileAggregatorAvg';
-  height?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
+export type UploadFileEntityResponseCollection = {
+  __typename?: 'UploadFileEntityResponseCollection';
+  data: Array<UploadFileEntity>;
+  meta: ResponseCollectionMeta;
 };
 
-export type UploadFileAggregatorMax = {
-  __typename?: 'UploadFileAggregatorMax';
-  height?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
+export type UploadFileFiltersInput = {
+  alternativeText?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
+  caption?: InputMaybe<StringFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  ext?: InputMaybe<StringFilterInput>;
+  formats?: InputMaybe<JsonFilterInput>;
+  hash?: InputMaybe<StringFilterInput>;
+  height?: InputMaybe<IntFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  mime?: InputMaybe<StringFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<UploadFileFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UploadFileFiltersInput>>>;
+  previewUrl?: InputMaybe<StringFilterInput>;
+  provider?: InputMaybe<StringFilterInput>;
+  provider_metadata?: InputMaybe<JsonFilterInput>;
+  size?: InputMaybe<FloatFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  url?: InputMaybe<StringFilterInput>;
+  width?: InputMaybe<IntFilterInput>;
 };
 
-export type UploadFileAggregatorMin = {
-  __typename?: 'UploadFileAggregatorMin';
-  height?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-};
-
-export type UploadFileAggregatorSum = {
-  __typename?: 'UploadFileAggregatorSum';
-  height?: Maybe<Scalars['Float']>;
-  size?: Maybe<Scalars['Float']>;
-  width?: Maybe<Scalars['Float']>;
-};
-
-export type UploadFileConnection = {
-  __typename?: 'UploadFileConnection';
-  aggregate?: Maybe<UploadFileAggregator>;
-  groupBy?: Maybe<UploadFileGroupBy>;
-  values?: Maybe<Array<Maybe<UploadFile>>>;
-};
-
-export type UploadFileConnectionAlternativeText = {
-  __typename?: 'UploadFileConnectionAlternativeText';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionCaption = {
-  __typename?: 'UploadFileConnectionCaption';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionCreated_At = {
-  __typename?: 'UploadFileConnectionCreated_at';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type UploadFileConnectionExt = {
-  __typename?: 'UploadFileConnectionExt';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionFormats = {
-  __typename?: 'UploadFileConnectionFormats';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['JSON']>;
-};
-
-export type UploadFileConnectionHash = {
-  __typename?: 'UploadFileConnectionHash';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionHeight = {
-  __typename?: 'UploadFileConnectionHeight';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['Int']>;
-};
-
-export type UploadFileConnectionId = {
-  __typename?: 'UploadFileConnectionId';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type UploadFileConnectionMime = {
-  __typename?: 'UploadFileConnectionMime';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionName = {
-  __typename?: 'UploadFileConnectionName';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionPreviewUrl = {
-  __typename?: 'UploadFileConnectionPreviewUrl';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionProvider = {
-  __typename?: 'UploadFileConnectionProvider';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionProvider_Metadata = {
-  __typename?: 'UploadFileConnectionProvider_metadata';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['JSON']>;
-};
-
-export type UploadFileConnectionSize = {
-  __typename?: 'UploadFileConnectionSize';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['Float']>;
-};
-
-export type UploadFileConnectionUpdated_At = {
-  __typename?: 'UploadFileConnectionUpdated_at';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type UploadFileConnectionUrl = {
-  __typename?: 'UploadFileConnectionUrl';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UploadFileConnectionWidth = {
-  __typename?: 'UploadFileConnectionWidth';
-  connection?: Maybe<UploadFileConnection>;
-  key?: Maybe<Scalars['Int']>;
-};
-
-export type UploadFileGroupBy = {
-  __typename?: 'UploadFileGroupBy';
-  alternativeText?: Maybe<Array<Maybe<UploadFileConnectionAlternativeText>>>;
-  caption?: Maybe<Array<Maybe<UploadFileConnectionCaption>>>;
-  created_at?: Maybe<Array<Maybe<UploadFileConnectionCreated_At>>>;
-  ext?: Maybe<Array<Maybe<UploadFileConnectionExt>>>;
-  formats?: Maybe<Array<Maybe<UploadFileConnectionFormats>>>;
-  hash?: Maybe<Array<Maybe<UploadFileConnectionHash>>>;
-  height?: Maybe<Array<Maybe<UploadFileConnectionHeight>>>;
-  id?: Maybe<Array<Maybe<UploadFileConnectionId>>>;
-  mime?: Maybe<Array<Maybe<UploadFileConnectionMime>>>;
-  name?: Maybe<Array<Maybe<UploadFileConnectionName>>>;
-  previewUrl?: Maybe<Array<Maybe<UploadFileConnectionPreviewUrl>>>;
-  provider?: Maybe<Array<Maybe<UploadFileConnectionProvider>>>;
-  provider_metadata?: Maybe<Array<Maybe<UploadFileConnectionProvider_Metadata>>>;
-  size?: Maybe<Array<Maybe<UploadFileConnectionSize>>>;
-  updated_at?: Maybe<Array<Maybe<UploadFileConnectionUpdated_At>>>;
-  url?: Maybe<Array<Maybe<UploadFileConnectionUrl>>>;
-  width?: Maybe<Array<Maybe<UploadFileConnectionWidth>>>;
-};
-
-export type UserInput = {
-  albums?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  articles?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  avatar?: InputMaybe<Scalars['String']>;
-  blocked?: InputMaybe<Scalars['Boolean']>;
-  confirmationToken?: InputMaybe<Scalars['String']>;
-  confirmed?: InputMaybe<Scalars['Boolean']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  email: Scalars['String'];
-  password?: InputMaybe<Scalars['String']>;
+export type UploadFileInput = {
+  alternativeText?: InputMaybe<Scalars['String']>;
+  caption?: InputMaybe<Scalars['String']>;
+  ext?: InputMaybe<Scalars['String']>;
+  formats?: InputMaybe<Scalars['JSON']>;
+  hash?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['Int']>;
+  mime?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+  previewUrl?: InputMaybe<Scalars['String']>;
   provider?: InputMaybe<Scalars['String']>;
-  resetPasswordToken?: InputMaybe<Scalars['String']>;
-  role?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  username: Scalars['String'];
-  videos?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
+  provider_metadata?: InputMaybe<Scalars['JSON']>;
+  size?: InputMaybe<Scalars['Float']>;
+  url?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['Int']>;
 };
 
-export type UserPermissionsPasswordPayload = {
-  __typename?: 'UserPermissionsPasswordPayload';
+export type UsersPermissionsCreateRolePayload = {
+  __typename?: 'UsersPermissionsCreateRolePayload';
+  ok: Scalars['Boolean'];
+};
+
+export type UsersPermissionsDeleteRolePayload = {
+  __typename?: 'UsersPermissionsDeleteRolePayload';
   ok: Scalars['Boolean'];
 };
 
 export type UsersPermissionsLoginInput = {
   identifier: Scalars['String'];
   password: Scalars['String'];
-  provider?: InputMaybe<Scalars['String']>;
+  provider?: Scalars['String'];
 };
 
 export type UsersPermissionsLoginPayload = {
@@ -1875,10 +1642,9 @@ export type UsersPermissionsLoginPayload = {
 
 export type UsersPermissionsMe = {
   __typename?: 'UsersPermissionsMe';
-  avatar?: Maybe<Scalars['String']>;
   blocked?: Maybe<Scalars['Boolean']>;
   confirmed?: Maybe<Scalars['Boolean']>;
-  email: Scalars['String'];
+  email?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   role?: Maybe<UsersPermissionsMeRole>;
   username: Scalars['String'];
@@ -1892,15 +1658,39 @@ export type UsersPermissionsMeRole = {
   type?: Maybe<Scalars['String']>;
 };
 
+export type UsersPermissionsPasswordPayload = {
+  __typename?: 'UsersPermissionsPasswordPayload';
+  ok: Scalars['Boolean'];
+};
+
 export type UsersPermissionsPermission = {
   __typename?: 'UsersPermissionsPermission';
   action: Scalars['String'];
-  controller: Scalars['String'];
-  enabled: Scalars['Boolean'];
-  id: Scalars['ID'];
-  policy?: Maybe<Scalars['String']>;
-  role?: Maybe<UsersPermissionsRole>;
-  type: Scalars['String'];
+  createdAt?: Maybe<Scalars['DateTime']>;
+  role?: Maybe<UsersPermissionsRoleEntityResponse>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+};
+
+export type UsersPermissionsPermissionEntity = {
+  __typename?: 'UsersPermissionsPermissionEntity';
+  attributes?: Maybe<UsersPermissionsPermission>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type UsersPermissionsPermissionFiltersInput = {
+  action?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<UsersPermissionsPermissionFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UsersPermissionsPermissionFiltersInput>>>;
+  role?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+};
+
+export type UsersPermissionsPermissionRelationResponseCollection = {
+  __typename?: 'UsersPermissionsPermissionRelationResponseCollection';
+  data: Array<UsersPermissionsPermissionEntity>;
 };
 
 export type UsersPermissionsRegisterInput = {
@@ -1911,991 +1701,249 @@ export type UsersPermissionsRegisterInput = {
 
 export type UsersPermissionsRole = {
   __typename?: 'UsersPermissionsRole';
+  createdAt?: Maybe<Scalars['DateTime']>;
   description?: Maybe<Scalars['String']>;
-  id: Scalars['ID'];
   name: Scalars['String'];
-  permissions?: Maybe<Array<Maybe<UsersPermissionsPermission>>>;
+  permissions?: Maybe<UsersPermissionsPermissionRelationResponseCollection>;
   type?: Maybe<Scalars['String']>;
-  users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  users?: Maybe<UsersPermissionsUserRelationResponseCollection>;
 };
 
 
 export type UsersPermissionsRolePermissionsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  filters?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 
 export type UsersPermissionsRoleUsersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
+  filters?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  pagination?: InputMaybe<PaginationArg>;
+  sort?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
-export type UsersPermissionsRoleAggregator = {
-  __typename?: 'UsersPermissionsRoleAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
+export type UsersPermissionsRoleEntity = {
+  __typename?: 'UsersPermissionsRoleEntity';
+  attributes?: Maybe<UsersPermissionsRole>;
+  id?: Maybe<Scalars['ID']>;
 };
 
-export type UsersPermissionsRoleConnection = {
-  __typename?: 'UsersPermissionsRoleConnection';
-  aggregate?: Maybe<UsersPermissionsRoleAggregator>;
-  groupBy?: Maybe<UsersPermissionsRoleGroupBy>;
-  values?: Maybe<Array<Maybe<UsersPermissionsRole>>>;
+export type UsersPermissionsRoleEntityResponse = {
+  __typename?: 'UsersPermissionsRoleEntityResponse';
+  data?: Maybe<UsersPermissionsRoleEntity>;
 };
 
-export type UsersPermissionsRoleConnectionDescription = {
-  __typename?: 'UsersPermissionsRoleConnectionDescription';
-  connection?: Maybe<UsersPermissionsRoleConnection>;
-  key?: Maybe<Scalars['String']>;
+export type UsersPermissionsRoleEntityResponseCollection = {
+  __typename?: 'UsersPermissionsRoleEntityResponseCollection';
+  data: Array<UsersPermissionsRoleEntity>;
+  meta: ResponseCollectionMeta;
 };
 
-export type UsersPermissionsRoleConnectionId = {
-  __typename?: 'UsersPermissionsRoleConnectionId';
-  connection?: Maybe<UsersPermissionsRoleConnection>;
-  key?: Maybe<Scalars['ID']>;
+export type UsersPermissionsRoleFiltersInput = {
+  and?: InputMaybe<Array<InputMaybe<UsersPermissionsRoleFiltersInput>>>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  description?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  name?: InputMaybe<StringFilterInput>;
+  not?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UsersPermissionsRoleFiltersInput>>>;
+  permissions?: InputMaybe<UsersPermissionsPermissionFiltersInput>;
+  type?: InputMaybe<StringFilterInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  users?: InputMaybe<UsersPermissionsUserFiltersInput>;
 };
 
-export type UsersPermissionsRoleConnectionName = {
-  __typename?: 'UsersPermissionsRoleConnectionName';
-  connection?: Maybe<UsersPermissionsRoleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsRoleConnectionType = {
-  __typename?: 'UsersPermissionsRoleConnectionType';
-  connection?: Maybe<UsersPermissionsRoleConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsRoleGroupBy = {
-  __typename?: 'UsersPermissionsRoleGroupBy';
-  description?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionDescription>>>;
-  id?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionId>>>;
-  name?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionName>>>;
-  type?: Maybe<Array<Maybe<UsersPermissionsRoleConnectionType>>>;
-};
-
-export type UsersPermissionsUser = {
-  __typename?: 'UsersPermissionsUser';
-  albums?: Maybe<Array<Maybe<Album>>>;
-  articles?: Maybe<Array<Maybe<Article>>>;
-  avatar?: Maybe<Scalars['String']>;
-  blocked?: Maybe<Scalars['Boolean']>;
-  confirmed?: Maybe<Scalars['Boolean']>;
-  created_at: Scalars['DateTime'];
-  email: Scalars['String'];
-  id: Scalars['ID'];
-  provider?: Maybe<Scalars['String']>;
-  role?: Maybe<UsersPermissionsRole>;
-  updated_at: Scalars['DateTime'];
-  username: Scalars['String'];
-  videos?: Maybe<Array<Maybe<Video>>>;
-};
-
-
-export type UsersPermissionsUserAlbumsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type UsersPermissionsUserArticlesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-
-export type UsersPermissionsUserVideosArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  sort?: InputMaybe<Scalars['String']>;
-  start?: InputMaybe<Scalars['Int']>;
-  where?: InputMaybe<Scalars['JSON']>;
-};
-
-export type UsersPermissionsUserAggregator = {
-  __typename?: 'UsersPermissionsUserAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type UsersPermissionsUserConnection = {
-  __typename?: 'UsersPermissionsUserConnection';
-  aggregate?: Maybe<UsersPermissionsUserAggregator>;
-  groupBy?: Maybe<UsersPermissionsUserGroupBy>;
-  values?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
-};
-
-export type UsersPermissionsUserConnectionAvatar = {
-  __typename?: 'UsersPermissionsUserConnectionAvatar';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsUserConnectionBlocked = {
-  __typename?: 'UsersPermissionsUserConnectionBlocked';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type UsersPermissionsUserConnectionConfirmed = {
-  __typename?: 'UsersPermissionsUserConnectionConfirmed';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type UsersPermissionsUserConnectionCreated_At = {
-  __typename?: 'UsersPermissionsUserConnectionCreated_at';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type UsersPermissionsUserConnectionEmail = {
-  __typename?: 'UsersPermissionsUserConnectionEmail';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsUserConnectionId = {
-  __typename?: 'UsersPermissionsUserConnectionId';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type UsersPermissionsUserConnectionProvider = {
-  __typename?: 'UsersPermissionsUserConnectionProvider';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsUserConnectionRole = {
-  __typename?: 'UsersPermissionsUserConnectionRole';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type UsersPermissionsUserConnectionUpdated_At = {
-  __typename?: 'UsersPermissionsUserConnectionUpdated_at';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type UsersPermissionsUserConnectionUsername = {
-  __typename?: 'UsersPermissionsUserConnectionUsername';
-  connection?: Maybe<UsersPermissionsUserConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type UsersPermissionsUserGroupBy = {
-  __typename?: 'UsersPermissionsUserGroupBy';
-  avatar?: Maybe<Array<Maybe<UsersPermissionsUserConnectionAvatar>>>;
-  blocked?: Maybe<Array<Maybe<UsersPermissionsUserConnectionBlocked>>>;
-  confirmed?: Maybe<Array<Maybe<UsersPermissionsUserConnectionConfirmed>>>;
-  created_at?: Maybe<Array<Maybe<UsersPermissionsUserConnectionCreated_At>>>;
-  email?: Maybe<Array<Maybe<UsersPermissionsUserConnectionEmail>>>;
-  id?: Maybe<Array<Maybe<UsersPermissionsUserConnectionId>>>;
-  provider?: Maybe<Array<Maybe<UsersPermissionsUserConnectionProvider>>>;
-  role?: Maybe<Array<Maybe<UsersPermissionsUserConnectionRole>>>;
-  updated_at?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUpdated_At>>>;
-  username?: Maybe<Array<Maybe<UsersPermissionsUserConnectionUsername>>>;
-};
-
-export type Video = {
-  __typename?: 'Video';
-  cover?: Maybe<ComponentOtherImg>;
-  created_at: Scalars['DateTime'];
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  id: Scalars['ID'];
-  published?: Maybe<Scalars['Boolean']>;
-  slug?: Maybe<Scalars['String']>;
-  tag?: Maybe<Array<Maybe<ComponentBlogTag>>>;
-  title: Scalars['String'];
-  updated_at: Scalars['DateTime'];
-  user?: Maybe<UsersPermissionsUser>;
-  videoID: Scalars['String'];
-};
-
-export type VideoAggregator = {
-  __typename?: 'VideoAggregator';
-  count?: Maybe<Scalars['Int']>;
-  totalCount?: Maybe<Scalars['Int']>;
-};
-
-export type VideoConnection = {
-  __typename?: 'VideoConnection';
-  aggregate?: Maybe<VideoAggregator>;
-  groupBy?: Maybe<VideoGroupBy>;
-  values?: Maybe<Array<Maybe<Video>>>;
-};
-
-export type VideoConnectionCover = {
-  __typename?: 'VideoConnectionCover';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type VideoConnectionCreated_At = {
-  __typename?: 'VideoConnectionCreated_at';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type VideoConnectionDate = {
-  __typename?: 'VideoConnectionDate';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type VideoConnectionExcerpt = {
-  __typename?: 'VideoConnectionExcerpt';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type VideoConnectionId = {
-  __typename?: 'VideoConnectionId';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type VideoConnectionPublished = {
-  __typename?: 'VideoConnectionPublished';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['Boolean']>;
-};
-
-export type VideoConnectionSlug = {
-  __typename?: 'VideoConnectionSlug';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type VideoConnectionTitle = {
-  __typename?: 'VideoConnectionTitle';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type VideoConnectionUpdated_At = {
-  __typename?: 'VideoConnectionUpdated_at';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['DateTime']>;
-};
-
-export type VideoConnectionUser = {
-  __typename?: 'VideoConnectionUser';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['ID']>;
-};
-
-export type VideoConnectionVideoId = {
-  __typename?: 'VideoConnectionVideoID';
-  connection?: Maybe<VideoConnection>;
-  key?: Maybe<Scalars['String']>;
-};
-
-export type VideoGroupBy = {
-  __typename?: 'VideoGroupBy';
-  cover?: Maybe<Array<Maybe<VideoConnectionCover>>>;
-  created_at?: Maybe<Array<Maybe<VideoConnectionCreated_At>>>;
-  date?: Maybe<Array<Maybe<VideoConnectionDate>>>;
-  excerpt?: Maybe<Array<Maybe<VideoConnectionExcerpt>>>;
-  id?: Maybe<Array<Maybe<VideoConnectionId>>>;
-  published?: Maybe<Array<Maybe<VideoConnectionPublished>>>;
-  slug?: Maybe<Array<Maybe<VideoConnectionSlug>>>;
-  title?: Maybe<Array<Maybe<VideoConnectionTitle>>>;
-  updated_at?: Maybe<Array<Maybe<VideoConnectionUpdated_At>>>;
-  user?: Maybe<Array<Maybe<VideoConnectionUser>>>;
-  videoID?: Maybe<Array<Maybe<VideoConnectionVideoId>>>;
-};
-
-export type VideoInput = {
-  cover: ComponentOtherImgInput;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date: Scalars['Date'];
-  excerpt: Scalars['String'];
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  tag?: InputMaybe<Array<ComponentBlogTagInput>>;
-  title: Scalars['String'];
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-  videoID: Scalars['String'];
-};
-
-export type CreateAboutCardInput = {
-  data?: InputMaybe<AboutCardInput>;
-};
-
-export type CreateAboutCardPayload = {
-  __typename?: 'createAboutCardPayload';
-  aboutCard?: Maybe<AboutCard>;
-};
-
-export type CreateAlbumInput = {
-  data?: InputMaybe<AlbumInput>;
-};
-
-export type CreateAlbumPayload = {
-  __typename?: 'createAlbumPayload';
-  album?: Maybe<Album>;
-};
-
-export type CreateArticleInput = {
-  data?: InputMaybe<ArticleInput>;
-};
-
-export type CreateArticlePayload = {
-  __typename?: 'createArticlePayload';
-  article?: Maybe<Article>;
-};
-
-export type CreateAvatarInput = {
-  data?: InputMaybe<AvatarInput>;
-};
-
-export type CreateAvatarPayload = {
-  __typename?: 'createAvatarPayload';
-  avatar?: Maybe<Avatar>;
-};
-
-export type CreateCommentInput = {
-  data?: InputMaybe<CommentInput>;
-};
-
-export type CreateCommentPayload = {
-  __typename?: 'createCommentPayload';
-  comment?: Maybe<Comment>;
-};
-
-export type CreateEmailInput = {
-  data?: InputMaybe<EmailInput>;
-};
-
-export type CreateEmailPayload = {
-  __typename?: 'createEmailPayload';
-  email?: Maybe<Email>;
-};
-
-export type CreateHeroInput = {
-  data?: InputMaybe<HeroInput>;
-};
-
-export type CreateHeroPayload = {
-  __typename?: 'createHeroPayload';
-  hero?: Maybe<Hero>;
-};
-
-export type CreateNavInput = {
-  data?: InputMaybe<NavInput>;
-};
-
-export type CreateNavPayload = {
-  __typename?: 'createNavPayload';
-  nav?: Maybe<Nav>;
-};
-
-export type CreateResumeInput = {
-  data?: InputMaybe<ResumeInput>;
-};
-
-export type CreateResumePayload = {
-  __typename?: 'createResumePayload';
-  resume?: Maybe<Resume>;
-};
-
-export type CreateRoleInput = {
-  data?: InputMaybe<RoleInput>;
-};
-
-export type CreateRolePayload = {
-  __typename?: 'createRolePayload';
-  role?: Maybe<UsersPermissionsRole>;
-};
-
-export type CreateUserInput = {
-  data?: InputMaybe<UserInput>;
-};
-
-export type CreateUserPayload = {
-  __typename?: 'createUserPayload';
-  user?: Maybe<UsersPermissionsUser>;
-};
-
-export type CreateVideoInput = {
-  data?: InputMaybe<VideoInput>;
-};
-
-export type CreateVideoPayload = {
-  __typename?: 'createVideoPayload';
-  video?: Maybe<Video>;
-};
-
-export type DeleteAboutCardInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteAboutCardPayload = {
-  __typename?: 'deleteAboutCardPayload';
-  aboutCard?: Maybe<AboutCard>;
-};
-
-export type DeleteAlbumInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteAlbumPayload = {
-  __typename?: 'deleteAlbumPayload';
-  album?: Maybe<Album>;
-};
-
-export type DeleteArticleInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteArticlePayload = {
-  __typename?: 'deleteArticlePayload';
-  article?: Maybe<Article>;
-};
-
-export type DeleteAvatarInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteAvatarPayload = {
-  __typename?: 'deleteAvatarPayload';
-  avatar?: Maybe<Avatar>;
-};
-
-export type DeleteCommentInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteCommentPayload = {
-  __typename?: 'deleteCommentPayload';
-  comment?: Maybe<Comment>;
-};
-
-export type DeleteEmailInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteEmailPayload = {
-  __typename?: 'deleteEmailPayload';
-  email?: Maybe<Email>;
-};
-
-export type DeleteFileInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteFilePayload = {
-  __typename?: 'deleteFilePayload';
-  file?: Maybe<UploadFile>;
-};
-
-export type DeleteHeroInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteHeroPayload = {
-  __typename?: 'deleteHeroPayload';
-  hero?: Maybe<Hero>;
-};
-
-export type DeleteNavInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteNavPayload = {
-  __typename?: 'deleteNavPayload';
-  nav?: Maybe<Nav>;
-};
-
-export type DeleteResumeInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteResumePayload = {
-  __typename?: 'deleteResumePayload';
-  resume?: Maybe<Resume>;
-};
-
-export type DeleteRoleInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteRolePayload = {
-  __typename?: 'deleteRolePayload';
-  role?: Maybe<UsersPermissionsRole>;
-};
-
-export type DeleteUserInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteUserPayload = {
-  __typename?: 'deleteUserPayload';
-  user?: Maybe<UsersPermissionsUser>;
-};
-
-export type DeleteVideoInput = {
-  where?: InputMaybe<InputId>;
-};
-
-export type DeleteVideoPayload = {
-  __typename?: 'deleteVideoPayload';
-  video?: Maybe<Video>;
-};
-
-export type EditAboutCardInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  excerpt?: InputMaybe<Scalars['String']>;
-  img?: InputMaybe<EditComponentOtherImgInput>;
-  title?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditAlbumInput = {
-  albumID?: InputMaybe<Scalars['String']>;
-  cover?: InputMaybe<EditComponentOtherImgInput>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date?: InputMaybe<Scalars['Date']>;
-  excerpt?: InputMaybe<Scalars['String']>;
-  location?: InputMaybe<Enum_Album_Location>;
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditArticleInput = {
-  comments?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  content?: InputMaybe<Scalars['String']>;
-  cover?: InputMaybe<EditComponentOtherImgInput>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date?: InputMaybe<Scalars['Date']>;
-  excerpt?: InputMaybe<Scalars['String']>;
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  tag?: InputMaybe<Array<InputMaybe<EditComponentBlogTagInput>>>;
-  title?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditAvatarInput = {
-  alt?: InputMaybe<Scalars['String']>;
-  avatar?: InputMaybe<EditComponentOtherImgInput>;
-  bio?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditCommentInput = {
-  article?: InputMaybe<Scalars['ID']>;
-  children?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  content?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date?: InputMaybe<Scalars['DateTime']>;
-  dislikes?: InputMaybe<Array<InputMaybe<EditComponentBlogDislikeInput>>>;
-  flagged?: InputMaybe<Scalars['Boolean']>;
-  likes?: InputMaybe<Array<InputMaybe<EditComponentBlogLikeInput>>>;
-  parent?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditComponentBlogDislikeInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditComponentBlogLikeInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditComponentBlogTagInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  tag?: InputMaybe<Enum_Componentblogtag_Tag>;
-};
-
-export type EditComponentHeroesHeroInput = {
-  cover?: InputMaybe<EditComponentOtherImgInput>;
-  id?: InputMaybe<Scalars['ID']>;
-  title?: InputMaybe<Scalars['String']>;
-};
-
-export type EditComponentNavNavInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  title?: InputMaybe<Scalars['String']>;
-  url?: InputMaybe<Scalars['String']>;
-};
-
-export type EditComponentOtherImgInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  img?: InputMaybe<Scalars['ID']>;
-  placeholder?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditEmailInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  email?: InputMaybe<Scalars['String']>;
-  message?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditFileInput = {
-  alternativeText?: InputMaybe<Scalars['String']>;
-  caption?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  ext?: InputMaybe<Scalars['String']>;
-  formats?: InputMaybe<Scalars['JSON']>;
-  hash?: InputMaybe<Scalars['String']>;
-  height?: InputMaybe<Scalars['Int']>;
-  mime?: InputMaybe<Scalars['String']>;
-  name?: InputMaybe<Scalars['String']>;
-  previewUrl?: InputMaybe<Scalars['String']>;
-  provider?: InputMaybe<Scalars['String']>;
-  provider_metadata?: InputMaybe<Scalars['JSON']>;
-  related?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  size?: InputMaybe<Scalars['Float']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  url?: InputMaybe<Scalars['String']>;
-  width?: InputMaybe<Scalars['Int']>;
-};
-
-export type EditHeroInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  hero?: InputMaybe<Array<InputMaybe<EditComponentHeroesHeroInput>>>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditNavInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
-  nav?: InputMaybe<Array<InputMaybe<EditComponentNavNavInput>>>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-};
-
-export type EditResumeInput = {
-  address?: InputMaybe<Scalars['String']>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  edu?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  highlight?: InputMaybe<EditComponentOtherImgInput>;
-  hobbies?: InputMaybe<Scalars['String']>;
-  phoneNum?: InputMaybe<Scalars['String']>;
-  skills?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  workExp?: InputMaybe<Scalars['String']>;
-};
-
-export type EditRoleInput = {
-  created_by?: InputMaybe<Scalars['ID']>;
+export type UsersPermissionsRoleInput = {
   description?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   permissions?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
   type?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
   users?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
-export type EditUserInput = {
-  albums?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  articles?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
-  avatar?: InputMaybe<Scalars['String']>;
+export type UsersPermissionsUpdateRolePayload = {
+  __typename?: 'UsersPermissionsUpdateRolePayload';
+  ok: Scalars['Boolean'];
+};
+
+export type UsersPermissionsUser = {
+  __typename?: 'UsersPermissionsUser';
+  Biography?: Maybe<Scalars['String']>;
+  Img?: Maybe<ComponentMediaImg>;
+  blocked?: Maybe<Scalars['Boolean']>;
+  confirmed?: Maybe<Scalars['Boolean']>;
+  createdAt?: Maybe<Scalars['DateTime']>;
+  email: Scalars['String'];
+  provider?: Maybe<Scalars['String']>;
+  role?: Maybe<UsersPermissionsRoleEntityResponse>;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  username: Scalars['String'];
+};
+
+export type UsersPermissionsUserEntity = {
+  __typename?: 'UsersPermissionsUserEntity';
+  attributes?: Maybe<UsersPermissionsUser>;
+  id?: Maybe<Scalars['ID']>;
+};
+
+export type UsersPermissionsUserEntityResponse = {
+  __typename?: 'UsersPermissionsUserEntityResponse';
+  data?: Maybe<UsersPermissionsUserEntity>;
+};
+
+export type UsersPermissionsUserEntityResponseCollection = {
+  __typename?: 'UsersPermissionsUserEntityResponseCollection';
+  data: Array<UsersPermissionsUserEntity>;
+  meta: ResponseCollectionMeta;
+};
+
+export type UsersPermissionsUserFiltersInput = {
+  Biography?: InputMaybe<StringFilterInput>;
+  and?: InputMaybe<Array<InputMaybe<UsersPermissionsUserFiltersInput>>>;
+  blocked?: InputMaybe<BooleanFilterInput>;
+  confirmationToken?: InputMaybe<StringFilterInput>;
+  confirmed?: InputMaybe<BooleanFilterInput>;
+  createdAt?: InputMaybe<DateTimeFilterInput>;
+  email?: InputMaybe<StringFilterInput>;
+  id?: InputMaybe<IdFilterInput>;
+  not?: InputMaybe<UsersPermissionsUserFiltersInput>;
+  or?: InputMaybe<Array<InputMaybe<UsersPermissionsUserFiltersInput>>>;
+  password?: InputMaybe<StringFilterInput>;
+  provider?: InputMaybe<StringFilterInput>;
+  resetPasswordToken?: InputMaybe<StringFilterInput>;
+  role?: InputMaybe<UsersPermissionsRoleFiltersInput>;
+  updatedAt?: InputMaybe<DateTimeFilterInput>;
+  username?: InputMaybe<StringFilterInput>;
+};
+
+export type UsersPermissionsUserInput = {
+  Biography?: InputMaybe<Scalars['String']>;
+  Img?: InputMaybe<ComponentMediaImgInput>;
   blocked?: InputMaybe<Scalars['Boolean']>;
   confirmationToken?: InputMaybe<Scalars['String']>;
   confirmed?: InputMaybe<Scalars['Boolean']>;
-  created_by?: InputMaybe<Scalars['ID']>;
   email?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
   provider?: InputMaybe<Scalars['String']>;
   resetPasswordToken?: InputMaybe<Scalars['String']>;
   role?: InputMaybe<Scalars['ID']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
   username?: InputMaybe<Scalars['String']>;
-  videos?: InputMaybe<Array<InputMaybe<Scalars['ID']>>>;
 };
 
-export type EditVideoInput = {
-  cover?: InputMaybe<EditComponentOtherImgInput>;
-  created_by?: InputMaybe<Scalars['ID']>;
-  date?: InputMaybe<Scalars['Date']>;
-  excerpt?: InputMaybe<Scalars['String']>;
-  published?: InputMaybe<Scalars['Boolean']>;
-  slug?: InputMaybe<Scalars['String']>;
-  tag?: InputMaybe<Array<InputMaybe<EditComponentBlogTagInput>>>;
-  title?: InputMaybe<Scalars['String']>;
-  updated_by?: InputMaybe<Scalars['ID']>;
-  user?: InputMaybe<Scalars['ID']>;
-  videoID?: InputMaybe<Scalars['String']>;
+export type UsersPermissionsUserRelationResponseCollection = {
+  __typename?: 'UsersPermissionsUserRelationResponseCollection';
+  data: Array<UsersPermissionsUserEntity>;
 };
 
-export type UpdateAboutCardInput = {
-  data?: InputMaybe<EditAboutCardInput>;
-  where?: InputMaybe<InputId>;
-};
+export type AboutCardFragmentFragment = { __typename?: 'Query', about?: { __typename?: 'AboutEntityResponse', data?: { __typename?: 'AboutEntity', attributes?: { __typename?: 'About', AboutCard: Array<{ __typename?: 'ComponentAboutAboutCard', id: string, Tagline: string, Extension: string, Img?: Array<{ __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null> | null } | null> } | null } | null } | null };
 
-export type UpdateAboutCardPayload = {
-  __typename?: 'updateAboutCardPayload';
-  aboutCard?: Maybe<AboutCard>;
-};
-
-export type UpdateAlbumInput = {
-  data?: InputMaybe<EditAlbumInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateAlbumPayload = {
-  __typename?: 'updateAlbumPayload';
-  album?: Maybe<Album>;
-};
-
-export type UpdateArticleInput = {
-  data?: InputMaybe<EditArticleInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateArticlePayload = {
-  __typename?: 'updateArticlePayload';
-  article?: Maybe<Article>;
-};
-
-export type UpdateAvatarInput = {
-  data?: InputMaybe<EditAvatarInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateAvatarPayload = {
-  __typename?: 'updateAvatarPayload';
-  avatar?: Maybe<Avatar>;
-};
-
-export type UpdateCommentInput = {
-  data?: InputMaybe<EditCommentInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateCommentPayload = {
-  __typename?: 'updateCommentPayload';
-  comment?: Maybe<Comment>;
-};
-
-export type UpdateEmailInput = {
-  data?: InputMaybe<EditEmailInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateEmailPayload = {
-  __typename?: 'updateEmailPayload';
-  email?: Maybe<Email>;
-};
-
-export type UpdateHeroInput = {
-  data?: InputMaybe<EditHeroInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateHeroPayload = {
-  __typename?: 'updateHeroPayload';
-  hero?: Maybe<Hero>;
-};
-
-export type UpdateNavInput = {
-  data?: InputMaybe<EditNavInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateNavPayload = {
-  __typename?: 'updateNavPayload';
-  nav?: Maybe<Nav>;
-};
-
-export type UpdateResumeInput = {
-  data?: InputMaybe<EditResumeInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateResumePayload = {
-  __typename?: 'updateResumePayload';
-  resume?: Maybe<Resume>;
-};
-
-export type UpdateRoleInput = {
-  data?: InputMaybe<EditRoleInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateRolePayload = {
-  __typename?: 'updateRolePayload';
-  role?: Maybe<UsersPermissionsRole>;
-};
-
-export type UpdateUserInput = {
-  data?: InputMaybe<EditUserInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateUserPayload = {
-  __typename?: 'updateUserPayload';
-  user?: Maybe<UsersPermissionsUser>;
-};
-
-export type UpdateVideoInput = {
-  data?: InputMaybe<EditVideoInput>;
-  where?: InputMaybe<InputId>;
-};
-
-export type UpdateVideoPayload = {
-  __typename?: 'updateVideoPayload';
-  video?: Maybe<Video>;
-};
-
-export type AboutCardFragmentFragment = { __typename?: 'Query', aboutCards?: Array<{ __typename?: 'AboutCard', id: string, title: string, excerpt: string, img?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null> | null };
-
-export type ArticleListFragmentFragment = { __typename?: 'Query', list?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, date: any, excerpt: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type ArticleListFragmentFragment = { __typename?: 'Query', list?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
 export type AddCommentMutationVariables = Exact<{
-  articleID: Scalars['ID'];
-  userID: Scalars['ID'];
+  articleId: Scalars['ID'];
+  userId: Scalars['ID'];
   content: Scalars['String'];
   date: Scalars['DateTime'];
-  parentID?: InputMaybe<Scalars['ID']>;
+  parentId?: InputMaybe<Scalars['ID']>;
 }>;
 
 
-export type AddCommentMutation = { __typename?: 'Mutation', createComment?: { __typename?: 'createCommentPayload', comment?: { __typename?: 'Comment', id: string, content?: string | null, date?: any | null, user?: { __typename?: 'UsersPermissionsUser', id: string } | null, article?: { __typename?: 'Article', id: string } | null, parent?: { __typename?: 'Comment', id: string } | null } | null } | null };
+export type AddCommentMutation = { __typename?: 'Mutation', createComment?: { __typename?: 'CommentEntityResponse', data?: { __typename?: 'CommentEntity', id?: string | null, attributes?: { __typename?: 'Comment', Content?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null } | null } | null, article?: { __typename?: 'ArticleEntityResponse', data?: { __typename?: 'ArticleEntity', id?: string | null } | null } | null, Parent?: { __typename?: 'CommentEntityResponse', data?: { __typename?: 'CommentEntity', id?: string | null } | null } | null } | null } | null } | null };
 
 export type CommentsQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type CommentsQuery = { __typename?: 'Query', me?: { __typename?: 'UsersPermissionsMe', id: string, username: string, avatar?: string | null } | null, comments?: Array<{ __typename?: 'Comment', id: string, content?: string | null, created_at: any, updated_at: any, article?: { __typename?: 'Article', id: string } | null, user?: { __typename?: 'UsersPermissionsUser', id: string, username: string, avatar?: string | null } | null, likes?: Array<{ __typename?: 'ComponentBlogLikes', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null> | null, dislikes?: Array<{ __typename?: 'ComponentBlogDislike', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null> | null, children?: Array<{ __typename?: 'Comment', id: string, content?: string | null, user?: { __typename?: 'UsersPermissionsUser', id: string, username: string, avatar?: string | null } | null, likes?: Array<{ __typename?: 'ComponentBlogLikes', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null> | null, dislikes?: Array<{ __typename?: 'ComponentBlogDislike', user?: { __typename?: 'UsersPermissionsUser', id: string } | null } | null> | null } | null> | null } | null> | null };
+export type CommentsQuery = { __typename?: 'Query', me?: { __typename?: 'UsersPermissionsMe', username: string } | null, comments?: { __typename?: 'CommentEntityResponseCollection', data: Array<{ __typename?: 'CommentEntity', attributes?: { __typename?: 'Comment', Content?: string | null, createdAt?: any | null, updatedAt?: any | null, article?: { __typename?: 'ArticleEntityResponse', data?: { __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null } | null } | null } | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null, Children?: { __typename?: 'CommentRelationResponseCollection', data: Array<{ __typename?: 'CommentEntity', attributes?: { __typename?: 'Comment', Content?: string | null, createdAt?: any | null, updatedAt?: any | null, Likes?: Array<{ __typename?: 'ComponentCommentLikes', UserId?: number | null } | null> | null, Dislikes?: Array<{ __typename?: 'ComponentCommentLikes', UserId?: number | null } | null> | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null } | null }> } | null, Likes?: Array<{ __typename?: 'ComponentCommentLikes', UserId?: number | null } | null> | null, Dislikes?: Array<{ __typename?: 'ComponentCommentLikes', UserId?: number | null } | null> | null } | null }> } | null };
 
-export type SidebarArticlesFragmentFragment = { __typename?: 'Query', sidebar?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, date: any, excerpt: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null, avatar?: { __typename?: 'Avatar', avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null };
-
-export type AddEmailMutationVariables = Exact<{
-  name: Scalars['String'];
-  email: Scalars['String'];
-  message: Scalars['String'];
-}>;
-
-
-export type AddEmailMutation = { __typename?: 'Mutation', createEmail?: { __typename?: 'createEmailPayload', email?: { __typename?: 'Email', id: string, name?: string | null, email?: string | null, message?: string | null } | null } | null };
+export type SidebarArticlesFragmentFragment = { __typename?: 'Query', sidebar?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
 export type GetAlbumsQueryVariables = Exact<{
-  slug?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+  slug: Scalars['String'];
 }>;
 
 
-export type GetAlbumsQuery = { __typename?: 'Query', albums?: Array<{ __typename?: 'Album', id: string, title: string, slug?: string | null, excerpt: string, albumID: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string } | null } | null } | null> | null };
+export type GetAlbumsQuery = { __typename?: 'Query', albums?: { __typename?: 'AlbumEntityResponseCollection', data: Array<{ __typename?: 'AlbumEntity', attributes?: { __typename?: 'Album', Name?: string | null, Tagline?: string | null, Slug?: string | null, GPhotoId: string, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
-export type AlbumFragmentFragment = { __typename?: 'Query', albums?: Array<{ __typename?: 'Album', id: string, slug?: string | null, title: string, date: any, location: Enum_Album_Location, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type AlbumFragmentFragment = { __typename?: 'Query', albums?: { __typename?: 'AlbumEntityResponseCollection', data: Array<{ __typename?: 'AlbumEntity', attributes?: { __typename?: 'Album', Name?: string | null, Tagline?: string | null, Slug?: string | null, Date?: any | null, Location?: Enum_Album_Location | null, GPhotoId: string, Photographer?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
-export type BiographyFragmentFragment = { __typename?: 'Query', avatar?: { __typename?: 'Avatar', id: string, bio: string, avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null };
+export type BiographyFragmentFragment = { __typename?: 'Query', usersPermissionsUser?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', id?: string | null, attributes?: { __typename?: 'UsersPermissionsUser', Biography?: string | null, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null };
 
-export type ImageBannerFragmentFragment = { __typename?: 'Query', hero?: { __typename?: 'Hero', id: string, hero?: Array<{ __typename?: 'ComponentHeroesHero', id: string, title?: string | null, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null> | null } | null };
+export type ImageBannerFragmentFragment = { __typename?: 'Query', home?: { __typename?: 'HomeEntityResponse', data?: { __typename?: 'HomeEntity', attributes?: { __typename?: 'Home', Hero?: Array<{ __typename?: 'ComponentHomeHero', id: string, Caption: string, Img?: Array<{ __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null> | null } | null> | null } | null } | null } | null };
 
-export type RecentAlbumFragmentFragment = { __typename?: 'Query', albums?: Array<{ __typename?: 'Album', slug?: string | null, id: string, title: string, date: any, location: Enum_Album_Location, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type RecentAlbumFragmentFragment = { __typename?: 'Query', albums?: { __typename?: 'AlbumEntityResponseCollection', data: Array<{ __typename?: 'AlbumEntity', id?: string | null, attributes?: { __typename?: 'Album', Slug?: string | null, Name?: string | null, Tagline?: string | null, Date?: any | null, Location?: Enum_Album_Location | null, Photographer?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
-export type RecentArticlesFragmentFragment = { __typename?: 'Query', articles?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, excerpt: string, date: any, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type RecentArticlesFragmentFragment = { __typename?: 'Query', articles?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
-export type NavigationFragmentFragment = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null };
+export type NavigationFragmentFragment = { __typename?: 'Query', navLink?: { __typename?: 'NavLinkEntityResponse', data?: { __typename?: 'NavLinkEntity', attributes?: { __typename?: 'NavLink', Link: Array<{ __typename?: 'ComponentNavigationLink', id: string, Name: string, URL: string } | null> } | null } | null } | null };
 
-export type AvatarFragmentFragment = { __typename?: 'Avatar', avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null };
+export type ContactFragmentFragment = { __typename?: 'Resume', Address?: string | null, Phone?: string | null };
 
-export type ContactFragmentFragment = { __typename?: 'Resume', address: string, phoneNum: string };
+export type EducationFragmentFragment = { __typename?: 'Resume', Education?: string | null };
 
-export type EducationFragmentFragment = { __typename?: 'Resume', edu: string };
+export type HobbiesFragmentFragment = { __typename?: 'Resume', Hobbies?: string | null };
 
-export type HobbiesFragmentFragment = { __typename?: 'Resume', hobbies: string };
+export type HighlightImgFragmentFragment = { __typename?: 'Resume', Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null };
 
-export type HighlightImgFragmentFragment = { __typename?: 'Resume', highlight?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null };
+export type ResumeEmailFragmentFragment = { __typename?: 'Resume', email?: string | null };
 
-export type ResumeEmailFragmentFragment = { __typename?: 'Resume', email: string };
+export type SkillsFragmentFragment = { __typename?: 'Resume', Skills?: string | null };
 
-export type SkillsFragmentFragment = { __typename?: 'Resume', skills: string };
-
-export type WorkExpFragmentFragment = { __typename?: 'Resume', workExp: string };
-
-export type GetAboutCardsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetAboutCardsQuery = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null, aboutCards?: Array<{ __typename?: 'AboutCard', id: string, title: string, excerpt: string, img?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null> | null };
+export type WorkExpFragmentFragment = { __typename?: 'Resume', Experience?: string | null };
 
 export type GetAlbumPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAlbumPageQuery = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null, albums?: Array<{ __typename?: 'Album', id: string, slug?: string | null, title: string, date: any, location: Enum_Album_Location, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type GetAlbumPageQuery = { __typename?: 'Query', navLink?: { __typename?: 'NavLinkEntityResponse', data?: { __typename?: 'NavLinkEntity', attributes?: { __typename?: 'NavLink', Link: Array<{ __typename?: 'ComponentNavigationLink', id: string, Name: string, URL: string } | null> } | null } | null } | null, albums?: { __typename?: 'AlbumEntityResponseCollection', data: Array<{ __typename?: 'AlbumEntity', attributes?: { __typename?: 'Album', Name?: string | null, Tagline?: string | null, Slug?: string | null, Date?: any | null, Location?: Enum_Album_Location | null, GPhotoId: string, Photographer?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
 export type GetArticlesQueryVariables = Exact<{
   start: Scalars['Int'];
 }>;
 
 
-export type GetArticlesQuery = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null, list?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, date: any, excerpt: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null, sidebar?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, date: any, excerpt: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null, avatar?: { __typename?: 'Avatar', avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null };
+export type GetArticlesQuery = { __typename?: 'Query', navLink?: { __typename?: 'NavLinkEntityResponse', data?: { __typename?: 'NavLinkEntity', attributes?: { __typename?: 'NavLink', Link: Array<{ __typename?: 'ComponentNavigationLink', id: string, Name: string, URL: string } | null> } | null } | null } | null, list?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null, sidebar?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
 export type ArticleQueryVariables = Exact<{
   slug?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ArticleQuery = { __typename?: 'Query', articles?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, excerpt: string, content: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, tag?: Array<{ __typename?: 'ComponentBlogTag', tag?: Enum_Componentblogtag_Tag | null } | null> | null } | null> | null, nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null, sidebar?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, date: any, excerpt: string, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null, avatar?: { __typename?: 'Avatar', avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null };
+export type ArticleQuery = { __typename?: 'Query', articles?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Content: string, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null, navLink?: { __typename?: 'NavLinkEntityResponse', data?: { __typename?: 'NavLinkEntity', attributes?: { __typename?: 'NavLink', Link: Array<{ __typename?: 'ComponentNavigationLink', id: string, Name: string, URL: string } | null> } | null } | null } | null, sidebar?: { __typename?: 'ArticleEntityResponseCollection', data: Array<{ __typename?: 'ArticleEntity', id?: string | null, attributes?: { __typename?: 'Article', Slug?: string | null, Title: string, Tagline?: string | null, Published?: any | null, Author?: { __typename?: 'UsersPermissionsUserEntityResponse', data?: { __typename?: 'UsersPermissionsUserEntity', attributes?: { __typename?: 'UsersPermissionsUser', username: string, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null, Cover?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null }> } | null };
 
 export type GetContactPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetContactPageQuery = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null };
-
-export type GetHomePageQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetHomePageQuery = { __typename?: 'Query', nav?: { __typename?: 'Nav', nav?: Array<{ __typename?: 'ComponentNavNav', id: string, title: string, url: string } | null> | null } | null, hero?: { __typename?: 'Hero', id: string, hero?: Array<{ __typename?: 'ComponentHeroesHero', id: string, title?: string | null, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null> | null } | null, avatar?: { __typename?: 'Avatar', id: string, bio: string, avatar?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null, articles?: Array<{ __typename?: 'Article', id: string, slug?: string | null, title: string, excerpt: string, date: any, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null, albums?: Array<{ __typename?: 'Album', slug?: string | null, id: string, title: string, date: any, location: Enum_Album_Location, cover?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null, user?: { __typename?: 'UsersPermissionsUser', username: string } | null } | null> | null };
+export type GetContactPageQuery = { __typename?: 'Query', navLink?: { __typename?: 'NavLinkEntityResponse', data?: { __typename?: 'NavLinkEntity', attributes?: { __typename?: 'NavLink', Link: Array<{ __typename?: 'ComponentNavigationLink', id: string, Name: string, URL: string } | null> } | null } | null } | null };
 
 export type GetResumeQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetResumeQueryQuery = { __typename?: 'Query', resume?: { __typename?: 'Resume', id: string, address: string, phoneNum: string, workExp: string, edu: string, skills: string, hobbies: string, email: string, highlight?: { __typename?: 'ComponentOtherImg', img?: { __typename?: 'UploadFile', id: string, url: string, hash: string } | null } | null } | null };
+export type GetResumeQueryQuery = { __typename?: 'Query', resume?: { __typename?: 'ResumeEntityResponse', data?: { __typename?: 'ResumeEntity', id?: string | null, attributes?: { __typename?: 'Resume', Address?: string | null, Phone?: string | null, Experience?: string | null, Education?: string | null, Skills?: string | null, Hobbies?: string | null, email?: string | null, Img?: { __typename?: 'ComponentMediaImg', img: { __typename?: 'UploadFileEntityResponse', data?: { __typename?: 'UploadFileEntity', id?: string | null, attributes?: { __typename?: 'UploadFile', url: string, hash: string } | null } | null } } | null } | null } | null } | null };
 
-export const AboutCardFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AboutCardFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"aboutCards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AboutCardFragmentFragment, unknown>;
-export const ArticleListFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleListFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"list"},"name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"7"}},{"kind":"Argument","name":{"kind":"Name","value":"start"},"value":{"kind":"Variable","name":{"kind":"Name","value":"start"}}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<ArticleListFragmentFragment, unknown>;
-export const AvatarFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AvatarFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Avatar"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]} as unknown as DocumentNode<AvatarFragmentFragment, unknown>;
-export const SidebarArticlesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SidebarArticlesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"sidebar"},"name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"4"}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"avatar"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"1","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"AvatarFragment"}}]}}]}},...AvatarFragmentFragmentDoc.definitions]} as unknown as DocumentNode<SidebarArticlesFragmentFragment, unknown>;
-export const AlbumFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AlbumFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<AlbumFragmentFragment, unknown>;
-export const BiographyFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BiographyFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"avatar"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"StringValue","value":"1","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"bio"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AvatarFragment"}}]}}]}},...AvatarFragmentFragmentDoc.definitions]} as unknown as DocumentNode<BiographyFragmentFragment, unknown>;
-export const ImageBannerFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageBannerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hero"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImageBannerFragmentFragment, unknown>;
-export const RecentAlbumFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecentAlbumFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"4"}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"location"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<RecentAlbumFragmentFragment, unknown>;
-export const RecentArticlesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecentArticlesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"3"}},{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"published"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}}]} as unknown as DocumentNode<RecentArticlesFragmentFragment, unknown>;
-export const NavigationFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"NavigationFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nav"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"nav"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]} as unknown as DocumentNode<NavigationFragmentFragment, unknown>;
-export const ContactFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"address"}},{"kind":"Field","name":{"kind":"Name","value":"phoneNum"}}]}}]} as unknown as DocumentNode<ContactFragmentFragment, unknown>;
-export const EducationFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"EducationFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edu"}}]}}]} as unknown as DocumentNode<EducationFragmentFragment, unknown>;
-export const HobbiesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HobbiesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hobbies"}}]}}]} as unknown as DocumentNode<HobbiesFragmentFragment, unknown>;
-export const HighlightImgFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HighlightImgFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"highlight"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]} as unknown as DocumentNode<HighlightImgFragmentFragment, unknown>;
+export const AboutCardFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AboutCardFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"about"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"AboutCard"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Extension"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<AboutCardFragmentFragment, unknown>;
+export const ArticleListFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ArticleListFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"list"},"name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"Published:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"start"},"value":{"kind":"Variable","name":{"kind":"Name","value":"start"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"7"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Published"}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ArticleListFragmentFragment, unknown>;
+export const SidebarArticlesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SidebarArticlesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"sidebar"},"name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"Published:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"4"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Published"}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<SidebarArticlesFragmentFragment, unknown>;
+export const AlbumFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AlbumFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"Date:desc","block":false}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Date"}},{"kind":"Field","name":{"kind":"Name","value":"Location"}},{"kind":"Field","name":{"kind":"Name","value":"Photographer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"GPhotoId"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AlbumFragmentFragment, unknown>;
+export const BiographyFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"BiographyFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"usersPermissionsUser"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Biography"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<BiographyFragmentFragment, unknown>;
+export const ImageBannerFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ImageBannerFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"home"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Hero"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Caption"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<ImageBannerFragmentFragment, unknown>;
+export const RecentAlbumFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecentAlbumFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"Date:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"start"},"value":{"kind":"IntValue","value":"0"}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"4"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Date"}},{"kind":"Field","name":{"kind":"Name","value":"Location"}},{"kind":"Field","name":{"kind":"Name","value":"Photographer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<RecentAlbumFragmentFragment, unknown>;
+export const RecentArticlesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"RecentArticlesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"sort"},"value":{"kind":"StringValue","value":"Published:desc","block":false}},{"kind":"Argument","name":{"kind":"Name","value":"pagination"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"start"},"value":{"kind":"IntValue","value":"0"}},{"kind":"ObjectField","name":{"kind":"Name","value":"limit"},"value":{"kind":"IntValue","value":"3"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Published"}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<RecentArticlesFragmentFragment, unknown>;
+export const NavigationFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"NavigationFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Query"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"navLink"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Link"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"URL"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<NavigationFragmentFragment, unknown>;
+export const ContactFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ContactFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Address"}},{"kind":"Field","name":{"kind":"Name","value":"Phone"}}]}}]} as unknown as DocumentNode<ContactFragmentFragment, unknown>;
+export const EducationFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"EducationFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Education"}}]}}]} as unknown as DocumentNode<EducationFragmentFragment, unknown>;
+export const HobbiesFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HobbiesFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Hobbies"}}]}}]} as unknown as DocumentNode<HobbiesFragmentFragment, unknown>;
+export const HighlightImgFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"HighlightImgFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<HighlightImgFragmentFragment, unknown>;
 export const ResumeEmailFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"ResumeEmailFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"}}]}}]} as unknown as DocumentNode<ResumeEmailFragmentFragment, unknown>;
-export const SkillsFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SkillsFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"skills"}}]}}]} as unknown as DocumentNode<SkillsFragmentFragment, unknown>;
-export const WorkExpFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkExpFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"workExp"}}]}}]} as unknown as DocumentNode<WorkExpFragmentFragment, unknown>;
-export const AddCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"articleID"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userID"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"date"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"parentID"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"article"},"value":{"kind":"Variable","name":{"kind":"Name","value":"articleID"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"user"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userID"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"date"},"value":{"kind":"Variable","name":{"kind":"Name","value":"date"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"parent"},"value":{"kind":"Variable","name":{"kind":"Name","value":"parentID"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"comment"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"article"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"date"}},{"kind":"Field","name":{"kind":"Name","value":"parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]} as unknown as DocumentNode<AddCommentMutation, AddCommentMutationVariables>;
-export const CommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Comments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"article"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"parent_null"},"value":{"kind":"BooleanValue","value":true}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"created_at"}},{"kind":"Field","name":{"kind":"Name","value":"updated_at"}},{"kind":"Field","name":{"kind":"Name","value":"article"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"dislikes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"avatar"}}]}},{"kind":"Field","name":{"kind":"Name","value":"likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"dislikes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"user"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<CommentsQuery, CommentsQueryVariables>;
-export const AddEmailDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddEmail"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"name"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"email"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"message"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createEmail"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"name"},"value":{"kind":"Variable","name":{"kind":"Name","value":"name"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"email"},"value":{"kind":"Variable","name":{"kind":"Name","value":"email"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"message"},"value":{"kind":"Variable","name":{"kind":"Name","value":"message"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"email"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"message"}}]}}]}}]}}]} as unknown as DocumentNode<AddEmailMutation, AddEmailMutationVariables>;
-export const GetAlbumsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAlbums"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"albumID"}}]}}]}}]} as unknown as DocumentNode<GetAlbumsQuery, GetAlbumsQueryVariables>;
-export const GetAboutCardsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAboutCards"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AboutCardFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...AboutCardFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetAboutCardsQuery, GetAboutCardsQueryVariables>;
+export const SkillsFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"SkillsFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Skills"}}]}}]} as unknown as DocumentNode<SkillsFragmentFragment, unknown>;
+export const WorkExpFragmentFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"WorkExpFragment"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"Resume"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Experience"}}]}}]} as unknown as DocumentNode<WorkExpFragmentFragment, unknown>;
+export const AddCommentDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"AddComment"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"articleId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"userId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"content"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"date"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"DateTime"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"parentId"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createComment"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"data"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"article"},"value":{"kind":"Variable","name":{"kind":"Name","value":"articleId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"Author"},"value":{"kind":"Variable","name":{"kind":"Name","value":"userId"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"Content"},"value":{"kind":"Variable","name":{"kind":"Name","value":"content"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"Published"},"value":{"kind":"Variable","name":{"kind":"Name","value":"date"}}},{"kind":"ObjectField","name":{"kind":"Name","value":"Parent"},"value":{"kind":"Variable","name":{"kind":"Name","value":"parentId"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Content"}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"article"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Published"}},{"kind":"Field","name":{"kind":"Name","value":"Parent"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<AddCommentMutation, AddCommentMutationVariables>;
+export const CommentsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Comments"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"me"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}},{"kind":"Field","name":{"kind":"Name","value":"comments"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"article"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"Slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"StringValue","value":"for-jack","block":false}}]}}]}},{"kind":"ObjectField","name":{"kind":"Name","value":"Parent"},"value":{"kind":"NullValue"}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"article"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Content"}},{"kind":"Field","name":{"kind":"Name","value":"Children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Content"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"Likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"UserId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"Dislikes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"UserId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}},{"kind":"Field","name":{"kind":"Name","value":"Img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}},{"kind":"Field","name":{"kind":"Name","value":"Likes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"UserId"}}]}},{"kind":"Field","name":{"kind":"Name","value":"Dislikes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"UserId"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<CommentsQuery, CommentsQueryVariables>;
+export const GetAlbumsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAlbums"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"albums"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"Slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Name"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"GPhotoId"}}]}}]}}]}}]}}]} as unknown as DocumentNode<GetAlbumsQuery, GetAlbumsQueryVariables>;
 export const GetAlbumPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getAlbumPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AlbumFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...AlbumFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetAlbumPageQuery, GetAlbumPageQueryVariables>;
 export const GetArticlesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getArticles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"start"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ArticleListFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"SidebarArticlesFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...ArticleListFragmentFragmentDoc.definitions,...SidebarArticlesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetArticlesQuery, GetArticlesQueryVariables>;
-export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"where"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"slug"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"excerpt"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"tag"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tag"}}]}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"SidebarArticlesFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...SidebarArticlesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
+export const ArticleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Article"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"slug"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"Field","name":{"kind":"Name","value":"articles"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"filters"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"Slug"},"value":{"kind":"ObjectValue","fields":[{"kind":"ObjectField","name":{"kind":"Name","value":"eq"},"value":{"kind":"Variable","name":{"kind":"Name","value":"slug"}}}]}}]}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Slug"}},{"kind":"Field","name":{"kind":"Name","value":"Title"}},{"kind":"Field","name":{"kind":"Name","value":"Tagline"}},{"kind":"Field","name":{"kind":"Name","value":"Published"}},{"kind":"Field","name":{"kind":"Name","value":"Content"}},{"kind":"Field","name":{"kind":"Name","value":"Author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"Cover"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"img"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}},{"kind":"Field","name":{"kind":"Name","value":"hash"}}]}}]}}]}}]}}]}}]}}]}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"SidebarArticlesFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...SidebarArticlesFragmentFragmentDoc.definitions]} as unknown as DocumentNode<ArticleQuery, ArticleQueryVariables>;
 export const GetContactPageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getContactPage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}}]}},...NavigationFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetContactPageQuery, GetContactPageQueryVariables>;
-export const GetHomePageDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getHomePage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"NavigationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ImageBannerFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"BiographyFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RecentArticlesFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"RecentAlbumFragment"}}]}},...NavigationFragmentFragmentDoc.definitions,...ImageBannerFragmentFragmentDoc.definitions,...BiographyFragmentFragmentDoc.definitions,...RecentArticlesFragmentFragmentDoc.definitions,...RecentAlbumFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetHomePageQuery, GetHomePageQueryVariables>;
-export const GetResumeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getResumeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resume"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"IntValue","value":"1"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkExpFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"EducationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"SkillsFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightImgFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HobbiesFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ResumeEmailFragment"}}]}}]}},...ContactFragmentFragmentDoc.definitions,...WorkExpFragmentFragmentDoc.definitions,...EducationFragmentFragmentDoc.definitions,...SkillsFragmentFragmentDoc.definitions,...HighlightImgFragmentFragmentDoc.definitions,...HobbiesFragmentFragmentDoc.definitions,...ResumeEmailFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetResumeQueryQuery, GetResumeQueryQueryVariables>;
+export const GetResumeQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getResumeQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resume"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"data"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"attributes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"FragmentSpread","name":{"kind":"Name","value":"ContactFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"WorkExpFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"EducationFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"SkillsFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HighlightImgFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"HobbiesFragment"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"ResumeEmailFragment"}}]}}]}}]}}]}},...ContactFragmentFragmentDoc.definitions,...WorkExpFragmentFragmentDoc.definitions,...EducationFragmentFragmentDoc.definitions,...SkillsFragmentFragmentDoc.definitions,...HighlightImgFragmentFragmentDoc.definitions,...HobbiesFragmentFragmentDoc.definitions,...ResumeEmailFragmentFragmentDoc.definitions]} as unknown as DocumentNode<GetResumeQueryQuery, GetResumeQueryQueryVariables>;

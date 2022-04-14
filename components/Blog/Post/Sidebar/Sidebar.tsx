@@ -51,7 +51,7 @@ const PostSidebar = ({ sidebar }): JSX.Element => {
   return (
     <div className={s.blogSidebar}>
       <h2>ˇˇˇ</h2>
-      <AboutMe avatar={sidebar[0]?.attributes.Author.data.attributes} />
+      <AboutMe avatar={sidebar[0]?.attributes.Author.data} />
       {sidebar.map((article) => (
         <Post
           id={article?.id}

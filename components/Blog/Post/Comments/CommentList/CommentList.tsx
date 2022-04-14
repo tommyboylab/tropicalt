@@ -10,54 +10,81 @@ import Load from '../../../../Other/Load/Load';
 
 export const GetCommentList = gql(`
   query Comments($slug: String) {
-    me {
-      id
-      username
-      avatar
-    }
-    comments(where: { article: { slug: $slug }, parent_null: true }) {
-      id
-      content
-      created_at
-      updated_at
-      article {
-        id
-      }
-      user {
-        id
-        username
-        avatar
-      }
-      likes {
-        user {
-          id
-        }
-      }
-      dislikes {
-        user {
-          id
-        }
-      }
-      children {
-        id
-        content
-        user {
-          id
-          username
-          avatar
-        }
-        likes {
-          user {
+me {
+    username
+  }
+  comments(filters: { article: { Slug: { eq: "for-jack" } }, Parent: null }) {
+    data {
+      attributes {
+        article {
+          data {
             id
+            attributes {
+              Slug
+            }
           }
         }
-        dislikes {
-          user {
-            id
+        Author {
+          data {
+            attributes {
+              username
+              Img {
+                img {
+                  data {
+                    attributes {
+                      url
+                      hash
+                    }
+                  }
+                }
+              }
+            }
           }
+        }
+        Content
+        Children {
+          data {
+            attributes {
+              Content
+              createdAt
+              updatedAt
+              Likes {
+                UserId
+              }
+              Dislikes {
+                UserId
+              }
+              Author {
+                data {
+                  attributes {
+                    username
+                    Img {
+                      img {
+                        data {
+                          attributes {
+                            url
+                            hash
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        createdAt
+        updatedAt
+        Likes {
+          UserId
+        }
+        Dislikes {
+          UserId
         }
       }
     }
+  }
   }
 `);
 
@@ -68,16 +95,19 @@ type CommentList = {
 
 const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
   const [result] = useQuery({ query: GetCommentList, variables: { slug } });
-  const { data, loading, fetching, error } = result;
+  const { data, fetching, error } = result;
 
+  {
+    console.log(error);
+  }
   const { comments } = data;
   const { me } = data;
 
-  if ((loading && !data) || fetching) return <Load />;
+  if ((fetching && !data) || fetching) return <Load />;
 
-  const parentCommentLength = Number(comments?.length);
+  const parentCommentLength = Number(comments?.data.length);
 
-  const nestedCommentLength = Number(comments?.forEach((comment) => comment?.children?.length));
+  const nestedCommentLength = Number(comments?.data.forEach((comment) => comment?.attributes.Children?.data.length));
 
   // const childCommentLength = comments?.forEach((comment) => (nestedCommentLength += Number(comment?.children?.length)));
   const totalCommentLength = nestedCommentLength + parentCommentLength;
@@ -85,13 +115,13 @@ const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm me={me} articleId={String(articleID)} content={''} />
+      <CommentForm me={me.data} articleId={String(articleID)} content={''} />
 
       {parentCommentLength > 0 &&
-        comments?.map((comment) => (
+        comments.data?.map((comment) => (
           <>
-            <Comment comment={comment} key={comment?.id} me={me} />
-            <NestedComment articleID={String(articleID)} child={comment?.children} me={me} />
+            <Comment comment={comment.attributes} commentId={comment.id} key={comment?.id} me={me.data} />
+            <NestedComment articleID={String(articleID)} child={comment?.attributes.children.data} me={me.data} />
           </>
         ))}
     </div>

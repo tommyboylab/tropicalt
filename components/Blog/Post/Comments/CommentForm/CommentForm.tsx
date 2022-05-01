@@ -3,11 +3,33 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import moment from 'moment';
-import { useMutation } from 'urql';
-import { gql } from 'urql';
+import { useMutation, useQuery } from 'urql';
+import { gql } from '@app/gql';
 import s from '../Comments.module.scss';
 
-const CreateComment = gql`
+const getUserQuery = gql(`
+query getUser($userId: ID!) {
+  usersPermissionsUser(id: $userId) {
+    data {
+      attributes {
+        username
+        Img {
+          img {
+            data {
+              id
+              attributes {
+                url
+                hash
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`);
+
+const CreateComment = gql(`
   mutation AddComment($articleId: ID!, $userId: ID!, $content: String!, $date: DateTime!, $parentId: ID) {
     createComment(
       data: { article: $articleId, Author: $userId, Content: $content, Published: $date, Parent: $parentId }
@@ -36,7 +58,7 @@ const CreateComment = gql`
       }
     }
   }
-`;
+`);
 
 const commentSchema = yup.object({ content: yup.string().min(2, `That's not good enough!`).max(40).required() });
 type commentType = yup.InferType<typeof commentSchema>;
@@ -57,10 +79,25 @@ type commentType = yup.InferType<typeof commentSchema>;
 //   nested?: boolean;
 // };
 
-const CommentForm = ({ commentId, me, articleId, nested }): JSX.Element => {
+type CommentFormProps = {
+  commentId?: string | null;
+  userId?: string;
+  articleId: string;
+  nested?: boolean;
+};
+
+const CommentForm = ({ commentId, userId, articleId, nested }: CommentFormProps): JSX.Element => {
   const commentCreateDate = moment().toISOString();
   const commentParentID = nested ? commentId : null;
   const [addCommentResult, addComment] = useMutation(CreateComment);
+
+  const [result] = useQuery({ query: getUserQuery, variables: { userId: String(userId) } });
+  const { data, fetching, error } = result;
+
+  console.log(fetching);
+  console.log(error);
+
+  const userData = data?.usersPermissionsUser;
 
   const {
     register,
@@ -75,13 +112,11 @@ const CommentForm = ({ commentId, me, articleId, nested }): JSX.Element => {
 
   const onSubmit = async (data: { content: string }): Promise<void> => {
     await addComment({
-      variables: {
-        userId: String(me?.id),
-        articleId: articleId,
-        content: data.content,
-        date: commentCreateDate,
-        parentId: commentParentID,
-      },
+      articleId: String(articleId),
+      content: data.content,
+      date: commentCreateDate,
+      parentId: String(commentParentID),
+      userId: String(userId),
     }).then((result) => {
       if (result.error) {
         console.error('Oh no!', result.error);
@@ -93,13 +128,13 @@ const CommentForm = ({ commentId, me, articleId, nested }): JSX.Element => {
     });
   };
 
-  console.log('Mutation is fething', addCommentResult.fetching);
+  console.log('Mutation is fetching', addCommentResult.fetching);
   return (
     <form className={s.commentForm} onSubmit={void handleSubmit(onSubmit)}>
       <img
         className={s.commentAvatar}
-        src={String(me?.data.Img.img.data.attributes.url)}
-        alt={`${String(me?.data.username)}'s Avatar`}
+        src={String(userData?.data?.attributes?.Img?.img?.data?.attributes?.url)}
+        alt={`${String(userData?.data?.attributes?.username)}'s Avatar`}
       />
       <div className={s.formInput}>
         <input

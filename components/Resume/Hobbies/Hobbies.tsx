@@ -9,11 +9,15 @@ export const HobbiesFragment = gql(`
   }
 `);
 
-const Hobbies = (hobbies): JSX.Element => {
+type HobbyType = {
+  hobbies: string;
+};
+
+const Hobbies = ({ hobbies }: HobbyType): JSX.Element => {
   return (
     <div className={s.hobbies}>
       <h2>Hobbies</h2>
-      <ReactMarkdown>{hobbies.hobbies}</ReactMarkdown>
+      <ReactMarkdown>{hobbies}</ReactMarkdown>
     </div>
   );
 };

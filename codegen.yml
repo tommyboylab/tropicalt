@@ -4,5 +4,5 @@ documents:
   - "./**/*.tsx"
   - "!./gql/**/*"
 generates:
-  ./apollo/gql/:
+  ./gql/:
     preset: gql-tag-operations-preset

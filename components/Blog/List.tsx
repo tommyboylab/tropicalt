@@ -1,9 +1,9 @@
 import React from 'react';
-import { gql } from 'urql';
+import { gql, DocumentType } from '@app/gql';
 import Post from '../Home/Recents/Recents';
 import s from './List.module.scss';
 
-export const ArticleListFragment = gql`
+export const ArticleListFragment = gql(`
   fragment ArticleListFragment on Query {
     list: articles(sort: "Published:desc", pagination: { start: $start, limit: 7 }) {
       data {
@@ -34,25 +34,28 @@ export const ArticleListFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Articles = ({ list }): JSX.Element => {
+const Articles = ({ list }: DocumentType<typeof ArticleListFragment>): JSX.Element => {
+  const listData = list?.data;
+
   return (
     <div className={s.postList}>
-      {list.map((article) => (
-        <Post
-          id={article?.id}
-          type='blog'
-          slug={String(article?.attributes.Slug)}
-          key={article?.id}
-          cover={`/uploads/sqip_${String(article?.attributes.Cover?.img?.data.attributes.hash)}.svg`}
-          img={article?.attributes.Cover?.img?.data.attributes.url}
-          title={article?.attributes.Title}
-          date={String(article?.attributes.Published)}
-          name={article?.attributes.Author.data.attributes?.username}
-          excerpt={article?.attributes.Tagline}
-        />
-      ))}
+      {listData &&
+        listData.map((article) => (
+          <Post
+            id={String(article?.id)}
+            type='blog'
+            slug={String(article?.attributes?.Slug)}
+            key={article?.id}
+            cover={`/uploads/sqip_${String(article?.attributes?.Cover?.img?.data?.attributes?.hash)}.svg`}
+            img={article?.attributes?.Cover?.img?.data?.attributes?.url}
+            title={article?.attributes?.Title}
+            date={String(article?.attributes?.Published)}
+            name={article?.attributes?.Author?.data?.attributes?.username}
+            excerpt={String(article?.attributes?.Tagline)}
+          />
+        ))}
     </div>
   );
 };
@@ -60,7 +63,7 @@ const Articles = ({ list }): JSX.Element => {
 Articles.displayName = 'ArticleList';
 
 Articles.fragments = {
-  ArticleListFragment: ArticleListFragment,
+  ArticleListFragment,
 };
 
 export default Articles;

@@ -9,12 +9,13 @@ import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
 
 export const GetCommentList = gql(`
-  query Comments($slug: String) {
-me {
-    username
+ query Comments($slug: String) {
+  me {
+    id
   }
-  comments(filters: { article: { Slug: { eq: "for-jack" } }, Parent: null }) {
+  comments(filters: { article: { Slug: { eq: $slug } }, Parent: null }) {
     data {
+      id
       attributes {
         article {
           data {
@@ -85,7 +86,7 @@ me {
       }
     }
   }
-  }
+}
 `);
 
 type CommentList = {
@@ -97,31 +98,39 @@ const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
   const [result] = useQuery({ query: GetCommentList, variables: { slug } });
   const { data, fetching, error } = result;
 
+  const commentData = data?.comments;
+
+  const userId = data?.me?.id;
   {
     console.log(error);
   }
-  const { comments } = data;
-  const { me } = data;
 
   if ((fetching && !data) || fetching) return <Load />;
 
-  const parentCommentLength = Number(comments?.data.length);
+  const parentCommentLength = Number(commentData?.data.length);
 
-  const nestedCommentLength = Number(comments?.data.forEach((comment) => comment?.attributes.Children?.data.length));
+  const childCommentLength = Number(commentData?.data.forEach((comment) => comment?.attributes?.Children?.data.length));
 
-  // const childCommentLength = comments?.forEach((comment) => (nestedCommentLength += Number(comment?.children?.length)));
-  const totalCommentLength = nestedCommentLength + parentCommentLength;
+  const totalCommentLength = childCommentLength + parentCommentLength;
 
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm me={me.data} articleId={String(articleID)} content={''} />
+      <CommentForm userId={String(userId)} articleId={String(articleID)} commentId={undefined} nested={false} />
 
       {parentCommentLength > 0 &&
-        comments.data?.map((comment) => (
+        commentData?.data?.map((comment) => (
           <>
-            <Comment comment={comment.attributes} commentId={comment.id} key={comment?.id} me={me.data} />
-            <NestedComment articleID={String(articleID)} child={comment?.attributes.children.data} me={me.data} />
+            {comment?.attributes?.Content}
+            <Comment
+              comment={comment?.attributes}
+              commentId={comment?.id}
+              key={comment?.id}
+              userId={userId}
+              nested={false}
+              articleId={articleID}
+            />
+            <NestedComment child={comment?.attributes?.Children?.data} userId={userId} articleId={articleID} />
           </>
         ))}
     </div>

@@ -9,11 +9,15 @@ export const SkillsFragment = gql`
   }
 `;
 
-const Skills = (skills): JSX.Element => {
+type SkillsType = {
+  skills: string;
+};
+
+const Skills = ({ skills }: SkillsType): JSX.Element => {
   return (
     <div className={s.skills}>
       <h2>Skills</h2>
-      <ReactMarkdown>{skills.skills}</ReactMarkdown>
+      <ReactMarkdown>{skills}</ReactMarkdown>
     </div>
   );
 };

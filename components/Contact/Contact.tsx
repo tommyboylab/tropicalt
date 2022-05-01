@@ -13,18 +13,19 @@ type FormFields = {
   message: string;
 };
 
-const sendEmail = gql`
-  mutation AddEmail($name: String!, $email: String!, $message: String!) {
-  createContact(data: { Name:$name, Email:$email, Message:$message }) {
+const sendEmail = gql(`
+mutation AddEmail($name: String!, $email: String!, $message: String!) {
+  createContact(data: { Name: $name, Email: $email, Message: $message }) {
     data {
-     attributes{
-      Name
-      Email
-      Message
+      attributes {
+        Name
+        Email
+        Message
+      }
     }
   }
-  }
-`;
+}
+`);
 
 const contactSchema = yup.object({
   name: yup.string().min(2, `That's not a name!`).max(22).required(),

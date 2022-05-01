@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { gql } from 'urql';
+import { gql, DocumentType } from '@app/gql';
 import Text from './AboutCard/AboutCardText';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
@@ -30,16 +30,18 @@ export const AboutCardFragment = gql(`
   }
 `);
 
-const AboutCards = ({ aboutCards }): JSX.Element => {
+const AboutCards = ({ about }: DocumentType<typeof AboutCardFragment>): JSX.Element => {
+  const aboutData = about?.data?.attributes?.AboutCard;
+
   return (
     <>
-      {aboutCards?.map((aboutCard) => {
+      {aboutData?.map((aboutCard) => {
         return (
           <Fragment key={aboutCard?.id}>
             <Img
               class={s.aboutCardImg}
-              url={String(aboutCard?.Img[0].img.data.attributes.url)}
-              placeholder={`/uploads/sqip_${String(aboutCard?.Img[0].img?.data.attributes.hash)}.svg`}
+              url={String(aboutCard?.Img?.[0]?.img?.data?.attributes?.url)}
+              placeholder={`/uploads/sqip_${String(aboutCard?.Img?.[0]?.img?.data?.attributes?.hash)}.svg`}
               alt={`Image for ${String(aboutCard?.Tagline)}`}
             />
             <Text title={String(aboutCard?.Tagline)} excerpt={String(aboutCard?.Extension)} />
@@ -53,7 +55,7 @@ const AboutCards = ({ aboutCards }): JSX.Element => {
 AboutCards.displayName = 'AboutCards';
 
 AboutCards.fragments = {
-  AboutCardFragment: AboutCardFragment,
+  AboutCardFragment,
 };
 
 export default AboutCards;

@@ -9,11 +9,15 @@ export const EducationFragment = gql`
   }
 `;
 
-const Education = (education): JSX.Element => {
+type EducationType = {
+  edu: string;
+};
+
+const Education = ({ edu }: EducationType): JSX.Element => {
   return (
     <div className={s.education}>
       <h2>Education</h2>
-      <ReactMarkdown>{education.edu}</ReactMarkdown>
+      <ReactMarkdown>{edu}</ReactMarkdown>
     </div>
   );
 };

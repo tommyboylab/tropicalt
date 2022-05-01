@@ -18,7 +18,7 @@
 	"dependencies": {
 		"@apollo/client": "^3.5.10",
 		"@apollo/react-ssr": "^4.0.0",
-		"@app/gql": "file:./apollo/gql",
+		"@app/gql": "file:./gql",
 		"@hookform/resolvers": "^2.8.8",
 		"@prefresh/next": "^1.5.2",
 		"apollo-server-core": "^3.6.7",

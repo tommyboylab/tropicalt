@@ -1,24 +1,24 @@
 import React from 'react';
-import { gql } from 'urql';
+import { gql } from '@app/gql';
 import { useRouter } from 'next/router';
 import { useQuery } from 'urql';
 import Load from '../../components/Other/Load/Load';
 import Err from '../../components/Other/Error/Error';
 import Meta from '../../components/Other/Meta/Meta';
 import s from '../../components/Other/Layout/Post.module.scss';
-import Nav, { NavFragment } from '../../components/Nav/Nav';
+import Nav from '../../components/Nav/Nav';
 import MobileHeader from '../../components/Blog/Post/MobileHeader/MobileHeader';
 import CoverImg from '../../components/Blog/Post/CoverImg/CoverImg';
 // import TagList from '../../components/Blog/Post/Tags/TagList';
 // import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
 import Body from '../../components/Blog/Post/Body/Body';
-import Sidebar, { SidebarArticlesFragment } from '../../components/Blog/Post/Sidebar/Sidebar';
+import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
-// import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
+import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
 // import { isSignedIn } from '../../apollo/apolloClient';
-import Modal from '../../components/Other/SocialAuth/Modal';
+// import Modal from '../../components/Other/SocialAuth/Modal';
 
-const getArticle = gql`
+const getArticle = gql(`
   query Article($slug: String) {
     ...NavigationFragment
     articles(filters: { Slug: { eq: $slug } }) {
@@ -52,9 +52,7 @@ const getArticle = gql`
     }
     ...SidebarArticlesFragment
   }
-  ${NavFragment}
-  ${SidebarArticlesFragment}
-`;
+`);
 
 const Post = (): JSX.Element => {
   const router = useRouter();
@@ -67,29 +65,30 @@ const Post = (): JSX.Element => {
   if (fetching && !data) return <Load />;
   if (error) return <Err />;
 
-  const articleData = data.articles.data[0].attributes;
+  const articleData = data?.articles?.data[0].attributes;
   return (
     <>
       <Meta
         title={articleData?.Title}
-        excerpt={articleData?.Tagline}
-        imgUrl={articleData?.Cover?.img?.data.attributes.url}
+        excerpt={String(articleData?.Tagline)}
+        imgUrl={articleData?.Cover?.img?.data?.attributes?.url}
         url={`/blog/${String(slug)}`}
       />
-      <main className={s.layout} key={data.articles.data[0].id}>
-        <Nav nav={data?.navLink.data.attributes.Link} />
+      <main className={s.layout} key={data?.articles?.data[0].id}>
+        <Nav navLink={data?.navLink} />
         <MobileHeader />
         <CoverImg
           title={String(articleData?.Title)}
-          url={String(articleData?.Cover?.img?.data.attributes.url)}
-          placeholder={`/uploads/sqip_${String(articleData?.Cover?.img?.data.attributes.hash)}.svg`}
-          alt={String(articleData?.title)}
+          url={String(articleData?.Cover?.img?.data?.attributes?.url)}
+          placeholder={`/uploads/sqip_${String(articleData?.Cover?.img?.data?.attributes?.hash)}.svg`}
+          alt={String(articleData?.Title)}
         />
         {/*<TagList>{articleData?.tag?.map((tag) => tag?.tag)}</TagList>*/}
         <Body content={String(articleData?.Content)} />
-        <Sidebar sidebar={data?.sidebar.data} />
-        {/*{authenticated ? <CommentList slug={String(article?.slug)} articleID={String(article?.id)} /> : <Modal />}*/}
-        <Footer nav={data?.navLink.data.attributes.Link} />
+        <Sidebar sidebar={data?.sidebar} />
+        <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} />
+        {/*{authenticated ? <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} /> : <Modal />}*/}
+        <Footer navLink={data?.navLink} />
       </main>
     </>
   );

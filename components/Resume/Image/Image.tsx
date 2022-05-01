@@ -19,14 +19,28 @@ export const HighlightImgFragment = gql`
   }
 `;
 
-const Highlight = (highlightImg): JSX.Element => {
+type HighlightType = {
+  highlight:
+    | {
+        img: {
+          data?: {
+            id?: string | null;
+            attributes?: { url: string; hash: string } | null;
+          } | null;
+        };
+      }
+    | null
+    | undefined
+    | undefined;
+};
+
+const Highlight = ({ highlight }: HighlightType): JSX.Element => {
   return (
     <div className={s.highlightImg}>
-      {console.log('THis is Hightlight', highlightImg.highlight)}
       <Img
         class={s.highlightImg}
-        url={String(highlightImg?.highlight.img.data.attributes.url)}
-        placeholder={`/uploads/sqip_${String(highlightImg?.highlight.img.data.attributes.hash)}.svg`}
+        url={String(highlight?.img?.data?.attributes?.url)}
+        placeholder={`/uploads/sqip_${String(highlight?.img?.data?.attributes?.hash)}.svg`}
         alt={`Image for Resume`}
       />
     </div>

@@ -9,11 +9,15 @@ export const WorkExpFragment = gql`
   }
 `;
 
-const WorkExp = (workExp): JSX.Element => {
+type WorkExpType = {
+  workExp: string;
+};
+
+const WorkExp = ({ workExp }: WorkExpType): JSX.Element => {
   return (
     <div className={s.workHistory}>
       <h2>Work History</h2>
-      <ReactMarkdown>{workExp.workExp}</ReactMarkdown>
+      <ReactMarkdown>{workExp}</ReactMarkdown>
     </div>
   );
 };

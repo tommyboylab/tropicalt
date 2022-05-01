@@ -2,7 +2,35 @@ import React, { useState } from 'react';
 import Comment from '../Comment/Comment';
 import s from '../Comments.module.scss';
 
-const NestedComment = ({ child, me }): JSX.Element => {
+type ChildCommentProps = {
+  child?: Array<{
+    attributes?: {
+      Content?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+      Likes?: Array<{ UserId?: number | null } | null> | null;
+      Dislikes?: Array<{ UserId?: number | null } | null> | null;
+      Author?: {
+        data?: {
+          attributes?: {
+            username: string;
+            Img?: {
+              img: {
+                data?: {
+                  attributes?: { url: string; hash: string } | null;
+                } | null;
+              };
+            } | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
+  }>;
+  userId?: string;
+  articleId?: string;
+};
+
+const NestedComment = ({ child, userId, articleId }: ChildCommentProps): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
   const commentNumber = Number(child?.length);
 
@@ -20,7 +48,13 @@ const NestedComment = ({ child, me }): JSX.Element => {
         commentNumber > 0 &&
         child?.map((comment, index) => (
           <>
-            <Comment nested comment={comment.attributes} key={index} me={me} />
+            <Comment
+              nested={true}
+              comment={comment.attributes}
+              key={index}
+              userId={userId}
+              articleId={String(articleId)}
+            />
           </>
         ))}
     </div>

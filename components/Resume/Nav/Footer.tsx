@@ -8,12 +8,16 @@ export const ResumeEmailFragment = gql(`
   }
 `);
 
-const Email = (email): JSX.Element => {
+type EmailType = {
+  email: string;
+};
+
+const Email = ({ email }: EmailType): JSX.Element => {
   return (
     <div className={s.contact}>
       <p>
         Contact Information:
-        <a href={`mailto:${email.email}`}>Email</a>
+        <a href={`mailto:${email}`}>Email</a>
       </p>
     </div>
   );

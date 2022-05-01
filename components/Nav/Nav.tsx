@@ -1,9 +1,9 @@
 import React from 'react';
-import { gql } from 'urql';
+import { gql, DocumentType } from '@app/gql';
 import Link from './ActiveLink/ActiveLink';
 import s from './Nav.module.scss';
 
-export const NavFragment = gql`
+export const NavigationFragment = gql(`
   fragment NavigationFragment on Query {
     navLink {
       data {
@@ -17,9 +17,11 @@ export const NavFragment = gql`
       }
     }
   }
-`;
+`);
 
-const Nav = ({ nav }): JSX.Element => {
+const Nav = ({ navLink }: DocumentType<typeof NavigationFragment>): JSX.Element => {
+  const navData = navLink?.data?.attributes?.Link;
+
   return (
     <nav className={s.nav}>
       <li className={s.menu}>T^T</li>
@@ -31,13 +33,14 @@ const Nav = ({ nav }): JSX.Element => {
             content: ' -------';
           }
         `}</style>
-        {nav.map((nav) => {
-          return (
-            <Link href={nav.URL} key={nav?.id}>
-              <li className='link'>{nav?.Name}</li>
-            </Link>
-          );
-        })}
+        {navData &&
+          navData.map((nav) => {
+            return (
+              <Link href={String(nav?.URL)} key={nav?.id}>
+                <li className='link'>{nav?.Name}</li>
+              </Link>
+            );
+          })}
       </ul>
     </nav>
   );
@@ -46,7 +49,7 @@ const Nav = ({ nav }): JSX.Element => {
 Nav.displayName = 'Nav';
 
 Nav.fragments = {
-  NavigationFragment: NavFragment,
+  NavigationFragment,
 };
 
 export default Nav;

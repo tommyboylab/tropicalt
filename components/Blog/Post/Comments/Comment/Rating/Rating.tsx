@@ -2,15 +2,18 @@ import React, { MouseEventHandler } from 'react';
 import { useMutation } from 'urql';
 import { gql } from 'urql';
 import s from '../../Comments.module.scss';
-import { Comment } from '../Comment';
+// import { Comment } from '../Comment';
 
-const UpdateCommentLikes = gql`
-  mutation updateCommentLikes(
-    $commentID: ID!
-    $likes: [editComponentBlogLikeInput]
-    $dislikes: [editComponentBlogDislikeInput]]
+const UpdateCommentLikes = gql(`
+mutation updateCommentLikes(
+  $commentId: ID!
+  $likes: Int!
+  $dislikes: Int!
+) {
+  updateComment(
+    id: $commentId
+    data: { Likes: { UserId: $likes }, Dislikes: { UserId: $dislikes } }
   ) {
-     updateComment(id: $commentId, data: { Likes:{UserId:$likes}, Dislikes: {UserId:$dislikes} }) {
     data {
       id
       attributes {
@@ -23,57 +26,55 @@ const UpdateCommentLikes = gql`
       }
     }
   }
-  }
-`;
-//
-// type Props = {
-//   comment: Comment;
-//   me:
-//     | {
-//         __typename?: 'UsersPermissionsMe' | undefined;
-//         id: string;
-//         username: string;
-//         avatar?: string | null | undefined;
-//       }
-//     | null
-//     | undefined;
-//   nested?: boolean;
-//   reply: MouseEventHandler<SVGSVGElement>;
-//   replyIsOpen: boolean;
-// };
+}
 
-const Rating = ({ comment, me, nested, reply, replyIsOpen }): JSX.Element => {
-  const like = comment?.likes;
-  const dislike = comment?.dislikes;
+`);
 
-  const likeNum = like?.length;
-  const dislikeNum = dislike?.length;
+type CommentRatingProps = {
+  commentId?: string | null;
+  userId?: string;
+  nested?: boolean;
+  reply: MouseEventHandler<SVGSVGElement>;
+  replyIsOpen: boolean;
+  likes?: Array<{ UserId?: number | null } | null> | null;
+  dislikes?: Array<{ UserId?: number | null } | null> | null;
+};
 
-  const isLiked = like?.some((like) => like?.user?.id === me?.id);
+const Rating = ({
+  commentId,
+  likes,
+  dislikes,
+  userId,
+  nested,
+  reply,
+  replyIsOpen,
+}: CommentRatingProps): JSX.Element => {
+  const likeNum = likes?.length;
+  const dislikeNum = dislikes?.length;
 
-  const isDisliked = dislike?.some((dislike) => dislike?.user?.id === me?.id);
+  const isLiked = likes?.some((like) => like?.UserId === userId);
+
+  const isDisliked = dislikes?.some((dislike) => dislike?.UserId === userId);
 
   const liked = () =>
-    isLiked
-      ? like?.filter((like) => like?.user?.id !== me?.id)
-      : like
-      ? [...like, { id: String(like.length + 1), me }]
-      : like;
+    isLiked ? likes?.filter((like) => like?.UserId !== userId) : likes ? [...likes, { UserId: userId }] : likes;
 
   const disliked = () =>
     isDisliked
-      ? dislike?.filter((dislike) => dislike?.user?.id !== me?.id)
-      : dislike
-      ? [...dislike, { id: String(dislike?.length + 1), me }]
-      : dislike;
+      ? dislikes?.filter((dislike) => dislike?.UserId !== userId)
+      : dislikes
+      ? [...dislikes, { UserId: userId }]
+      : dislikes;
+
+  //      ? [...dislikes, { id: String(dislikes?.length + 1), me }]
 
   const removeLike = () =>
-    like?.some((like) => like?.user?.id === me?.id) ? like?.filter((like) => like?.user?.id !== me?.id) : like;
+    likes?.some((like) => like?.UserId === userId) ? likes?.filter((like) => like?.UserId !== userId) : likes;
 
   const removeDislike = () =>
-    dislike?.some((dislike) => dislike?.user?.id === me?.id)
-      ? dislike?.filter((dislike) => dislike?.user?.id !== me?.id)
-      : dislike;
+    dislikes?.some((dislike) => dislike?.UserId === userId)
+      ? dislikes?.filter((dislike) => dislike?.UserId !== userId)
+      : dislikes;
 
   const [UpdateCommentLikesResult, updateCommentLikes] = useMutation(UpdateCommentLikes);
 
@@ -103,7 +104,7 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }): JSX.Element => {
     <div className={s.commentRating}>
       <svg
         aria-disabled={UpdateCommentLikesResult.fetching}
-        onClick={void updateLike(String(comment?.id))}
+        onClick={void updateLike(String(commentId))}
         style={{ fill: `${isLiked ? '#0FA' : 'black'}` }}
         className={s.commentLikeImg}
         xmlns='http://www.w3.org/2000/svg'
@@ -114,7 +115,7 @@ const Rating = ({ comment, me, nested, reply, replyIsOpen }): JSX.Element => {
       <h3 className={s.commentLike}>{likeNum}</h3>
       <svg
         aria-disabled={UpdateCommentDislikesResult.fetching}
-        onClick={void updateDislike(String(comment?.id))}
+        onClick={void updateDislike(String(commentId))}
         style={{ fill: `${isDisliked ? 'red' : 'black'}` }}
         className={s.commentDislikeImg}
         xmlns='http://www.w3.org/2000/svg'

@@ -1,34 +1,30 @@
 import React from 'react';
-import Nav, { NavFragment } from '../components/Nav/Nav';
+import Nav from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
-import RecentPosts, { RecentArticlesFragment } from '../components/Home/Recents/Posts/RecentPosts';
-import RecentAlbums, { RecentAlbumFragment } from '../components/Home/Recents/Albums/RecentAlbums';
-import ImgB, { ImgBFragment } from '../components/Home/Hero/Hero';
-import Bio, { BioFragment } from '../components/Home/Bio/Bio';
+import RecentPosts from '../components/Home/Recents/Posts/RecentPosts';
+import RecentAlbums from '../components/Home/Recents/Albums/RecentAlbums';
+import Hero from '../components/Home/Hero/Hero';
+import Bio from '../components/Home/Bio/Bio';
 import s from '../components/Other/Layout/Home.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
 
-import { useQuery, gql } from 'urql';
+import { useQuery } from 'urql';
+import { gql } from '@app/gql';
 
-const getHomepageQuery = gql`
-  query {
-    ...ImageBannerFragment
+const GetHomepageQuery = gql(`
+  query GetHomePage {
     ...NavigationFragment
+    ...HeroFragment
     ...BiographyFragment
     ...RecentArticlesFragment
-    ...RecentAlbumFragment
+    ...RecentAlbumsFragment
   }
-  ${ImgBFragment}
-  ${NavFragment}
-  ${BioFragment}
-  ${RecentArticlesFragment}
-  ${RecentAlbumFragment}
-`;
+`);
 
 export default function Home(): JSX.Element {
-  const [result] = useQuery({ query: getHomepageQuery });
+  const [result] = useQuery({ query: GetHomepageQuery });
 
   const { data, error, fetching } = result;
 
@@ -40,15 +36,15 @@ export default function Home(): JSX.Element {
       <Meta
         title={'T^T - TropicalT'}
         excerpt={'The homepage of Thomas Fiala'}
-        imgUrl={data.usersPermissionsUser.data.attributes.Img.img.data.attributes.url}
+        imgUrl={data?.usersPermissionsUser?.data?.attributes?.Img?.img?.data?.attributes?.url}
         url={'/'}
       />
-      <Nav nav={data?.navLink.data.attributes.Link} />
-      <ImgB hero={data?.home.data.attributes.Hero} />
-      <Bio avatar={data?.usersPermissionsUser.data} />
-      <RecentPosts articles={data?.articles.data} />
-      <RecentAlbums albums={data?.albums.data} />
-      <Footer nav={data?.navLink.data.attributes.Link} />
+      <Nav navLink={data?.navLink} />
+      <Hero home={data?.home} />
+      <Bio usersPermissionsUser={data?.usersPermissionsUser} />
+      <RecentPosts articles={data?.articles} />
+      <RecentAlbums albums={data?.albums} />
+      <Footer navLink={data?.navLink} />
     </main>
   );
 }

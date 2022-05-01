@@ -9,11 +9,16 @@ export const ContactFragment = gql`
   }
 `;
 
-const Contact = (contact): JSX.Element => {
+type ContactType = {
+  phoneNum: string;
+  address: string;
+};
+
+const Contact = ({ phoneNum, address }: ContactType): JSX.Element => {
   return (
     <div className={s.contactInfo}>
-      <p className={s.cellphone}>{contact.phoneNum}</p>
-      <p className={s.address}>{contact.address}</p>
+      <p className={s.cellphone}>{phoneNum}</p>
+      <p className={s.address}>{address}</p>
     </div>
   );
 };

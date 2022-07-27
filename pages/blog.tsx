@@ -1,5 +1,4 @@
 import React, { useCallback, useState } from 'react';
-import Nav from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
 import Header from '../components/Blog/Header/Header';
 import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
@@ -10,8 +9,10 @@ import { gql } from '@app/gql';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
+import NewNav from '../components/Nav/NewNav';
 
-const GetArticlesQuery = gql(`
+export const GetArticlesQuery = gql(`
   query GetArticles($start: Int!) {
     ...NavigationFragment
     ...ArticleListFragment
@@ -42,7 +43,7 @@ export default function Blog(): JSX.Element {
         imgUrl={data?.list?.data?.[0]?.attributes?.Cover?.img?.data?.attributes?.url}
         url={'/blog'}
       />
-      <Nav navLink={data?.navLink} />
+      <NewNav navLink={data?.navLink} />
       <Header />
       <List list={data?.list} />
       <div className={s.postControls}>
@@ -54,7 +55,12 @@ export default function Blog(): JSX.Element {
         </button>
       </div>
       <Sidebar sidebar={data?.sidebar} />
-      <Footer navLink={data?.navLink} />
+      <Footer />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  await client.query(GetArticlesQuery, { start: 1 }).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from '../components/Nav/Nav';
 import Footer from '../components/Nav/Footer';
 import RecentPosts from '../components/Home/Recents/Posts/RecentPosts';
 import RecentAlbums from '../components/Home/Recents/Albums/RecentAlbums';
@@ -12,6 +11,8 @@ import Err from '../components/Other/Error/Error';
 
 import { useQuery } from 'urql';
 import { gql } from '@app/gql';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
+import NewNav from '../components/Nav/NewNav';
 
 const GetHomepageQuery = gql(`
   query GetHomePage {
@@ -39,12 +40,17 @@ export default function Home(): JSX.Element {
         imgUrl={data?.usersPermissionsUser?.data?.attributes?.Img?.img?.data?.attributes?.url}
         url={'/'}
       />
-      <Nav navLink={data?.navLink} />
+      <NewNav navLink={data?.navLink} />
       <Hero home={data?.home} />
       <Bio usersPermissionsUser={data?.usersPermissionsUser} />
       <RecentPosts articles={data?.articles} />
       <RecentAlbums albums={data?.albums} />
-      <Footer navLink={data?.navLink} />
+      <Footer />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  await client.query(GetHomepageQuery).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

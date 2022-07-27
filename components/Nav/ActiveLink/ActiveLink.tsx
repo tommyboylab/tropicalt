@@ -1,9 +1,10 @@
 import { NextRouter, withRouter } from 'next/router';
-import React, { MouseEventHandler, useCallback } from 'react';
+import React from 'react';
+import Link from 'next/link';
 
-const getStyle = (router: NextRouter, href: string) => ({
-  color: router.pathname === href ? 'rgb(190, 55, 250)' : 'rgba(190, 55, 250, .35)',
-});
+// const getStyle = (router: NextRouter, href: string) => ({
+//   color: router.pathname === href ? 'rgb(190, 55, 250)' : 'rgba(190, 55, 250, .35)',
+// });
 
 type Active = {
   children: JSX.Element;
@@ -12,20 +13,18 @@ type Active = {
 };
 
 const ActiveLink = ({ children, router, href }: Active) => {
-  const style = getStyle(router, href);
-
-  const handleClick: MouseEventHandler = useCallback(
-    (e) => {
-      e.preventDefault();
-      void router.push(href).then(() => window.scrollTo(0, 0));
-    },
-    [href, router]
-  );
+  // const handleClick: MouseEventHandler = useCallback(
+  //   (e) => {
+  //     e.preventDefault();
+  //     void router.push(href).then(() => window.scrollTo(0, 0));
+  //   },
+  //   [href, router]
+  // );
 
   return (
-    <a href={href} onClick={handleClick} style={style}>
+    <Link className={router.pathname == href ? 'active' : ''} href={href}>
       {children}
-    </a>
+    </Link>
   );
 };
 

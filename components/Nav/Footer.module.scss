@@ -11,40 +11,14 @@
 }
 
 .footer h3 {
+  padding-bottom: 2.5rem;
   color: GlobalStyle.$SECONDARY_COLOR;
   margin: auto 0;
-  padding: 0 1em;
-}
-
-.footer a {
-  color: GlobalStyle.$PRIMARY_COLOR;
-  background: none;
-  margin: auto 0;
-}
-
-.footer h3:hover {
-  color: GlobalStyle.$QUATERNARY_COLOR;
-  transition: 0.5s ease-in-out;
-}
-
-.footer ul {
-  margin: auto 0;
-  column-count: 2;
-}
-
-.footer li {
-  cursor: pointer;
-  color: GlobalStyle.$PRIMARY_COLOR;
-  list-style: none;
 }
 
 @media (max-width: 920px) {
   .footer {
     flex-direction: column;
     text-align: center;
-  }
-
-  .footer ul {
-    margin: 0 auto;
   }
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import Nav from '../components/Nav/Nav';
 import AboutCards from '../components/About/AboutCards';
 import s from '../components/Other/Layout/About.module.scss';
 import Meta from '../components/Other/Meta/Meta';
@@ -7,6 +6,8 @@ import { gql } from '@app/gql';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
+import NewNav from '../components/Nav/NewNav';
 
 const GetAboutCardQuery = gql(`
   query GetAboutPage {
@@ -30,8 +31,13 @@ export default function About(): JSX.Element {
         imgUrl={data?.about?.data?.attributes?.AboutCard?.[0]?.Img?.[0]?.img?.data?.attributes?.url}
         url={'/about'}
       />
-      <Nav navLink={data?.navLink} />
+      <NewNav navLink={data?.navLink} />
       <AboutCards about={data?.about} />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  await client.query(GetAboutCardQuery).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

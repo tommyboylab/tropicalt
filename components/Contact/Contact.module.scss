@@ -1,6 +1,6 @@
 @use '../Other/Styles/GlobalStyle';
 
-.form > form {
+.form>form {
   display: flex;
   flex-direction: column;
   background-color: GlobalStyle.$SECONDARY_COLOR_MUTED;

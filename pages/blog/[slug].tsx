@@ -6,7 +6,7 @@ import Load from '../../components/Other/Load/Load';
 import Err from '../../components/Other/Error/Error';
 import Meta from '../../components/Other/Meta/Meta';
 import s from '../../components/Other/Layout/Post.module.scss';
-import Nav from '../../components/Nav/Nav';
+import NewNav from '../../components/Nav/NewNav';
 import MobileHeader from '../../components/Blog/Post/MobileHeader/MobileHeader';
 import CoverImg from '../../components/Blog/Post/CoverImg/CoverImg';
 // import TagList from '../../components/Blog/Post/Tags/TagList';
@@ -15,8 +15,23 @@ import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
 import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
+import { client, ssrCacheExchange } from '../../gql/urqlClient';
+// import { GetArticlesQuery } from '../blog';
 // import { isSignedIn } from '../../apollo/apolloClient';
 // import Modal from '../../components/Other/SocialAuth/Modal';
+
+const getBlogSlugs = gql(`
+query Articles {
+  articles {
+    data {
+      id
+      attributes {
+        Slug
+      }
+    }
+  }
+}
+`);
 
 const getArticle = gql(`
   query Article($slug: String) {
@@ -75,7 +90,7 @@ const Post = (): JSX.Element => {
         url={`/blog/${String(slug)}`}
       />
       <main className={s.layout} key={data?.articles?.data[0].id}>
-        <Nav navLink={data?.navLink} />
+        <NewNav navLink={data?.navLink} />
         <MobileHeader />
         <CoverImg
           title={String(articleData?.Title)}
@@ -88,7 +103,7 @@ const Post = (): JSX.Element => {
         <Sidebar sidebar={data?.sidebar} />
         <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} />
         {/*{authenticated ? <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} /> : <Modal />}*/}
-        <Footer navLink={data?.navLink} />
+        <Footer />
       </main>
     </>
   );
@@ -97,3 +112,36 @@ const Post = (): JSX.Element => {
 Post.displayName = 'Post';
 
 export default Post;
+
+export async function getStaticPaths() {
+  const { data } = await client
+    .query(getBlogSlugs)
+    .toPromise()
+    .catch((err) => {
+      throw new Error(`This is the error ${String(err)}`);
+    });
+
+  const slugArr = data?.articles?.data.map(({ attributes }) => attributes?.Slug);
+
+  const paths = slugArr?.map((slug) => ({
+    params: {
+      slug,
+    },
+  }));
+
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps(context: {
+  params: {
+    slug: string;
+  };
+}) {
+  const { params } = context;
+
+  const { slug } = params;
+
+  await client.query(getArticle, { slug }).toPromise();
+
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
+}

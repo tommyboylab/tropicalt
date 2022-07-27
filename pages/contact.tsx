@@ -1,12 +1,13 @@
 import React from 'react';
 import Contact from '../components/Contact/Contact';
-import Nav from '../components/Nav/Nav';
+import NewNav from '../components/Nav/NewNav';
 import s from '../components/Other/Layout/Contact.module.scss';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
 
 const GetContactQuery = gql(`
   query GetContactPage {
@@ -23,8 +24,13 @@ export default function ContactPage(): JSX.Element {
   return (
     <main className={s.layout}>
       <Meta title={'T^T - Contact Me'} excerpt={'Send me a message and let me know what you think'} url={'/contact'} />
-      <Nav navLink={data?.navLink} />
+      <NewNav navLink={data?.navLink} />
       <Contact />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  await client.query(GetContactQuery).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

@@ -6,6 +6,7 @@ import { gql } from '@app/gql';
 import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
 
 const GetGalleryQuery = gql(`
   query GetAlbumPage {
@@ -31,4 +32,9 @@ export default function Albums(): JSX.Element {
       <Gallery albums={data?.albums} />
     </main>
   );
+}
+
+export async function getStaticProps() {
+  await client.query(GetGalleryQuery).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

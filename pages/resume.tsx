@@ -13,6 +13,7 @@ import Img from '../components/Resume/Image/Image';
 import Footer from '../components/Resume/Nav/Footer';
 import Load from '../components/Other/Load/Load';
 import Header from '../components/Resume/Nav/Header';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
 
 const GetResumeQuery = gql(`
   query GetResumeQuery {
@@ -64,3 +65,8 @@ export default function ResumePage(): JSX.Element {
 }
 
 ResumePage.displayName = 'Resume';
+
+export async function getStaticProps() {
+  await client.query(GetResumeQuery).toPromise();
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
+}

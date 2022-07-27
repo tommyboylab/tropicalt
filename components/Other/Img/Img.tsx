@@ -1,5 +1,5 @@
 import React, { CSSProperties } from 'react';
-import Image from 'next/image';
+import Image from 'next/future/image';
 
 type Img = {
   id?: string;
@@ -21,9 +21,8 @@ const ImgComp = (Img: Img): JSX.Element => {
       loading='lazy'
       alt={Img.alt}
       sizes='100%'
-      width='100%'
-      height='100%'
-      layout='raw'
+      width={2500}
+      height={2500}
     />
   );
 };

@@ -1,9 +1,10 @@
 @use '../Other/Styles/GlobalStyle';
 
 .nav {
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
   position: fixed;
-  justify-self: center;
   bottom: 0;
   width: 90vw;
   max-width: 45rem;
@@ -32,6 +33,10 @@ $colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$
   width: 20vw;
   transition: height 200ms ease-in-out;
   display: flex;
+}
+
+.nav ul {
+  margin-right: 0.5em;
 }
 
 .nav ul li a {

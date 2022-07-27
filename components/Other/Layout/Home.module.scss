@@ -1,7 +1,6 @@
 .layout {
   display: grid;
-  grid-template-areas:
-    'ImageBanner ImageBanner'
+  grid-template-areas: 'ImageBanner ImageBanner'
     'Bio RecentAlbums'
     'RecentArticles RecentAlbums'
     'Footer Footer';

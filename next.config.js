@@ -1,7 +1,7 @@
 require('dotenv').config();
-const path = require('path')
-// const withPreact = require('next-plugin-preact');
-module.exports = {
+const path = require('path');
+const withPreact = require('next-plugin-preact');
+module.exports = withPreact({
   reactStrictMode: true,
   // swcMinify: true,
   env: {
@@ -12,21 +12,21 @@ module.exports = {
   },
   images: {
     domains: ['api.tropicalt.ca', 'http://localhost:3000/'],
-
   },
   experimental: {
+    esmExternals: false,
     images: {
       allowFutureImage: true,
     },
   },
   // webpack: (config) => {
   //   // Replace React with Preact
-  //     Object.assign(config.resolve.alias, {
-  //       react: 'preact/compat',
-  //       'react-dom/test-utils': 'preact/test-utils',
-  //       'react-dom': 'preact/compat',
-  //     });
+  //   Object.assign(config.resolve.alias, {
+  //     react: 'preact/compat',
+  //     'react-dom/test-utils': 'preact/test-utils',
+  //     'react-dom': 'preact/compat',
+  //   });
 
   //   return config;
   // },
-};
+});

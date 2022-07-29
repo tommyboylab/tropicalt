@@ -15,10 +15,9 @@ import Body from '../../components/Blog/Post/Body/Body';
 import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
 import Footer from '../../components/Nav/Footer';
 import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
-import { client, ssrCacheExchange } from '../../gql/urqlClient';
+import { client, ssrCacheExchange, isSignedIn } from '../../gql/urqlClient';
 // import { GetArticlesQuery } from '../blog';
-// import { isSignedIn } from '../../apollo/apolloClient';
-// import Modal from '../../components/Other/SocialAuth/Modal';
+import Modal from '../../components/Other/SocialAuth/Modal';
 
 const getBlogSlugs = gql(`
 query Articles {
@@ -72,7 +71,7 @@ const getArticle = gql(`
 const Post = (): JSX.Element => {
   const router = useRouter();
   const slug = router.query.slug;
-  // const authenticated = isSignedIn();
+  const authenticated = isSignedIn();
 
   const [result] = useQuery({ query: getArticle, variables: { slug: String(slug) } });
   const { data, fetching, error } = result;
@@ -101,8 +100,7 @@ const Post = (): JSX.Element => {
         {/*<TagList>{articleData?.tag?.map((tag) => tag?.tag)}</TagList>*/}
         <Body content={String(articleData?.Content)} />
         <Sidebar sidebar={data?.sidebar} />
-        <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} />
-        {/*{authenticated ? <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} /> : <Modal />}*/}
+        {authenticated ? <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} /> : <Modal />}
         <Footer />
       </main>
     </>

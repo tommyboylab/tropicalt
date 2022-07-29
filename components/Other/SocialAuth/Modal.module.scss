@@ -1,6 +1,8 @@
 @use '../Styles/GlobalStyle';
 
 .modalContainer {
+  // Make it the same as CommentList it replaces
+  grid-area: CommentList;
   text-align: center;
   margin-right: 0.5em;
   margin-bottom: 1em;

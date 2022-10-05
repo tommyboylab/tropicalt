@@ -1,6 +1,6 @@
 import React from 'react';
 import Gallery from '../components/Gallery/Gallery';
-import Nav from '../components/Nav/Nav';
+import NewNav from '../components/Nav/NewNav';
 import Meta from '../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
 import { useQuery } from 'urql';
@@ -28,7 +28,7 @@ export default function Albums(): JSX.Element {
         imgUrl={data?.albums?.data?.[0]?.attributes?.Cover?.img?.data?.attributes?.url}
         url={'/albums'}
       />
-      <Nav navLink={data?.navLink} />
+      <NewNav navLink={data?.navLink} />
       <Gallery albums={data?.albums} />
     </main>
   );

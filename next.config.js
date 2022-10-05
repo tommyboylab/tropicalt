@@ -3,7 +3,6 @@ const path = require('path');
 const withPreact = require('next-plugin-preact');
 module.exports = withPreact({
   reactStrictMode: true,
-  // swcMinify: true,
   env: {
     API: process.env.API,
   },

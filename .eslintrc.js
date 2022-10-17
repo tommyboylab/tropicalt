@@ -27,6 +27,7 @@ module.exports = {
   rules: {
     'react-perf/jsx-no-new-function-as-prop': 'off',
     'react-perf/jsx-no-new-object-as-prop': 'off',
+    'react/no-unknown-property': ['error', { ignore: ['jsx', 'global'] }]
   },
   overrides: [
     {

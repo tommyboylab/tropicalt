@@ -29,7 +29,7 @@ export const GetCommentList = gql(`
           data {
             attributes {
               username
-              Img {
+              avatar {
                 img {
                   data {
                     attributes {
@@ -59,7 +59,7 @@ export const GetCommentList = gql(`
                 data {
                   attributes {
                     username
-                    Img {
+                    avatar {
                       img {
                         data {
                           attributes {

@@ -66,7 +66,7 @@ export default function ResumePage(): JSX.Element {
 
 ResumePage.displayName = 'Resume';
 
-export async function getStaticProps() {
-  await client.query(GetResumeQuery).toPromise();
+export function getStaticProps() {
+  client.query(GetResumeQuery, {});
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

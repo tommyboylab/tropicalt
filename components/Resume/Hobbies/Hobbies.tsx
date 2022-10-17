@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import s from '../Resume.module.scss';
 import { gql } from 'urql';
 
@@ -17,7 +17,7 @@ const Hobbies = ({ hobbies }: HobbyType): JSX.Element => {
   return (
     <div className={s.hobbies}>
       <h2>Hobbies</h2>
-      <ReactMarkdown>{hobbies}</ReactMarkdown>
+      <Markdown>{hobbies}</Markdown>
     </div>
   );
 };

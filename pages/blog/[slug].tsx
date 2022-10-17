@@ -112,12 +112,7 @@ Post.displayName = 'Post';
 export default Post;
 
 export async function getStaticPaths() {
-  const { data } = await client
-    .query(getBlogSlugs)
-    .toPromise()
-    .catch((err) => {
-      throw new Error(`This is the error ${String(err)}`);
-    });
+  const { data } = await client.query(getBlogSlugs, {}).toPromise();
 
   const slugArr = data?.articles?.data.map(({ attributes }) => attributes?.Slug);
 
@@ -130,16 +125,15 @@ export async function getStaticPaths() {
   return { paths, fallback: false };
 }
 
-export async function getStaticProps(context: {
+export function getStaticProps(context: {
   params: {
     slug: string;
   };
 }) {
   const { params } = context;
-
   const { slug } = params;
 
-  await client.query(getArticle, { slug }).toPromise();
+  client.query(getArticle, { slug });
 
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

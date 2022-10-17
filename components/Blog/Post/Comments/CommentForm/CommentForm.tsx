@@ -13,7 +13,7 @@ query getUser($userId: ID!) {
     data {
       attributes {
         username
-        Img {
+        avatar {
           img {
             data {
               id
@@ -133,7 +133,7 @@ const CommentForm = ({ commentId, userId, articleId, nested }: CommentFormProps)
     <form className={s.commentForm} onSubmit={void handleSubmit(onSubmit)}>
       <img
         className={s.commentAvatar}
-        src={String(userData?.data?.attributes?.Img?.img?.data?.attributes?.url)}
+        src={String(userData?.data?.attributes?.avatar?.img?.data?.attributes?.url)}
         alt={`${String(userData?.data?.attributes?.username)}'s Avatar`}
       />
       <div className={s.formInput}>

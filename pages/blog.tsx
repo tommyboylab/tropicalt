@@ -60,7 +60,7 @@ export default function Blog(): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
-  await client.query(GetArticlesQuery, { start: 1 }).toPromise();
+export function getStaticProps() {
+  client.query(GetArticlesQuery, { start: 1 });
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

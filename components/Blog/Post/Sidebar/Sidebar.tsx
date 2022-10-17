@@ -18,7 +18,7 @@ export const SidebarArticlesFragment = gql(`
           data {
             attributes {
               username
-              Img {
+              avatar {
                 img {
                   data {
                     id
@@ -55,7 +55,7 @@ const PostSidebar = ({ sidebar }: DocumentType<typeof SidebarArticlesFragment>):
   return (
     <div className={s.blogSidebar}>
       <h2>ˇˇˇ</h2>
-      <AboutMe img={sidebar?.data?.[0]?.attributes?.Author?.data?.attributes?.Img?.img} />
+      <AboutMe img={sidebar?.data?.[0]?.attributes?.Author?.data?.attributes?.avatar?.img} />
       {sidebarData &&
         sidebarData.map((article) => (
           <Post

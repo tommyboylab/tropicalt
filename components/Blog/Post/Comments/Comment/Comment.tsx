@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import Rating from './Rating/Rating';
 import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
@@ -20,7 +20,7 @@ type CommentType = {
           data?: {
             attributes?: {
               username: string;
-              Img?: {
+              avatar?: {
                 img: {
                   data?: {
                     attributes?: { url: string; hash: string } | null;
@@ -76,12 +76,12 @@ const Comment = ({ comment, commentId, userId, nested, articleId }: CommentType)
   return (
     <div className={s.comment}>
       <img
-        src={String(comment?.Author?.data?.attributes?.Img?.img?.data?.attributes?.url)}
+        src={String(comment?.Author?.data?.attributes?.avatar?.img?.data?.attributes?.url)}
         className={s.commentAvatar}
         alt={`${String(comment?.Author?.data?.attributes?.username)}'s avatar image`}
       />
       <h3 className={s.commentName}>{comment?.Author?.data?.attributes?.username}</h3>
-      <ReactMarkdown className={s.commentContent}>{String(comment?.Content)}</ReactMarkdown>
+      <Markdown className={s.commentContent}>{String(comment?.Content)}</Markdown>
       <Rating
         commentId={commentId}
         likes={comment?.Likes}

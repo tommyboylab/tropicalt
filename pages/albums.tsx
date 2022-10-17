@@ -34,7 +34,7 @@ export default function Albums(): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
-  await client.query(GetGalleryQuery).toPromise();
+export function getStaticProps() {
+  client.query(GetGalleryQuery, {});
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

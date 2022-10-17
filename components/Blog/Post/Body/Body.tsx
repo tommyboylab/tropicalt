@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import s from './Body.module.scss';
 
 type Content = {
@@ -7,7 +7,7 @@ type Content = {
 };
 const Body = ({ content }: Content): JSX.Element => (
   <div className={s.postText}>
-    <ReactMarkdown>{content}</ReactMarkdown>
+    <Markdown>{content}</Markdown>
   </div>
 );
 

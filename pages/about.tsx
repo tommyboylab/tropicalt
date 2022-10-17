@@ -37,7 +37,7 @@ export default function About(): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
-  await client.query(GetAboutCardQuery).toPromise();
+export function getStaticProps() {
+  client.query(GetAboutCardQuery, {});
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

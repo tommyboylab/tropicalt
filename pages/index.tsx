@@ -37,7 +37,7 @@ export default function Home(): JSX.Element {
       <Meta
         title={'T^T - TropicalT'}
         excerpt={'The homepage of Thomas Fiala'}
-        imgUrl={data?.usersPermissionsUser?.data?.attributes?.Img?.img?.data?.attributes?.url}
+        imgUrl={data?.usersPermissionsUser?.data?.attributes?.avatar?.img?.data?.attributes?.url}
         url={'/'}
       />
       <NewNav navLink={data?.navLink} />
@@ -50,7 +50,8 @@ export default function Home(): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
-  await client.query(GetHomepageQuery).toPromise();
+export function getStaticProps() {
+  client.query(GetHomepageQuery, {});
+
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

@@ -30,7 +30,7 @@ export default function ContactPage(): JSX.Element {
   );
 }
 
-export async function getStaticProps() {
-  await client.query(GetContactQuery).toPromise();
+export function getStaticProps() {
+  client.query(GetContactQuery, {});
   return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

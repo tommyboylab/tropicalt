@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import { gql, DocumentType } from '@app/gql';
 import Avatar from '../../Other/Avatar/Avatar';
 import s from './Bio.module.scss';
@@ -10,8 +10,8 @@ usersPermissionsUser(id:1){
   data{
     id
     attributes{
-      Biography
-      Img{
+      biography
+      avatar{
         img{
           data{
             id
@@ -31,8 +31,8 @@ const Bio = ({ usersPermissionsUser }: DocumentType<typeof BiographyFragment>): 
 
   return (
     <div key={bioData?.id} className={s.bio}>
-      <Avatar img={bioData?.attributes?.Img?.img} />
-      <ReactMarkdown>{String(bioData?.attributes?.Biography)}</ReactMarkdown>
+      <Avatar img={bioData?.attributes?.avatar?.img} />
+      <Markdown>{String(bioData?.attributes?.biography)}</Markdown>
     </div>
   );
 };

@@ -10,13 +10,10 @@ module.exports = withPreact({
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['api.tropicalt.ca', 'http://localhost:3000/'],
+    domains: ['api.tropicalt.ca', 'http://localhost:3000/', 'http://localhost:3001/'],
   },
   experimental: {
     esmExternals: false,
-    images: {
-      allowFutureImage: true,
-    },
   },
   // webpack: (config) => {
   //   // Replace React with Preact

@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import s from '../Resume.module.scss';
 import { gql } from 'urql';
 
@@ -17,7 +17,7 @@ const Skills = ({ skills }: SkillsType): JSX.Element => {
   return (
     <div className={s.skills}>
       <h2>Skills</h2>
-      <ReactMarkdown>{skills}</ReactMarkdown>
+      <Markdown>{skills}</Markdown>
     </div>
   );
 };

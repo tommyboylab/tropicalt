@@ -1,129 +1,136 @@
 import React from 'react';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import { gql } from '@app/gql';
+import { useQuery } from 'urql';
 import s from '../Comments.module.scss';
 import CommentHeader from '../CommentHeader/CommentHeader';
 import CommentForm from '../CommentForm/CommentForm';
 import Comment from '../Comment/Comment';
 import NestedComment from '../NestedComment/NestedComment';
 import Load from '../../../../Other/Load/Load';
-import Modal from 'components/Other/SocialAuth/Modal';
-import { NetworkStatus } from '@apollo/client';
 
-type UserType = {
-  id: number;
-  username: string;
-  avatar: string;
-};
-type CommentList = {
-  id: number;
-  user: { id: number; avatar: string; username: string };
-  articleID: number;
-  content: string;
-  newComment: ConcatArray<never>;
-  children: [
-    {
-      id: number;
-      articleID: number;
-      content: string;
-      user: { id: number; username: string; avatar: string };
-      likes: [{ user: { id: number } }];
-      dislikes: [{ user: { id: number } }];
-    }
-  ];
-  likes: [{ user: { id: number } }];
-  dislikes: [{ user: { id: number } }];
-};
-
-const getCommentList = gql`
-  query Comments($slug: String) {
-    me {
+export const GetCommentList = gql(`
+ query Comments($slug: String) {
+  me {
+    id
+  }
+  comments(filters: { article: { Slug: { eq: $slug } }, Parent: null }) {
+    data {
       id
-      username
-      avatar
-    }
-    comments(where: { article: { slug: $slug }, parent_null: true }) {
-      id
-      content
-      article {
-        id
-      }
-      user {
-        id
-        username
-        avatar
-      }
-      likes {
-        user {
-          id
-        }
-      }
-      dislikes {
-        user {
-          id
-        }
-      }
-      children {
-        id
-        content
-        user {
-          id
-          username
-          avatar
-        }
-        likes {
-          user {
+      attributes {
+        article {
+          data {
             id
+            attributes {
+              Slug
+            }
           }
         }
-        dislikes {
-          user {
-            id
+        Author {
+          data {
+            attributes {
+              username
+              avatar {
+                img {
+                  data {
+                    attributes {
+                      url
+                      hash
+                    }
+                  }
+                }
+              }
+            }
           }
+        }
+        Content
+        Children {
+          data {
+            attributes {
+              Content
+              createdAt
+              updatedAt
+              Likes {
+                UserId
+              }
+              Dislikes {
+                UserId
+              }
+              Author {
+                data {
+                  attributes {
+                    username
+                    avatar {
+                      img {
+                        data {
+                          attributes {
+                            url
+                            hash
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        createdAt
+        updatedAt
+        Likes {
+          UserId
+        }
+        Dislikes {
+          UserId
         }
       }
     }
   }
-`;
+}
+`);
 
-const CommentList = ({ articleID, slug }: any): JSX.Element => {
-  const { data, error, loading, refetch, networkStatus } = useQuery(getCommentList, {
-    variables: { slug },
-    notifyOnNetworkStatusChange: true,
-  });
+type CommentList = {
+  slug: string;
+  articleID: string;
+};
 
-  if ((loading && !data) || networkStatus === NetworkStatus.refetch) return <Load />;
-  if (error) return <Modal />;
+const CommentList = ({ slug, articleID }: CommentList): JSX.Element => {
+  const [result] = useQuery({ query: GetCommentList, variables: { slug } });
+  const { data, fetching, error } = result;
 
-  const comments = data?.comments as CommentList[];
-  const user = data?.me as UserType;
+  const commentData = data?.comments;
 
-  const parentCommentLength = comments.length;
+  const userId = data?.me?.id;
+  {
+    console.log(error);
+  }
 
-  let nestedCommentLength = 0;
-  comments.forEach((comment) => (nestedCommentLength += comment.children.length));
-  const totalCommentLength = nestedCommentLength + parentCommentLength;
+  if ((fetching && !data) || fetching) return <Load />;
+
+  const parentCommentLength = Number(commentData?.data.length);
+
+  const childCommentLength = Number(commentData?.data.forEach((comment) => comment?.attributes?.Children?.data.length));
+
+  const totalCommentLength = childCommentLength + parentCommentLength;
 
   return (
     <div className={s.commentList}>
       <CommentHeader totalComments={totalCommentLength} />
-      <CommentForm updateState={refetch} user={user} articleID={articleID} content={''} />
+      <CommentForm userId={String(userId)} articleId={String(articleID)} commentId={undefined} nested={false} />
 
-      {comments.length > 0 &&
-        comments.map((comment) => (
+      {parentCommentLength > 0 &&
+        commentData?.data?.map((comment) => (
           <>
+            {comment?.attributes?.Content}
             <Comment
-              id={comment.id}
-              comment={comment}
-              articleID={articleID}
-              key={comment.id}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={refetch}
+              comment={comment?.attributes}
+              commentId={comment?.id}
+              key={comment?.id}
+              userId={userId}
+              nested={false}
+              articleId={articleID}
             />
-            <NestedComment articleID={articleID} parent={comment.children} updateState={refetch} />
+            <NestedComment child={comment?.attributes?.Children?.data} userId={userId} articleId={articleID} />
           </>
         ))}
     </div>

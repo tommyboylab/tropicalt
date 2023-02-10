@@ -1,11 +1,173 @@
 import React from 'react';
-import { ApolloProvider } from '@apollo/client';
-import { withApollo } from '../apollo/withApollo';
+import { Provider } from 'urql';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
+import Head from 'next/head';
+import { AppContext, AppInitialProps } from 'next/app';
+import { SSRData } from '@urql/core/dist/types/exchanges/ssr';
 
-const TropicalT = ({ Component, pageProps, apollo, router }: any) => (
-  <ApolloProvider client={apollo}>
-    <Component {...pageProps} router={router} />
-  </ApolloProvider>
-);
+const globalStyle = {
+  __html: `
+  
+  /*
+  1. Use a more-intuitive box-sizing model.
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  3. Allow percentage-based heights in the application
+*/
+html, body {
+  height: 100%;
+}
+/*
+  Typographic tweaks!
+  4. Add accessible line-height
+  5. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  6. Improve media defaults
+*/
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  7. Remove built-in form typography styles
+*/
+input, button, textarea, select {
+  font: inherit;
+}
+/*
+  8. Avoid text overflows
+*/
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/*
+  9. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
 
-export default withApollo({ ssr: true })(TropicalT);
+  *,
+  *::before,
+  *::after {
+    padding: 0;
+    margin: 0;
+    font-family: Didact Gothic;
+    font-size:1.15rem;
+    line-height:1.5em;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1 {
+   font-family: Raleway;
+  }
+
+  /* didact-gothic-regular - latin */
+  @font-face {
+    font-family: 'Didact Gothic';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Didact Gothic Regular'), local('DidactGothic-Regular'),
+       url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/static/fonts/DidactGothic/didact-gothic-v13-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/static/fonts//DidactGothicdidact-gothic-v13-latin-regular.svg#DidactGothic') format('svg'); /* Legacy iOS */
+  }
+  
+ /* raleway-regular - latin */
+  @font-face {
+    font-family: 'Raleway';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/static/fonts/Raleway/raleway-v14-latin-regular.eot'); /* IE9 Compat Modes */
+    src: local('Raleway'), local('Raleway-Regular'),
+       url('/static/fonts/Raleway/raleway-v14-latin-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('/static/fonts/Raleway/raleway-v14-latin-regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('/static/fonts/Raleway/raleway-v14-latin-regular.woff') format('woff'), /* Modern Browsers */
+       url('/static/fonts/Raleway/raleway-v14-latin-regular.ttf') format('truetype'), /* Safari, Android, iOS */
+       url('/static/fonts/Raleway/raleway-v14-latin-regular.svg#Raleway') format('svg'); /* Legacy iOS */
+  }
+  
+  ::selection {
+    color:Jade;
+    background: Violet; /* WebKit/Blink Browsers */
+  }
+  ::-moz-selection {
+    color:Jade;
+    background: Violet; /* Gecko Browsers */
+  }
+  ::placeholder{ /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(0, 255, 136);
+  }
+  ::-ms-input-placeholder {
+    color: rgb(0, 255, 136);
+  }
+
+/* Change Autocomplete styles in Chrome*/
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover, 
+  input:-webkit-autofill:focus,
+  textarea:-webkit-autofill,
+  textarea:-webkit-autofill:hover,
+  textarea:-webkit-autofill:focus,
+  select:-webkit-autofill,
+  select:-webkit-autofill:hover,
+  select:-webkit-autofill:focus {
+  border-bottom: 2px solid #be37fa;
+  -webkit-text-fill-color: #be37fa;
+  -webkit-box-shadow: 0 0 0 500em inset #00ffaa;
+  }
+
+  html {
+    background-color: rgb(30,30,40);
+    width:100%;
+    height:100%;
+  }
+  
+  button:focus {
+  outline:0;
+  box-shadow: 0 0 .5em rgba(90, 225, 125, 1);
+  }
+`,
+};
+const TropicalT = ({ Component, pageProps, router }: AppContext & AppInitialProps) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { urqlState } = pageProps;
+  if (urqlState) {
+    ssrCacheExchange.restoreData(urqlState as SSRData);
+  }
+  return (
+    <>
+      <Head>
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <meta charSet='utf-8' />
+        <style dangerouslySetInnerHTML={globalStyle} />
+        <title />
+      </Head>
+      <Provider value={client}>
+        <Component {...pageProps} router={router} />
+      </Provider>
+    </>
+  );
+};
+
+export default TropicalT;

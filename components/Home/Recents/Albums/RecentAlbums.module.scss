@@ -7,13 +7,13 @@
   width: 100%;
   min-height: 20em;
   height: 100%;
-  padding: .5em .75em 1em .75em;
+  padding: 0.5em 0.75em 1em 0.75em;
 }
 
 .recentAlbums h2 {
   color: GlobalStyle.$PRIMARY_COLOR;
   width: max-content;
-  margin: .5em auto .75em auto;
+  margin: 0.5em auto 0.75em auto;
   border-bottom: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
@@ -29,8 +29,7 @@
   height: 40%;
 }
 
-@media ( max-width: 750px ) {
-
+@media (max-width: 750px) {
   .recentAlbums > article {
     height: 30%;
   }

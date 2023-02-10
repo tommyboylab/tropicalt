@@ -1,34 +1,57 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useLayoutEffect, useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'redaxios';
 
 const Callback = (): JSX.Element => {
-  const router = useRouter();
-  const provider = router.query.provider;
-  const accessToken = router.query.access_token;
-  const accessSecret = router.query.access_secret;
+  const [width, setWidth] = useState<number>(0);
+  const { query, push, isReady } = useRouter();
+  const { provider, access_token, access_secret } = query;
+
   const redirectURL =
-    router.query.provider === 'twitter'
-      ? `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}&access_secret=${accessSecret}`
-      : `https://api.tropicalt.ca/auth/${provider}/callback?access_token=${accessToken}`;
+    provider === 'twitter'
+      ? `${process.env.API}/api/auth/${provider}/callback?access_token=${String(
+          access_token
+        )}&access_secret=${String(access_secret)}`
+      : `${process.env.API}/api/auth/${String(provider)}/callback?access_token=${String(access_token)}`;
+  const isMobile = typeof window !== 'undefined' && width <= 768;
+
+  useEffect(() => {
+    const handleWindowSizeChange = () => {
+      /* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */
+      setWidth(window.opener.innerWidth as number);
+    };
+
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, []);
 
   useLayoutEffect(() => {
-    if (window.opener) {
-      axios
+    if (isReady) {
+      console.log(query);
+      void axios
         .get(redirectURL)
-        .then((res: any) => {
-          window.opener.postMessage(res.data.jwt);
+        .then(({ data }: { data: { jwt: string } }) => {
+          /* eslint-disable @typescript-eslint/no-unsafe-call */
+          /* eslint-disable  @typescript-eslint/no-unsafe-member-access */
+          window.opener.postMessage(data?.jwt);
+          /* eslint-enable @typescript-eslint/no-unsafe-call */
+          /* eslint-enable  @typescript-eslint/no-unsafe-member-access */
         })
-        .catch((error: any) => {
-          router.push('/login');
+        .catch(async (error) => {
+          await push('/login');
           console.log(error);
         })
-        .then(() => {
-          window.opener.location.reload();
+        .then(async () => {
+          if (isMobile) {
+            await push(location.href);
+          }
+          location.reload();
           window.close();
         });
     }
-  }, []);
+  }, [isReady, isMobile, push, query, redirectURL]);
   return (
     <div>
       <h2>Doing some stuff...</h2>

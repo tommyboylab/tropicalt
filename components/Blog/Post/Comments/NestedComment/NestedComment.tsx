@@ -2,23 +2,37 @@ import React, { useState } from 'react';
 import Comment from '../Comment/Comment';
 import s from '../Comments.module.scss';
 
-type NestedComment = {
-  articleID: number;
-  parent: [
-    {
-      id: number;
-      content: string;
-      user: { id: number; username: string; avatar: string };
-      likes: [{ user: { id: number } }];
-      dislikes: [{ user: { id: number } }];
-    }
-  ];
-  updateState: CallableFunction;
+type ChildCommentProps = {
+  child?: Array<{
+    attributes?: {
+      Content?: string | null;
+      createdAt?: any | null;
+      updatedAt?: any | null;
+      Likes?: Array<{ UserId?: number | null } | null> | null;
+      Dislikes?: Array<{ UserId?: number | null } | null> | null;
+      Author?: {
+        data?: {
+          attributes?: {
+            username: string;
+            Img?: {
+              img: {
+                data?: {
+                  attributes?: { url: string; hash: string } | null;
+                } | null;
+              };
+            } | null;
+          } | null;
+        } | null;
+      } | null;
+    } | null;
+  }>;
+  userId?: string;
+  articleId?: string;
 };
 
-const NestedComment = ({ parent, articleID, updateState }: NestedComment): JSX.Element => {
+const NestedComment = ({ child, userId, articleId }: ChildCommentProps): JSX.Element => {
   const [openReplies, setOpenReplies] = useState(false);
-  const commentNumber = parent.length;
+  const commentNumber = Number(child?.length);
 
   const handleChange = () => {
     setOpenReplies(!openReplies);
@@ -32,19 +46,14 @@ const NestedComment = ({ parent, articleID, updateState }: NestedComment): JSX.E
       )}
       {openReplies &&
         commentNumber > 0 &&
-        parent.map((comment, index) => (
+        child?.map((comment, index) => (
           <>
             <Comment
-              id={comment.id}
-              nested
-              comment={comment}
-              articleID={articleID}
+              nested={true}
+              comment={comment.attributes}
               key={index}
-              user={comment.user}
-              content={comment.content}
-              likes={comment.likes}
-              dislikes={comment.dislikes}
-              updateState={updateState}
+              userId={userId}
+              articleId={String(articleId)}
             />
           </>
         ))}

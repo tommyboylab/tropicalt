@@ -1,35 +1,40 @@
 import React from 'react';
 import Gallery from '../components/Gallery/Gallery';
-import Nav from '../components/Nav/Nav';
+import NewNav from '../components/Nav/NewNav';
 import Meta from '../components/Other/Meta/Meta';
-import gql from 'graphql-tag';
-import { useQuery } from '@apollo/client';
+import { gql } from '@app/gql';
+import { useQuery } from 'urql';
 import Load from '../components/Other/Load/Load';
 import Err from '../components/Other/Error/Error';
+import { client, ssrCacheExchange } from '../gql/urqlClient';
 
-const getGalleryQuery = gql`
-  query getImageBanner {
+const GetGalleryQuery = gql(`
+  query GetAlbumPage {
     ...NavigationFragment
     ...AlbumFragment
   }
-  ${Nav.fragments.NavigationFragment}
-  ${Gallery.fragments.AlbumFragment}
-`;
-
+`);
 export default function Albums(): JSX.Element {
-  const { data, error, loading } = useQuery(getGalleryQuery);
-  if (loading && !data) return <Load />;
+  const [result] = useQuery({ query: GetGalleryQuery });
+  const { data, fetching, error } = result;
+
+  if (fetching && !data) return <Load />;
   if (error) return <Err />;
   return (
     <main>
       <Meta
         title={'T^T - Gallery'}
         excerpt={'My life through pictures '}
-        imgUrl={data.albums[0].cover.img.url}
+        imgUrl={data?.albums?.data?.[0]?.attributes?.Cover?.img?.data?.attributes?.url}
         url={'/albums'}
       />
-      <Nav data={data} />
-      <Gallery data={data} />
+      <NewNav navLink={data?.navLink} />
+      <Gallery albums={data?.albums} />
     </main>
   );
+}
+
+export function getStaticProps() {
+  client.query(GetGalleryQuery, {});
+  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
 }

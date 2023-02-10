@@ -3,14 +3,14 @@
 .postText {
   grid-area: PostText;
   font-family: GlobalStyle.$PRIMARY_FONT;
-  background-color: rgb(20, 20, 25);
-  box-shadow: black 0 .25em 1em;
   color: GlobalStyle.$FONT_COLOR;
-  margin: 0 .5em;
+  background-color: rgb(20, 20, 25);
+  margin: 0 0.5em;
   margin-bottom: 1em;
-  border-bottom-right-radius: .5em;
-  border-bottom-left-radius: .5em;
-  padding: 1em 2vw .5vw 1.5vw;
+  padding: 1em 2vw 0.5vw 1.5vw;
+  border-bottom-right-radius: 0.5em;
+  border-bottom-left-radius: 0.5em;
+  box-shadow: black 0 0.25em 1em;
 }
 
 .postText h1 {
@@ -46,11 +46,11 @@
 }
 
 .postText dl {
-  margin: 1em 0 1em .25em;
+  margin: 1em 0 1em 0.25em;
 }
 
 .postText dd {
-  margin: .25em 0 .5em .5em;
+  margin: 0.25em 0 0.5em 0.5em;
 }
 
 .postText pre {
@@ -64,10 +64,10 @@
   font-size: GlobalStyle.$CALC_FONT_SMALL;
   word-wrap: break-word;
   color: GlobalStyle.$SECONDARY_COLOR;
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   margin: 0 auto;
   padding: 2em;
-  border-radius: .5em;
+  border-radius: 0.5em;
 }
 
 //.postText blockquote {
@@ -76,7 +76,7 @@
 
 .postText p {
   font-size: GlobalStyle.$SMALL_FONT;
-  text-indent: .5em;
+  text-indent: 0.5em;
   margin-bottom: 1em;
 }
 
@@ -106,8 +106,7 @@
   background-color: GlobalStyle.$PRIMARY_COLOR;
 }
 
-@media ( max-width: 600px ) {
-
+@media (max-width: 600px) {
   .postText {
     font-size: GlobalStyle.$X_SMALL_FONT;
   }

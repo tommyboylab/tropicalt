@@ -18,15 +18,15 @@
   background: GlobalStyle.$BACKGROUND_COLOR;
   max-width: 20em;
   height: max-content;
-  margin: auto .5em;
+  margin: auto 0.5em;
   padding: 1em;
-  border-radius: .5em;
+  border-radius: 0.5em;
 }
 
 .modal h2 {
   font-size: GlobalStyle.$LARGE_FONT;
   color: GlobalStyle.$SECONDARY_COLOR;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 }
 
 .modal p {
@@ -39,9 +39,9 @@
   color: GlobalStyle.$PRIMARY_COLOR;
   background-color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
   margin: 0 auto;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   border: none;
-  border-radius: .75em;
+  border-radius: 0.75em;
 }
 
 .modal button:hover,

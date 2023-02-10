@@ -1,91 +1,94 @@
 {
-	"name": "tropicalt",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next -p PORT --hostname 0.0.0.0",
-		"build": "next build",
-		"start": "next start",
-		"export": "next export",
-		"test:static": "npm run check-types && npm run lint && npm run prettier:validate",
-		"types": "tsc --noEmit",
-		"prettier": "prettier './components/**/*.+(ts|tsx|json|graphq|scss)' --write",
-		"lint": "eslint './**/*.js' './**/*.ts' './**/*.tsx' --fix",
-		"stylelint": "stylelint './**/*.scss' --fix",
-		"fixall": "npm run prettier && npm run stylelint && npm run lint",
-		"codegen": "graphql-codegen --config codegen.yml"
-	},
-	"dependencies": {
-		"@apollo/client": "^3.3.11",
-		"@apollo/react-ssr": "^4.0.0",
-		"apollo-server-core": "^2.21.0",
-		"graphql": "^15.5.0",
-		"isomorphic-unfetch": "^3.1.0",
-		"moment": "^2.29.1",
-		"next": "^10.0.7",
-		"nookies": "^2.5.2",
-		"react": "^17.0.1",
-		"react-check-auth": "^0.2.0-alpha.2",
-		"react-dom": "^17.0.1",
-		"react-hook-form": "^6.15.4",
-		"react-markdown": "^5.0.3",
-		"react-moment": "^1.1.1",
-		"redaxios": "^0.4.1",
-		"sass": "^1.32.8",
-		"swr": "^0.4.2",
-		"yup": "^0.32.9"
-	},
-	"devDependencies": {
-		"@babel/core": "^7.13.1",
-		"@babel/plugin-proposal-optional-chaining": "^7.13.0",
-		"@babel/plugin-transform-react-jsx": "^7.12.17",
-		"@babel/plugin-transform-typescript": "^7.13.0",
-		"@babel/preset-typescript": "^7.13.0",
-		"@semantic-release/changelog": "^5.0.1",
-		"@semantic-release/git": "^9.0.0",
-		"@types/react": "^17.0.2",
-		"@types/react-dom": "^17.0.1",
-		"@types/yup": "^0.29.11",
-		"@typescript-eslint/eslint-plugin": "^4.15.2",
-		"@typescript-eslint/parser": "^4.15.2",
-		"@typescript-eslint/typescript-estree": "^4.15.2",
-		"babel-loader": "^8.2.2",
-		"babel-plugin-import-graphql": "^2.8.1",
-		"dotenv": "^8.2.0",
-		"eslint": "^7.20.0",
-		"eslint-config-prettier": "^8.0.0",
-		"eslint-plugin-react": "^7.22.0",
-		"eslint-plugin-react-hooks": "^4.2.0",
-		"eslint-plugin-react-perf": "^3.3.0",
-		"prettier": "^2.2.1",
-		"stylelint": "^13.11.0",
-		"stylelint-config-recommended-scss": "^4.2.0",
-		"stylelint-order": "^4.1.0",
-		"stylelint-prettier": "^1.1.2",
-		"stylelint-scss": "^3.19.0",
-		"typescript": "^4.1.5"
-	},
-	"plugins": [
-		"@semantic-release/commit-analyzer",
-		"@semantic-release/release-notes-generator",
-		"@semantic-release/changelog",
-		"@semantic-release/github",
-		"@semantic-release/npm",
-		"@semantic-release/git"
-	],
-	"release": {
-		"prepare": [
-			"@semantic-release/changelog",
-			"@semantic-release/npm",
-			{
-				"path": "@semantic-release/git",
-				"assets": [
-					"package.json",
-					"package-lock.json",
-					"CHANGELOG.md"
-				],
-				"message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
-			}
-		]
-	}
+  "name": "tropicalt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next -p 3000 --hostname 0.0.0.0",
+    "build": "next build",
+    "start": "next start",
+    "export": "next export",
+    "test:static": "npm run check-types && npm run lint && npm run prettier:validate",
+    "types": "tsc --noEmit",
+    "prettier": "prettier './components/**/*.+(ts|tsx|json|graphq|scss)' --write",
+    "lint": "eslint './**/*.js' './**/*.ts' './**/*.tsx' --fix",
+    "stylelint": "stylelint './**/*.scss' --fix",
+    "fixall": "npm run prettier && npm run stylelint && npm run lint",
+    "codegen": "graphql-codegen --config codegen.yml"
+  },
+  "dependencies": {
+    "@app/gql": "file:./gql",
+    "@hookform/resolvers": "^2.9.10",
+    "deepmerge": "^4.2.2",
+    "framer-motion": "^7.10.3",
+    "graphql": "^16.6.0",
+    "graphql-ws": "^5.11.2",
+    "isomorphic-unfetch": "^3.1.0",
+    "lodash.isequal": "^4.5.0",
+    "markdown-to-jsx": "^7.1.7",
+    "moment": "^2.29.4",
+    "next": "^13.0.3",
+    "nookies": "^2.5.2",
+    "preact": "^10.11.2",
+    "preact-render-to-string": "^5.2.6",
+    "react": "18.2.0",
+    "react-check-auth": "^0.2.0-alpha.2",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.39.3",
+    "react-moment": "^1.1.2",
+    "redaxios": "^0.5.1",
+    "sass": "^1.56.1",
+    "sharp": "^0.31.2",
+    "swr": "^1.3.0",
+    "urql": "^3.0.3",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.13.11",
+    "@graphql-codegen/gql-tag-operations-preset": "^1.7.0",
+    "@graphql-typed-document-node/core": "^3.1.1",
+    "@semantic-release/changelog": "^6.0.1",
+    "@semantic-release/git": "^10.0.1",
+    "@types/lodash.isequal": "^4.5.6",
+    "@types/react": "^18.0.25",
+    "@types/react-dom": "^18.0.8",
+    "@typescript-eslint/eslint-plugin": "^5.42.1",
+    "@typescript-eslint/parser": "^5.42.1",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.27.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.31.10",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-perf": "^3.3.1",
+    "prettier": "^2.7.1",
+    "stylelint": "^14.14.1",
+    "stylelint-config-recommended-scss": "^8.0.0",
+    "stylelint-order": "^5.0.0",
+    "stylelint-prettier": "^2.0.0",
+    "stylelint-scss": "^4.3.0",
+    "typescript": "^4.8.4"
+  },
+  "plugins": [
+    "@semantic-release/commit-analyzer",
+    "@semantic-release/release-notes-generator",
+    "@semantic-release/changelog",
+    "@semantic-release/github",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ],
+  "release": {
+    "prepare": [
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      {
+        "path": "@semantic-release/git",
+        "assets": [
+          "package.json",
+          "package-lock.json",
+          "CHANGELOG.md"
+        ],
+        "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  }
 }

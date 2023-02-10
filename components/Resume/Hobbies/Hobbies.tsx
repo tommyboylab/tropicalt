@@ -1,25 +1,23 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from 'urql';
 
-type Hobbies = {
+export const HobbiesFragment = gql(`
+  fragment HobbiesFragment on Resume {
+    Hobbies
+  }
+`);
+
+type HobbyType = {
   hobbies: string;
 };
 
-const HobbiesFragment = gql`
-  fragment HobbiesFragment on Resume {
-    hobbies
-  }
-`;
-
-const Hobbies = (hobbies: any): JSX.Element => {
-  hobbies = hobbies.data?.resume as Hobbies;
-
+const Hobbies = ({ hobbies }: HobbyType): JSX.Element => {
   return (
     <div className={s.hobbies}>
       <h2>Hobbies</h2>
-      <ReactMarkdown source={hobbies.hobbies} />
+      <Markdown>{hobbies}</Markdown>
     </div>
   );
 };

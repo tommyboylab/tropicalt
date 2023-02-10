@@ -1,10 +1,6 @@
 import React from 'react';
 import s from './Tags.module.scss';
 
-type Tag = {
-  tag: { id: string; tag: string };
-};
-
-const TagList = (tag: Tag): JSX.Element => <li className={s.postTags}>{tag.tag},</li>;
+const TagList = (tag: string): JSX.Element => <li className={s.postTags}>{tag},</li>;
 
 export default TagList;

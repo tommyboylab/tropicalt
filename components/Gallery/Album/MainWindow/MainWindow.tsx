@@ -2,7 +2,7 @@ import React from 'react';
 import s from '../Album.module.scss';
 
 type MainWindow = {
-  src: any;
+  src: string;
 };
 
 const MainWindow = ({ src }: MainWindow): JSX.Element => (

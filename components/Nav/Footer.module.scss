@@ -5,47 +5,20 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   border-top: 1px solid GlobalStyle.$SECONDARY_COLOR;
 }
 
 .footer h3 {
+  padding-bottom: 2.5rem;
   color: GlobalStyle.$SECONDARY_COLOR;
   margin: auto 0;
-  padding: 0 1em;
 }
 
-.footer a {
-  color: GlobalStyle.$PRIMARY_COLOR;
-  background: none;
-  margin: auto 0;
-}
-
-.footer h3:hover {
-  color: GlobalStyle.$QUATERNARY_COLOR;
-  transition: .5s ease-in-out;
-}
-
-.footer ul {
-  margin: auto 0;
-  column-count: 2;
-}
-
-.footer li {
-  cursor: pointer;
-  color: GlobalStyle.$PRIMARY_COLOR;
-  list-style: none;
-}
-
-@media ( max-width: 920px ) {
-
+@media (max-width: 920px) {
   .footer {
     flex-direction: column;
     text-align: center;
-  }
-
-  .footer ul {
-    margin: 0 auto;
   }
 }

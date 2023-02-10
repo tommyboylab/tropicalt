@@ -3,9 +3,9 @@
 .postAbout {
   text-align: center;
   background-color: GlobalStyle.$TERTIARY_COLOR;
-  margin: .5em 1em;
-  padding: .5em;
-  border-radius: .25em;
+  margin: 0.5em 1em;
+  padding: 0.5em;
+  border-radius: 0.25em;
   box-shadow: 0em 0em 5em GlobalStyle.$BOXSHADOW_COLOR;
 }
 
@@ -26,5 +26,5 @@
 
 .postAbout a:hover {
   color: GlobalStyle.$SECONDARY_COLOR_MUTED;
-  transition: .25s ease-in-out;
+  transition: 0.25s ease-in-out;
 }

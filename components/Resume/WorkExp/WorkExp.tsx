@@ -1,24 +1,23 @@
 import React from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from 'urql';
 
-type Work = {
-  workExp: string;
-};
-
-const WorkExpFragment = gql`
+export const WorkExpFragment = gql`
   fragment WorkExpFragment on Resume {
-    workExp
+    Experience
   }
 `;
 
-const WorkExp = (workExp: any): JSX.Element => {
-  workExp = workExp.data?.resume as Work;
+type WorkExpType = {
+  workExp: string;
+};
+
+const WorkExp = ({ workExp }: WorkExpType): JSX.Element => {
   return (
     <div className={s.workHistory}>
       <h2>Work History</h2>
-      <ReactMarkdown source={workExp.workExp} />
+      <Markdown>{workExp}</Markdown>
     </div>
   );
 };

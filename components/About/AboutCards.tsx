@@ -1,50 +1,50 @@
 import React, { Fragment } from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Text from './AboutCard/AboutCardText';
 import Img from '../Other/Img/Img';
 import s from './AboutCards.module.scss';
 
-type AboutCard = [
-  {
-    img: { img: { id: string; url: string; hash: string } };
-    id: string;
-    title: string;
-    excerpt: string;
-  }
-];
-
-const AboutCardFragment = gql`
+export const AboutCardFragment = gql(`
   fragment AboutCardFragment on Query {
-    aboutCards {
-      id
-      title
-      excerpt
-      img {
-        img {
+  about {
+    data {
+      attributes {
+        AboutCard {
           id
-          url
-          hash
+          Tagline
+          Extension
+          Img {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
+          }
         }
       }
     }
   }
-`;
+  }
+`);
 
-const AboutCards = (aboutCards: any): JSX.Element => {
-  aboutCards = aboutCards.data?.aboutCards as AboutCard;
+const AboutCards = ({ about }: DocumentType<typeof AboutCardFragment>): JSX.Element => {
+  const aboutData = about?.data?.attributes?.AboutCard;
 
   return (
     <>
-      {aboutCards.map((aboutCard: any) => {
+      {aboutData?.map((aboutCard) => {
         return (
-          <Fragment key={aboutCard.id}>
+          <Fragment key={aboutCard?.id}>
             <Img
               class={s.aboutCardImg}
-              url={aboutCard.img.img.url}
-              placeholder={`/uploads/${aboutCard.img.img.hash}-thumb.svg`}
-              alt={`Image for ${aboutCard.title}`}
+              url={String(aboutCard?.Img?.[0]?.img?.data?.attributes?.url)}
+              placeholder={`/uploads/sqip_${String(aboutCard?.Img?.[0]?.img?.data?.attributes?.hash)}.svg`}
+              alt={`Image for ${String(aboutCard?.Tagline)}`}
             />
-            <Text title={aboutCard.title} excerpt={aboutCard.excerpt} />
+            <Text title={String(aboutCard?.Tagline)} excerpt={String(aboutCard?.Extension)} />
           </Fragment>
         );
       })}
@@ -55,7 +55,7 @@ const AboutCards = (aboutCards: any): JSX.Element => {
 AboutCards.displayName = 'AboutCards';
 
 AboutCards.fragments = {
-  AboutCardFragment: AboutCardFragment,
+  AboutCardFragment,
 };
 
 export default AboutCards;

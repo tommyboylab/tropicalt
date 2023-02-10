@@ -1,59 +1,63 @@
 import React from 'react';
 import Recents from '../Home/Recents/Recents';
 import s from './Gallery.module.scss';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 
-type Albums = {
-  id: string;
-  slug: string;
-  cover: { img: { id: string; url: string; hash: string } };
-  title: string;
-  date: string;
-  user: { username: string };
-  location: string;
-};
-
-const AlbumFragment = gql`
+export const AlbumFragment = gql(`
   fragment AlbumFragment on Query {
-    albums(sort: "date:desc", where: { published: true }) {
+    albums(sort: "Date:desc") {
+      data {
       id
-      slug
-      title
-      cover {
-        img {
-          id
-          url
-          hash
+        attributes {
+          Name
+          Tagline
+          Slug
+          Date
+          Location
+          Photographer {
+            data {
+              attributes {
+                username
+              }
+            }
+          }
+          Cover {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
+          }
+          GPhotoId
         }
-      }
-      date
-      location
-      user {
-        username
       }
     }
   }
-`;
+`);
 
-const Albums = (albums: any): JSX.Element => {
-  albums = albums.data?.albums as Albums[];
+const Albums = ({ albums }: DocumentType<typeof AlbumFragment>): JSX.Element => {
+  const albumData = albums?.data;
 
   return (
     <div className={s.albumList}>
-      {albums.map((album: Albums) => (
-        <Recents
-          key={album.id}
-          type='albums'
-          id={album.id}
-          slug={album.slug}
-          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
-          img={album.cover.img.url}
-          title={album.title}
-          date={album.date}
-          name={album.user.username}
-          excerpt={`Location: ${album.location}`}
-        />
-      ))}
+      {albumData &&
+        albumData.map((album) => (
+          <Recents
+            key={album.id}
+            type='albums'
+            id={String(album?.id)}
+            slug={String(album?.attributes?.Slug)}
+            cover={`/uploads/sqip_${String(album?.attributes?.Cover?.img?.data?.attributes?.hash)}.svg`}
+            img={album?.attributes?.Cover?.img?.data?.attributes?.url}
+            title={String(album?.attributes?.Name)}
+            date={String(album?.attributes?.Date)}
+            name={album?.attributes?.Photographer?.data?.attributes?.username}
+            excerpt={`Location: ${String(album?.attributes?.Location)}`}
+          />
+        ))}
     </div>
   );
 };

@@ -1,93 +1,101 @@
-import React from 'react';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+import React, { MouseEventHandler } from 'react';
+import { useMutation } from 'urql';
+import { gql } from 'urql';
 import s from '../../Comments.module.scss';
+// import { Comment } from '../Comment';
 
-type Rating = {
-  nested?: boolean;
-  comment: { id: number };
-  user: { id: number };
-  likes: [{ user: { id: number } }];
-  dislikes: [{ user: { id: number } }];
-  reply: any;
-  replyIsOpen: boolean;
-};
-
-type ArrayType = ConcatArray<{ user: { id: number } }>;
-
-const updateCommentLikes = gql`
-  mutation updateCommentLikes(
-    $commentID: ID!
-    $likes: [editComponentBlogLikeInput]
-    $dislikes: [editComponentBlogDislikeInput]
+const UpdateCommentLikes = gql(`
+mutation updateCommentLikes(
+  $commentId: ID!
+  $likes: Int!
+  $dislikes: Int!
+) {
+  updateComment(
+    id: $commentId
+    data: { Likes: { UserId: $likes }, Dislikes: { UserId: $dislikes } }
   ) {
-    updateComment(input: { where: { id: $commentID }, data: { likes: $likes, dislikes: $dislikes } }) {
-      comment {
-        id
-        likes {
-          user {
-            id
-          }
+    data {
+      id
+      attributes {
+        Likes {
+          UserId
         }
-        dislikes {
-          user {
-            id
-          }
+        Dislikes {
+          UserId
         }
       }
     }
   }
-`;
+}
 
-const Rating = ({ comment, user, likes, dislikes, reply, replyIsOpen, nested }: Rating): JSX.Element => {
-  const likeNum = likes.length;
-  const dislikeNum = dislikes.length;
+`);
 
-  const [updateCommentLike]: any = useMutation(updateCommentLikes);
+type CommentRatingProps = {
+  commentId?: string | null;
+  userId?: string;
+  nested?: boolean;
+  reply: MouseEventHandler<SVGSVGElement>;
+  replyIsOpen: boolean;
+  likes?: Array<{ UserId?: number | null } | null> | null;
+  dislikes?: Array<{ UserId?: number | null } | null> | null;
+};
 
-  const [updateCommentDislike]: any = useMutation(updateCommentLikes);
+const Rating = ({
+  commentId,
+  likes,
+  dislikes,
+  userId,
+  nested,
+  reply,
+  replyIsOpen,
+}: CommentRatingProps): JSX.Element => {
+  const likeNum = likes?.length;
+  const dislikeNum = dislikes?.length;
 
-  const isLiked = likes.some((like) => like.user.id === user.id);
+  const isLiked = likes?.some((like) => like?.UserId === userId);
 
-  const isDisliked = dislikes.some((dislike) => dislike.user.id === user.id);
+  const isDisliked = dislikes?.some((dislike) => dislike?.UserId === userId);
 
-  const liked = (arr: any) => {
-    return likes.some((like) => like.user.id === user.id)
-      ? likes.filter((like) => like.user.id !== user.id)
-      : likes.concat(({ user: user.id } as unknown) as ArrayType);
-  };
+  const liked = () =>
+    isLiked ? likes?.filter((like) => like?.UserId !== userId) : likes ? [...likes, { UserId: userId }] : likes;
 
-  const disliked = (arr: any) => {
-    return dislikes.some((dislike) => dislike.user.id === user.id)
-      ? dislikes.filter((dislike) => dislike.user.id !== user.id)
-      : dislikes.concat(({ user: user.id } as unknown) as ArrayType);
-  };
-
-  const removeLike = (arr: any) => {
-    return likes.some((like) => like.user.id === user.id) ? likes.filter((like) => like.user.id !== user.id) : likes;
-  };
-
-  const removeDislike = (arr: any) => {
-    return dislikes.some((dislike) => dislike.user?.id === user.id)
-      ? dislikes.filter((dislike) => dislike.user?.id !== user.id)
+  const disliked = () =>
+    isDisliked
+      ? dislikes?.filter((dislike) => dislike?.UserId !== userId)
+      : dislikes
+      ? [...dislikes, { UserId: userId }]
       : dislikes;
-  };
-  const updateLike = async (commentID: number): Promise<void> => {
-    await updateCommentLike({
+
+  //      ? [...dislikes, { id: String(dislikes?.length + 1), me }]
+
+  const removeLike = () =>
+    likes?.some((like) => like?.UserId === userId) ? likes?.filter((like) => like?.UserId !== userId) : likes;
+
+  const removeDislike = () =>
+    dislikes?.some((dislike) => dislike?.UserId === userId)
+      ? dislikes?.filter((dislike) => dislike?.UserId !== userId)
+      : dislikes;
+
+  const [UpdateCommentLikesResult, updateCommentLikes] = useMutation(UpdateCommentLikes);
+
+  const [UpdateCommentDislikesResult, updateCommentDislikes] = useMutation(UpdateCommentLikes);
+
+  const updateLike = async (commentID: string) => {
+    await updateCommentLikes({
       variables: {
-        commentID: commentID,
-        likes: liked(likes),
-        dislikes: removeDislike(dislikes),
+        commentID,
+        likes: liked(),
+        dislikes: removeDislike(),
       },
     });
   };
 
-  const updateDislike = async (commentID: number): Promise<void> => {
-    await updateCommentDislike({
+  const updateDislike = async (commentID: string) => {
+    await updateCommentDislikes({
       variables: {
-        commentID: commentID,
-        likes: removeLike(likes),
-        dislikes: disliked(dislikes),
+        commentID,
+        likes: removeLike(),
+        dislikes: disliked(),
       },
     });
   };
@@ -95,7 +103,8 @@ const Rating = ({ comment, user, likes, dislikes, reply, replyIsOpen, nested }: 
   return (
     <div className={s.commentRating}>
       <svg
-        onClick={() => updateLike(comment.id)}
+        aria-disabled={UpdateCommentLikesResult.fetching}
+        onClick={void updateLike(String(commentId))}
         style={{ fill: `${isLiked ? '#0FA' : 'black'}` }}
         className={s.commentLikeImg}
         xmlns='http://www.w3.org/2000/svg'
@@ -105,7 +114,8 @@ const Rating = ({ comment, user, likes, dislikes, reply, replyIsOpen, nested }: 
       </svg>
       <h3 className={s.commentLike}>{likeNum}</h3>
       <svg
-        onClick={() => updateDislike(comment.id)}
+        aria-disabled={UpdateCommentDislikesResult.fetching}
+        onClick={void updateDislike(String(commentId))}
         style={{ fill: `${isDisliked ? 'red' : 'black'}` }}
         className={s.commentDislikeImg}
         xmlns='http://www.w3.org/2000/svg'

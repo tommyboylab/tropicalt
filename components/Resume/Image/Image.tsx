@@ -1,35 +1,46 @@
 import React from 'react';
 import Img from '../../Other/Img/Img';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from 'urql';
 
-type Img = {
-  id: string;
-  url: string;
-  hash: string;
-  alt: string;
-};
-
-const HighlightImgFragment = gql`
+export const HighlightImgFragment = gql`
   fragment HighlightImgFragment on Resume {
-    highlight {
+    Img {
       img {
-        id
-        url
-        hash
+        data {
+          id
+          attributes {
+            url
+            hash
+          }
+        }
       }
     }
   }
 `;
 
-const Highlight = (highlightImg: any): JSX.Element => {
-  highlightImg = highlightImg.data?.resume as Img;
+type HighlightType = {
+  highlight:
+    | {
+        img: {
+          data?: {
+            id?: string | null;
+            attributes?: { url: string; hash: string } | null;
+          } | null;
+        };
+      }
+    | null
+    | undefined
+    | undefined;
+};
+
+const Highlight = ({ highlight }: HighlightType): JSX.Element => {
   return (
     <div className={s.highlightImg}>
       <Img
         class={s.highlightImg}
-        url={highlightImg.highlight.img.url}
-        placeholder={`/uploads/${highlightImg.highlight.img.hash}-thumb.svg`}
+        url={String(highlight?.img?.data?.attributes?.url)}
+        placeholder={`/uploads/sqip_${String(highlight?.img?.data?.attributes?.hash)}.svg`}
         alt={`Image for Resume`}
       />
     </div>

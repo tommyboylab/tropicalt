@@ -1,60 +1,60 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { DocumentType, gql } from '@app/gql';
 import Recents from '../Recents';
 import s from './RecentAlbums.module.scss';
 
-type Album = [
-  {
-    id: string;
-    slug: string;
-    cover: { img: { id: string; url: string; hash: string } };
-    title: string;
-    date: string;
-    user: { username: string };
-    location: string;
-  }
-];
-
-const RecentAlbumFragment = gql`
-  fragment RecentAlbumFragment on Query {
-    albums(limit: 4, sort: "date:desc", where: { published: true }) {
-      slug
+export const RecentAlbumsFragment = gql(`
+  fragment RecentAlbumsFragment on Query {
+      albums(sort: "Date:desc", pagination: { start: 0, limit: 4 }) {
+    data {
       id
-      cover {
-        img {
-          id
-          url
-          hash
+      attributes {
+        Slug
+        Name
+        Tagline
+        Date
+        Location
+        Photographer {
+          data {
+            attributes {
+              username
+            }
+          }
         }
-      }
-      title
-      date
-      location
-      user {
-        username
+        Cover {
+          img {
+            data {
+              attributes {
+                url
+                hash
+              }
+            }
+          }
+        }
       }
     }
   }
-`;
+  }
+`);
 
-const Albums = (albums: any): JSX.Element => {
-  albums = albums.data?.albums as Album;
+const Albums = ({ albums }: DocumentType<typeof RecentAlbumsFragment>): JSX.Element => {
+  const albumData = albums?.data;
 
   return (
     <div className={s.recentAlbums}>
       <h2>Recent Albums</h2>
-      {albums.map((album: any) => (
+      {albumData?.map((album) => (
         <Recents
-          id={album.id}
+          id={String(album?.id)}
           type='albums'
-          key={album.id}
-          slug={album.slug}
-          cover={`/uploads/${album.cover.img.hash}-thumb.svg`}
-          img={album.cover.img.url}
-          title={album.title}
-          date={album.date}
-          name={album.user.username}
-          excerpt={`Location: ${album.location}`}
+          key={album?.id}
+          slug={String(album?.attributes?.Slug)}
+          cover={`/uploads/sqip_${String(album?.attributes?.Cover?.img?.data?.attributes?.hash)}.svg`}
+          img={String(album?.attributes?.Cover?.img?.data?.attributes?.url)}
+          title={String(album?.attributes?.Name)}
+          date={String(album?.attributes?.Date)}
+          name={String(album?.attributes?.Photographer?.data?.attributes?.username)}
+          excerpt={`Location: ${String(album?.attributes?.Location)}`}
         />
       ))}
     </div>
@@ -64,7 +64,7 @@ const Albums = (albums: any): JSX.Element => {
 Albums.displayName = 'Recent Albums';
 
 Albums.fragments = {
-  RecentAlbumFragment: RecentAlbumFragment,
+  RecentAlbumsFragment,
 };
 
 export default Albums;

@@ -1,46 +1,34 @@
 import React from 'react';
-import gql from 'graphql-tag';
 import Img from '../Img/Img';
 import s from './Avatar.module.scss';
+import {motion} from "framer-motion";
 
 type Avatar = {
-  id: number;
-  avatar: { img: { id: string; url: string; hash: string } };
+  img?:
+    | {
+        __typename?: 'UploadFileEntityResponse';
+        data?: {
+          __typename?: 'UploadFileEntity';
+          id?: string | null;
+          attributes?: { __typename?: 'UploadFile'; url: string; hash: string } | null;
+        } | null;
+      }
+    | undefined;
 };
 
-const AvatarFragment = gql`
-  fragment AvatarFragment on Avatar {
-    id
-    avatar {
-      img {
-        id
-        url
-        hash
-      }
-    }
-    alt
-  }
-`;
-
-const Avatar = (avatar: any): JSX.Element => {
-  avatar = avatar?.data?.avatar as Avatar;
-
+const Avatar = ({ img }: Avatar): JSX.Element => {
   return (
-    <div key={avatar.id} className={s.avatar}>
+    <motion.div key={img?.data?.id} className={s.avatar}>
       <Img
         class={s.avatar}
-        url={avatar.img.url}
-        placeholder={`/uploads/${avatar.img.hash}-thumb.svg`}
-        alt={`Image for ${avatar.alt}`}
+        url={String(img?.data?.attributes?.url)}
+        placeholder={`/uploads/sqip_${String(img?.data?.attributes?.hash)}.svg`}
+        alt={`Image for Avatar`}
       />
-    </div>
+    </motion.div>
   );
 };
 
 Avatar.displayName = 'Avatar';
-
-Avatar.fragments = {
-  AvatarFragment: AvatarFragment,
-};
 
 export default Avatar;

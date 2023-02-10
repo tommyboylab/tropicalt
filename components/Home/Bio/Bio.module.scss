@@ -6,7 +6,7 @@
 
 .bio h3 {
   color: GlobalStyle.$SECONDARY_COLOR;
-  margin: 1em .5em;
+  margin: 1em 0.5em;
 }
 
 .bio p {
@@ -18,18 +18,26 @@
   padding-bottom: 4em;
 }
 
-.bio > div {
-  margin: 2.5% 3% .5% 1.5%;
+.bio a {
+    text-decoration: none;
+    color: GlobalStyle.$SECONDARY_COLOR;
 }
 
-@media ( max-width: 550px ) {
+.bio a:hover {
+    color: GlobalStyle.$SEDENTARY_COLOR;
+}
 
+.bio > div {
+  margin: 2.5% 3% 0.5% 1.5%;
+}
+
+@media (max-width: 550px) {
   .bio h3 {
-    margin: .75em 0 0 .75em;
+    margin: 0.75em 0 0 0.75em;
   }
 
   .bio p {
     font-size: GlobalStyle.$X_SMALL_FONT;
-    margin: .5em .75em .75em .75em;
+    margin: 0.5em 0.75em 0.75em 0.75em;
   }
 }

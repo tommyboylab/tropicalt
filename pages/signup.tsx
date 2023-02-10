@@ -3,6 +3,7 @@ import Head from 'next/head';
 import axios from 'redaxios';
 import { destroyCookie, parseCookies, setCookie } from 'nookies';
 import Router from 'next/router';
+import { NextPageContext } from 'next';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -13,7 +14,7 @@ const SignUp = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    const res = await axios.post('https://api.tropicalt.ca/auth/local/register', {
+    const res: { data: { jwt: string } } = await axios.post(`${process.env.API}/auth/local/register`, {
       username,
       email,
       password,
@@ -25,15 +26,15 @@ const SignUp = () => {
     });
   };
 
-  const handleSignOut = () => {
+  const handleSignOut = async () => {
     destroyCookie(undefined, 'token');
-    Router.push('/signup');
+    await Router.push('/signup');
   };
   const Nav = () => (
     <nav>
       <ul>
         <li>
-          <button onClick={handleSignOut}>Log out</button>
+          <button onClick={() => handleSignOut}>Log out</button>
         </li>
       </ul>
     </nav>
@@ -80,7 +81,7 @@ const SignUp = () => {
               />
             </div>
             <div>
-              <button type='button' onClick={handleSubmit}>
+              <button type='button' onClick={() => handleSubmit}>
                 Sign Up
               </button>
               <a href='#'>Forgot Password?</a>
@@ -94,14 +95,14 @@ const SignUp = () => {
 
 export default SignUp;
 
-SignUp.getInitialProps = (ctx: any) => {
+SignUp.getInitialProps = async (ctx: NextPageContext) => {
   const isAuthenticated = !!parseCookies(ctx).token;
 
   // When the user is authenticated, don't let the user visit the
   // sign-in and sign-up routes
-  if (isAuthenticated && ['/signup', '/signin'].indexOf(ctx.asPath) > -1) {
+  if (isAuthenticated && ['/signup', '/signin'].indexOf(String(ctx.asPath)) > -1) {
     if (typeof window !== 'undefined') {
-      Router.push('/');
+      await Router.push('/');
     } else {
       if (ctx.res) {
         ctx.res.writeHead(301, {

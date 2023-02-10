@@ -1,91 +1,148 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { object, string } from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import moment from 'moment';
-import { useMutation } from '@apollo/client';
-import gql from 'graphql-tag';
+import { useMutation, useQuery } from 'urql';
+import { gql } from '@app/gql';
 import s from '../Comments.module.scss';
 
-type CommentForm = {
-  updateState: CallableFunction;
-  comment?: { id: number | undefined };
-  user: { id: number; avatar: string; username: string };
-  articleID: number;
-  content: string;
-  nested?: boolean;
-};
-
-const createComment = gql`
-  mutation AddComment($articleID: ID!, $userID: ID!, $content: String!, $date: DateTime!, $parentID: ID) {
-    createComment(
-      input: { data: { article: $articleID, user: $userID, content: $content, date: $date, parent: $parentID } }
-    ) {
-      comment {
-        id
-        content
-        user {
-          id
-        }
-        article {
-          id
-        }
-        date
-        parent {
-          id
+const getUserQuery = gql(`
+query getUser($userId: ID!) {
+  usersPermissionsUser(id: $userId) {
+    data {
+      attributes {
+        username
+        avatar {
+          img {
+            data {
+              id
+              attributes {
+                url
+                hash
+              }
+            }
+          }
         }
       }
     }
   }
-`;
+}`);
 
-const commentSchema = object().shape({
-  content: string().min(2, `That's not good enough!`).max(40).required(),
-});
+const CreateComment = gql(`
+  mutation AddComment($articleId: ID!, $userId: ID!, $content: String!, $date: DateTime!, $parentId: ID) {
+    createComment(
+      data: { article: $articleId, Author: $userId, Content: $content, Published: $date, Parent: $parentId }
+    ) {
+      data {
+        id
+        attributes {
+          Content
+          Author {
+            data {
+              id
+            }
+          }
+          article {
+            data {
+              id
+            }
+          }
+          Published
+          Parent {
+            data {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`);
 
-const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentForm): JSX.Element => {
+const commentSchema = yup.object({ content: yup.string().min(2, `That's not good enough!`).max(40).required() });
+type commentType = yup.InferType<typeof commentSchema>;
+
+// type Props = {
+//   commentId?: string;
+//   content: string;
+//   me:
+//     | {
+//         __typename?: 'UsersPermissionsMe' | undefined;
+//         id: string;
+//         username: string;
+//         avatar?: string | null | undefined;
+//       }
+//     | null
+//     | undefined;
+//   articleId: string;
+//   nested?: boolean;
+// };
+
+type CommentFormProps = {
+  commentId?: string | null;
+  userId?: string;
+  articleId: string;
+  nested?: boolean;
+};
+
+const CommentForm = ({ commentId, userId, articleId, nested }: CommentFormProps): JSX.Element => {
   const commentCreateDate = moment().toISOString();
-  const commentParentID = nested ? comment?.id : null;
-  const [addComment, { loading: mutationLoading, error: mutationError }] = useMutation(createComment);
+  const commentParentID = nested ? commentId : null;
+  const [addCommentResult, addComment] = useMutation(CreateComment);
 
-  const { register, errors, handleSubmit, formState, reset } = useForm<CommentForm>({
+  const [result] = useQuery({ query: getUserQuery, variables: { userId: String(userId) } });
+  const { data, fetching, error } = result;
+
+  console.log(fetching);
+  console.log(error);
+
+  const userData = data?.usersPermissionsUser;
+
+  const {
+    register,
+    handleSubmit,
+    formState,
+    reset,
+    formState: { errors },
+  } = useForm<commentType>({
     mode: 'onChange',
-    //@ts-ignore
-    validationSchema: commentSchema,
+    resolver: yupResolver(commentSchema),
   });
 
-  const onSubmit = async (data: {
-    userID: number;
-    articleID: number;
-    content: string;
-    date: string;
-    parentID: number;
-  }): Promise<void> => {
+  const onSubmit = async (data: { content: string }): Promise<void> => {
     await addComment({
-      variables: {
-        userID: user.id,
-        articleID: articleID,
-        content: data.content,
-        date: commentCreateDate,
-        parentID: commentParentID,
-      },
+      articleId: String(articleId),
+      content: data.content,
+      date: commentCreateDate,
+      parentId: String(commentParentID),
+      userId: String(userId),
+    }).then((result) => {
+      if (result.error) {
+        console.error('Oh no!', result.error);
+      }
+      return;
     });
     reset({
       content: '',
     });
-    updateState();
   };
+
+  console.log('Mutation is fetching', addCommentResult.fetching);
   return (
-    <form className={s.commentForm} onSubmit={handleSubmit(onSubmit)}>
-      <img className={s.commentAvatar} src={user.avatar} alt={`${user.username}'s Avatar`} />
+    <form className={s.commentForm} onSubmit={void handleSubmit(onSubmit)}>
+      <img
+        className={s.commentAvatar}
+        src={String(userData?.data?.attributes?.avatar?.img?.data?.attributes?.url)}
+        alt={`${String(userData?.data?.attributes?.username)}'s Avatar`}
+      />
       <div className={s.formInput}>
         <input
           type='text'
           placeholder='Leave a comment'
-          name='content'
-          ref={register}
+          {...register('content', { required: true })}
           maxLength={40}
           minLength={2}
-          required={true}
         />
       </div>
       {errors.content && <p className={s.error}>{errors.content.message}</p>}
@@ -95,8 +152,8 @@ const CommentForm = ({ comment, user, articleID, nested, updateState }: CommentF
         onClick={() => {
           handleSubmit(onSubmit);
         }}
-        disabled={!!mutationError || !formState.isValid || (errors && mutationLoading)}>
-        {mutationError ? `Error :( Please try again` : `Send`}
+        disabled={!!addCommentResult.error || !formState.isValid || (errors && addCommentResult.fetching)}>
+        {addCommentResult.error ? `Error :( Please try again` : `Send`}
       </button>
     </form>
   );

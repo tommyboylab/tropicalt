@@ -1,78 +1,86 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Post from '../../../Home/Recents/Recents';
 import AboutMe from '../About/AboutMe';
 import s from './Sidebar.module.scss';
-import Avatar from '../../../Other/Avatar/Avatar';
+import {motion} from "framer-motion";
 
-type Article = [
-  {
-    id: string;
-    slug: string;
-    cover: { img: { id: string; url: string; hash: string } };
-    title: string;
-    date: string;
-    user: { username: string };
-    excerpt: string;
-  }
-];
-
-const SidebarArticlesFragment = gql`
-  fragment SidebarArticlesFragment on Query {
-    sidebar: articles(limit: 4, sort: "date:desc", where: { published: true }) {
+export const SidebarArticlesFragment = gql(`
+ fragment SidebarArticlesFragment on Query {
+  sidebar: articles(sort: "Published:desc", pagination: { limit: 4 }) {
+    data {
       id
-      slug
-      cover {
-        img {
-          id
-          url
-          hash
+      attributes {
+        Slug
+        Title
+        Tagline
+        Published
+        Author {
+          data {
+            attributes {
+              username
+              avatar {
+                img {
+                  data {
+                    id
+                    attributes {
+                      url
+                      hash
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        Cover {
+          img {
+            data {
+              id
+              attributes {
+                url
+                hash
+              }
+            }
+          }
         }
       }
-      title
-      date
-      excerpt
-      user {
-        username
-      }
-    }
-    avatar(id: "1") {
-      ...AvatarFragment
     }
   }
-  ${Avatar.fragments.AvatarFragment}
-`;
+}
+`);
 
-const PostSidebar = (data: any): JSX.Element => {
-  const articles = data?.data.sidebar as Article;
-  const avatar = data?.data.avatar;
+const PostSidebar = ({ sidebar }: DocumentType<typeof SidebarArticlesFragment>): JSX.Element => {
+  const sidebarData = sidebar?.data;
+
   return (
-    <div className={s.blogSidebar}>
-      <h2>ˇˇˇ</h2>
-      <AboutMe data={avatar} />
-      {articles &&
-        articles.map((article: any) => (
-          <Post
-            id={article.id}
+    <motion.div className={s.blogSidebar}>
+      <motion.h2>ˇˇˇ</motion.h2>
+      <AboutMe img={sidebar?.data?.[0]?.attributes?.Author?.data?.attributes?.avatar?.img} />
+        {sidebarData &&
+        sidebarData.map((article) => (
+                <Post
+            sidebar= {true}
+            id={String(article?.id)}
             type='blog'
-            key={article.id}
-            slug={article.slug}
-            cover={`/uploads/${article.cover.img.hash}-thumb.svg`}
-            img={article.cover.img.url}
-            title={article.title}
-            date={article.date}
-            name={article.user.username}
-            excerpt={article.excerpt}
+            key={article?.id}
+            slug={String(article?.attributes?.Slug)}
+            cover={`/uploads/sqip_${String(article?.attributes?.Cover?.img?.data?.attributes?.hash)}.svg`}
+            img={article?.attributes?.Cover?.img?.data?.attributes?.url}
+            title={article?.attributes?.Title}
+            date={String(article?.attributes?.Published)}
+            name={article?.attributes?.Author?.data?.attributes?.username}
+            excerpt={String(article?.attributes?.Tagline)}
           />
         ))}
-    </div>
+    </motion.div>
   );
 };
 
 PostSidebar.displayName = 'Sidebar';
 
 PostSidebar.fragments = {
-  SidebarArticlesFragment: SidebarArticlesFragment,
+  SidebarArticlesFragment,
 };
 
 export default PostSidebar;

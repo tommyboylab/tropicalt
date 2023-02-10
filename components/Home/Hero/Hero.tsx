@@ -1,42 +1,40 @@
 import React, { SetStateAction, useEffect, useState } from 'react';
 import s from './Hero.module.scss';
 import Img from '../../Other/Img/Img';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 
-export type Heroes = [
-  {
-    id: number;
-    title: string;
-    cover: { img: { id: string; url: string; hash: string } };
-  }
-];
-
-const ImgBFragment = gql`
-  fragment ImageBannerFragment on Query {
-    hero(id: 1) {
-      id
-      hero {
-        id
-        title
-        cover {
-          img {
-            id
-            url
-            hash
+const HeroFragment = gql(`
+  fragment HeroFragment on Query {
+  home {
+    data {
+      attributes {
+        Hero {
+          id
+          Img {
+            img {
+              data {
+                attributes {
+                  url
+                  hash
+                }
+              }
+            }
           }
+          Caption
         }
       }
     }
   }
-`;
+}
+`);
 
-const ImgB = (heroes: any): JSX.Element => {
+const Hero = ({ home }: DocumentType<typeof HeroFragment>): JSX.Element => {
+  const heroData = home?.data?.attributes?.Hero;
+
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  heroes = heroes.data?.hero?.hero as Heroes;
-
   const nextHero = (): SetStateAction<void> => {
-    setCurrentIndex(currentIndex === heroes.length - 1 ? 0 : currentIndex + 1);
+    setCurrentIndex(currentIndex === Number(heroData?.length) - 1 ? 0 : currentIndex + 1);
   };
 
   useEffect(() => {
@@ -48,23 +46,22 @@ const ImgB = (heroes: any): JSX.Element => {
 
   return (
     <>
-      {heroes.map(
-        (
-          hero: { id: string | number | undefined; title: React.ReactNode; cover: { img: { url: string; hash: any } } },
-          index: number
-        ) => (
+      {heroData &&
+        heroData.map((heroData, index: number) => (
           <div
             className={s.imageBanner}
-            key={hero.id}
+            key={heroData?.id}
             style={{
               animation: `${currentIndex === index ? 'fadeInOut' : 'fadeOut'} 5s infinite ease-in-out`,
             }}>
-            <h1>{hero.title}</h1>
+            <h1>{heroData?.Caption}</h1>
             <Img
+              key={heroData?.id}
+              id={heroData?.id}
               class={s.imageBanner}
-              url={hero.cover.img.url}
-              placeholder={`/uploads/${hero.cover.img.hash}-thumb.svg`}
-              alt={`Image for ${hero.title}`}
+              url={heroData?.Img?.[0]?.img?.data?.attributes?.url}
+              placeholder={`/uploads/sqip_${String(heroData?.Img?.[0]?.img?.data?.attributes?.hash)}.svg`}
+              alt={`Image for ${String(heroData?.Caption)}`}
             />
             <style global jsx>{`
               @keyframes fadeInOut {
@@ -97,14 +94,13 @@ const ImgB = (heroes: any): JSX.Element => {
               }
             `}</style>
           </div>
-        )
-      )}
+        ))}
     </>
   );
 };
 
-ImgB.fragments = {
-  HeroesFragment: ImgBFragment,
+Hero.fragments = {
+  HeroFragment,
 };
 
-export default ImgB;
+export default Hero;

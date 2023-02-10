@@ -1,30 +1,26 @@
 import React from 'react';
-import gql from 'graphql-tag';
+import { gql, DocumentType } from '@app/gql';
 import Link from './ActiveLink/ActiveLink';
 import s from './Nav.module.scss';
 
-type Nav = [
-  {
-    id: string;
-    title: string;
-    url: string;
-  }
-];
-
-const NavFragment = gql`
+export const NavigationFragment = gql(`
   fragment NavigationFragment on Query {
-    nav(id: 1) {
-      nav {
-        id
-        title
-        url
+    navLink {
+      data {
+        attributes {
+          Link {
+            id
+            Name
+            URL
+          }
+        }
       }
     }
   }
-`;
+`);
 
-const Nav = (nav: any): JSX.Element => {
-  nav = nav.data?.nav?.nav as Nav;
+const Nav = ({ navLink }: DocumentType<typeof NavigationFragment>): JSX.Element => {
+  const navData = navLink?.data?.attributes?.Link;
 
   return (
     <nav className={s.nav}>
@@ -37,11 +33,11 @@ const Nav = (nav: any): JSX.Element => {
             content: ' -------';
           }
         `}</style>
-        {nav &&
-          nav.map((nav: { url: string; id: string | number | undefined; title: React.ReactNode }) => {
+        {navData &&
+          navData.map((nav) => {
             return (
-              <Link href={nav.url} key={nav.id}>
-                <li className='link'>{nav.title}</li>
+              <Link href={String(nav?.URL)} key={nav?.id}>
+                <li className='link'>{nav?.Name}</li>
               </Link>
             );
           })}
@@ -53,7 +49,7 @@ const Nav = (nav: any): JSX.Element => {
 Nav.displayName = 'Nav';
 
 Nav.fragments = {
-  NavigationFragment: NavFragment,
+  NavigationFragment,
 };
 
 export default Nav;

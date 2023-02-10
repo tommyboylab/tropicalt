@@ -1,0 +1,87 @@
+@use '../Other/Styles/GlobalStyle';
+
+.nav {
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  width: 90vw;
+  max-width: 45rem;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+}
+
+// Nav colors used in loop below
+$colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$TERTIARY_COLOR,
+  GlobalStyle.$QUINARY_COLOR, GlobalStyle.$SEDENTARY_COLOR;
+
+// Loop also reverses z-index order of list items.. no idea why it's stacked in that order
+@for $i from 1 through 5 {
+  .nav ul li:nth-child(#{$i}) {
+    z-index: #{5 - $i};
+    background: nth($colors, $i);
+  }
+}
+
+.nav ul li {
+  user-select: none;
+  border-radius: 0.5em 0.5em 0 0;
+  margin-right: -0.5em;
+  width: 20vw;
+  transition: height 200ms ease-in-out;
+  display: flex;
+}
+
+.nav ul {
+  margin-right: 0.5em;
+}
+
+.nav ul li a {
+    width: 100%;
+    display:flex;
+    text-decoration: none;
+    margin: auto 0;
+    line-height: 0;
+}
+
+.nav ul li svg {
+  margin: auto 1em;
+}
+
+.nav ul li:hover {
+  .navActiveIcon {
+    display: inline;
+  }
+
+  .navIcon {
+    display: none;
+  }
+}
+
+.navActiveLink {
+  height: 2.5em;
+}
+
+.navLink {
+  padding: 0.25em;
+  height: 2em;
+  margin-top: auto;
+}
+
+.navLink:hover {
+  height: 2.25em;
+}
+
+@media (max-width: 770px) {
+  .nav ul li a span{
+    display: none;
+  }
+
+  .nav ul li a svg {
+    margin: auto;
+  }
+}

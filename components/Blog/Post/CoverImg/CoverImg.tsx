@@ -1,6 +1,7 @@
 import React from 'react';
 import Img from '../../../Other/Img/Img';
 import s from './CoverImg.module.scss';
+import {motion} from "framer-motion";
 
 type PostImg = {
   title: string;
@@ -10,10 +11,10 @@ type PostImg = {
 };
 
 const Image = (PostImg: PostImg): JSX.Element => (
-  <div className={s.postImg}>
-    <h1>{PostImg.title}</h1>
+  <motion.div className={s.postImg}>
+    <motion.h1>{PostImg.title}</motion.h1>
     <Img class={s.postImg} url={PostImg.url} placeholder={PostImg.placeholder} alt={`Image for ${PostImg.alt}`} />
-  </div>
+  </motion.div>
 );
 
 export default Image;

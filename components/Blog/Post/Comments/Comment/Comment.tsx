@@ -1,51 +1,98 @@
 import React, { useState } from 'react';
-import ReactMarkdown from 'react-markdown';
+import Markdown from 'markdown-to-jsx';
 import Rating from './Rating/Rating';
 import CommentForm from '../CommentForm/CommentForm';
 import s from '../Comments.module.scss';
 
-type Comment = {
-  id: number;
+type CommentType = {
+  comment:
+    | {
+        Content?: string | null;
+        createdAt?: any;
+        updatedAt?: any;
+        article?: {
+          data?: {
+            id?: string | null;
+            attributes?: { Slug?: string | null } | null;
+          } | null;
+        } | null;
+        Author?: {
+          data?: {
+            attributes?: {
+              username: string;
+              avatar?: {
+                img: {
+                  data?: {
+                    attributes?: { url: string; hash: string } | null;
+                  } | null;
+                };
+              } | null;
+            } | null;
+          } | null;
+        } | null;
+        Children?: {
+          data: Array<{
+            attributes?: {
+              Content?: string | null;
+              createdAt?: any;
+              updatedAt?: any;
+              Likes?: Array<{ UserId?: number | null } | null> | null;
+              Dislikes?: Array<{ UserId?: number | null } | null> | null;
+              Author?: {
+                data?: {
+                  attributes?: {
+                    username: string;
+                    Img?: {
+                      img: {
+                        data?: {
+                          attributes?: { url: string; hash: string } | null;
+                        } | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+              } | null;
+            } | null;
+          }>;
+        } | null;
+        Likes?: Array<{ __typename?: 'ComponentCommentLikes'; UserId?: number | null } | null> | null;
+        Dislikes?: Array<{ __typename?: 'ComponentCommentLikes'; UserId?: number | null } | null> | null;
+      }
+    | null
+    | undefined;
+  commentId?: string | null;
+  userId?: string;
   nested?: boolean;
-  comment: { id: number };
-  user: { id: number; avatar: string; username: string };
-  content: string;
-  likes: [{ user: { id: number } }];
-  dislikes: [{ user: { id: number } }];
-  articleID: number;
-  updateState: CallableFunction;
+  articleId: string;
 };
-const Comment = ({ comment, user, content, likes, dislikes, articleID, nested, updateState }: Comment): JSX.Element => {
+
+const Comment = ({ comment, commentId, userId, nested, articleId }: CommentType): JSX.Element => {
   const [openReplyBox, setOpenReplyBox] = useState(false);
 
-  console.log(openReplyBox);
   const openReply = () => {
     setOpenReplyBox(!openReplyBox);
   };
 
   return (
     <div className={s.comment}>
-      <img src={user.avatar} className={s.commentAvatar} alt={`${user.username}'s avatar image`} />
-      <h3 className={s.commentName}>{user.username}</h3>
-      <ReactMarkdown className={s.commentContent}>{content}</ReactMarkdown>
+      <img
+        src={String(comment?.Author?.data?.attributes?.avatar?.img?.data?.attributes?.url)}
+        className={s.commentAvatar}
+        alt={`${String(comment?.Author?.data?.attributes?.username)}'s avatar image`}
+      />
+      <h3 className={s.commentName}>{comment?.Author?.data?.attributes?.username}</h3>
+      <Markdown className={s.commentContent}>{String(comment?.Content)}</Markdown>
       <Rating
-        comment={comment}
-        user={user}
+        commentId={commentId}
+        likes={comment?.Likes}
+        dislikes={comment?.Dislikes}
+        userId={userId}
         replyIsOpen={openReplyBox}
         nested={nested}
         reply={openReply}
-        likes={likes}
-        dislikes={dislikes}
       />
       {openReplyBox && (
-        <CommentForm
-          updateState={updateState}
-          comment={comment}
-          nested={nested}
-          user={user}
-          articleID={articleID}
-          content={''}
-        />
+        <CommentForm commentId={commentId} nested={nested} userId={userId} articleId={String(articleId)} />
       )}
     </div>
   );

@@ -1,25 +1,24 @@
 import React from 'react';
 import s from '../Resume.module.scss';
-import gql from 'graphql-tag';
+import { gql } from 'urql';
 
-type Contact = {
+export const ContactFragment = gql`
+  fragment ContactFragment on Resume {
+    Address
+    Phone
+  }
+`;
+
+type ContactType = {
   phoneNum: string;
   address: string;
 };
 
-const ContactFragment = gql`
-  fragment ContactFragment on Resume {
-    address
-    phoneNum
-  }
-`;
-
-const Contact = (contact: any): JSX.Element => {
-  contact = contact.data?.resume as Contact;
+const Contact = ({ phoneNum, address }: ContactType): JSX.Element => {
   return (
     <div className={s.contactInfo}>
-      <p className={s.cellphone}>{contact.phoneNum}</p>
-      <p className={s.address}>{contact.address}</p>
+      <p className={s.cellphone}>{phoneNum}</p>
+      <p className={s.address}>{address}</p>
     </div>
   );
 };

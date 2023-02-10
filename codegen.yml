@@ -1,0 +1,8 @@
+schema: 'https://api.tropicalt.ca/graphql'
+overwrite: true
+documents:
+  - './**/*.tsx'
+  - '!./gql/**/*'
+generates:
+  ./gql/:
+    preset: gql-tag-operations-preset

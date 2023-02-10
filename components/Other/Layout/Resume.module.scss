@@ -1,6 +1,7 @@
 .layout {
   display: grid;
-  grid-template-areas: 'name name name name'
+  grid-template-areas:
+    'name name name name'
     'contactInfo contactInfo contactInfo contactInfo'
     'workHistory education imageHighlight imageHighlight'
     'workHistory skills imageHighlight imageHighlight'
@@ -11,10 +12,10 @@
   padding: 0 8vw;
 }
 
-@media only screen and ( max-width: 1400px ) {
-
+@media only screen and (max-width: 1400px) {
   .layout {
-    grid-template-areas: 'name name'
+    grid-template-areas:
+      'name name'
       'contactInfo contactInfo'
       'workHistory education'
       'workHistory skills'
@@ -24,10 +25,10 @@
   }
 }
 
-@media only screen and ( max-width: 1000px ) {
-
+@media only screen and (max-width: 1000px) {
   .layout {
-    grid-template-areas: 'name'
+    grid-template-areas:
+      'name'
       'contactInfo'
       'workHistory'
       'education'

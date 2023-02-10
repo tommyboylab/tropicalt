@@ -6,22 +6,22 @@
   flex-direction: column;
   min-height: 60em;
   margin-top: 3.25em;
-  margin-right: .5em;
+  margin-right: 0.5em;
   padding-bottom: 1em;
 }
 
 .blogSidebar h2 {
   font-size: GlobalStyle.$X_LARGE_FONT;
   text-align: right;
-  letter-spacing: .25em;
+  letter-spacing: 0.25em;
   color: GlobalStyle.$TERTIARY_COLOR;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }
 
 .blogSidebar article {
   flex: 1 2 auto;
   height: 15%;
-  margin: .25em;
+  margin: 0.25em;
   transition: all 350ms ease-in-out;
   transition-property: height;
 }
@@ -31,12 +31,11 @@
   height: 25%;
 }
 
-@media ( max-width: 1000px ) {
-
+@media (max-width: 1000px) {
   .blogSidebar {
     width: 100%;
     margin-top: 0;
-    padding: .5em;
+    padding: 0.5em;
   }
 
   .blogSidebar article:hover {

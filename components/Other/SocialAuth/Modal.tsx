@@ -5,8 +5,8 @@ import SocialButton from './Button/Button';
 import { setCookie } from 'nookies';
 
 type Toggle = {
-  toggle: Function;
-  content: Function;
+  toggle: CallableFunction;
+  content: CallableFunction;
 };
 
 export const ToggleContent = ({ toggle, content }: Toggle): JSX.Element => {
@@ -35,12 +35,12 @@ export const Modal = ({ children }: Modal): JSX.Element =>
   );
 
 const Toggle = (): JSX.Element => {
-  const receiveAuthInfo = (e: any) => {
-    if (e.origin !== 'https://www.tropicalt.ca') {
+  const receiveAuthInfo = (e: { origin: string; data: string }) => {
+    if (e.origin !== 'https://tropicalt.ca') {
       return;
     }
     const { data } = e;
-    
+
     setCookie(undefined, 'token', data, {
       maxAge: 30 * 24 * 60 * 60,
       path: '/',

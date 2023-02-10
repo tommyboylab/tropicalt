@@ -18,6 +18,15 @@
   padding-bottom: 4em;
 }
 
+.bio a {
+    text-decoration: none;
+    color: GlobalStyle.$SECONDARY_COLOR;
+}
+
+.bio a:hover {
+    color: GlobalStyle.$SEDENTARY_COLOR;
+}
+
 .bio > div {
   margin: 2.5% 3% 0.5% 1.5%;
 }

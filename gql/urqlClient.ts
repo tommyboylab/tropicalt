@@ -2,13 +2,13 @@ import { createClient, dedupExchange, cacheExchange, ssrExchange, fetchExchange 
 // import { createClient as createWSClient } from 'graphql-ws';
 import { parseCookies } from 'nookies';
 
-
 const { token } = parseCookies();
 export const isSignedIn = () => !!token;
 
 const serverSide = typeof window === 'undefined';
-const ssrCacheExchange = ssrExchange({ isClient: !serverSide });
-
+const ssrCacheExchange = ssrExchange({
+  isClient: !serverSide,
+});
 
 // Strapi doesn't yet support WS so this is disabled until such a time it's possible
 // const subscriptionClient = createWSClient({
@@ -26,7 +26,7 @@ const ssrCacheExchange = ssrExchange({ isClient: !serverSide });
 // })
 
 const client = createClient({
-  url: String(process.env.API),
+  url: `${process.env.API}/graphql`,
   exchanges: [dedupExchange, cacheExchange, ssrCacheExchange, fetchExchange],
   fetchOptions: () => {
     return token ? { headers: { Authorization: `Bearer ${token}` } } : {};

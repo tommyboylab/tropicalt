@@ -14,7 +14,7 @@ const SignUp = () => {
   const handleSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
-    const res: { data: { jwt: string } } = await axios.post('https://api.tropicalt.ca/auth/local/register', {
+    const res: { data: { jwt: string } } = await axios.post(`${process.env.API}/auth/local/register`, {
       username,
       email,
       password,

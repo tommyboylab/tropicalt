@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Footer from '../components/Nav/Footer';
 import RecentPosts from '../components/Home/Recents/Posts/RecentPosts';
@@ -11,7 +12,6 @@ import Err from '../components/Other/Error/Error';
 
 import { useQuery } from 'urql';
 import { gql } from '@app/gql';
-import { client, ssrCacheExchange } from '../gql/urqlClient';
 import NewNav from '../components/Nav/NewNav';
 
 const GetHomepageQuery = gql(`
@@ -24,7 +24,7 @@ const GetHomepageQuery = gql(`
   }
 `);
 
-export default function Home(): JSX.Element {
+const HomePage = () => {
   const [result] = useQuery({ query: GetHomepageQuery });
 
   const { data, error, fetching } = result;
@@ -48,10 +48,6 @@ export default function Home(): JSX.Element {
       <Footer />
     </main>
   );
-}
+};
 
-export function getStaticProps() {
-  client.query(GetHomepageQuery, {});
-
-  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
-}
+export default HomePage;

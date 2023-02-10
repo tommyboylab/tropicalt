@@ -31,7 +31,13 @@
   transition: opacity 500ms ease-in-out;
 }
 
+.postControls button:hover {
+    cursor: pointer;
+    color: GlobalStyle.$SECONDARY_COLOR_MUTED;
+}
+
 .postControls button:disabled {
+  cursor:not-allowed;
   opacity: 0.5;
 }
 

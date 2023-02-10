@@ -9,10 +9,10 @@ const Callback = (): JSX.Element => {
 
   const redirectURL =
     provider === 'twitter'
-      ? `https://api.tropicalt.ca/api/auth/${provider}/callback?access_token=${String(
+      ? `${process.env.API}/api/auth/${provider}/callback?access_token=${String(
           access_token
         )}&access_secret=${String(access_secret)}`
-      : `https://api.tropicalt.ca/api/auth/${String(provider)}/callback?access_token=${String(access_token)}`;
+      : `${process.env.API}/api/auth/${String(provider)}/callback?access_token=${String(access_token)}`;
   const isMobile = typeof window !== 'undefined' && width <= 768;
 
   useEffect(() => {

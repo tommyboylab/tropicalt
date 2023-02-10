@@ -1,25 +1,27 @@
+'use client';
 import React from 'react';
 import { gql } from '@app/gql';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useQuery } from 'urql';
-import Load from '../../components/Other/Load/Load';
-import Err from '../../components/Other/Error/Error';
-import Meta from '../../components/Other/Meta/Meta';
-import s from '../../components/Other/Layout/Post.module.scss';
-import NewNav from '../../components/Nav/NewNav';
-import MobileHeader from '../../components/Blog/Post/MobileHeader/MobileHeader';
-import CoverImg from '../../components/Blog/Post/CoverImg/CoverImg';
+import Load from '../../../components/Other/Load/Load';
+import Err from '../../../components/Other/Error/Error';
+import Meta from '../../../components/Other/Meta/Meta';
+import s from '../../../components/Other/Layout/Post.module.scss';
+import NewNav from '../../../components/Nav/NewNav';
+import MobileHeader from '../../../components/Blog/Post/MobileHeader/MobileHeader';
+import CoverImg from '../../../components/Blog/Post/CoverImg/CoverImg';
 // import TagList from '../../components/Blog/Post/Tags/TagList';
 // import Tags from '../../components/Blog/Post/Tags/Tag/Tags';
-import Body from '../../components/Blog/Post/Body/Body';
-import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
-import Footer from '../../components/Nav/Footer';
-import CommentList from '../../components/Blog/Post/Comments/CommentList/CommentList';
-import { client, ssrCacheExchange, isSignedIn } from '../../gql/urqlClient';
+import Body from '../../../components/Blog/Post/Body/Body';
+import Sidebar from '../../../components/Blog/Post/Sidebar/Sidebar';
+import Footer from '../../../components/Nav/Footer';
+import CommentList from '../../../components/Blog/Post/Comments/CommentList/CommentList';
+import { isSignedIn } from '../../../gql/urqlClient';
 // import { GetArticlesQuery } from '../blog';
-import Modal from '../../components/Other/SocialAuth/Modal';
+import Modal from '../../../components/Other/SocialAuth/Modal';
+import {motion} from 'framer-motion';
 
-const getBlogSlugs = gql(`
+export const getBlogSlugs = gql(`
 query Articles {
   articles {
     data {
@@ -68,12 +70,12 @@ const getArticle = gql(`
   }
 `);
 
-const Post = (): JSX.Element => {
-  const router = useRouter();
-  const slug = router.query.slug;
+const BlogPostPage = () => {
+  const params = useSearchParams();
+  const slug = params.get('slug')?.toString();
   const authenticated = isSignedIn();
 
-  const [result] = useQuery({ query: getArticle, variables: { slug: String(slug) } });
+  const [result] = useQuery({ query: getArticle, variables: { slug: slug } });
   const { data, fetching, error } = result;
 
   if (fetching && !data) return <Load />;
@@ -88,7 +90,13 @@ const Post = (): JSX.Element => {
         imgUrl={articleData?.Cover?.img?.data?.attributes?.url}
         url={`/blog/${String(slug)}`}
       />
-      <main className={s.layout} key={data?.articles?.data[0].id}>
+      <motion.main
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          style={{ pointerEvents: "auto" }}
+          className={s.layout} key={data?.articles?.data[0].id}>
         <NewNav navLink={data?.navLink} />
         <MobileHeader />
         <CoverImg
@@ -102,38 +110,12 @@ const Post = (): JSX.Element => {
         <Sidebar sidebar={data?.sidebar} />
         {authenticated ? <CommentList slug={String(slug)} articleID={String(data?.articles?.data[0].id)} /> : <Modal />}
         <Footer />
-      </main>
+      </motion.main
+>
     </>
   );
 };
 
-Post.displayName = 'Post';
+BlogPostPage.displayName = 'Blog Post Page';
 
-export default Post;
-
-export async function getStaticPaths() {
-  const { data } = await client.query(getBlogSlugs, {}).toPromise();
-
-  const slugArr = data?.articles?.data.map(({ attributes }) => attributes?.Slug);
-
-  const paths = slugArr?.map((slug) => ({
-    params: {
-      slug,
-    },
-  }));
-
-  return { paths, fallback: false };
-}
-
-export function getStaticProps(context: {
-  params: {
-    slug: string;
-  };
-}) {
-  const { params } = context;
-  const { slug } = params;
-
-  client.query(getArticle, { slug });
-
-  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
-}
+export default BlogPostPage;

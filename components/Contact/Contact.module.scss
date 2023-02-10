@@ -1,9 +1,9 @@
 @use '../Other/Styles/GlobalStyle';
 
-.form>form {
+.form > form {
   display: flex;
   flex-direction: column;
-  background-color: GlobalStyle.$SECONDARY_COLOR_MUTED;
+  background-color: GlobalStyle.$SECONDARY_COLOR;
   max-width: 100vw;
   width: max-content;
   margin: 0 auto 0.75em auto;

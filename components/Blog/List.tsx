@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import { gql, DocumentType } from '@app/gql';
 import Post from '../Home/Recents/Recents';
 import s from './List.module.scss';
+import {motion} from "framer-motion";
 
 export const ArticleListFragment = gql(`
   fragment ArticleListFragment on Query {
@@ -38,9 +39,18 @@ export const ArticleListFragment = gql(`
 
 const Articles = ({ list }: DocumentType<typeof ArticleListFragment>): JSX.Element => {
   const listData = list?.data;
+  const scrollContainer = useRef(null);
 
   return (
-    <div className={s.postList}>
+    <motion.div
+        key={'post'}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.3, delay: 0.5 }}
+        ref={scrollContainer}
+        className={s.postList}
+        >
       {listData &&
         listData.map((article) => (
           <Post
@@ -56,7 +66,8 @@ const Articles = ({ list }: DocumentType<typeof ArticleListFragment>): JSX.Eleme
             excerpt={String(article?.attributes?.Tagline)}
           />
         ))}
-    </div>
+    </motion.div
+>
   );
 };
 

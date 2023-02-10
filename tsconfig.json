@@ -4,15 +4,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "target": "es5",
-    "lib": [
-      "es5",
-      "es6",
-      "es7",
-      "es2017",
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["es5", "es6", "es7", "es2017", "dom", "dom.iterable", "esnext"],
     "sourceMap": true,
     "allowJs": false,
     "skipLibCheck": true,
@@ -21,12 +13,7 @@
     "strict": true,
     "jsx": "preserve",
     "noEmit": true,
-    "rootDirs": [
-      "components",
-      "pages",
-      "public",
-      "stories"
-    ],
+    "rootDirs": ["components", "pages", "public", "stories"],
     "baseUrl": ".",
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -40,15 +27,13 @@
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".eslintrc.js",
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".eslintrc.js", ".next/types/**/*.ts"],
+  "exclude": ["node_modules", ".next"]
 }

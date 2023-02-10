@@ -5,9 +5,7 @@ import s from '../Resume.module.scss';
 const Header = (): JSX.Element => (
   <div className={s.name}>
     <h5 className={s.return}>
-      <Link href='/'>
-        <a>Return to T_T</a>
-      </Link>
+      <Link href='/'>Return to T_T</Link>
     </h5>
     <br />
     <br />

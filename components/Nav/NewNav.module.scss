@@ -30,7 +30,6 @@ $colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$
 .nav ul li {
   user-select: none;
   border-radius: 0.5em 0.5em 0 0;
-  text-align: center;
   margin-right: -0.5em;
   width: 20vw;
   transition: height 200ms ease-in-out;
@@ -42,9 +41,11 @@ $colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$
 }
 
 .nav ul li a {
-  margin: auto 0;
-  text-decoration: none;
-  line-height: 0;
+    width: 100%;
+    display:flex;
+    text-decoration: none;
+    margin: auto 0;
+    line-height: 0;
 }
 
 .nav ul li svg {
@@ -67,7 +68,6 @@ $colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$
 
 .navLink {
   padding: 0.25em;
-  background-color: green;
   height: 2em;
   margin-top: auto;
 }
@@ -77,11 +77,11 @@ $colors: GlobalStyle.$PRIMARY_COLOR, GlobalStyle.$SECONDARY_COLOR, GlobalStyle.$
 }
 
 @media (max-width: 770px) {
-  .nav ul li a {
+  .nav ul li a span{
     display: none;
   }
 
-  .nav ul li svg {
+  .nav ul li a svg {
     margin: auto;
   }
 }

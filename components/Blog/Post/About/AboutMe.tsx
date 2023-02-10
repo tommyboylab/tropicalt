@@ -1,6 +1,7 @@
 import React from 'react';
 import Avatar from '../../../Other/Avatar/Avatar';
 import s from './AboutMe.module.scss';
+import {motion} from "framer-motion";
 
 type About = {
   img?:
@@ -16,11 +17,11 @@ type About = {
 };
 
 const About = ({ img }: About): JSX.Element => (
-  <div className={s.postAbout}>
+  <motion.div className={s.postAbout}>
     <Avatar img={img} />
-    <p>{`I'm just a simple man with a dream of building a personal website.`}</p>
-    <a href='/about'>Read More...</a>
-  </div>
+    <motion.p>{`I'm just a simple man with a dream of building a personal website.`}</motion.p>
+    <motion.a href='/about'>Read More...</motion.a>
+  </motion.div>
 );
 
 About.displayName = 'About';

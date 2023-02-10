@@ -1,19 +1,19 @@
+'use client';
 import React from 'react';
-import s from '../components/Other/Layout/Resume.module.scss';
-import Meta from '../components/Other/Meta/Meta';
+import s from '../../components/Other/Layout/Resume.module.scss';
+import Meta from '../../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
 import { useQuery } from 'urql';
-import Err from '../components/Other/Error/Error';
-import Skills from '../components/Resume/Skills/Skills';
-import WorkExp from '../components/Resume/WorkExp/WorkExp';
-import Hobbies from '../components/Resume/Hobbies/Hobbies';
-import Contact from '../components/Resume/Contact/Contact';
-import Education from '../components/Resume/Education/Education';
-import Img from '../components/Resume/Image/Image';
-import Footer from '../components/Resume/Nav/Footer';
-import Load from '../components/Other/Load/Load';
-import Header from '../components/Resume/Nav/Header';
-import { client, ssrCacheExchange } from '../gql/urqlClient';
+import Err from '../../components/Other/Error/Error';
+import Skills from '../../components/Resume/Skills/Skills';
+import WorkExp from '../../components/Resume/WorkExp/WorkExp';
+import Hobbies from '../../components/Resume/Hobbies/Hobbies';
+import Contact from '../../components/Resume/Contact/Contact';
+import Education from '../../components/Resume/Education/Education';
+import Img from '../../components/Resume/Image/Image';
+import Footer from '../../components/Resume/Nav/Footer';
+import Load from '../../components/Other/Load/Load';
+import Header from '../../components/Resume/Nav/Header';
 
 const GetResumeQuery = gql(`
   query GetResumeQuery {
@@ -34,7 +34,7 @@ const GetResumeQuery = gql(`
   }
 `);
 
-export default function ResumePage(): JSX.Element {
+const ResumePage = () => {
   const [result] = useQuery({ query: GetResumeQuery });
   const { data, fetching, error } = result;
 
@@ -62,11 +62,8 @@ export default function ResumePage(): JSX.Element {
       <Footer email={String(data?.resume?.data?.attributes?.email)} />
     </main>
   );
-}
+};
 
-ResumePage.displayName = 'Resume';
+ResumePage.displayName = 'Resume Page';
 
-export function getStaticProps() {
-  client.query(GetResumeQuery, {});
-  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
-}
+export default ResumePage;

@@ -1,13 +1,13 @@
+'use client';
 import React from 'react';
-import AboutCards from '../components/About/AboutCards';
-import s from '../components/Other/Layout/About.module.scss';
-import Meta from '../components/Other/Meta/Meta';
+import AboutCards from '../../components/About/AboutCards';
+import s from '../../components/Other/Layout/About.module.scss';
+import Meta from '../../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
 import { useQuery } from 'urql';
-import Load from '../components/Other/Load/Load';
-import Err from '../components/Other/Error/Error';
-import { client, ssrCacheExchange } from '../gql/urqlClient';
-import NewNav from '../components/Nav/NewNav';
+import Load from '../../components/Other/Load/Load';
+import Err from '../../components/Other/Error/Error';
+import NewNav from '../../components/Nav/NewNav';
 
 const GetAboutCardQuery = gql(`
   query GetAboutPage {
@@ -15,8 +15,7 @@ const GetAboutCardQuery = gql(`
     ...AboutCardFragment
   }
 `);
-
-export default function About(): JSX.Element {
+const AboutPage = () => {
   const [result] = useQuery({ query: GetAboutCardQuery });
   const { data, fetching, error } = result;
 
@@ -35,9 +34,8 @@ export default function About(): JSX.Element {
       <AboutCards about={data?.about} />
     </main>
   );
-}
+};
 
-export function getStaticProps() {
-  client.query(GetAboutCardQuery, {});
-  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
-}
+AboutPage.displayName = 'About Page';
+
+export default AboutPage;

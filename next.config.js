@@ -1,7 +1,6 @@
 require('dotenv').config();
 const path = require('path');
-const withPreact = require('next-plugin-preact');
-module.exports = withPreact({
+module.exports = {
   reactStrictMode: true,
   env: {
     API: process.env.API,
@@ -10,19 +9,25 @@ module.exports = withPreact({
     includePaths: [path.join(__dirname, 'styles')],
   },
   images: {
-    domains: ['api.tropicalt.ca', 'http://localhost:3000/', 'http://localhost:3001/'],
+    domains: ['localhost','http://localhost:1337','api.tropicalt.ca', 'http://localhost:3000/', 'http://localhost:3001/'],
   },
-  experimental: {
+  experimental: {scrollRestoration: true,
+      
     esmExternals: false,
+    appDir: true,
   },
-  // webpack: (config) => {
-  //   // Replace React with Preact
-  //   Object.assign(config.resolve.alias, {
-  //     react: 'preact/compat',
-  //     'react-dom/test-utils': 'preact/test-utils',
-  //     'react-dom': 'preact/compat',
-  //   });
-
+  // issues with Preact and Next 13
+  // webpack: (config, { dev, isServer }) => {
+  //   // Note, preact is only enabled for production builds (`next build`)
+  //   if (!dev && !isServer) {
+  //     config.resolve.alias = {
+  //       ...config.resolve.alias,
+  //       'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
+  //       'react': 'preact/compat',
+  //       'react-dom/test-utils': 'preact/test-utils',
+  //       'react-dom': 'preact/compat',
+  //     };
+  //   }
   //   return config;
   // },
-});
+};

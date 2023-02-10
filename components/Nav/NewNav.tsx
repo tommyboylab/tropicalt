@@ -1,7 +1,8 @@
+'use client';
 import React from 'react';
 import { DocumentType, gql } from '@app/gql';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+import { usePathname } from 'next/navigation';
 import s from './NewNav.module.scss';
 
 const icons: Record<string, Record<string, JSX.Element>> = {
@@ -122,22 +123,22 @@ export const NewNavigationFragment = gql(`
 
 const NewNav = ({ navLink }: DocumentType<typeof NewNavigationFragment>): JSX.Element => {
   const navData = navLink?.data?.attributes?.Link;
-  const router = useRouter();
+  const path = usePathname();
 
   return (
     <nav className={s.nav}>
       <ul>
         {navData &&
           navData?.map((nav) => {
-            const isActive = String(router.pathname) == String(nav?.URL);
+            const isActive = String(path) == String(nav?.URL);
             const { icon, active } = icons[String(nav?.Name.toLowerCase())];
             return (
-              <Link key={nav?.id} href={String(nav?.URL)}>
-                <li key={nav?.id} className={isActive ? s.navActiveLink : s.navLink}>
+              <li key={nav?.id} className={isActive ? s.navActiveLink : s.navLink}>
+                <Link key={nav?.id} href={String(nav?.URL)}>
                   {isActive ? active : icon}
-                  <a>{nav?.Name}</a>
-                </li>
-              </Link>
+                  <span>{nav?.Name}</span>
+                </Link>
+              </li>
             );
           })}
       </ul>

@@ -63,9 +63,7 @@ const Sidebar = ({ photos, setActiveItem, title, excerpt }: Sidebar): JSX.Elemen
         <span />
       </button>
       <div className={s.sidebar}>
-        <Link href='/albums'>
-          <a>{'Back to TropicalT >>>'}</a>
-        </Link>
+        <Link href='/albums'>Back to TropicalT `{'>>>'}`</Link>
         <div className={s.sidebarHeader}>
           <h2>{title}</h2>
           <p>{excerpt}</p>

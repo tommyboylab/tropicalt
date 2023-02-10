@@ -1,6 +1,6 @@
 @use '../../Other/Styles/GlobalStyle';
 
-.recent {
+.recent{
   position: relative;
   cursor: pointer;
   user-select: none;
@@ -10,6 +10,11 @@
   border-radius: 0.25em;
   box-shadow: 0em 0em 0.75em black;
   transition: flex-basis 600ms ease-in-out;
+}
+
+.recent a {
+    text-decoration: none;
+    color: GlobalStyle.$QUATERNARY_COLOR_MUTED;
 }
 
 .img {
@@ -45,6 +50,10 @@
 .recent:hover {
   color: GlobalStyle.$QUATERNARY_COLOR;
   transition: all 600ms ease-in-out;
+}
+
+.recent a:hover {
+    color: GlobalStyle.$QUATERNARY_COLOR;
 }
 
 .recent:hover .detailsList {

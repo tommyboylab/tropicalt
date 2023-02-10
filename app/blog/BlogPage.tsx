@@ -1,16 +1,16 @@
+'use client';
 import React, { useCallback, useState } from 'react';
-import Footer from '../components/Nav/Footer';
-import Header from '../components/Blog/Header/Header';
-import Sidebar from '../components/Blog/Post/Sidebar/Sidebar';
-import List from '../components/Blog/List';
-import s from '../components/Other/Layout/Blog.module.scss';
-import Meta from '../components/Other/Meta/Meta';
+import Footer from '../../components/Nav/Footer';
+import Header from '../../components/Blog/Header/Header';
+import Sidebar from '../../components/Blog/Post/Sidebar/Sidebar';
+import List from '../../components/Blog/List';
+import s from '../../components/Other/Layout/Blog.module.scss';
+import Meta from '../../components/Other/Meta/Meta';
 import { gql } from '@app/gql';
 import { useQuery } from 'urql';
-import Load from '../components/Other/Load/Load';
-import Err from '../components/Other/Error/Error';
-import { client, ssrCacheExchange } from '../gql/urqlClient';
-import NewNav from '../components/Nav/NewNav';
+import Load from '../../components/Other/Load/Load';
+import Err from '../../components/Other/Error/Error';
+import NewNav from '../../components/Nav/NewNav';
 
 export const GetArticlesQuery = gql(`
   query GetArticles($start: Int!) {
@@ -20,7 +20,7 @@ export const GetArticlesQuery = gql(`
   }
 `);
 
-export default function Blog(): JSX.Element {
+const BlogPage = () => {
   const [nextPosts, setNextPosts] = useState(0);
   const prev = useCallback((): void => {
     setNextPosts(nextPosts - 7), window.scrollTo(0, 0);
@@ -58,9 +58,8 @@ export default function Blog(): JSX.Element {
       <Footer />
     </main>
   );
-}
+};
 
-export function getStaticProps() {
-  client.query(GetArticlesQuery, { start: 1 });
-  return { props: { urqlState: ssrCacheExchange.extractData() }, revalidate: 1200 };
-}
+BlogPage.displayName = 'Blog Page';
+
+export default BlogPage;

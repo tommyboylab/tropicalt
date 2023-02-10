@@ -1,6 +1,7 @@
 import React from 'react';
 import Img from '../Img/Img';
 import s from './Avatar.module.scss';
+import {motion} from "framer-motion";
 
 type Avatar = {
   img?:
@@ -17,14 +18,14 @@ type Avatar = {
 
 const Avatar = ({ img }: Avatar): JSX.Element => {
   return (
-    <div key={img?.data?.id} className={s.avatar}>
+    <motion.div key={img?.data?.id} className={s.avatar}>
       <Img
         class={s.avatar}
         url={String(img?.data?.attributes?.url)}
         placeholder={`/uploads/sqip_${String(img?.data?.attributes?.hash)}.svg`}
         alt={`Image for Avatar`}
       />
-    </div>
+    </motion.div>
   );
 };
 
